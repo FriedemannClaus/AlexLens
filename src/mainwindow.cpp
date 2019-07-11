@@ -11,30 +11,23 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->setupUi(this);
 }
 
+
 MainWindow::~MainWindow()
 {
     delete ui;
 }
 
-void MainWindow::on_pushButton_clicked()
+
+
+MainWindow::MainWindow(Manager* manager, QWidget *parent) :
+        QMainWindow(parent),
+        ui(new Ui::MainWindow)
 {
-    /*QString imagePath = QFileDialog::getOpenFileName(
-                        this,
-                        tr("Choose"),
-                        "",
-                        tr("JPEG (*.jpg *.jpeg);;PNG (*.png)" )
-                        );
 
-    QImage imageObject;
-    imageObject.load(imagePath);
-    imageObject = imageObject.scaledToWidth(ui->myLabel->width());
-    image = QPixmap::fromImage(imageObject);
-    ui->myLabel->setPixmap(image);*/
+    ui->setupUi(this);
+    this->manager = manager;
 
-    std::cout << "im here";
-    scene = new QGraphicsScene(this);
-    scene->addPixmap(image);
-    scene->setSceneRect(image.rect());
-    //ui->graphicsView->setScene(scene);
-
+    ui->parameterPanel->setManager(manager);
+    ui->parameterPanel->fillModes();
+    ui->parameterPanel->fillNeuralNets();
 }

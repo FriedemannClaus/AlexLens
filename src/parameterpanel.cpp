@@ -10,6 +10,9 @@
 #include <QPushButton>
 #include <QMessageBox>
 #include <QDebug>
+#include <QString>
+
+using namespace std;
 
 ParameterPanel::ParameterPanel(QWidget *parent)
         : QWidget(parent)
@@ -18,21 +21,14 @@ ParameterPanel::ParameterPanel(QWidget *parent)
 
     m_gridLayout = new QGridLayout(this);
 
-
     QGroupBox *vertikalGroupBox = new QGroupBox(this);
     QVBoxLayout *parameterList = new QVBoxLayout;
 
-    QListWidget *modList = new QListWidget;
-    modList->addItem("Optimal");
-    modList->addItem("Hohe Perfomance");
-    modList->addItem("Geringer Leistungsverbrauch");
-    modList->addItem("Hohe Energieeffizienz");
-
-    QListWidget *nnList = new QListWidget(this);
-    nnList->addItem("AlexNet");
+    modList = new QListWidget; //will be filled in fillModes()
+    neuralNetsList = new QListWidget; // will be filled in fillNeuralNets()
 
     parameterList->addWidget(modList);
-    parameterList->addWidget(nnList);
+    parameterList->addWidget(neuralNetsList);
 
     vertikalGroupBox->setLayout(parameterList);
 
@@ -70,4 +66,20 @@ void ParameterPanel::beenden()
     QMessageBox::warning(this, "BEENDEN", "BEENDEN" );
 }
 
+void ParameterPanel::fillModes() {
+    list<string> modes = this->manager->getDefaultModes();
+    list<string>::iterator it;
+    for (it = modes.begin(); it != modes.end(); ++it) {
+        string item = *it;
+        modList->addItem(QString::fromStdString(item));
+    }
+}
 
+void ParameterPanel::fillNeuralNets() {
+    list<string> nets = this->manager->getDeafaultNeuralNets();
+    list<string>::iterator it;
+    for (it = nets.begin(); it != nets.end(); ++it) {
+        string item = *it;
+        neuralNetsList->addItem(QString::fromStdString(item));
+    }
+}

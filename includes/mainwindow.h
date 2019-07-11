@@ -4,6 +4,7 @@
 #include <QMainWindow>
 #include<QFileDialog>
 #include<QGraphicsScene>
+#include "Manager.h"
 
 namespace Ui {
     class MainWindow;
@@ -15,16 +16,14 @@ class MainWindow : public QMainWindow
 
 public:
     explicit MainWindow(QWidget *parent = nullptr);
+    MainWindow(Manager* manager, QWidget *parent = nullptr);
     ~MainWindow();
 
 private slots:
-            void on_pushButton_clicked();
 
 private:
     Ui::MainWindow *ui;
-    QPixmap image;
-    QImage  *imageObject;
-    QGraphicsScene *scene;
+    Manager* manager;
 };
 
 #endif // MAINWINDOW_H
