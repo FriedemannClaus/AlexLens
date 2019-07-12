@@ -46,8 +46,6 @@ ParameterPanel::ParameterPanel(QWidget *parent)
     buttons->addWidget(m_pushButton);
     horizonatlGroupBox->setLayout(buttons);
     m_gridLayout->addWidget(horizonatlGroupBox);
-    //m_gridLayout->addWidget(m_pushButton, 2, 0);
-    //m_gridLayout->addWidget(m_pushButton2, 1, 0);
 }
 
 ParameterPanel::~ParameterPanel()

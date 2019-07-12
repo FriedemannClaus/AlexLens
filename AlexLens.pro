@@ -30,13 +30,18 @@ SOURCES += \
         src/main.cpp \
         src/mainwindow.cpp \
         src/outputclassifypanel.cpp \
-        src/parameterpanel.cpp
+        src/parameterpanel.cpp \
+        src/Mode.cpp \
+        src/Manager.cpp
 
 HEADERS += \
         includes/inputpanel.h \
         includes/mainwindow.h \
         includes/outputclassifypanel.h \
         includes/parameterpanel.h \
+        includes/Mode.h \
+        includes/Manager.h \
+        includes/ui_mainwindow.h
 
 FORMS += \
         mainwindow.ui

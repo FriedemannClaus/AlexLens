@@ -14,7 +14,6 @@
 #include <QtWidgets/QApplication>
 #include <QtWidgets/QHBoxLayout>
 #include <QtWidgets/QMainWindow>
-#include <QtWidgets/QMenu>
 #include <QtWidgets/QMenuBar>
 #include <QtWidgets/QStatusBar>
 #include <QtWidgets/QTabWidget>
@@ -37,16 +36,15 @@ public:
     QTabWidget *tabWidget;
     QWidget *classifyTab;
     QHBoxLayout *horizontalLayout;
-    InputPanel *inputPanel;
-    ParameterPanel *parameterPanel;
+    InputPanel *inputClassifyPanel;
+    ParameterPanel *parameterClassifyPanel;
     OutputClassifyPanel *outputClassifyPanel;
     QWidget *trainingTab;
     QHBoxLayout *horizontalLayout_2;
-    InputPanel *widget;
-    ParameterPanel *widget_2;
-    OutputClassifyPanel *widget_3;
+    InputPanel *inputTrainingPanel;
+    ParameterPanel *parameterTrainingPanel;
+    OutputClassifyPanel *outputTrainingPanel;
     QMenuBar *menuBar;
-    QMenu *menuAlexLens;
     QToolBar *mainToolBar;
     QStatusBar *statusBar;
 
@@ -73,15 +71,15 @@ public:
         horizontalLayout->setSpacing(6);
         horizontalLayout->setContentsMargins(11, 11, 11, 11);
         horizontalLayout->setObjectName(QString::fromUtf8("horizontalLayout"));
-        inputPanel = new InputPanel(classifyTab);
-        inputPanel->setObjectName(QString::fromUtf8("inputPanel"));
+        inputClassifyPanel = new InputPanel(classifyTab);
+        inputClassifyPanel->setObjectName(QString::fromUtf8("inputClassifyPanel"));
 
-        horizontalLayout->addWidget(inputPanel);
+        horizontalLayout->addWidget(inputClassifyPanel);
 
-        parameterPanel = new ParameterPanel(classifyTab);
-        parameterPanel->setObjectName(QString::fromUtf8("parameterPanel"));
+        parameterClassifyPanel = new ParameterPanel(classifyTab);
+        parameterClassifyPanel->setObjectName(QString::fromUtf8("parameterClassifyPanel"));
 
-        horizontalLayout->addWidget(parameterPanel);
+        horizontalLayout->addWidget(parameterClassifyPanel);
 
         outputClassifyPanel = new OutputClassifyPanel(classifyTab);
         outputClassifyPanel->setObjectName(QString::fromUtf8("outputClassifyPanel"));
@@ -95,20 +93,20 @@ public:
         horizontalLayout_2->setSpacing(6);
         horizontalLayout_2->setContentsMargins(11, 11, 11, 11);
         horizontalLayout_2->setObjectName(QString::fromUtf8("horizontalLayout_2"));
-        widget = new InputPanel(trainingTab);
-        widget->setObjectName(QString::fromUtf8("widget"));
+        inputTrainingPanel = new InputPanel(trainingTab);
+        inputTrainingPanel->setObjectName(QString::fromUtf8("inputTrainingPanel"));
 
-        horizontalLayout_2->addWidget(widget);
+        horizontalLayout_2->addWidget(inputTrainingPanel);
 
-        widget_2 = new ParameterPanel(trainingTab);
-        widget_2->setObjectName(QString::fromUtf8("widget_2"));
+        parameterTrainingPanel = new ParameterPanel(trainingTab);
+        parameterTrainingPanel->setObjectName(QString::fromUtf8("parameterTrainingPanel"));
 
-        horizontalLayout_2->addWidget(widget_2);
+        horizontalLayout_2->addWidget(parameterTrainingPanel);
 
-        widget_3 = new OutputClassifyPanel(trainingTab);
-        widget_3->setObjectName(QString::fromUtf8("widget_3"));
+        outputTrainingPanel = new OutputClassifyPanel(trainingTab);
+        outputTrainingPanel->setObjectName(QString::fromUtf8("outputTrainingPanel"));
 
-        horizontalLayout_2->addWidget(widget_3);
+        horizontalLayout_2->addWidget(outputTrainingPanel);
 
         tabWidget->addTab(trainingTab, QString());
 
@@ -118,9 +116,6 @@ public:
         menuBar = new QMenuBar(MainWindow);
         menuBar->setObjectName(QString::fromUtf8("menuBar"));
         menuBar->setGeometry(QRect(0, 0, 822, 22));
-        menuAlexLens = new QMenu(menuBar);
-        menuAlexLens->setObjectName(QString::fromUtf8("menuAlexLens"));
-        menuAlexLens->setEnabled(true);
         MainWindow->setMenuBar(menuBar);
         mainToolBar = new QToolBar(MainWindow);
         mainToolBar->setObjectName(QString::fromUtf8("mainToolBar"));
@@ -129,13 +124,9 @@ public:
         statusBar->setObjectName(QString::fromUtf8("statusBar"));
         MainWindow->setStatusBar(statusBar);
 
-        menuBar->addAction(menuAlexLens->menuAction());
-        menuAlexLens->addAction(actionMenu_1);
-        menuAlexLens->addAction(actionmenu_2);
-
         retranslateUi(MainWindow);
 
-        tabWidget->setCurrentIndex(0);
+        tabWidget->setCurrentIndex(1);
 
 
         QMetaObject::connectSlotsByName(MainWindow);
@@ -143,12 +134,11 @@ public:
 
     void retranslateUi(QMainWindow *MainWindow)
     {
-        MainWindow->setWindowTitle(QCoreApplication::translate("MainWindow", "AlexLens", nullptr));
+        MainWindow->setWindowTitle(QCoreApplication::translate("MainWindow", "MainWindow", nullptr));
         actionMenu_1->setText(QCoreApplication::translate("MainWindow", "Menu 1", nullptr));
         actionmenu_2->setText(QCoreApplication::translate("MainWindow", "menu 2", nullptr));
         tabWidget->setTabText(tabWidget->indexOf(classifyTab), QCoreApplication::translate("MainWindow", "Klassifizierung", nullptr));
         tabWidget->setTabText(tabWidget->indexOf(trainingTab), QCoreApplication::translate("MainWindow", "Transfer Learning", nullptr));
-        menuAlexLens->setTitle(QCoreApplication::translate("MainWindow", "AlexLens", nullptr));
     } // retranslateUi
 
 };
