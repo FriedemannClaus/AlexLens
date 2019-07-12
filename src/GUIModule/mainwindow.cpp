@@ -1,5 +1,5 @@
-#include "../includes/mainwindow.h"
-#include "../includes/ui_mainwindow.h"
+#include "GUIModule/mainwindow.h"
+#include "GUIModule/ui_mainwindow.h"
 #include<iostream>
 #include<unistd.h>
 

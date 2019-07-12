@@ -4,7 +4,7 @@
 #include <QMainWindow>
 #include<QFileDialog>
 #include<QGraphicsScene>
-#include "Manager.h"
+#include "ManagerModule/Manager.h"
 
 namespace Ui {
     class MainWindow;

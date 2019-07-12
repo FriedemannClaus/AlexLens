@@ -1,4 +1,4 @@
-#include "parameterpanel.h"
+#include "GUIModule/parameterpanel.h"
 #include <QFileDialog>
 #include <QDir>
 #include <QStandardPaths>

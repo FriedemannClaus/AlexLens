@@ -2,7 +2,7 @@
 // Created by Friedemann on 12.07.2019.
 //
 
-#include <Mode.h>
+#include <PlatformModule/Mode.h>
 
 Mode::Mode() {
 }

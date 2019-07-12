@@ -1,4 +1,4 @@
-#include "outputclassifypanel.h"
+#include "GUIModule/outputclassifypanel.h"
 
 #include <QFileDialog>
 #include <QDir>

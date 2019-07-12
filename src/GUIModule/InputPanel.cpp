@@ -1,4 +1,4 @@
-#include "../includes/inputpanel.h"
+#include "GUIModule/inputpanel.h"
 
 #include <QFileDialog>
 #include <QDir>

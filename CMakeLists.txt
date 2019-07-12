@@ -11,7 +11,7 @@ find_package(Qt5Widgets REQUIRED)
 
 list(APPEND THIRD-PARTY-LIBS Qt::Widgets Qt::Core)
 
-add_executable(AlexLens src/main.cpp src/InputPanel.cpp includes/inputpanel.h src/mainwindow.cpp includes/mainwindow.h src/parameterpanel.cpp includes/parameterpanel.h src/outputclassifypanel.cpp includes/outputclassifypanel.h includes/ui_mainwindow.h src/Manager.cpp includes/Manager.h includes/Mode.h includes/Mode.h src/Mode.cpp)
+add_executable(AlexLens src/main.cpp src/GUIModule/InputPanel.cpp includes/GUIModule/inputpanel.h src/GUIModule/mainwindow.cpp includes/GUIModule/mainwindow.h src/GUIModule/parameterpanel.cpp includes/GUIModule/parameterpanel.h src/GUIModule/outputclassifypanel.cpp includes/GUIModule/outputclassifypanel.h includes/GUIModule/ui_mainwindow.h src/ManagerModule/Manager.cpp includes/ManagerModule/Manager.h includes/PlatformModule/Mode.h includes/PlatformModule/Mode.h src/PlatformModule/Mode.cpp)
 
 include_directories(includes)
 
