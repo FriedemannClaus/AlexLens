@@ -5,9 +5,13 @@
  */
 
 
-#ifndef _MODE_H
-#define _MODE_H
+#ifndef _TRAINING_H
+#define _TRAINING_H
 
-enum Mode { HIGH_PERFOMANCE, LOW_POWER, ENERGY_EFFICIENT, OPTIMAL };
+#include "TrainingSet.h"
 
-#endif //_MODE_H
+
+class Training: public TrainingSet {
+};
+
+#endif //_TRAINING_H

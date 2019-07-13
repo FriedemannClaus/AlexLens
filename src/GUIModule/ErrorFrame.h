@@ -5,9 +5,13 @@
  */
 
 
-#ifndef _MODE_H
-#define _MODE_H
+#ifndef _ERRORFRAME_H
+#define _ERRORFRAME_H
 
-enum Mode { HIGH_PERFOMANCE, LOW_POWER, ENERGY_EFFICIENT, OPTIMAL };
+#include "IView.h"
 
-#endif //_MODE_H
+
+class ErrorFrame: public IView {
+};
+
+#endif //_ERRORFRAME_H

@@ -5,9 +5,10 @@
  */
 
 
-#ifndef _MODE_H
-#define _MODE_H
+#ifndef _OPENVINO_H
+#define _OPENVINO_H
 
-enum Mode { HIGH_PERFOMANCE, LOW_POWER, ENERGY_EFFICIENT, OPTIMAL };
+class OpenVINO {
+};
 
-#endif //_MODE_H
+#endif //_OPENVINO_H

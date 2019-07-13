@@ -5,9 +5,13 @@
  */
 
 
-#ifndef _MODE_H
-#define _MODE_H
+#ifndef _SKALAR_H
+#define _SKALAR_H
 
-enum Mode { HIGH_PERFOMANCE, LOW_POWER, ENERGY_EFFICIENT, OPTIMAL };
+#include "TensorObject.h"
 
-#endif //_MODE_H
+
+class Skalar: public TensorObject {
+};
+
+#endif //_SKALAR_H

@@ -5,9 +5,10 @@
  */
 
 
-#ifndef _MODE_H
-#define _MODE_H
+#ifndef _OPENCL_H
+#define _OPENCL_H
 
-enum Mode { HIGH_PERFOMANCE, LOW_POWER, ENERGY_EFFICIENT, OPTIMAL };
+class OpenCL {
+};
 
-#endif //_MODE_H
+#endif //_OPENCL_H

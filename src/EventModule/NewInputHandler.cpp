@@ -5,9 +5,16 @@
  */
 
 
-#ifndef _MODE_H
-#define _MODE_H
+#include "NewInputHandler.h"
 
-enum Mode { HIGH_PERFOMANCE, LOW_POWER, ENERGY_EFFICIENT, OPTIMAL };
+/**
+ * NewInputHandler implementation
+ */
 
-#endif //_MODE_H
+
+/**
+ * @return void
+ */
+void NewInputHandler::run() {
+    return;
+}

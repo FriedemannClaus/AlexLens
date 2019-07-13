@@ -5,9 +5,13 @@
  */
 
 
-#ifndef _MODE_H
-#define _MODE_H
+#ifndef _NORMLAYER_H
+#define _NORMLAYER_H
 
-enum Mode { HIGH_PERFOMANCE, LOW_POWER, ENERGY_EFFICIENT, OPTIMAL };
+#include "Layer.h"
 
-#endif //_MODE_H
+
+class NormLayer: public Layer {
+};
+
+#endif //_NORMLAYER_H

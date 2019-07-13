@@ -5,9 +5,14 @@
  */
 
 
-#ifndef _MODE_H
-#define _MODE_H
+#ifndef _SHAPE_H
+#define _SHAPE_H
 
-enum Mode { HIGH_PERFOMANCE, LOW_POWER, ENERGY_EFFICIENT, OPTIMAL };
+class Shape {
+private: 
+	int numRow;
+	int numCol;
+	int depth;
+};
 
-#endif //_MODE_H
+#endif //_SHAPE_H

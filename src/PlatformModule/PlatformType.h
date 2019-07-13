@@ -5,9 +5,9 @@
  */
 
 
-#ifndef _MODE_H
-#define _MODE_H
+#ifndef _PLATFORMTYPE_H
+#define _PLATFORMTYPE_H
 
-enum Mode { HIGH_PERFOMANCE, LOW_POWER, ENERGY_EFFICIENT, OPTIMAL };
+enum PlatformType { GPU, CPU, ASIC };
 
-#endif //_MODE_H
+#endif //_PLATFORMTYPE_H

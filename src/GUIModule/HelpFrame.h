@@ -5,9 +5,13 @@
  */
 
 
-#ifndef _MODE_H
-#define _MODE_H
+#ifndef _HELPFRAME_H
+#define _HELPFRAME_H
 
-enum Mode { HIGH_PERFOMANCE, LOW_POWER, ENERGY_EFFICIENT, OPTIMAL };
+#include "IView.h"
 
-#endif //_MODE_H
+
+class HelpFrame: public IView {
+};
+
+#endif //_HELPFRAME_H

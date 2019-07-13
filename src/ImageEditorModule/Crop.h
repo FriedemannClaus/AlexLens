@@ -5,9 +5,13 @@
  */
 
 
-#ifndef _MODE_H
-#define _MODE_H
+#ifndef _CROP_H
+#define _CROP_H
 
-enum Mode { HIGH_PERFOMANCE, LOW_POWER, ENERGY_EFFICIENT, OPTIMAL };
+#include "ImageOperation.h"
 
-#endif //_MODE_H
+
+class Crop: public ImageOperation {
+};
+
+#endif //_CROP_H

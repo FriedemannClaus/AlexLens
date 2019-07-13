@@ -5,9 +5,13 @@
  */
 
 
-#ifndef _MODE_H
-#define _MODE_H
+#ifndef _PAD_H
+#define _PAD_H
 
-enum Mode { HIGH_PERFOMANCE, LOW_POWER, ENERGY_EFFICIENT, OPTIMAL };
+#include "ImageOperation.h"
 
-#endif //_MODE_H
+
+class Pad: public ImageOperation {
+};
+
+#endif //_PAD_H

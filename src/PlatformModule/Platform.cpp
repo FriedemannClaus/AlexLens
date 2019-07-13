@@ -5,9 +5,16 @@
  */
 
 
-#ifndef _MODE_H
-#define _MODE_H
+#include "Platform.h"
 
-enum Mode { HIGH_PERFOMANCE, LOW_POWER, ENERGY_EFFICIENT, OPTIMAL };
+/**
+ * Platform implementation
+ */
 
-#endif //_MODE_H
+
+/**
+ * @return void
+ */
+virtual void Platform::runClassify() {
+    return;
+}

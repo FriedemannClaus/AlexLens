@@ -5,9 +5,9 @@
  */
 
 
-#ifndef _MODE_H
-#define _MODE_H
+#ifndef _LAYERTYPE_H
+#define _LAYERTYPE_H
 
-enum Mode { HIGH_PERFOMANCE, LOW_POWER, ENERGY_EFFICIENT, OPTIMAL };
+enum LayerType { CONV_LAYER, FC_LAYER, POOL_LAYER, NORM_LAYER };
 
-#endif //_MODE_H
+#endif //_LAYERTYPE_H

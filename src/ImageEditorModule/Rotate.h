@@ -5,9 +5,13 @@
  */
 
 
-#ifndef _MODE_H
-#define _MODE_H
+#ifndef _ROTATE_H
+#define _ROTATE_H
 
-enum Mode { HIGH_PERFOMANCE, LOW_POWER, ENERGY_EFFICIENT, OPTIMAL };
+#include "ImageOperation.h"
 
-#endif //_MODE_H
+
+class Rotate: public ImageOperation {
+};
+
+#endif //_ROTATE_H

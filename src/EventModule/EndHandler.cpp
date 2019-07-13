@@ -5,9 +5,16 @@
  */
 
 
-#ifndef _MODE_H
-#define _MODE_H
+#include "EndHandler.h"
 
-enum Mode { HIGH_PERFOMANCE, LOW_POWER, ENERGY_EFFICIENT, OPTIMAL };
+/**
+ * EndHandler implementation
+ */
 
-#endif //_MODE_H
+
+/**
+ * @return void
+ */
+void EndHandler::run() {
+    return;
+}

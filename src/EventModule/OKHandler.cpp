@@ -5,9 +5,16 @@
  */
 
 
-#ifndef _MODE_H
-#define _MODE_H
+#include "OKHandler.h"
 
-enum Mode { HIGH_PERFOMANCE, LOW_POWER, ENERGY_EFFICIENT, OPTIMAL };
+/**
+ * OKHandler implementation
+ */
 
-#endif //_MODE_H
+
+/**
+ * @return void
+ */
+void OKHandler::run() {
+    return;
+}

@@ -5,9 +5,13 @@
  */
 
 
-#ifndef _MODE_H
-#define _MODE_H
+#ifndef _RESIZE_H
+#define _RESIZE_H
 
-enum Mode { HIGH_PERFOMANCE, LOW_POWER, ENERGY_EFFICIENT, OPTIMAL };
+#include "ImageOperation.h"
 
-#endif //_MODE_H
+
+class Resize: public ImageOperation {
+};
+
+#endif //_RESIZE_H

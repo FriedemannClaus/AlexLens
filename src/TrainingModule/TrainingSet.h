@@ -5,9 +5,12 @@
  */
 
 
-#ifndef _MODE_H
-#define _MODE_H
+#ifndef _TRAININGSET_H
+#define _TRAININGSET_H
 
-enum Mode { HIGH_PERFOMANCE, LOW_POWER, ENERGY_EFFICIENT, OPTIMAL };
+class TrainingSet {
+private: 
+	List<TrainingElement> trainingImages;
+};
 
-#endif //_MODE_H
+#endif //_TRAININGSET_H

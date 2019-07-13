@@ -5,9 +5,13 @@
  */
 
 
-#ifndef _MODE_H
-#define _MODE_H
+#ifndef _MAXPOOL2D_H
+#define _MAXPOOL2D_H
 
-enum Mode { HIGH_PERFOMANCE, LOW_POWER, ENERGY_EFFICIENT, OPTIMAL };
+#include "PoolLayer.h"
 
-#endif //_MODE_H
+
+class MaxPool2D: public PoolLayer {
+};
+
+#endif //_MAXPOOL2D_H
