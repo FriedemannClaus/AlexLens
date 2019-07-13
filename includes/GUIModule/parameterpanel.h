@@ -15,7 +15,7 @@
 #include <list>
 #include <iterator>
 #include <iostream>
-#include "../ManagerModule/Manager.h"
+#include "../../src/ManagerModule/Manager.h"
 using namespace std;
 
 class ParameterPanel : public QWidget
@@ -32,7 +32,7 @@ public:
     inline void setManager(Manager* manager) {this->manager = manager;};
 
 private slots:
-    void start();
+    void run();
     void beenden();
 
 private:

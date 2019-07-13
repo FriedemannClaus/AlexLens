@@ -4,7 +4,7 @@
 #include <QMainWindow>
 #include<QFileDialog>
 #include<QGraphicsScene>
-#include "../ManagerModule/Manager.h"
+#include "../../src/ManagerModule/Manager.h"
 
 namespace Ui {
     class MainWindow;
@@ -20,10 +20,6 @@ public:
     ~MainWindow();
 
 private slots:
-
-    void on_actionStatistiken_triggered();
-
-    void on_actionHilfe_triggered();
 
 private:
     Ui::MainWindow *ui;

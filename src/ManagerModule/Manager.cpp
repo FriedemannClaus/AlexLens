@@ -2,7 +2,7 @@
 // Created by dmitrii on 11.07.19.
 //
 
-#include "../../includes/ManagerModule/Manager.h"
+#include "Manager.h"
 
 
 Manager::Manager() {
