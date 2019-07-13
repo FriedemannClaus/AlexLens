@@ -8,7 +8,7 @@
 #include <list>
 #include <iterator>
 #include <string>
-#include "../../includes/PlatformModule/Mode.h"
+#include "../PlatformModule/Mode.h"
 
 using namespace std;
 
