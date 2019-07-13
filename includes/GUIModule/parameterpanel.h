@@ -15,7 +15,7 @@
 #include <list>
 #include <iterator>
 #include <iostream>
-#include "../../src/ManagerModule/Manager.h"
+#include "../ManagerModule/Manager.h"
 using namespace std;
 
 class ParameterPanel : public QWidget
