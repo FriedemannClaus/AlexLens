@@ -24,7 +24,7 @@ InputPanel::InputPanel(QWidget *parent)
     m_scrollArea->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
     m_gridLayout->addWidget(m_scrollArea, 0, 0, 1, 1);
 
-    m_pushButton = new QPushButton("Add Image", this);
+    m_pushButton = new QPushButton("Durchsuchen", this);
     connect(m_pushButton, &QPushButton::clicked, this, &InputPanel::addImage);
     m_gridLayout->addWidget(m_pushButton, 1, 0);
 }

@@ -30,6 +30,7 @@ CONFIG += c++11
 
 SOURCES += \
     src/GUIModule/InputPanel.cpp \
+    src/GUIModule/helpform.cpp \
     src/GUIModule/mainwindow.cpp \
     src/GUIModule/outputclassifypanel.cpp \
     src/GUIModule/parameterpanel.cpp \
@@ -41,13 +42,15 @@ SOURCES += \
 HEADERS += \
     includes/GUIModule/inputpanel.h \
     includes/GUIModule/mainwindow.h \
+    includes/GUIModule/helpform.h \
     includes/GUIModule/outputclassifypanel.h \
     includes/GUIModule/parameterpanel.h \
-    includes/GUIModule/ui_mainwindow.h \
+    #includes/GUIModule/ui_mainwindow.h \
     includes/ManagerModule/Manager.h \
-    includes/PlatformModule/Mode.h
+    includes/PlatformModule/Mode.h \
 
 FORMS += \
+    helpform.ui \
     mainwindow.ui
 
 
@@ -67,3 +70,6 @@ Debug:UI_DIR = qmake-build-debug/.ui
 qnx: target.path = /tmp/$${TARGET}/bin
 else: unix:!android: target.path = /opt/$${TARGET}/bin
 !isEmpty(target.path): INSTALLS += target
+
+RESOURCES += \
+    Icon/icon.qrc

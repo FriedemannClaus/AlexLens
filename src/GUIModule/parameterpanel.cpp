@@ -34,11 +34,11 @@ ParameterPanel::ParameterPanel(QWidget *parent)
 
     m_gridLayout->addWidget(vertikalGroupBox);
 
-    m_pushButton = new QPushButton("run", this);
-    m_pushButton2 = new QPushButton("Beenden", this);
+    m_pushButton = new QPushButton("Beenden", this);
+    m_pushButton2 = new QPushButton("Start", this);
 
-    connect(m_pushButton, &QPushButton::clicked, this, &ParameterPanel::run);
-    connect(m_pushButton2, &QPushButton::clicked, this, &ParameterPanel::beenden);
+    connect(m_pushButton, &QPushButton::clicked, this, &ParameterPanel::beenden);
+    connect(m_pushButton2, &QPushButton::clicked, this, &ParameterPanel::start);
 
     QGroupBox *horizonatlGroupBox = new QGroupBox(this);
     QHBoxLayout *buttons = new QHBoxLayout();
@@ -53,9 +53,9 @@ ParameterPanel::~ParameterPanel()
 
 }
 
-void ParameterPanel::run()
+void ParameterPanel::start()
 {
-    QMessageBox::warning(this, "RUN", "RUN" );
+    QMessageBox::warning(this, "START", "START" );
 
 }
 

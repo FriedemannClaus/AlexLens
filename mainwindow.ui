@@ -26,13 +26,74 @@
        </attribute>
        <layout class="QHBoxLayout" name="horizontalLayout">
         <item>
-         <widget class="InputPanel" name="inputClassifyPanel" native="true"/>
+         <widget class="InputPanel" name="inputClassifyPanel" native="true">
+          <property name="autoFillBackground">
+           <bool>false</bool>
+          </property>
+          <widget class="QLabel" name="label">
+           <property name="geometry">
+            <rect>
+             <x>11</x>
+             <y>-5</y>
+             <width>71</width>
+             <height>20</height>
+            </rect>
+           </property>
+           <property name="autoFillBackground">
+            <bool>false</bool>
+           </property>
+           <property name="text">
+            <string>Bildeingabe</string>
+           </property>
+          </widget>
+         </widget>
         </item>
         <item>
-         <widget class="ParameterPanel" name="parameterClassifyPanel" native="true"/>
+         <widget class="ParameterPanel" name="parameterClassifyPanel" native="true">
+          <widget class="QLabel" name="label_3">
+           <property name="geometry">
+            <rect>
+             <x>26</x>
+             <y>12</y>
+             <width>91</width>
+             <height>16</height>
+            </rect>
+           </property>
+           <property name="text">
+            <string>Betriebsmodus</string>
+           </property>
+          </widget>
+          <widget class="QLabel" name="label_4">
+           <property name="geometry">
+            <rect>
+             <x>26</x>
+             <y>135</y>
+             <width>101</width>
+             <height>16</height>
+            </rect>
+           </property>
+           <property name="text">
+            <string>Neuronales Netz</string>
+           </property>
+          </widget>
+         </widget>
         </item>
         <item>
-         <widget class="OutputClassifyPanel" name="outputClassifyPanel" native="true"/>
+         <widget class="OutputClassifyPanel" name="outputClassifyPanel" native="true">
+          <widget class="QLabel" name="label_2">
+           <property name="geometry">
+            <rect>
+             <x>11</x>
+             <y>-4</y>
+             <width>71</width>
+             <height>16</height>
+            </rect>
+           </property>
+           <property name="text">
+            <string>Ergebnisse</string>
+           </property>
+          </widget>
+         </widget>
         </item>
        </layout>
       </widget>
@@ -42,13 +103,71 @@
        </attribute>
        <layout class="QHBoxLayout" name="horizontalLayout_2">
         <item>
-         <widget class="InputPanel" name="inputTrainingPanel" native="true"/>
+         <widget class="InputPanel" name="inputTrainingPanel" native="true">
+          <widget class="QLabel" name="label_5">
+           <property name="geometry">
+            <rect>
+             <x>11</x>
+             <y>-5</y>
+             <width>71</width>
+             <height>20</height>
+            </rect>
+           </property>
+           <property name="autoFillBackground">
+            <bool>false</bool>
+           </property>
+           <property name="text">
+            <string>Bildeingabe</string>
+           </property>
+          </widget>
+         </widget>
         </item>
         <item>
-         <widget class="ParameterPanel" name="parameterTrainingPanel" native="true"/>
+         <widget class="ParameterPanel" name="parameterTrainingPanel" native="true">
+          <widget class="QLabel" name="label_7">
+           <property name="geometry">
+            <rect>
+             <x>26</x>
+             <y>12</y>
+             <width>91</width>
+             <height>16</height>
+            </rect>
+           </property>
+           <property name="text">
+            <string>Betriebsmodus</string>
+           </property>
+          </widget>
+          <widget class="QLabel" name="label_8">
+           <property name="geometry">
+            <rect>
+             <x>26</x>
+             <y>135</y>
+             <width>101</width>
+             <height>16</height>
+            </rect>
+           </property>
+           <property name="text">
+            <string>Neuronales Netz</string>
+           </property>
+          </widget>
+         </widget>
         </item>
         <item>
-         <widget class="OutputClassifyPanel" name="outputTrainingPanel" native="true"/>
+         <widget class="OutputClassifyPanel" name="outputTrainingPanel" native="true">
+          <widget class="QLabel" name="label_6">
+           <property name="geometry">
+            <rect>
+             <x>11</x>
+             <y>-4</y>
+             <width>71</width>
+             <height>16</height>
+            </rect>
+           </property>
+           <property name="text">
+            <string>Ergebnisse</string>
+           </property>
+          </widget>
+         </widget>
         </item>
        </layout>
       </widget>
@@ -67,22 +186,56 @@
    </property>
   </widget>
   <widget class="QToolBar" name="mainToolBar">
+   <property name="maximumSize">
+    <size>
+     <width>16777215</width>
+     <height>16777215</height>
+    </size>
+   </property>
+   <property name="contextMenuPolicy">
+    <enum>Qt::DefaultContextMenu</enum>
+   </property>
+   <property name="layoutDirection">
+    <enum>Qt::RightToLeft</enum>
+   </property>
+   <property name="iconSize">
+    <size>
+     <width>20</width>
+     <height>20</height>
+    </size>
+   </property>
    <attribute name="toolBarArea">
     <enum>TopToolBarArea</enum>
    </attribute>
    <attribute name="toolBarBreak">
     <bool>false</bool>
    </attribute>
+   <addaction name="actionHilfe"/>
+   <addaction name="actionStatistiken"/>
   </widget>
   <widget class="QStatusBar" name="statusBar"/>
-  <action name="actionMenu_1">
+  <action name="actionStatistiken">
+   <property name="icon">
+    <iconset resource="Icon/icon.qrc">
+     <normaloff>:/icon/iconStat.png</normaloff>:/icon/iconStat.png</iconset>
+   </property>
    <property name="text">
-    <string>Menu 1</string>
+    <string>Statistiken</string>
+   </property>
+   <property name="toolTip">
+    <string>Statistiken</string>
    </property>
   </action>
-  <action name="actionmenu_2">
+  <action name="actionHilfe">
+   <property name="icon">
+    <iconset resource="Icon/icon.qrc">
+     <normaloff>:/icon/iconQuestion.png</normaloff>:/icon/iconQuestion.png</iconset>
+   </property>
    <property name="text">
-    <string>menu 2</string>
+    <string>Hilfe</string>
+   </property>
+   <property name="toolTip">
+    <string>Hilfe</string>
    </property>
   </action>
  </widget>
@@ -107,6 +260,8 @@
    <container>1</container>
   </customwidget>
  </customwidgets>
- <resources/>
+ <resources>
+  <include location="Icon/icon.qrc"/>
+ </resources>
  <connections/>
 </ui>

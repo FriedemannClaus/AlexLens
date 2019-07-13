@@ -32,7 +32,7 @@ public:
     inline void setManager(Manager* manager) {this->manager = manager;};
 
 private slots:
-    void run();
+    void start();
     void beenden();
 
 private:
