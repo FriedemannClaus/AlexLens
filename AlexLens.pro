@@ -10,7 +10,10 @@ greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
 TARGET = AlexLens
 TEMPLATE = app
-INCLUDEPATH += includes
+INCLUDEPATH += includes/GUIModule \
+               includes/PlatformModule \
+               includes/ManagerModule
+
 
 # The following define makes your compiler emit warnings if you use
 # any feature of Qt which has been marked as deprecated (the exact warnings
@@ -26,25 +29,27 @@ DEFINES += QT_DEPRECATED_WARNINGS
 CONFIG += c++11
 
 SOURCES += \
-        src/InputPanel.cpp \
-        src/main.cpp \
-        src/mainwindow.cpp \
-        src/outputclassifypanel.cpp \
-        src/parameterpanel.cpp \
-        src/Mode.cpp \
-        src/Manager.cpp
+    src/GUIModule/InputPanel.cpp \
+    src/GUIModule/mainwindow.cpp \
+    src/GUIModule/outputclassifypanel.cpp \
+    src/GUIModule/parameterpanel.cpp \
+    src/ManagerModule/Manager.cpp \
+    src/PlatformModule/Mode.cpp \
+    src/main.cpp
+
 
 HEADERS += \
-        includes/inputpanel.h \
-        includes/mainwindow.h \
-        includes/outputclassifypanel.h \
-        includes/parameterpanel.h \
-        includes/Mode.h \
-        includes/Manager.h \
-        includes/ui_mainwindow.h
+    includes/GUIModule/inputpanel.h \
+    includes/GUIModule/mainwindow.h \
+    includes/GUIModule/outputclassifypanel.h \
+    includes/GUIModule/parameterpanel.h \
+    includes/GUIModule/ui_mainwindow.h \
+    includes/ManagerModule/Manager.h \
+    includes/PlatformModule/Mode.h
 
 FORMS += \
-        mainwindow.ui
+    mainwindow.ui
+
 
 Release:DESTDIR = qmake-build-release
 Release:OBJECTS_DIR = qmake-build-release/.obj
@@ -59,6 +64,6 @@ Debug:RCC_DIR = qmake-build-debug/.rcc
 Debug:UI_DIR = qmake-build-debug/.ui
 
 # Default rules for deployment.
-#qnx: target.path = /tmp/$${TARGET}/bin
-#else: unix:!android: target.path = /opt/$${TARGET}/bin
-#!isEmpty(target.path): INSTALLS += target
+qnx: target.path = /tmp/$${TARGET}/bin
+else: unix:!android: target.path = /opt/$${TARGET}/bin
+!isEmpty(target.path): INSTALLS += target
