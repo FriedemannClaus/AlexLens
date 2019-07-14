@@ -8,7 +8,7 @@
 #ifndef _PLATFORMMANAGER_H
 #define _PLATFORMMANAGER_H
 
-#include "IPlatformManager.h"
+#include "PlatformModule/IPlatformManager.h"
 #include "../GUIModule/Subject.h"
 #include "../GUIModule/Subject.h"
 #include "../GUIModule/Subject.h"

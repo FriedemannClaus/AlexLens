@@ -8,9 +8,9 @@
 #ifndef _IMAGEEDITOR_H
 #define _IMAGEEDITOR_H
 
-#include "IImageEditor.h"
-#include "IImageEditor.h"
-#include "IImageEditor.h"
+#include "ImageEditorModule/IImageEditor.h"
+#include "ImageEditorModule/IImageEditor.h"
+#include "ImageEditorModule/IImageEditor.h"
 
 
 class ImageEditor: public IImageEditor, public IImageEditor, public IImageEditor {

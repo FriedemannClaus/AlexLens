@@ -8,7 +8,7 @@
 #ifndef _SAVEDELETETRAININGFRAME_H
 #define _SAVEDELETETRAININGFRAME_H
 
-#include "IView.h"
+#include "GUIModule/IView.h"
 
 
 class SaveDeleteTrainingFrame: public IView {

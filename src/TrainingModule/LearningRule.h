@@ -8,8 +8,8 @@
 #ifndef _LEARNINGRULE_H
 #define _LEARNINGRULE_H
 
-#include "ITraining.h"
-#include "ITraining.h"
+#include "TrainingModule/ITraining.h"
+#include "TrainingModule/ITraining.h"
 
 
 class LearningRule: public ITraining, public ITraining {

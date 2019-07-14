@@ -8,8 +8,8 @@
 #ifndef _NEURALNET_H
 #define _NEURALNET_H
 
-#include "INeuralNet.h"
-#include "INeuralNet.h"
+#include "NeuralNetModule/INeuralNet.h"
+#include "NeuralNetModule/INeuralNet.h"
 
 
 class NeuralNet: public INeuralNet, public INeuralNet {

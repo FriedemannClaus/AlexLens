@@ -8,7 +8,7 @@
 #ifndef _TRAININGFRAME_H
 #define _TRAININGFRAME_H
 
-#include "IView.h"
+#include "GUIModule/IView.h"
 
 
 class TrainingFrame: public IView {

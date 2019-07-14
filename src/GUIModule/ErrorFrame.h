@@ -8,7 +8,7 @@
 #ifndef _ERRORFRAME_H
 #define _ERRORFRAME_H
 
-#include "IView.h"
+#include "GUIModule/IView.h"
 
 
 class ErrorFrame: public IView {

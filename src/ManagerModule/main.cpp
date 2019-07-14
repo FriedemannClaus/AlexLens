@@ -2,7 +2,8 @@
 #include <QApplication>
 #include<QFileDialog>
 #include "Manager.h"
-#include "../TrainingModule/ITraining.h"
+#include "TrainingModule/ITraining.h"
+#include "../MathModule/Skalar.h"
 
 int main(int argc, char *argv[])
 {

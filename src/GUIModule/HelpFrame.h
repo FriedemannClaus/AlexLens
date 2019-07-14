@@ -8,7 +8,7 @@
 #ifndef _HELPFRAME_H
 #define _HELPFRAME_H
 
-#include "IView.h"
+#include "GUIModule/IView.h"
 
 
 class HelpFrame: public IView {

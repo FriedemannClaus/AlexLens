@@ -10,21 +10,21 @@
 
 #include "TensorObject.h"
 
-
+template <class T>
 class Tensor: public TensorObject {
 public: 
 	
 /**
  * @param values
  */
-void Tensor(double values);
+void Tensor(T[][][] values);
 	
 /**
  * @param x
  * @param y
  * @param z
  */
-double getValue(int x, int y, int z);
+T getValue(int x, int y, int z);
 	
 /**
  * @param x
@@ -32,13 +32,16 @@ double getValue(int x, int y, int z);
  * @param z
  * @param value
  */
-void setValue(int x, int y, int z, double value);
+void setValue(int x, int y, int z, T value);
 	
 int getNumRow();
 	
 int getNumCol();
 	
 int getDepth();
+
+private:
+    T[][][] values;
 };
 
 #endif //_TENSOR_H

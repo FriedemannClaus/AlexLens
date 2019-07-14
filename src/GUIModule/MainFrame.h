@@ -8,7 +8,7 @@
 #ifndef _MAINFRAME_H
 #define _MAINFRAME_H
 
-#include "IView.h"
+#include "GUIModule/IView.h"
 
 
 class MainFrame: public IView {

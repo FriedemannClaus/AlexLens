@@ -8,8 +8,8 @@
 #ifndef _NORULE_H
 #define _NORULE_H
 
-#include "ITraining.h"
-#include "ITraining.h"
+#include "TrainingModule/ITraining.h"
+#include "TrainingModule/ITraining.h"
 
 
 class NoRule: public ITraining, public ITraining {

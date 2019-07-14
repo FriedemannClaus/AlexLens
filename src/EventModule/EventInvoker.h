@@ -8,8 +8,8 @@
 #ifndef _EVENTINVOKER_H
 #define _EVENTINVOKER_H
 
-#include "IEventInvoker.h"
-#include "IEventInvoker.h"
+#include "EventModule/IEventInvoker.h"
+#include "EventModule/IEventInvoker.h"
 
 
 class EventInvoker: public IEventInvoker, public IEventInvoker {

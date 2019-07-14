@@ -8,7 +8,7 @@
 #ifndef _STATISTICFRAME_H
 #define _STATISTICFRAME_H
 
-#include "IView.h"
+#include "GUIModule/IView.h"
 #include "IObserver.h"
 
 

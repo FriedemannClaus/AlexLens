@@ -8,8 +8,8 @@
 #ifndef _ITRAINING_H
 #define _ITRAINING_H
 
-#include "../GUIModule/Subject.h"
-#include "../GUIModule/IObserver.h"
+#include "../../src/GUIModule/Subject.h"
+#include "../../src/GUIModule/IObserver.h"
 
 
 class ITraining: public Subject {
