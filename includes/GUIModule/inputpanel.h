@@ -10,6 +10,7 @@
 #include <QLabel>
 #include <QImage>
 #include <QPixmap>
+#include "../../src/ManagerModule/Manager.h"
 
 class InputPanel : public QWidget
 {
@@ -18,6 +19,8 @@ class InputPanel : public QWidget
 public:
     InputPanel(QWidget *parent = 0);
     ~InputPanel();
+
+    inline void setManager(Manager* manager) {this->manager = manager;};
 
 private slots:
             void addImage();
@@ -32,7 +35,9 @@ private:
     QPushButton* m_pushButton;
     QVBoxLayout* m_verticalLayout;
     QWidget*     m_scrollAreaWidgetContents;
-    QVector<QPair<QLabel*, QPixmap> > m_imagesVector;
+    QVector<QPair<QLabel*, QPixmap> > previewImages;
+    Manager* manager;
+    bool imageWasAdded = false;
 };
 
 #endif // WIDGET_H

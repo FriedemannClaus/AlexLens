@@ -6,6 +6,7 @@
 #include <QScrollBar>
 
 #include <QDebug>
+#include <iostream>
 
 
 InputPanel::InputPanel(QWidget *parent)
@@ -36,6 +37,7 @@ InputPanel::~InputPanel()
 
 void InputPanel::addImage()
 {
+    this->imageWasAdded = true;
     QStringList fileNameList = QFileDialog::getOpenFileNames(this,
                                                              "Open Files",
                                                              QStandardPaths::displayName(QStandardPaths::HomeLocation),
@@ -47,9 +49,12 @@ void InputPanel::addImage()
     {
         QLabel* imageLabel = new QLabel(this);
         QPixmap pix(fileName);
-        m_imagesVector.append(qMakePair(imageLabel, pix));
+        previewImages.append(qMakePair(imageLabel, pix));
         imageLabel->setPixmap(pix.scaledToWidth(imageWidth));
         m_verticalLayout->addWidget(imageLabel);
+
+        this->manager->addImage(fileName.toStdString()); // adding fileName to manager
+        std::cout << fileName.toStdString() << endl;
     }
 }
 
@@ -58,7 +63,7 @@ void InputPanel::resizeEvent(QResizeEvent *event)
     Q_UNUSED(event)
     int imageWidth = m_scrollArea->width() - 30;
 
-    for (QPair<QLabel*, QPixmap> pair : m_imagesVector)
+    for (QPair<QLabel*, QPixmap> pair : previewImages)
     {
         pair.first->setPixmap(pair.second.scaledToWidth(imageWidth));
     }

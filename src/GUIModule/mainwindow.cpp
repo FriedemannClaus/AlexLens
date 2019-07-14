@@ -28,11 +28,10 @@ MainWindow::MainWindow(Manager* manager, QWidget *parent) :
 
     ui->setupUi(this);
     this->manager = manager;
-    //ui->parameterPanel->setManager(manager);
-    //ui->parameterPanel->fillModes();
-    //ui->parameterPanel->fillNeuralNets();
+
     ui->parameterClassifyPanel->setManager(manager);
     ui->parameterTrainingPanel->setManager(manager);
+    ui->inputClassifyPanel->setManager(manager);
 
     ui->parameterClassifyPanel->fillModes();
     ui->parameterClassifyPanel->fillNeuralNets();

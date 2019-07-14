@@ -42,6 +42,7 @@ private:
     QListWidget* modList;
     QListWidget* neuralNetsList;
     Manager* manager;
+    bool runWasPushed = false;
 
 };
 

@@ -1,4 +1,5 @@
 #include "../../includes/GUIModule/parameterpanel.h"
+#include "../PlatformModule/ModeUtil.h"
 #include <QFileDialog>
 #include <QDir>
 #include <QStandardPaths>
@@ -11,6 +12,7 @@
 #include <QMessageBox>
 #include <QDebug>
 #include <QString>
+#include <string>
 
 using namespace std;
 
@@ -64,13 +66,23 @@ ParameterPanel::~ParameterPanel()
 
 void ParameterPanel::start()
 {
+    string currentMode = this->modList->currentItem()->text().toStdString();
+    string currentNeuralNet = this->neuralNetsList->currentItem()->text().toStdString();
+    //cout << currentMode << endl;
+    this->manager->setMode(ModeUtil::whichMode(currentMode));
+    this->manager->setNeuralNet(currentNeuralNet);
+    this->runWasPushed = true;
     QMessageBox::warning(this, "Start", "Start" );
 
 }
 
 void ParameterPanel::beenden()
 {
-    QMessageBox::warning(this, "Beenden", "Beenden" );
+    if (runWasPushed) {
+        QMessageBox::warning(this, "Beenden", "Prozess wird beendet!" );
+    } else {
+        QMessageBox::warning(this, "Beenden", "Nichts zu beenden!" );
+    }
 }
 
 void ParameterPanel::fillModes() {
