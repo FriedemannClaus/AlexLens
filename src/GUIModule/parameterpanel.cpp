@@ -24,21 +24,30 @@ ParameterPanel::ParameterPanel(QWidget *parent)
     QGroupBox *vertikalGroupBox = new QGroupBox(this);
     QVBoxLayout *parameterList = new QVBoxLayout;
 
+    QLabel *label = new QLabel(this);
+    label->setText("Betriebsmodus");
+    parameterList->addWidget(label);
+
     modList = new QListWidget; //will be filled in fillModes()
     neuralNetsList = new QListWidget; // will be filled in fillNeuralNets()
 
     parameterList->addWidget(modList);
+
+    QLabel *label_2 = new QLabel(this);
+    label_2->setText("Neuronales Netz");
+    parameterList->addWidget(label_2);
+
     parameterList->addWidget(neuralNetsList);
 
     vertikalGroupBox->setLayout(parameterList);
 
     m_gridLayout->addWidget(vertikalGroupBox);
 
-    m_pushButton = new QPushButton("run", this);
-    m_pushButton2 = new QPushButton("Beenden", this);
+    m_pushButton = new QPushButton("Beenden", this);
+    m_pushButton2 = new QPushButton("Start", this);
 
-    connect(m_pushButton, &QPushButton::clicked, this, &ParameterPanel::run);
-    connect(m_pushButton2, &QPushButton::clicked, this, &ParameterPanel::beenden);
+    connect(m_pushButton, &QPushButton::clicked, this, &ParameterPanel::beenden);
+    connect(m_pushButton2, &QPushButton::clicked, this, &ParameterPanel::start);
 
     QGroupBox *horizonatlGroupBox = new QGroupBox(this);
     QHBoxLayout *buttons = new QHBoxLayout();
@@ -53,15 +62,15 @@ ParameterPanel::~ParameterPanel()
 
 }
 
-void ParameterPanel::run()
+void ParameterPanel::start()
 {
-    QMessageBox::warning(this, "RUN", "RUN" );
+    QMessageBox::warning(this, "Start", "Start" );
 
 }
 
 void ParameterPanel::beenden()
 {
-    QMessageBox::warning(this, "BEENDEN", "BEENDEN" );
+    QMessageBox::warning(this, "Beenden", "Beenden" );
 }
 
 void ParameterPanel::fillModes() {
@@ -71,6 +80,7 @@ void ParameterPanel::fillModes() {
         string item = *it;
         modList->addItem(QString::fromStdString(item));
     }
+    modList->setCurrentRow(0);
 }
 
 void ParameterPanel::fillNeuralNets() {
@@ -80,4 +90,5 @@ void ParameterPanel::fillNeuralNets() {
         string item = *it;
         neuralNetsList->addItem(QString::fromStdString(item));
     }
+    neuralNetsList->setCurrentRow(0);
 }

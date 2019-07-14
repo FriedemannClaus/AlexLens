@@ -1,8 +1,9 @@
 #include "../../includes/GUIModule/mainwindow.h"
 #include "../../includes/GUIModule/ui_mainwindow.h"
 #include "../ManagerModule/Manager.h"
-#include<iostream>
-#include<unistd.h>
+#include "../../includes/GUIModule/helpform.h"
+#include <iostream>
+#include <unistd.h>
 
 
 MainWindow::MainWindow(QWidget *parent) :
@@ -38,4 +39,18 @@ MainWindow::MainWindow(Manager* manager, QWidget *parent) :
 
     ui->parameterTrainingPanel->fillModes();
     ui->parameterTrainingPanel->fillNeuralNets();
+}
+
+void MainWindow::on_actionHilfe_triggered()
+{
+    ui->statusBar->showMessage("Hilfe ");
+
+    HelpForm* h = new HelpForm();
+    h->show();
+    //this->hide();
+}
+
+void MainWindow::on_actionStatistiken_triggered()
+{
+    ui->statusBar->showMessage("Statistiken ");
 }

@@ -1,6 +1,6 @@
-#include "GUIModule/mainwindow.h"
+#include "../../includes/GUIModule/mainwindow.h"
 #include <QApplication>
-#include<QFileDialog>
+#include <QFileDialog>
 #include "Manager.h"
 #include "../TrainingModule/ITraining.h"
 

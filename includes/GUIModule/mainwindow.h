@@ -21,6 +21,10 @@ public:
 
 private slots:
 
+    void on_actionHilfe_triggered();
+
+    void on_actionStatistiken_triggered();
+
 private:
     Ui::MainWindow *ui;
     Manager* manager;

@@ -1,6 +1,6 @@
 /**
  * Project Entwurf_PSE_KNN
- * @author Jakub Trzcinsi, Viet Pham, Friedemann Claus, Dima Seletkov, Alexandr Eismont
+ * @author Jakub Trzcinsi, Viet Pham, Friedemann Claus, Dima Seletkov, Aleksandr Eismont
  * @version 1.2
  */
 

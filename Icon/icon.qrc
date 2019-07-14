@@ -1,0 +1,6 @@
+<RCC>
+    <qresource prefix="/icon">
+        <file>iconQuestion.png</file>
+        <file>iconStat.png</file>
+    </qresource>
+</RCC>

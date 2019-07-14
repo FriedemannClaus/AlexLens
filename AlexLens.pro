@@ -10,9 +10,7 @@ greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
 TARGET = AlexLens
 TEMPLATE = app
-INCLUDEPATH += includes/GUIModule \
-               includes/PlatformModule \
-               includes/ManagerModule
+INCLUDEPATH += includes/GUIModule
 
 #fix commit
 # The following define makes your compiler emit warnings if you use
@@ -29,25 +27,30 @@ DEFINES += QT_DEPRECATED_WARNINGS
 CONFIG += c++11
 
 SOURCES += \
+    src/GUIModule/helpform.cpp \
     src/GUIModule/InputPanel.cpp \
+    src/GUIModule/helppanel.cpp \
     src/GUIModule/mainwindow.cpp \
     src/GUIModule/outputclassifypanel.cpp \
     src/GUIModule/parameterpanel.cpp \
     src/ManagerModule/Manager.cpp \
-    src/PlatformModule/Mode.cpp \
-    src/main.cpp
+    src/ManagerModule/main.cpp
 
 
 HEADERS += \
+    includes/GUIModule/helpform.h \
     includes/GUIModule/inputpanel.h \
+    includes/GUIModule/helppanel.h \
     includes/GUIModule/mainwindow.h \
     includes/GUIModule/outputclassifypanel.h \
     includes/GUIModule/parameterpanel.h \
     includes/GUIModule/ui_mainwindow.h \
-    includes/ManagerModule/Manager.h \
-    includes/PlatformModule/Mode.h
+    includes/GUIModule/ui_helpform.h \
+    src/ManagerModule/Manager.h \
+    src/PlatformModule/Mode.h
 
 FORMS += \
+    helpform.ui \
     mainwindow.ui
 
 
@@ -67,3 +70,6 @@ Debug:UI_DIR = qmake-build-debug/.ui
 qnx: target.path = /tmp/$${TARGET}/bin
 else: unix:!android: target.path = /opt/$${TARGET}/bin
 !isEmpty(target.path): INSTALLS += target
+
+RESOURCES += \
+    Icon/icon.qrc

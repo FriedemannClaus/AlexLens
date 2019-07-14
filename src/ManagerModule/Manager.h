@@ -22,13 +22,13 @@ private:
 public:
     Manager();
 
-    inline void addImage(string imagePath) {this->imagePaths->push_front(imagePath);};
+    inline void addImage(string imagePath) {this->imagePaths->push_front(imagePath);}
 
-    inline void setMode(Mode mode) {operationMode = mode;};
+    inline void setMode(Mode mode) {operationMode = mode;}
 
-    inline list<string> getDefaultModes() {return defaultModes;};
+    inline list<string> getDefaultModes() {return defaultModes;}
 
-    inline list<string> getDeafaultNeuralNets() {return defaultNeuralNets;};
+    inline list<string> getDeafaultNeuralNets() {return defaultNeuralNets;}
 
 private:
     void setDefaultModes();
