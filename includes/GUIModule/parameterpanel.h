@@ -16,6 +16,9 @@
 #include <iterator>
 #include <iostream>
 #include "../../src/ManagerModule/Manager.h"
+#include "inputpanel.h"
+#include "outputclassifypanel.h"
+
 using namespace std;
 
 class ParameterPanel : public QWidget
@@ -29,8 +32,11 @@ public:
     void fillModes();
     void fillNeuralNets();
 
-    inline void setManager(Manager* manager) {this->manager = manager;};
+    inline void setManager(Manager* manager) {this->manager = manager;}
 
+    inline void setInputClassifyPanel(InputPanel* inputClassifyPanel) {this->inputClassifyPanel = inputClassifyPanel;}
+
+    inline void setOutputClassifyPanel(OutputClassifyPanel* outputClassifyPanel) {this->outputClassifyPanel = outputClassifyPanel;}
 private slots:
     void start();
     void beenden();
@@ -42,6 +48,8 @@ private:
     QListWidget* modList;
     QListWidget* neuralNetsList;
     Manager* manager;
+    InputPanel* inputClassifyPanel;
+    OutputClassifyPanel* outputClassifyPanel;
     bool runWasPushed = false;
 
 };

@@ -38,6 +38,9 @@ MainWindow::MainWindow(Manager* manager, QWidget *parent) :
 
     ui->parameterTrainingPanel->fillModes();
     ui->parameterTrainingPanel->fillNeuralNets();
+
+    ui->parameterClassifyPanel->setInputClassifyPanel(ui->inputClassifyPanel);
+    ui->parameterClassifyPanel->setOutputClassifyPanel(ui->outputClassifyPanel);
 }
 
 void MainWindow::on_actionHilfe_triggered()

@@ -20,7 +20,8 @@ public:
     InputPanel(QWidget *parent = 0);
     ~InputPanel();
 
-    inline void setManager(Manager* manager) {this->manager = manager;};
+    inline void setManager(Manager* manager) {this->manager = manager;}
+    inline bool isImageAdded() {return imageWasAdded;}
 
 private slots:
             void addImage();
