@@ -18,9 +18,8 @@ class OutputClassifyPanel : public QWidget
 public:
     OutputClassifyPanel(QWidget *parent = 0);
     ~OutputClassifyPanel();
+    void addPreviewImages(QVector<QPair<QLabel*, QPixmap> > previewImages);
 
-private slots:
-            void addImage();
 
 protected:
     virtual void resizeEvent(QResizeEvent *event) override;
@@ -32,7 +31,8 @@ private:
     QPushButton* m_pushButton;
     QVBoxLayout* m_verticalLayout;
     QWidget*     m_scrollAreaWidgetContents;
-    QVector<QPair<QLabel*, QPixmap> > m_imagesVector;
+    QVector<QPair<QLabel*, QPixmap> > previewImages;
+    QVector<QLabel*> classifyResults;
 };
 
 #endif // WIDGET_H

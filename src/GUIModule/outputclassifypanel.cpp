@@ -23,10 +23,6 @@ OutputClassifyPanel::OutputClassifyPanel(QWidget *parent)
     m_scrollArea->setWidget(m_scrollAreaWidgetContents);
     m_scrollArea->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
     m_gridLayout->addWidget(m_scrollArea, 0, 0, 1, 1);
-
-    //m_pushButton = new QPushButton("Add Image", this);
-    //connect(m_pushButton, &QPushButton::clicked, this, &InputPanel::addImage);
-    //m_gridLayout->addWidget(m_pushButton, 1, 0);
 }
 
 OutputClassifyPanel::~OutputClassifyPanel()
@@ -34,9 +30,28 @@ OutputClassifyPanel::~OutputClassifyPanel()
 
 }
 
-void OutputClassifyPanel::addImage()
+void OutputClassifyPanel::addPreviewImages(QVector<QPair<QLabel *, QPixmap> > previewImages)
 {
-    //todo
+
+    int imageWidth = m_scrollArea->width() - 30;
+
+    this->classifyResults.clear();
+    this->previewImages.clear();
+    this->previewImages = previewImages;
+
+    for (auto pairLabelMap : this->previewImages)
+    {
+
+        QLabel* imageLabel = pairLabelMap.first;
+        QPixmap pix(pairLabelMap.second);
+        previewImages.append(qMakePair(imageLabel, pix));
+        imageLabel->setPixmap(pix.scaledToWidth(imageWidth));
+        m_verticalLayout->addWidget(imageLabel);
+        QLabel* resultLabel = new QLabel(this);
+        resultLabel->setText("hier erscheint das Ergebnis \n");
+        classifyResults.push_front(resultLabel);
+        m_verticalLayout->addWidget(resultLabel);
+    }
 }
 
 void OutputClassifyPanel::resizeEvent(QResizeEvent *event)
@@ -44,7 +59,7 @@ void OutputClassifyPanel::resizeEvent(QResizeEvent *event)
     Q_UNUSED(event)
     int imageWidth = m_scrollArea->width() - 30;
 
-    for (QPair<QLabel*, QPixmap> pair : m_imagesVector)
+    for (QPair<QLabel*, QPixmap> pair : previewImages)
     {
         pair.first->setPixmap(pair.second.scaledToWidth(imageWidth));
     }

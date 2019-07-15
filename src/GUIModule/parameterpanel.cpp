@@ -73,7 +73,12 @@ void ParameterPanel::start()
         this->manager->setMode(ModeUtil::whichMode(currentMode));
         this->manager->setNeuralNet(currentNeuralNet);
         this->runWasPushed = true;
-        QMessageBox::warning(this, "Start", "Start" );
+        //qDeleteAll(outputClassifyPanel->findChildren<QLabel *>());
+        //qDeleteAll(outputClassifyPanel->findChildren<QTextEdit *>());
+        //delete outputClassifyPanel;
+        this->outputClassifyPanel->addPreviewImages(this->inputClassifyPanel->getPreviewImages());
+        this->inputClassifyPanel->clearPreviewImages();
+        //QMessageBox::warning(this, "Start", "Start" );
 
     } else {
         QMessageBox::warning(this, "Start", "Fügen Sie zumindest ein Bild ein" );

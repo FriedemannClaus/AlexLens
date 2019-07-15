@@ -22,6 +22,8 @@ public:
 
     inline void setManager(Manager* manager) {this->manager = manager;}
     inline bool isImageAdded() {return imageWasAdded;}
+    inline QVector<QPair<QLabel*, QPixmap> > getPreviewImages() {return this->previewImages;}
+    inline void clearPreviewImages() {previewImages.clear();};
 
 private slots:
             void addImage();
