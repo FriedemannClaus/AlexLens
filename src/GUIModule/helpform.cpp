@@ -7,7 +7,8 @@ HelpForm::HelpForm(QWidget *parent) :
 {
     ui->setupUi(this);
 
-    //setWindowFlags( Qt::Window | Qt::WindowTitleHint | Qt::CustomizeWindowHint );
+    setWindowFlags( Qt::Dialog | Qt::MSWindowsFixedSizeDialogHint);
+    //setWindowFlags( Qt::Window | Qt::MSWindowsFixedSizeDialogHint| Qt::WindowTitleHint | Qt::CustomizeWindowHint );
 }
 
 HelpForm::~HelpForm()

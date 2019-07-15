@@ -24,6 +24,9 @@ HelpPanel::HelpPanel(QWidget *parent)
     //QString* str = new QString("abs");
 
     //parameterList->addWidget(str);
+
+    QLabel *label = new QLabel(this);
+    label->setText("\n\n    Das Produkt dient zur Bilderklassifizierung auf heterogenen Plattformen mittels neuronaler\nNetze u.a. AlexNet. Es soll zwischen verschiedenen Betriebsmodi ausgewählt werden können.\nZudem gibt es die Möglichkeit das vorhandene neuronale Netz mittels Transfer Learning zu\ntrainieren. AlexNet ist der Name eines konvolutionellen neuronalen Netzwerks, das von Alex\nKrizhevsky entworfen und mit Ilya Sutskever und Krizhevskys PhD-Berater Geoffrey Hinton\nveröffentlicht wurde. AlexNet nahm am 30. September 2012 an der ImageNet Large Scale\nVisual Recognition Challenge teil. Unter Transfer Learning versteht man das Übertragen der\nErgebnisse eines fertig trainierten neuronalen Netzes auf eine neue Aufgabe. Die fertig\ntrainierten Layer werden dabei entweder konstant gehalten und nur am Output-Layer\nnachtrainiert, oder es werden einige oder alle Layer auf Basis des aktuellen Trainings-Stands\nweiter trainiert.\n\n\n    Optimal Modus: der optimale Modus, in dem GPU und Intel Movidius Neural Compute Stick\nbenutzt werden.\n\n    Hohe Performance: der schnellste und performanteste Modus, in dem alle verfügbaren\nheterogenen Plattformen benutzt werden.\n\n    Geringer Leistungsverbrauch: der Modus, in dem genau ein Intel Movidius Neural Compute\nStick benutzt wird.\n\n    Hohe Energieeffizient: der Modus, in dem alle verfügbaren Intel Movidius Neural Compute\nSticks benutzt werden.");
 }
 
 HelpPanel::~HelpPanel()

@@ -45,14 +45,15 @@ MainWindow::MainWindow(Manager* manager, QWidget *parent) :
 
 void MainWindow::on_actionHilfe_triggered()
 {
-    ui->statusBar->showMessage("Hilfe ");
+    ui->statusBar->showMessage("Hilfe");
 
     HelpForm* h = new HelpForm();
+    h->setFixedSize(QSize(590, 460));
     h->show();
     //this->hide();
 }
 
 void MainWindow::on_actionStatistiken_triggered()
 {
-    ui->statusBar->showMessage("Statistiken ");
+    ui->statusBar->showMessage("Statistiken");
 }

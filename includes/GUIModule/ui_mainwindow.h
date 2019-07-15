@@ -20,9 +20,9 @@
 #include <QtWidgets/QToolBar>
 #include <QtWidgets/QVBoxLayout>
 #include <QtWidgets/QWidget>
-#include "inputpanel.h"
-#include "outputclassifypanel.h"
-#include "parameterpanel.h"
+#include <inputpanel.h>
+#include <outputclassifypanel.h>
+#include <parameterpanel.h>
 
 QT_BEGIN_NAMESPACE
 

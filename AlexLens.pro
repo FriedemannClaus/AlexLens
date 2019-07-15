@@ -34,6 +34,7 @@ SOURCES += \
     src/GUIModule/outputclassifypanel.cpp \
     src/GUIModule/parameterpanel.cpp \
     src/ManagerModule/Manager.cpp \
+    src/PlatformModule/ModeUtil.cpp \
     src/ManagerModule/main.cpp
 
 
@@ -47,6 +48,7 @@ HEADERS += \
     includes/GUIModule/ui_mainwindow.h \
     includes/GUIModule/ui_helpform.h \
     src/ManagerModule/Manager.h \
+    src/PlatformModule/ModeUtil.h \
     src/PlatformModule/Mode.h
 
 FORMS += \
