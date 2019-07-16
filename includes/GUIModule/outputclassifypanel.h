@@ -16,10 +16,10 @@ class OutputClassifyPanel : public QWidget
     Q_OBJECT
 
 public:
-    OutputClassifyPanel(QWidget *parent = 0);
+    OutputClassifyPanel(QWidget *parent = nullptr);
     ~OutputClassifyPanel();
     void addPreviewImages(QVector<QPair<QLabel*, QPixmap> > previewImages);
-
+    void clearPanel();
 
 protected:
     virtual void resizeEvent(QResizeEvent *event) override;

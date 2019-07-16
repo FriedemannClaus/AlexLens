@@ -6,6 +6,7 @@
 #include <QScrollBar>
 
 #include <QDebug>
+#include <iostream>
 
 
 OutputClassifyPanel::OutputClassifyPanel(QWidget *parent)
@@ -52,6 +53,21 @@ void OutputClassifyPanel::addPreviewImages(QVector<QPair<QLabel *, QPixmap> > pr
         classifyResults.push_front(resultLabel);
         m_verticalLayout->addWidget(resultLabel);
     }
+}
+
+void OutputClassifyPanel::clearPanel()
+{
+    QLayoutItem *child;
+    while ((child = this->m_verticalLayout->takeAt(0)) != nullptr)
+        {
+            if (child->widget()) {
+                delete child->widget();
+            }
+            if (child->layout()) {
+                delete child->layout();
+            }
+            delete child;
+        }
 }
 
 void OutputClassifyPanel::resizeEvent(QResizeEvent *event)

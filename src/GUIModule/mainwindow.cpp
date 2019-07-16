@@ -2,6 +2,7 @@
 #include "../../includes/GUIModule/ui_mainwindow.h"
 #include "../ManagerModule/Manager.h"
 #include "../../includes/GUIModule/helpform.h"
+#include "../../includes/GUIModule/statisticform.h"
 #include <iostream>
 #include <unistd.h>
 
@@ -48,7 +49,7 @@ void MainWindow::on_actionHilfe_triggered()
     ui->statusBar->showMessage("Hilfe");
 
     HelpForm* h = new HelpForm();
-    h->setFixedSize(QSize(590, 460));
+    h->setFixedSize(QSize(600, 500));
     h->show();
     //this->hide();
 }
@@ -56,4 +57,8 @@ void MainWindow::on_actionHilfe_triggered()
 void MainWindow::on_actionStatistiken_triggered()
 {
     ui->statusBar->showMessage("Statistiken");
+
+    StatisticForm* s = new StatisticForm();
+    s->setFixedSize(QSize(590, 460));
+    s->show();
 }

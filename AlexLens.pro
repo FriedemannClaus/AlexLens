@@ -35,7 +35,8 @@ SOURCES += \
     src/GUIModule/parameterpanel.cpp \
     src/ManagerModule/Manager.cpp \
     src/PlatformModule/ModeUtil.cpp \
-    src/ManagerModule/main.cpp
+    src/ManagerModule/main.cpp \
+    src/GUIModule/statisticform.cpp
 
 
 HEADERS += \
@@ -47,13 +48,16 @@ HEADERS += \
     includes/GUIModule/parameterpanel.h \
     includes/GUIModule/ui_mainwindow.h \
     includes/GUIModule/ui_helpform.h \
+    includes/GUIModule/ui_statisticform.h \
     src/ManagerModule/Manager.h \
     src/PlatformModule/ModeUtil.h \
-    src/PlatformModule/Mode.h
+    src/PlatformModule/Mode.h \
+    includes/GUIModule/statisticform.h
 
 FORMS += \
     helpform.ui \
-    mainwindow.ui
+    mainwindow.ui \
+    statisticform.ui
 
 
 Release:DESTDIR = qmake-build-release

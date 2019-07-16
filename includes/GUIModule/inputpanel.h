@@ -17,13 +17,13 @@ class InputPanel : public QWidget
     Q_OBJECT
 
 public:
-    InputPanel(QWidget *parent = 0);
+    InputPanel(QWidget *parent = nullptr);
     ~InputPanel();
 
     inline void setManager(Manager* manager) {this->manager = manager;}
     inline bool isImageAdded() {return imageWasAdded;}
     inline QVector<QPair<QLabel*, QPixmap> > getPreviewImages() {return this->previewImages;}
-    inline void clearPreviewImages() {this->previewImages.clear();};
+    inline void clearPreviewImages() {this->previewImages.clear();}
 
 private slots:
             void addImage();
