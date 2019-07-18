@@ -11,11 +11,7 @@ Manager::Manager() {
 }
 
 void Manager::setDefaultModes() {
-    list<string> mods;
-    mods.push_front("Optimal");
-    mods.push_front("Hohe Perfomance");
-    mods.push_front("Geringer Leistungsverbrauch");
-    mods.push_front("Hohe Energieeffizienz");
+    list<string> mods = ModeUtil::getAllModes();
     this->defaultModes = mods;
 }
 

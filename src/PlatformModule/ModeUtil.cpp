@@ -11,3 +11,13 @@
 Mode ModeUtil::whichMode(const string& mode) {
     return stringMode.at(mode);
 }
+
+list<string> ModeUtil::getAllModes() {
+    list<string> allModes;
+    for(auto const& pair: stringMode) {
+        allModes.push_back(pair.first);
+    }
+
+    return allModes;
+}
+

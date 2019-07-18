@@ -9,6 +9,7 @@
 #include <map>
 #include <iterator>
 #include <string>
+#include <list>
 
 using namespace std;
 
@@ -17,6 +18,7 @@ private:
     static const map<string, Mode> stringMode;
 public:
     static Mode whichMode(const string &mode);
+    static list<string> getAllModes();
 };
 
 

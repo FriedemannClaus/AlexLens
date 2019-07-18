@@ -43,6 +43,8 @@ void InputPanel::addImage()
                                                              QStandardPaths::displayName(QStandardPaths::HomeLocation),
                                                              tr("Images (*.png *.jpg)"));
 
+    if (fileNameList.size() == 0) this->imageWasAdded = false;
+
     int imageWidth = m_scrollArea->width() - 30;
 
     for (QString fileName : fileNameList)

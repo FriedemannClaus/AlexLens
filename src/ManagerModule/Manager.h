@@ -9,6 +9,7 @@
 #include <iterator>
 #include <string>
 #include "../PlatformModule/Mode.h"
+#include "../PlatformModule/ModeUtil.h"
 
 using namespace std;
 
