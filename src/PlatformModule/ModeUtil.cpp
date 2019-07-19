@@ -3,10 +3,10 @@
 //
 
 #include "ModeUtil.h"
- const map<string, Mode> ModeUtil::stringMode = {{"Hohe Energieeffizienz",       Mode::ENERGY_EFFICIENT},
-                                            {"Geringer Leistungsverbrauch", Mode::LOW_POWER },
-                                            {"Hohe Perfomance",             Mode::HIGH_PERFOMANCE},
-                                            {"Optimal",                     Mode::OPTIMAL}};
+ const map<string, Mode> ModeUtil::stringMode = {{"Optimal",       Mode::OPTIMAL},
+                                            {"Hohe Perfomance", Mode::HIGH_PERFOMANCE },
+                                            {"Geringer Leistungsverbrauch",             Mode::LOW_POWER},
+                                            {"Hohe Energieeffizienz",                     Mode::ENERGY_EFFICIENT}};
 
 Mode ModeUtil::whichMode(const string& mode) {
     return stringMode.at(mode);

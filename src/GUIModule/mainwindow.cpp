@@ -49,7 +49,7 @@ void MainWindow::on_actionHilfe_triggered()
     ui->statusBar->showMessage("Hilfe");
 
     HelpForm* h = new HelpForm();
-    h->setFixedSize(QSize(600, 500));
+    h->setFixedSize(QSize(650, 500));
     h->show();
     //this->hide();
 }

@@ -98,8 +98,10 @@ void ParameterPanel::fillModes() {
     list<string> modes = this->manager->getDefaultModes();
     list<string>::iterator it;
     for (it = modes.begin(); it != modes.end(); ++it) {
-        string item = *it;
-        modList->addItem(QString::fromStdString(item));
+        //string item = *it;
+        QListWidgetItem *item = new QListWidgetItem(QString::fromStdString(*it));
+        //item->setToolTip()
+        modList->addItem(item);
     }
     modList->setCurrentRow(0);
 }
@@ -108,8 +110,9 @@ void ParameterPanel::fillNeuralNets() {
     list<string> nets = this->manager->getDeafaultNeuralNets();
     list<string>::iterator it;
     for (it = nets.begin(); it != nets.end(); ++it) {
-        string item = *it;
-        neuralNetsList->addItem(QString::fromStdString(item));
+        //string item = *it;
+        QListWidgetItem *item = new QListWidgetItem(QString::fromStdString(*it));
+        neuralNetsList->addItem(item);
     }
     neuralNetsList->setCurrentRow(0);
 }

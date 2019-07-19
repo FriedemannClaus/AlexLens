@@ -28,7 +28,10 @@ public:
         HelpForm->resize(400, 300);
         widget = new HelpPanel(HelpForm);
         widget->setObjectName(QString::fromUtf8("widget"));
-        widget->setGeometry(QRect(15, 0, 600, 500));
+        widget->setGeometry(QRect(15, 0, 650, 500));
+        QFont font;
+        font.setPointSize(13);
+        widget->setFont(font);
 
         retranslateUi(HelpForm);
 

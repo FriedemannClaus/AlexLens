@@ -8,10 +8,10 @@
 #ifndef _MODE_H
 #define _MODE_H
 
-enum class Mode { HIGH_PERFOMANCE,
+enum class Mode { OPTIMAL,
+HIGH_PERFOMANCE,
 LOW_POWER,
-ENERGY_EFFICIENT,
-OPTIMAL };
+ENERGY_EFFICIENT};
 
 
 
