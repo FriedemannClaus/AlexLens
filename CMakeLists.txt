@@ -16,9 +16,9 @@ list(APPEND THIRD-PARTY-LIBS Qt::Widgets Qt::Core)
 include_directories(includes)
 include_directories(src)
 # OpenVino stuff
-INCLUDE_DIRECTORIES(/opt/intel/openvino/deployment_tools/inference_engine/include)
-INCLUDE_DIRECTORIES(/opt/intel/openvino/deployment_tools/inference_engine/samples/common/format_reader)
-INCLUDE_DIRECTORIES(/opt/intel/openvino/deployment_tools/inference_engine/samples/common)
+#INCLUDE_DIRECTORIES(/opt/intel/openvino/deployment_tools/inference_engine/include)
+#INCLUDE_DIRECTORIES(/opt/intel/openvino/deployment_tools/inference_engine/samples/common/format_reader)
+#INCLUDE_DIRECTORIES(/opt/intel/openvino/deployment_tools/inference_engine/samples/common)
 
 add_executable(AlexLens src/ManagerModule/main.cpp
         src/ManagerModule/Manager.cpp src/ManagerModule/Manager.h
@@ -35,7 +35,7 @@ add_executable(AlexLens src/ManagerModule/main.cpp
         src/ManagerModule/Manager.cpp src/ManagerModule/Manager.h
         src/ManagerModule/Executor.cpp src/ManagerModule/Executor.h
         src/PlatformModule/Platform.cpp src/PlatformModule/Platform.h
-        src/PlatformModule/ASICPlatform.cpp src/PlatformModule/ASICPlatform.h
+        #src/PlatformModule/ASICPlatform.cpp src/PlatformModule/ASICPlatform.h
         includes/GUIModule/IObserver.h
         includes/GUIModule/Subject.h)
 
@@ -45,7 +45,7 @@ target_link_libraries(${PROJECT_NAME}
         Qt5::Core
         Qt5::Widgets
         Qt5::Gui
-        /opt/intel/openvino/deployment_tools/inference_engine/lib/intel64/libinference_engine.so
-        /home/dmitrii/inference_engine_samples_build/intel64/Release/lib/libformat_reader.so
-        dl
+        #/opt/intel/openvino/deployment_tools/inference_engine/lib/intel64/libinference_engine.so
+        #/home/dmitrii/inference_engine_samples_build/intel64/Release/lib/libformat_reader.so
+        #dl
         )

@@ -3,6 +3,6 @@
 //
 
 #include "Platform.h"
-std::vector<std::string> Platform::runClassify(std::__cxx11::list<std::string> list) {
+std::vector<std::string> Platform::runClassify(std::list<std::string> list) {
     std::cout << "base virtual mathods" << std::endl;
 }

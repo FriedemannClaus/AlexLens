@@ -14,7 +14,7 @@
 
 class Platform {
 public:
-    virtual std::vector<std::string> runClassify(std::__cxx11::list<std::string> list);
+    virtual std::vector<std::string> runClassify(std::list<std::string> list);
 };
 
 
