@@ -69,7 +69,6 @@ void ParameterPanel::start()
     if(inputClassifyPanel->isImageAdded()) {
         string currentMode = this->modList->currentItem()->text().toStdString();
         string currentNeuralNet = this->neuralNetsList->currentItem()->text().toStdString();
-        //cout << currentMode << endl;
         this->manager->setMode(ModeUtil::whichMode(currentMode));
         this->manager->setNeuralNet(currentNeuralNet);
         this->runWasPushed = true;
@@ -77,7 +76,7 @@ void ParameterPanel::start()
         this->outputClassifyPanel->clearPanel();
         this->outputClassifyPanel->addPreviewImages(this->inputClassifyPanel->getPreviewImages());
         this->inputClassifyPanel->clearPreviewImages();
-        //QMessageBox::warning(this, "Start", "Start" );
+        this->manager->runClassify();
 
     } else {
         QMessageBox::warning(this, "Start", "Fügen Sie zumindest ein Bild ein" );

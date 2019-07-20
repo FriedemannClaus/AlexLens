@@ -1,37 +1,39 @@
-/**
- * Project Entwurf_PSE_KNN
- * @author Jakub Trzcinsi, Viet Pham, Friedemann Claus, Dima Seletkov, Alexandr Eismont
- * @version 1.2
- */
+//
+// Created by dmitrii on 7/18/19.
+//
+
+#ifndef ALEXLENS_EXECUTOR_H
+#define ALEXLENS_EXECUTOR_H
+
+#include <string>
+#include <list>
+#include "../PlatformModule/Mode.h"
+
+#include <iostream>
+#include <vector>
+//#include "../../includes/GUIModule/outputclassifypanel.h"
+
+using namespace std;
 
 
-#ifndef _EXECUTOR_H
-#define _EXECUTOR_H
+class Executor {
 
-#include "../GUIModule/Subject.h"
+public:
+    list<string> imagePaths;
+    //OutputClassifyPanel* panel;
+
+    //inline Subject* getSubject() { return this->subject;}
+
+    Executor();
+
+    //static void setOutputPanel(OutputClassifyPanel* panel) {
+   //     Executor::panel=panel;
+   // }
 
 
-class Executor: public Subject {
-public: 
-	
-/**
- * @param images
- * @param mode
- */
-void classify(List<Tensor> images, Mode mode);
-	
-/**
- * @param trainingSet
- * @param mode
- */
-void train(Map trainingSet, Mode mode);
-	
-void stop();
-private: 
-	Interpreter interpreter;
-	INeuralNet neuralNet;
-	ITraining learningRule;
-	IPlatformManager platformManager;
+    vector<string> classify(list<string> imagePaths, Mode mode, string neuralNet);
+
 };
 
-#endif //_EXECUTOR_H
+
+#endif //ALEXLENS_EXECUTOR_H

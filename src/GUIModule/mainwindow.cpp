@@ -5,6 +5,8 @@
 #include "../../includes/GUIModule/statisticform.h"
 #include <iostream>
 #include <unistd.h>
+#include "../../includes/GUIModule/Subject.h"
+//#include "../ManagerModule/Executor.h"
 
 
 MainWindow::MainWindow(QWidget *parent) :
@@ -22,10 +24,16 @@ MainWindow::~MainWindow()
 
 
 
-MainWindow::MainWindow(Manager* manager, QWidget *parent) :
+MainWindow::MainWindow(Manager* manager, Subject* subject, QWidget *parent) :
         QMainWindow(parent),
         ui(new Ui::MainWindow)
 {
+
+    //Executor* executor = new Executor;
+    //executor->panel = ui->outputClassifyPanel;
+    //manager->executor = executor;
+
+    //ui->outputClassifyPanel->setSubject(subject);
 
     ui->setupUi(this);
     this->manager = manager;
@@ -33,6 +41,7 @@ MainWindow::MainWindow(Manager* manager, QWidget *parent) :
     ui->parameterClassifyPanel->setManager(manager);
     ui->parameterTrainingPanel->setManager(manager);
     ui->inputClassifyPanel->setManager(manager);
+    ui->outputClassifyPanel->setManager(manager);
 
     ui->parameterClassifyPanel->fillModes();
     ui->parameterClassifyPanel->fillNeuralNets();
@@ -42,6 +51,10 @@ MainWindow::MainWindow(Manager* manager, QWidget *parent) :
 
     ui->parameterClassifyPanel->setInputClassifyPanel(ui->inputClassifyPanel);
     ui->parameterClassifyPanel->setOutputClassifyPanel(ui->outputClassifyPanel);
+
+    //ATTCAHING OBSERVER
+    this->manager->getSubject()->attachObserver(ui->outputClassifyPanel);
+    // = ui->outputClassifyPanel;
 }
 
 void MainWindow::on_actionHilfe_triggered()

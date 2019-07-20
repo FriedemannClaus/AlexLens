@@ -7,6 +7,7 @@
 
 #include <QDebug>
 #include <iostream>
+#include <vector>
 
 
 OutputClassifyPanel::OutputClassifyPanel(QWidget *parent)
@@ -24,6 +25,8 @@ OutputClassifyPanel::OutputClassifyPanel(QWidget *parent)
     m_scrollArea->setWidget(m_scrollAreaWidgetContents);
     m_scrollArea->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
     m_gridLayout->addWidget(m_scrollArea, 0, 0, 1, 1);
+
+
 }
 
 OutputClassifyPanel::~OutputClassifyPanel()
@@ -53,6 +56,9 @@ void OutputClassifyPanel::addPreviewImages(QVector<QPair<QLabel *, QPixmap> > pr
         classifyResults.push_front(resultLabel);
         m_verticalLayout->addWidget(resultLabel);
     }
+
+//HERE IS SUBJECT ATTACHING!!!! TEMPORARY
+//    this->manager->getSubject()->attachObserver(this);
 }
 
 void OutputClassifyPanel::clearPanel()
@@ -79,4 +85,21 @@ void OutputClassifyPanel::resizeEvent(QResizeEvent *event)
     {
         pair.first->setPixmap(pair.second.scaledToWidth(imageWidth));
     }
+}
+
+void OutputClassifyPanel::invokeUpdate() {
+    int i = 0;
+    for (string result:this->manager->getResults()) {
+        classifyResults.at(i)->setText(QString::fromStdString(result));
+        i++;
+    }
+
+}
+
+void OutputClassifyPanel::setResults(vector<string>& results) {
+        //vector<string> reults = ;
+        this->results.reserve(10);
+        for (auto a :results) this->results.push_back(a);
+        //this->results = results;
+
 }

@@ -8,8 +8,10 @@
 #include <list>
 #include <iterator>
 #include <string>
+#include <GUIModule/Subject.h>
 #include "../PlatformModule/Mode.h"
 #include "../PlatformModule/ModeUtil.h"
+#include "Executor.h"
 
 using namespace std;
 
@@ -21,8 +23,12 @@ private:
     Mode operationMode;
     string neuralNet;
     list<string> imagePaths;
+    Executor* executor;
+    Subject* subject;
+    vector<string> results;
+
 public:
-    Manager();
+    Manager(Subject* subject);
 
     inline void addImage(string imagePath) {this->imagePaths.push_front(imagePath);}
 
@@ -33,6 +39,13 @@ public:
     inline list<string> getDefaultModes() {return defaultModes;}
 
     inline list<string> getDeafaultNeuralNets() {return defaultNeuralNets;}
+
+    inline Executor* getExecutor() { return this->executor;}
+    inline Subject* getSubject() { return  this->subject;}
+
+    inline vector<string> getResults() { return this->results;}
+
+    void runClassify();
 
 private:
     void setDefaultModes();

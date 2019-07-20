@@ -1,14 +1,15 @@
 #include "../../includes/GUIModule/mainwindow.h"
 #include <QApplication>
 #include <QFileDialog>
+#include <GUIModule/Subject.h>
 #include "Manager.h"
-#include "../TrainingModule/ITraining.h"
 
 int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);
-    Manager* manager = new Manager();
-    MainWindow* w = new MainWindow(manager);
+    Subject* subject = new Subject();
+    Manager* manager = new Manager(subject);
+    MainWindow* w = new MainWindow(manager, subject);
     w->show();
 
     return a.exec();

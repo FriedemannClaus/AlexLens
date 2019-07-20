@@ -1,20 +1,21 @@
-/**
- * Project Entwurf_PSE_KNN
- * @author Jakub Trzcinsi, Viet Pham, Friedemann Claus, Dima Seletkov, Alexandr Eismont
- * @version 1.2
- */
+//
+// Created by dmitrii on 7/18/19.
+//
+
+#ifndef ALEXLENS_PLATFORM_H
+#define ALEXLENS_PLATFORM_H
+
+#include <iostream>
+#include <list>
+#include <string>
+#include <vector>
 
 
-#ifndef _PLATFORM_H
-#define _PLATFORM_H
 
 class Platform {
-public: 
-	
-virtual void runClassify() = 0;
-private: 
-	PlatformStatistic platformStatistic;
-	PlatformType platformType;
+public:
+    virtual std::vector<std::string> runClassify(std::__cxx11::list<std::string> list);
 };
 
-#endif //_PLATFORM_H
+
+#endif //ALEXLENS_PLATFORM_H

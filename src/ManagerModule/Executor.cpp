@@ -1,38 +1,19 @@
-/**
- * Project Entwurf_PSE_KNN
- * @author Jakub Trzcinsi, Viet Pham, Friedemann Claus, Dima Seletkov, Alexandr Eismont
- * @version 1.2
- */
+//
+// Created by dmitrii on 7/18/19.
+//
 
-
+#include <GUIModule/Subject.h>
 #include "Executor.h"
+#include "../PlatformModule/Platform.h"
+#include "../PlatformModule/ASICPlatform.h"
 
-/**
- * Executor implementation
- */
+vector<string> Executor::classify(list<string> imagePaths, Mode mode, string neuralNet) {
 
+    Platform* asicplatform = new ASICPlatform;
 
-/**
- * @param images
- * @param mode
- * @return void
- */
-void Executor::classify(List<Tensor> images, Mode mode) {
-    return;
+    vector<string> results = asicplatform->runClassify(imagePaths);
+
+    return results;
+
 }
-
-/**
- * @param trainingSet
- * @param mode
- * @return void
- */
-void Executor::train(Map trainingSet, Mode mode) {
-    return;
-}
-
-/**
- * @return void
- */
-void Executor::stop() {
-    return;
-}
+Executor::Executor() {}
