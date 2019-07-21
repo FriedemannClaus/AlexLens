@@ -7,6 +7,9 @@
 
 #ifndef _TENSOROBJECT_H
 #define _TENSOROBJECT_H
+#include <qsharedpointer.h>
+#include <memory>
+#include <iostream>
 
 class TensorObject {
 public: 
@@ -15,17 +18,17 @@ virtual int getDimensions() = 0;
 	
 virtual void transpose() = 0;
 	
-virtual boolean isTransposed() = 0;
+virtual bool isTransposed() = 0;
 	
 /**
  * @param tensorObject
  */
-virtual TensorObject multiplyWith(TensorObject tensorObject) = 0;
+virtual std::shared_ptr<TensorObject> multiplyWith(std::shared_ptr<TensorObject> tensorObject) = 0;
 	
 /**
  * @param tensorObject
  */
-virtual TensorObject addTo(TensorObject tensorObject) = 0;
+virtual std::shared_ptr<TensorObject> addTo(std::shared_ptr<TensorObject> tensorObject) = 0;
 };
 
 #endif //_TENSOROBJECT_H

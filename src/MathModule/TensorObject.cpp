@@ -12,6 +12,7 @@
  */
 
 
+
 /**
  * @return int
  */
@@ -34,11 +35,11 @@ virtual boolean TensorObject::isTransposed() {
 }
 
 /**
- * @param tensorObject
- * @return TensorObject
+ * Virtual/abstract method to multiply a TensorObject to the TensorObject form the right side.
+ * @param tensorObject the TensorObject to multiply with the TensorObject.
+ * @return TensorObject the result.
  */
-virtual TensorObject TensorObject::multiplyWith(TensorObject tensorObject) {
-    return null;
+virtual TensorObject TensorObject::multiplyWith(TensorObject other) {
 }
 
 /**
