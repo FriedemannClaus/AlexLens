@@ -4,6 +4,7 @@
 #include <QDir>
 #include <QStandardPaths>
 #include <QScrollBar>
+#include <QDragEnterEvent>
 
 #include <QDebug>
 #include <iostream>
@@ -13,6 +14,8 @@ InputPanel::InputPanel(QWidget *parent)
         : QWidget(parent)
 {
     resize(640, 480);
+
+    setAcceptDrops(true);
 
     m_gridLayout = new QGridLayout(this);
     m_scrollArea = new QScrollArea(this);
@@ -68,5 +71,37 @@ void InputPanel::resizeEvent(QResizeEvent *event)
     for (QPair<QLabel*, QPixmap> pair : previewImages)
     {
         pair.first->setPixmap(pair.second.scaledToWidth(imageWidth));
+    }
+}
+
+void InputPanel::dragEnterEvent(QDragEnterEvent *e)
+{
+    bool flag = true;
+    foreach (const QUrl &url, e->mimeData()->urls()) {
+        QFileInfo fileInfo(url.toLocalFile());
+        QString fileExtension = fileInfo.suffix().toLower();
+        if (!(fileExtension.contains("jpg") || fileExtension.contains("png"))) {
+            flag = false;
+        }
+    }
+    if (flag) {
+        e->acceptProposedAction();
+    }
+}
+
+void InputPanel::dropEvent(QDropEvent *e)
+{
+    this->imageWasAdded = true;
+    int imageWidth = m_scrollArea->width() - 30;
+
+    foreach (const QUrl &url, e->mimeData()->urls()) {
+        QString fileName = url.toLocalFile();
+        QLabel* imageLabel = new QLabel(this);
+        QPixmap pix(fileName);
+        previewImages.append(qMakePair(imageLabel, pix));
+        imageLabel->setPixmap(pix.scaledToWidth(imageWidth));
+        m_verticalLayout->addWidget(imageLabel);
+
+        this->manager->addImage(fileName.toStdString()); // adding fileName to manager
     }
 }

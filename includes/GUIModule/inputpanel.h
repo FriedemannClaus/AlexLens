@@ -10,6 +10,7 @@
 #include <QLabel>
 #include <QImage>
 #include <QPixmap>
+#include <QMimeData>
 #include "../../src/ManagerModule/Manager.h"
 
 class InputPanel : public QWidget
@@ -27,6 +28,8 @@ public:
 
 private slots:
             void addImage();
+            void dragEnterEvent(QDragEnterEvent *e) override;
+            void dropEvent(QDropEvent *e) override;
 
 protected:
     virtual void resizeEvent(QResizeEvent *event) override;

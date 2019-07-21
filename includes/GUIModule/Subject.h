@@ -5,7 +5,7 @@
 #ifndef ALEXLENS_SUBJECT_H
 #define ALEXLENS_SUBJECT_H
 
-#include <GUIModule/IObserver.h>
+#include "../GUIModule/IObserver.h"
 #include <list>
 #include <iostream>
 using namespace std;
@@ -17,7 +17,7 @@ public:
     Subject() {}
     inline void attachObserver(IObserver* observer) {
         observerList.push_back(observer);
-    };
+    }
 
     inline void informObservers() {
         for (auto observer:observerList) {

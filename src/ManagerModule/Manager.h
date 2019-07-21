@@ -8,7 +8,7 @@
 #include <list>
 #include <iterator>
 #include <string>
-#include <GUIModule/Subject.h>
+#include "../../includes/GUIModule/Subject.h"
 #include "../PlatformModule/Mode.h"
 #include "../PlatformModule/ModeUtil.h"
 #include "Executor.h"

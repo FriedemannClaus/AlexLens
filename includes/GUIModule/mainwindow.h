@@ -2,8 +2,8 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
-#include<QFileDialog>
-#include<QGraphicsScene>
+#include <QFileDialog>
+#include <QGraphicsScene>
 #include "../../src/ManagerModule/Manager.h"
 
 namespace Ui {
