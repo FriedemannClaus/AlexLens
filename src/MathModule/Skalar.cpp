@@ -10,3 +10,30 @@
 /**
  * Skalar implementation
  */
+double Skalar::getValue() {
+    return this->value;
+}
+
+void Skalar::setValue(double value) {
+    this->value = value;
+}
+int Skalar::getDimensions(){
+    return this->dimension;
+}
+void Skalar::transpose(){
+    //do nothing
+}
+bool Skalar::isTransposed() {
+    return false;
+}
+
+std::shared_ptr<TensorObject> Skalar::multiplyWith(std::shared_ptr<TensorObject> tensorObject) {
+
+    return nullptr;
+}
+
+std::shared_ptr<TensorObject> Skalar::addTo(std::shared_ptr<TensorObject> tensorObject) {
+
+    return nullptr;
+}
+

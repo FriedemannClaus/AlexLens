@@ -9,16 +9,27 @@
 #define _MATRIX_H
 
 #include "TensorObject.h"
+#include <string>
 
 
 class Matrix: public TensorObject {
-public: 
-	
+private:
+    double[][] values;
+public:
+
 /**
- * @param values
+ * A constructor of a Matrix without the need to give values.
+ * Constructs a Null (not zero) matrix.
+ * @return void
  */
-void Matrix(double values);
-	
+    Matrix();
+
+/**
+ * A constructor of a Matrix for given values.
+ * @param values The values, the matrix shall contain. Null values are legit.
+ * @return void
+ */
+    Matrix(double[][] values);
 /**
  * @param x
  * @param y
@@ -35,6 +46,12 @@ void setValue(int x, int y, double value);
 int getNumRow();
 	
 int getNumCol();
+
+TensorObject Matrix::multiplyWith(Matrix other) throws MathException
+
+TensorObject multiplyWith(TensorObject other) throws MathException
+
+TensorObject multiplyWith(Skalar other) throws MathException
 };
 
 #endif //_MATRIX_H
