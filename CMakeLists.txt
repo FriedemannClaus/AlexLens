@@ -14,7 +14,8 @@ list(APPEND THIRD-PARTY-LIBS Qt::Widgets Qt::Core)
 add_executable(AlexLens src/ManagerModule/main.cpp src/GUIModule/InputPanel.cpp includes/GUIModule/inputpanel.h src/GUIModule/mainwindow.cpp includes/GUIModule/mainwindow.h src/GUIModule/parameterpanel.cpp includes/GUIModule/parameterpanel.h src/GUIModule/outputclassifypanel.cpp includes/GUIModule/outputclassifypanel.h includes/GUIModule/ui_mainwindow.h src/ManagerModule/Manager.cpp src/ManagerModule/Manager.h src/PlatformModule/Mode.h src/PlatformModule/Mode.h
         includes/TrainingModule/ITraining.h
         src/GUIModule/Subject.h
-        src/MathModule/Skalar.cpp src/MathModule/Skalar.h)
+        src/MathModule/Matrix.cpp src/MathModule/Matrix.h
+        src/MathModule/Skalar.cpp src/MathModule/Skalar.h src/MathModule/MathException.h)
 
 include_directories(includes)
 
