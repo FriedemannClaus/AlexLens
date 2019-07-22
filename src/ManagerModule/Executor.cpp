@@ -2,7 +2,7 @@
 // Created by dmitrii on 7/18/19.
 //
 
-#include <GUIModule/Subject.h>
+#include "../../includes/GUIModule/Subject.h"
 #include <NeuralNetModule/NeuralNet.h>
 #include "Executor.h"
 #include "../PlatformModule/Platform.h"

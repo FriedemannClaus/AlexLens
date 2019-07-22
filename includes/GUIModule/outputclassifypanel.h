@@ -14,11 +14,10 @@
 #include <iostream>
 #include <list>
 #include <vector>
-#include <GUIModule/IObserver.h>
-#include <ManagerModule/Manager.h>
+#include "../GUIModule/IObserver.h"
+#include "../../src/ManagerModule/Manager.h"
 #include "Subject.h"
 
-//#include "../../src/ManagerModule/Manager.h"
 using namespace std;
 
 class OutputClassifyPanel : public QWidget, public IObserver

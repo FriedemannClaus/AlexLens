@@ -12,26 +12,18 @@
 #include <QtCore/QVariant>
 #include <QtWidgets/QApplication>
 #include <QtWidgets/QWidget>
-#include "helppanel.h"
 
 QT_BEGIN_NAMESPACE
 
 class Ui_HelpForm
 {
 public:
-    HelpPanel *widget;
 
     void setupUi(QWidget *HelpForm)
     {
         if (HelpForm->objectName().isEmpty())
             HelpForm->setObjectName(QString::fromUtf8("HelpForm"));
         HelpForm->resize(400, 300);
-        widget = new HelpPanel(HelpForm);
-        widget->setObjectName(QString::fromUtf8("widget"));
-        widget->setGeometry(QRect(15, 0, 650, 500));
-        QFont font;
-        font.setPointSize(13);
-        widget->setFont(font);
 
         retranslateUi(HelpForm);
 

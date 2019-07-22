@@ -1,7 +1,7 @@
 #include "../../includes/GUIModule/mainwindow.h"
 #include <QApplication>
 #include <QFileDialog>
-#include <GUIModule/Subject.h>
+#include "../../includes/GUIModule/Subject.h"
 #include "Manager.h"
 
 int main(int argc, char *argv[])

@@ -23,7 +23,7 @@ public:
     {
         if (StatisticForm->objectName().isEmpty())
             StatisticForm->setObjectName(QString::fromUtf8("StatisticForm"));
-        StatisticForm->resize(400, 300);
+        StatisticForm->resize(400, 306);
 
         retranslateUi(StatisticForm);
 

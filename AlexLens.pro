@@ -29,30 +29,36 @@ CONFIG += c++11
 SOURCES += \
     src/GUIModule/helpform.cpp \
     src/GUIModule/InputPanel.cpp \
-    src/GUIModule/helppanel.cpp \
     src/GUIModule/mainwindow.cpp \
     src/GUIModule/outputclassifypanel.cpp \
     src/GUIModule/parameterpanel.cpp \
+    src/ManagerModule/Executor.cpp \
     src/ManagerModule/Manager.cpp \
+    #src/PlatformModule/ASICPlatform.cpp \
     src/PlatformModule/ModeUtil.cpp \
     src/ManagerModule/main.cpp \
-    src/GUIModule/statisticform.cpp
+    src/GUIModule/statisticform.cpp \
+    src/PlatformModule/Platform.cpp
 
 
 HEADERS += \
+    includes/GUIModule/IObserver.h \
+    includes/GUIModule/Subject.h \
     includes/GUIModule/helpform.h \
     includes/GUIModule/inputpanel.h \
-    includes/GUIModule/helppanel.h \
     includes/GUIModule/mainwindow.h \
     includes/GUIModule/outputclassifypanel.h \
     includes/GUIModule/parameterpanel.h \
     includes/GUIModule/ui_mainwindow.h \
     includes/GUIModule/ui_helpform.h \
     includes/GUIModule/ui_statisticform.h \
+    src/ManagerModule/Executor.h \
     src/ManagerModule/Manager.h \
+    #src/PlatformModule/ASICPlatform.h \
     src/PlatformModule/ModeUtil.h \
     src/PlatformModule/Mode.h \
-    includes/GUIModule/statisticform.h
+    includes/GUIModule/statisticform.h \
+    src/PlatformModule/Platform.h
 
 FORMS += \
     helpform.ui \

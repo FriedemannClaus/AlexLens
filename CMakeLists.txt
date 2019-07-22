@@ -23,7 +23,6 @@ include_directories(src)
 add_executable(AlexLens src/ManagerModule/main.cpp
         src/ManagerModule/Manager.cpp src/ManagerModule/Manager.h
         src/GUIModule/InputPanel.cpp includes/GUIModule/inputpanel.h
-        src/GUIModule/helppanel.cpp includes/GUIModule/helppanel.h
         src/GUIModule/helpform.cpp includes/GUIModule/helpform.h
         src/GUIModule/statisticform.cpp includes/GUIModule/statisticform.h
         src/GUIModule/mainwindow.cpp includes/GUIModule/mainwindow.h
