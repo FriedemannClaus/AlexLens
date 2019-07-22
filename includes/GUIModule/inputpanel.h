@@ -23,7 +23,9 @@ public:
 
     inline void setManager(Manager* manager) {this->manager = manager;}
     inline void setImageWasAdded(bool imageWasAdded) {this->imageWasAdded = imageWasAdded;}
+    inline void setClassifyTab(bool classifyTab) {this->classifyTab = classifyTab;}
     inline bool isImageAdded() {return imageWasAdded;}
+    inline bool isClassifyTab() {return classifyTab;}
     inline QVector<QPair<QLabel*, QPixmap> > getPreviewImages() {return this->previewImages;}
     inline void clearPreviewImages() {this->previewImages.clear(); this->imageWasAdded = false;}
     void clearPanel();
@@ -47,6 +49,7 @@ private:
     QVector<QPair<QLabel*, QPixmap> > previewImages;
     Manager* manager;
     bool imageWasAdded = false;
+    bool classifyTab = true;
 };
 
 #endif // WIDGET_H

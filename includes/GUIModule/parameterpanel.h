@@ -38,6 +38,10 @@ public:
     inline void setInputClassifyPanel(InputPanel* inputClassifyPanel) {this->inputClassifyPanel = inputClassifyPanel;}
 
     inline void setOutputClassifyPanel(OutputClassifyPanel* outputClassifyPanel) {this->outputClassifyPanel = outputClassifyPanel;}
+
+    inline void setInputTrainingPanel(InputPanel* inputTrainingPanel) {this->inputTrainingPanel = inputTrainingPanel;}
+
+    inline void setOutputTrainingPanel(OutputClassifyPanel* outputTrainingPanel) {this->outputTrainingPanel = outputTrainingPanel;}
 private slots:
     void start();
     void beenden();
@@ -51,6 +55,8 @@ private:
     Manager* manager;
     InputPanel* inputClassifyPanel;
     OutputClassifyPanel* outputClassifyPanel;
+    InputPanel* inputTrainingPanel;
+    OutputClassifyPanel* outputTrainingPanel;
     bool runWasPushed = false;
 
 };
