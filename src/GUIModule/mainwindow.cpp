@@ -43,10 +43,10 @@ MainWindow::MainWindow(Manager* manager, Subject* subject, QWidget *parent) :
     ui->inputClassifyPanel->setManager(manager);
     ui->outputClassifyPanel->setManager(manager);
 
-    ui->parameterClassifyPanel->fillModes();
+    ui->parameterClassifyPanel->fillModesClassify();
     ui->parameterClassifyPanel->fillNeuralNets();
 
-    ui->parameterTrainingPanel->fillModes();
+    ui->parameterTrainingPanel->fillModesTraining();
     ui->parameterTrainingPanel->fillNeuralNets();
 
     ui->parameterClassifyPanel->setInputClassifyPanel(ui->inputClassifyPanel);
@@ -59,7 +59,7 @@ MainWindow::MainWindow(Manager* manager, Subject* subject, QWidget *parent) :
 
 void MainWindow::on_actionHilfe_triggered()
 {
-    ui->statusBar->showMessage("Hilfe");
+    //ui->statusBar->showMessage("Hilfe");
 
     HelpForm* h = new HelpForm();
     h->adjustSize();
@@ -70,9 +70,10 @@ void MainWindow::on_actionHilfe_triggered()
 
 void MainWindow::on_actionStatistiken_triggered()
 {
-    ui->statusBar->showMessage("Statistiken");
+    //ui->statusBar->showMessage("Statistiken");
 
     StatisticForm* s = new StatisticForm();
-    s->setFixedSize(QSize(590, 460));
+    s->adjustSize();
+    //s->setFixedSize(QSize(590, 460));
     s->show();
 }

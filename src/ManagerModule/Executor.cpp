@@ -3,7 +3,7 @@
 //
 
 #include "../../includes/GUIModule/Subject.h"
-#include <NeuralNetModule/NeuralNet.h>
+#include "../NeuralNetModule/NeuralNet.h"
 #include "Executor.h"
 #include "../PlatformModule/Platform.h"
 //#include "../PlatformModule/ASICPlatform.h"

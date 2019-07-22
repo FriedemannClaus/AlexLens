@@ -29,7 +29,8 @@ public:
     ParameterPanel(QWidget *parent = 0);
     ~ParameterPanel();
 
-    void fillModes();
+    void fillModesClassify();
+    void fillModesTraining();
     void fillNeuralNets();
 
     inline void setManager(Manager* manager) {this->manager = manager;}

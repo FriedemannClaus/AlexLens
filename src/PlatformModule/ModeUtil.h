@@ -15,10 +15,13 @@ using namespace std;
 
 class ModeUtil {
 private:
-    static const map<string, Mode> stringMode;
+    static const map<string, Mode> stringModeClassify;
+    static const map<string, Mode> stringModeTraining;
 public:
-    static Mode whichMode(const string &mode);
-    static list<string> getAllModes();
+    static Mode whichModeClassify(const string &mode);
+    static Mode whichModeTraining(const string &mode);
+    static list<string> getAllModesClassify();
+    static list<string> getAllModesTraining();
 };
 
 

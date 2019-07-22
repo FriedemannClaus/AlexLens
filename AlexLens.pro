@@ -35,6 +35,7 @@ SOURCES += \
     src/ManagerModule/Executor.cpp \
     src/ManagerModule/Manager.cpp \
     #src/PlatformModule/ASICPlatform.cpp \
+    src/NeuralNetModule/NeuralNet.cpp \
     src/PlatformModule/ModeUtil.cpp \
     src/ManagerModule/main.cpp \
     src/GUIModule/statisticform.cpp \
@@ -55,6 +56,7 @@ HEADERS += \
     src/ManagerModule/Executor.h \
     src/ManagerModule/Manager.h \
     #src/PlatformModule/ASICPlatform.h \
+    src/NeuralNetModule/NeuralNet.h \
     src/PlatformModule/ModeUtil.h \
     src/PlatformModule/Mode.h \
     includes/GUIModule/statisticform.h \

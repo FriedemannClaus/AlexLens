@@ -22,24 +22,30 @@
 
 
 Manager::Manager(Subject* subject) {
-    setDefaultModes();
+    setDefaultModesClassify();
+    setDefaultModesTraining();
     setDefaultNeuralNets();
     this->subject = subject;
     Executor* executor = new Executor();
     this->executor = executor;
 }
 
-void Manager::setDefaultModes() {
-    list<string> mods = ModeUtil::getAllModes();
-    this->defaultModes = mods;
+void Manager::setDefaultModesClassify() {
+    list<string> mods = ModeUtil::getAllModesClassify();
+    this->defaultModesClassify = mods;
+}
+
+void Manager::setDefaultModesTraining() {
+    list<string> mods = ModeUtil::getAllModesTraining();
+    this->defaultModesTraining = mods;
 }
 
 void Manager::setDefaultNeuralNets() {
     list<string> nets;
     //TODO
-    //nets.push_front("AlexNet");
-    //this->defaultNeuralNets = nets;
-    this->defaultNeuralNets = Manager::findNeuralNets();
+    nets.push_front("AlexNet");
+    this->defaultNeuralNets = nets;
+    //this->defaultNeuralNets = Manager::findNeuralNets();
 }
 
 void Manager::runClassify() {

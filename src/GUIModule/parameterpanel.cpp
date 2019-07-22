@@ -13,6 +13,7 @@
 #include <QDebug>
 #include <QString>
 #include <string>
+#include <iostream>
 
 using namespace std;
 
@@ -69,7 +70,7 @@ void ParameterPanel::start()
     if(inputClassifyPanel->isImageAdded()) {
         string currentMode = this->modList->currentItem()->text().toStdString();
         string currentNeuralNet = this->neuralNetsList->currentItem()->text().toStdString();
-        this->manager->setMode(ModeUtil::whichMode(currentMode));
+        this->manager->setMode(ModeUtil::whichModeClassify(currentMode));
         this->manager->setNeuralNet(currentNeuralNet);
         this->runWasPushed = true;
 
@@ -96,13 +97,29 @@ void ParameterPanel::beenden()
     }
 }
 
-void ParameterPanel::fillModes() {
-    list<string> modes = this->manager->getDefaultModes();
+void ParameterPanel::fillModesClassify() {
+    list<string> modes = this->manager->getDefaultModesClassify();
     list<string>::iterator it;
     for (it = modes.begin(); it != modes.end(); ++it) {
-        //string item = *it;
-        QListWidgetItem *item = new QListWidgetItem(QString::fromStdString(*it));
-        //item->setToolTip()
+        string item_str = *it;
+        string item_name = item_str.substr(0,item_str.find(':'));
+        string item_toolTip = item_str.substr(item_str.find(':')+2);
+        QListWidgetItem *item = new QListWidgetItem(QString::fromStdString(item_name));
+        item->setToolTip(QString::fromStdString(item_toolTip));
+        modList->addItem(item);
+    }
+    modList->setCurrentRow(0);
+}
+
+void ParameterPanel::fillModesTraining() {
+    list<string> modes = this->manager->getDefaultModesTraining();
+    list<string>::iterator it;
+    for (it = modes.begin(); it != modes.end(); ++it) {
+        string item_str = *it;
+        string item_name = item_str.substr(0,item_str.find(':'));
+        string item_toolTip = item_str.substr(item_str.find(':')+2);
+        QListWidgetItem *item = new QListWidgetItem(QString::fromStdString(item_name));
+        item->setToolTip(QString::fromStdString(item_toolTip));
         modList->addItem(item);
     }
     modList->setCurrentRow(0);
@@ -112,8 +129,11 @@ void ParameterPanel::fillNeuralNets() {
     list<string> nets = this->manager->getDeafaultNeuralNets();
     list<string>::iterator it;
     for (it = nets.begin(); it != nets.end(); ++it) {
-        //string item = *it;
+        //string item_str = *it;
+        //string item_name = item_str.substr(0,item_str.find(':'));
+        //string item_toolTip = item_str.substr(item_str.find(':')+2);
         QListWidgetItem *item = new QListWidgetItem(QString::fromStdString(*it));
+        //item->setToolTip(QString::fromStdString(item_toolTip));
         neuralNetsList->addItem(item);
     }
     neuralNetsList->setCurrentRow(0);

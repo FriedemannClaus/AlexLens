@@ -18,7 +18,8 @@ using namespace std;
 
 class Manager{
 private:
-    list<string> defaultModes;
+    list<string> defaultModesClassify;
+    list<string> defaultModesTraining;
     list<string> defaultNeuralNets;
     Mode operationMode;
     string neuralNet;
@@ -36,7 +37,9 @@ public:
 
     inline void setNeuralNet(string neuralNet) {this->neuralNet = neuralNet;}
 
-    inline list<string> getDefaultModes() {return defaultModes;}
+    inline list<string> getDefaultModesClassify() {return defaultModesClassify;}
+
+    inline list<string> getDefaultModesTraining() {return defaultModesTraining;}
 
     inline list<string> getDeafaultNeuralNets() {return defaultNeuralNets;}
 
@@ -48,7 +51,8 @@ public:
     void runClassify();
 
 private:
-    void setDefaultModes();
+    void setDefaultModesClassify();
+    void setDefaultModesTraining();
     void setDefaultNeuralNets();
     list<string> findNeuralNets();
 };
