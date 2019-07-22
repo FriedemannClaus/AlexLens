@@ -29,7 +29,6 @@ CONFIG += c++11
 SOURCES += \
     src/GUIModule/helpform.cpp \
     src/GUIModule/InputPanel.cpp \
-    src/GUIModule/helppanel.cpp \
     src/GUIModule/mainwindow.cpp \
     src/GUIModule/outputclassifypanel.cpp \
     src/GUIModule/parameterpanel.cpp \
@@ -47,7 +46,6 @@ HEADERS += \
     includes/GUIModule/Subject.h \
     includes/GUIModule/helpform.h \
     includes/GUIModule/inputpanel.h \
-    includes/GUIModule/helppanel.h \
     includes/GUIModule/mainwindow.h \
     includes/GUIModule/outputclassifypanel.h \
     includes/GUIModule/parameterpanel.h \

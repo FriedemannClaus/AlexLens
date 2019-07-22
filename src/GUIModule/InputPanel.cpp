@@ -17,6 +17,9 @@ InputPanel::InputPanel(QWidget *parent)
 
     setAcceptDrops(true);
 
+    //label = new QLabel(this);
+    //label->setText("Drag&Drop");
+
     m_gridLayout = new QGridLayout(this);
     m_scrollArea = new QScrollArea(this);
     m_scrollArea->setWidgetResizable(true);
@@ -27,6 +30,7 @@ InputPanel::InputPanel(QWidget *parent)
     m_scrollArea->setWidget(m_scrollAreaWidgetContents);
     m_scrollArea->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
     m_gridLayout->addWidget(m_scrollArea, 0, 0, 1, 1);
+    //m_verticalLayout->addWidget(label);
 
     m_pushButton = new QPushButton("Bild einfügen", this);
     connect(m_pushButton, &QPushButton::clicked, this, &InputPanel::addImage);
@@ -104,4 +108,19 @@ void InputPanel::dropEvent(QDropEvent *e)
 
         this->manager->addImage(fileName.toStdString()); // adding fileName to manager
     }
+}
+
+void InputPanel::clearPanel()
+{
+    QLayoutItem *child;
+    while ((child = this->m_verticalLayout->takeAt(0)) != nullptr)
+        {
+            if (child->widget()) {
+                delete child->widget();
+            }
+            if (child->layout()) {
+                delete child->layout();
+            }
+            delete child;
+        }
 }

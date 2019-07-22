@@ -13,30 +13,7 @@
   <property name="windowTitle">
    <string>Hilfe</string>
   </property>
-  <widget class="HelpPanel" name="widget" native="true">
-   <property name="geometry">
-    <rect>
-     <x>15</x>
-     <y>0</y>
-     <width>650</width>
-     <height>500</height>
-    </rect>
-   </property>
-   <property name="font">
-    <font>
-     <pointsize>13</pointsize>
-    </font>
-   </property>
-  </widget>
  </widget>
- <customwidgets>
-  <customwidget>
-   <class>HelpPanel</class>
-   <extends>QWidget</extends>
-   <header>helppanel.h</header>
-   <container>1</container>
-  </customwidget>
- </customwidgets>
  <resources/>
  <connections/>
 </ui>

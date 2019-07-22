@@ -86,6 +86,9 @@ void ParameterPanel::start()
 
 void ParameterPanel::beenden()
 {
+    this->inputClassifyPanel->clearPanel();
+    this->inputClassifyPanel->setImageWasAdded(false);
+    this->inputClassifyPanel->clearPreviewImages();
     if (runWasPushed) {
         QMessageBox::warning(this, "Beenden", "Prozess wird beendet!" );
     } else {

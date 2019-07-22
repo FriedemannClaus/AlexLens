@@ -22,9 +22,11 @@ public:
     ~InputPanel();
 
     inline void setManager(Manager* manager) {this->manager = manager;}
+    inline void setImageWasAdded(bool imageWasAdded) {this->imageWasAdded = imageWasAdded;}
     inline bool isImageAdded() {return imageWasAdded;}
     inline QVector<QPair<QLabel*, QPixmap> > getPreviewImages() {return this->previewImages;}
     inline void clearPreviewImages() {this->previewImages.clear(); this->imageWasAdded = false;}
+    void clearPanel();
 
 private slots:
             void addImage();
@@ -36,6 +38,7 @@ protected:
 
 private:
     QGridLayout* m_gridLayout;
+    QLabel *label;
     QGridLayout* m_gridLayout_2;
     QScrollArea* m_scrollArea;
     QPushButton* m_pushButton;
