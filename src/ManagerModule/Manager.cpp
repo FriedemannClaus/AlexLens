@@ -1,7 +1,7 @@
 //
 // Created by dmitrii on 11.07.19.
 //
-#include <cstdio.h>
+#include <stdio.h>
 #ifdef WINDOWS
 #include <direct.h>
     #define GetCurrentDir _getcwd
