@@ -8,23 +8,25 @@
 #ifndef _LAYER_H
 #define _LAYER_H
 
+#include "Shape.h"
+
 class Layer {
 public: 
 	
 /**
  * @param input
  */
-virtual TensorObject forwardPropagate(TensorObject input) = 0;
+virtual std::shared_ptr<TensorObject> forwardPropagate(std::shared_ptr<TensorObject> input) = 0;
 	
 /**
  * @param backPropInterimResult
  */
-virtual TensorObject backPropagate(TensorObject backPropInterimResult) = 0;
+virtual std::shared_ptr<TensorObject> backPropagate(std::shared_ptr<TensorObject> backPropInterimResult) = 0;
 private: 
 	Shape inputShape;
 	Shape outputShape;
-	Layer nextLayer;
-	Layer previousLayer;
+	std::shared_ptr<Layer> nextLayer;
+    std::shared_ptr<Layer> previousLayer;
 };
 
 #endif //_LAYER_H

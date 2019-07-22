@@ -8,17 +8,22 @@
 #ifndef _INEURALNET_H
 #define _INEURALNET_H
 
+#include <QList>
+#include "../MathModule/TensorObject.h"
+#include "Layer.h"
+
 class INeuralNet {
-public: 
-	
+public:
+
 /**
  * @param weights
  */
-void setWeights(List<TensorObject> weights);
-	
-List<TensorObject> getWeights();
-	
-List<Layer> getLayers();
+    void setWeights(QList<TensorObject> weights);
+
+    QList<std::shared_ptr<TensorObject>> getWeights();
+
+    QList<Layer> getLayers();
 };
+
 
 #endif //_INEURALNET_H

@@ -3,12 +3,14 @@
 //
 
 #include <GUIModule/Subject.h>
+#include <NeuralNetModule/NeuralNet.h>
 #include "Executor.h"
 #include "../PlatformModule/Platform.h"
 //#include "../PlatformModule/ASICPlatform.h"
 
-vector<string> Executor::classify(list<string> imagePaths, Mode mode, string neuralNet) {
+vector<string> Executor::classify(list<string> imagePaths, Mode mode, string neuralNetPath) {
 
+    NeuralNet *neuralNet1 = new NeuralNet(neuralNetPath);
     //Platform* asicplatform = new ASICPlatform;
 
     //vector<string> results = asicplatform->runClassify(imagePaths);

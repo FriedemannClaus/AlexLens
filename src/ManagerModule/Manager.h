@@ -50,6 +50,7 @@ public:
 private:
     void setDefaultModes();
     void setDefaultNeuralNets();
+    list<string> findNeuralNets();
 };
 
 

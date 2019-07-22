@@ -10,3 +10,6 @@
 /**
  * NeuralNet implementation
  */
+NeuralNet::NeuralNet(std::string modelPath) {
+
+}

@@ -24,6 +24,7 @@ virtual bool isTransposed() = 0;
  * @param tensorObject
  */
 virtual std::shared_ptr<TensorObject> multiplyWith(std::shared_ptr<TensorObject> tensorObject) = 0;
+
 	
 /**
  * @param tensorObject

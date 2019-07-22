@@ -30,7 +30,7 @@ virtual void TensorObject::transpose() {
 /**
  * @return boolean
  */
-virtual boolean TensorObject::isTransposed() {
+virtual bool TensorObject::isTransposed() {
     return false;
 }
 
@@ -39,13 +39,13 @@ virtual boolean TensorObject::isTransposed() {
  * @param tensorObject the TensorObject to multiply with the TensorObject.
  * @return TensorObject the result.
  */
-virtual TensorObject TensorObject::multiplyWith(TensorObject other) {
+virtual std::shared_ptr<TensorObject> TensorObject::multiplyWith(TensorObject other) {
 }
 
 /**
  * @param tensorObject
  * @return TensorObject
  */
-virtual TensorObject TensorObject::addTo(TensorObject tensorObject) {
+virtual std::shared_ptr<TensorObject> TensorObject::addTo(TensorObject tensorObject) {
     return null;
 }

@@ -9,12 +9,14 @@
 #define _NEURALNET_H
 
 #include "INeuralNet.h"
-#include "INeuralNet.h"
 
 
-class NeuralNet: public INeuralNet, public INeuralNet {
+
+class NeuralNet: public INeuralNet {
+public:
+    NeuralNet(std::string modelPath);
 private: 
-	List<Layer> layers;
+	QList<std::shared_ptr<Layer>> layers;
 };
 
 #endif //_NEURALNET_H
