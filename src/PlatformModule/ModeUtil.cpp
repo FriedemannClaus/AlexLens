@@ -3,6 +3,7 @@
 //
 
 #include "ModeUtil.h"
+
  const map<string, Mode> ModeUtil::stringModeClassify = {{"Optimal: Der optimale Modus, in dem GPU und Intel Movidius Neural Compute Stick benutzt werden", Mode::OPTIMAL},
                                             {"Hohe Perfomance: Der schnellste und performanteste Modus, in dem alle verfügbaren heterogenen Plattformen benutzt werden", Mode::HIGH_PERFOMANCE },
                                             {"Geringer Leistungsverbrauch: Der Modus, in dem genau ein Intel Movidius Neural Compute Stick benutzt wird", Mode::LOW_POWER},
@@ -10,11 +11,19 @@
  const map<string, Mode> ModeUtil::stringModeTraining = {{"Hohe Perfomance: Der schnellste und performanteste Modus, in dem alle verfügbaren heterogenen Plattformen benutzt werden", Mode::HIGH_PERFOMANCE }};
 
 Mode ModeUtil::whichModeClassify(const string& mode) {
-    return stringModeClassify.at(mode);
+    for(auto const& pair: stringModeClassify) {
+        if (pair.first.find(mode)== 0) {
+            return stringModeClassify.at(pair.first);
+        }
+    }
 }
 
 Mode ModeUtil::whichModeTraining(const string& mode) {
-    return stringModeTraining.at(mode);
+    for(auto const& pair: stringModeTraining) {
+        if (pair.first.find(mode)== 0) {
+            return stringModeTraining.at(pair.first);
+        }
+    }
 }
 
 list<string> ModeUtil::getAllModesClassify() {
