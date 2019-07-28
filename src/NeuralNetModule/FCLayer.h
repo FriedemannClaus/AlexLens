@@ -1,21 +1,34 @@
-/**
- * Project Entwurf_PSE_KNN
- * @author Jakub Trzcinsi, Viet Pham, Friedemann Claus, Dima Seletkov, Alexandr Eismont
- * @version 1.2
- */
+//
+// Created by dmitrii on 7/28/19.
+//
 
+#ifndef UNTITLED_FCLAYER_H
+#define UNTITLED_FCLAYER_H
 
-#ifndef _FCLAYER_H
-#define _FCLAYER_H
+#include "Layer.h"
 
-#include "TrainableLayer.h"
-#include "TrainableLayer.h"
+class FCLayer : public Layer {
+private:
+    /*
+     * Weight Matrix
+     */
+    Matrix_t W;
+    /*
+     * Bias vector
+     */
+    Vector_t b;
+    /*
+     * Result of forward propagation
+     */
+    Matrix_t r;
 
+public:
+    FCLayer(const size_t inputSize, const size_t outputSize) : Layer(inputSize, outputSize) {}
 
-class FCLayer: public TrainableLayer, public TrainableLayer {
-private: 
-	int LAYER_SIZE;
-	double dropout;
+    const Matrix_t& forward(const Matrix_t& x) override;
+    void setWeights(Matrix_t& W, Vector_t& b) override;
+
 };
 
-#endif //_FCLAYER_H
+
+#endif //UNTITLED_FCLAYER_H

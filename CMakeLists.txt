@@ -8,6 +8,7 @@ set(CMAKE_CXX_STANDARD 11)
 find_package(Qt5Core REQUIRED)
 find_package(Qt5Gui REQUIRED)
 find_package(Qt5Widgets REQUIRED)
+find_package(Eigen3 3.3 REQUIRED NO_MODULE)
 
 list(APPEND THIRD-PARTY-LIBS Qt::Widgets Qt::Core)
 
@@ -15,7 +16,7 @@ add_executable(AlexLens src/ManagerModule/main.cpp src/GUIModule/InputPanel.cpp 
         includes/TrainingModule/ITraining.h
         src/GUIModule/Subject.h
         src/MathModule/Matrix.cpp src/MathModule/Matrix.h
-        src/MathModule/Skalar.cpp src/MathModule/Skalar.h src/MathModule/MathException.h)
+        src/MathModule/Skalar.cpp src/MathModule/Skalar.h src/MathModule/MathException.h src/NeuralNetModule/Layer.h src/NeuralNetModule/FCLayer.cpp src/NeuralNetModule/FCLayer.h)
 
 include_directories(includes)
 
@@ -23,4 +24,5 @@ target_link_libraries(${PROJECT_NAME}
         Qt5::Core
         Qt5::Widgets
         Qt5::Gui
+        Eigen3::Eigen
         )
