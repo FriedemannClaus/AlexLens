@@ -32,6 +32,7 @@ public:
 
 
     vector<string> classify(list<string> imagePaths, Mode mode, string neuralNet);
+    void train(list<string> trainPaths, Mode mode, string neuralNet);
 
 };
 

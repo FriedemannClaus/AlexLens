@@ -91,6 +91,7 @@ list<string> Manager::findNeuralNets(){
 
 void Manager::runTraining() {
     std::cout << "Thats training" << std::endl;
+
 }
 
 

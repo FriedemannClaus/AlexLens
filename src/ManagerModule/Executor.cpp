@@ -20,4 +20,7 @@ vector<string> Executor::classify(list<string> imagePaths, Mode mode, string neu
     return results;
 
 }
+void Executor::train(list<string> trainPaths, Mode mode, string neuralNet) {
+
+}
 Executor::Executor() {}
