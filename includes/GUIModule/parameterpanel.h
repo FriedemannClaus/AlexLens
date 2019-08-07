@@ -29,19 +29,21 @@ public:
     ParameterPanel(QWidget *parent = 0);
     ~ParameterPanel();
 
-    void fillModesClassify();
-    void fillModesTraining();
+    void fillModes();
     void fillNeuralNets();
+
+    inline void setClassifyTab(bool classifyTab) {this->classifyTab = classifyTab;}
+    inline bool isClassifyTab() {return classifyTab;}
 
     inline void setManager(Manager* manager) {this->manager = manager;}
 
-    inline void setInputClassifyPanel(InputPanel* inputClassifyPanel) {this->inputClassifyPanel = inputClassifyPanel;}
+    inline void setInputPanel(InputPanel* inputPanel) {this->inputPanel = inputPanel;}
 
-    inline void setOutputClassifyPanel(OutputClassifyPanel* outputClassifyPanel) {this->outputClassifyPanel = outputClassifyPanel;}
+    inline void setOutputPanel(OutputClassifyPanel* outputPanel) {this->outputPanel = outputPanel;}
 
-    inline void setInputTrainingPanel(InputPanel* inputTrainingPanel) {this->inputTrainingPanel = inputTrainingPanel;}
+    //inline void setInputTrainingPanel(InputPanel* inputTrainingPanel) {this->inputTrainingPanel = inputTrainingPanel;}
 
-    inline void setOutputTrainingPanel(OutputClassifyPanel* outputTrainingPanel) {this->outputTrainingPanel = outputTrainingPanel;}
+    //inline void setOutputTrainingPanel(OutputClassifyPanel* outputTrainingPanel) {this->outputTrainingPanel = outputTrainingPanel;}
 private slots:
     void start();
     void beenden();
@@ -53,11 +55,11 @@ private:
     QListWidget* modList;
     QListWidget* neuralNetsList;
     Manager* manager;
-    InputPanel* inputClassifyPanel;
-    OutputClassifyPanel* outputClassifyPanel;
-    InputPanel* inputTrainingPanel;
-    OutputClassifyPanel* outputTrainingPanel;
+    InputPanel* inputPanel;
+    OutputClassifyPanel* outputPanel;
     bool runWasPushed = false;
+    bool classifyTab = true;
+    bool filesForTrainAdded = true;
 
 };
 

@@ -34,6 +34,14 @@ ParameterPanel::ParameterPanel(QWidget *parent)
     modList = new QListWidget; //will be filled in fillModes()
     neuralNetsList = new QListWidget; // will be filled in fillNeuralNets()
 
+   /* //Filling panels with content
+    if(classifyTab) {
+        this->fillModesClassify();
+    }else {
+        this->fillModesTraining();
+    }
+    this->fillNeuralNets();*/
+
     parameterList->addWidget(modList);
 
     QLabel *label_2 = new QLabel(this);
@@ -67,17 +75,25 @@ ParameterPanel::~ParameterPanel()
 
 void ParameterPanel::start()
 {
-    if(inputClassifyPanel->isImageAdded()) {
+    if((classifyTab && inputPanel->isImageAdded()) || (!classifyTab && filesForTrainAdded)) {
         string currentMode = this->modList->currentItem()->text().toStdString();
         string currentNeuralNet = this->neuralNetsList->currentItem()->text().toStdString();
         this->manager->setMode(ModeUtil::whichModeClassify(currentMode));
         this->manager->setNeuralNet(currentNeuralNet);
         this->runWasPushed = true;
 
-        this->outputClassifyPanel->clearPanel();
-        this->outputClassifyPanel->addPreviewImages(this->inputClassifyPanel->getPreviewImages());
-        this->inputClassifyPanel->clearPreviewImages();
-        this->manager->runClassify();
+        if (classifyTab) {
+            this->outputPanel->clearPanel();
+            this->outputPanel->addPreviewImages(this->inputPanel->getPreviewImages());
+            this->inputPanel->clearPreviewImages();
+            this->manager->runClassify();
+        } else {
+            //HERE
+            //clear inputTrainingPanel
+            //actions ith outputTrainingPanel?
+            this->manager->runTraining();
+        }
+
 
     } else {
         QMessageBox::warning(this, "Start", "Fügen Sie zumindest ein Bild ein" );
@@ -87,32 +103,28 @@ void ParameterPanel::start()
 
 void ParameterPanel::beenden()
 {
-    this->inputClassifyPanel->clearPanel();
-    this->inputClassifyPanel->setImageWasAdded(false);
-    this->inputClassifyPanel->clearPreviewImages();
-    if (runWasPushed) {
-        QMessageBox::warning(this, "Beenden", "Prozess wird beendet!" );
+    if (classifyTab) {
+        this->inputPanel->clearPanel();
+        this->inputPanel->setImageWasAdded(false);
+        this->inputPanel->clearPreviewImages();
+
     } else {
-        QMessageBox::warning(this, "Beenden", "Nichts zu beenden!" );
+        //training beenden
+    }
+    if (runWasPushed) {
+        QMessageBox::warning(this, "Beenden", "Prozess wird beendet!");
+    } else {
+        QMessageBox::warning(this, "Beenden", "Nichts zu beenden!");
     }
 }
 
-void ParameterPanel::fillModesClassify() {
-    list<string> modes = this->manager->getDefaultModesClassify();
-    list<string>::iterator it;
-    for (it = modes.begin(); it != modes.end(); ++it) {
-        string item_str = *it;
-        string item_name = item_str.substr(0,item_str.find(':'));
-        string item_toolTip = item_str.substr(item_str.find(':')+2);
-        QListWidgetItem *item = new QListWidgetItem(QString::fromStdString(item_name));
-        item->setToolTip(QString::fromStdString(item_toolTip));
-        modList->addItem(item);
+void ParameterPanel::fillModes() {
+    list<string> modes;
+    if (classifyTab) {
+        modes = this->manager->getDefaultModesClassify();
+    }else {
+        modes = this->manager->getDefaultModesTraining();
     }
-    modList->setCurrentRow(0);
-}
-
-void ParameterPanel::fillModesTraining() {
-    list<string> modes = this->manager->getDefaultModesTraining();
     list<string>::iterator it;
     for (it = modes.begin(); it != modes.end(); ++it) {
         string item_str = *it;

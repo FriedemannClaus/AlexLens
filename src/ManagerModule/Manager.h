@@ -44,11 +44,14 @@ public:
     inline list<string> getDeafaultNeuralNets() {return defaultNeuralNets;}
 
     inline Executor* getExecutor() { return this->executor;}
+
     inline Subject* getSubject() { return  this->subject;}
 
     inline vector<string> getResults() { return this->results;}
 
     void runClassify();
+
+    void runTraining();
 
 private:
     void setDefaultModesClassify();

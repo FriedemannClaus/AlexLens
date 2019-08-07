@@ -28,6 +28,7 @@ public:
     inline bool isClassifyTab() {return classifyTab;}
     inline QVector<QPair<QLabel*, QPixmap> > getPreviewImages() {return this->previewImages;}
     inline void clearPreviewImages() {this->previewImages.clear(); this->imageWasAdded = false;}
+    //inline void setIsClassify(bool flag) {this->classifyTab = flag;}
     void clearPanel();
 
 private slots:

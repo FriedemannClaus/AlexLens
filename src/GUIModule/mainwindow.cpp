@@ -45,18 +45,20 @@ MainWindow::MainWindow(Manager* manager, Subject* subject, QWidget *parent) :
     ui->inputClassifyPanel->setClassifyTab(true);
     ui->inputTrainingPanel->setManager(manager);
     ui->inputTrainingPanel->setClassifyTab(false);
+    ui->parameterClassifyPanel->setClassifyTab(true);
+    ui->parameterTrainingPanel->setClassifyTab(false);
 
     ui->outputClassifyPanel->setManager(manager);
 
-    ui->parameterClassifyPanel->fillModesClassify();
+    ui->parameterClassifyPanel->fillModes();
     ui->parameterClassifyPanel->fillNeuralNets();
-    ui->parameterTrainingPanel->fillModesTraining();
+    ui->parameterTrainingPanel->fillModes();
     ui->parameterTrainingPanel->fillNeuralNets();
 
-    ui->parameterClassifyPanel->setInputClassifyPanel(ui->inputClassifyPanel);
-    ui->parameterClassifyPanel->setOutputClassifyPanel(ui->outputClassifyPanel);
-    ui->parameterTrainingPanel->setInputTrainingPanel(ui->inputTrainingPanel);
-    ui->parameterTrainingPanel->setOutputTrainingPanel(ui->outputTrainingPanel);
+    ui->parameterClassifyPanel->setInputPanel(ui->inputClassifyPanel);
+    ui->parameterClassifyPanel->setOutputPanel(ui->outputClassifyPanel);
+    ui->parameterTrainingPanel->setInputPanel(ui->inputTrainingPanel);
+    ui->parameterTrainingPanel->setOutputPanel(ui->outputTrainingPanel);
 
     //ATTCAHING OBSERVER
     this->manager->getSubject()->attachObserver(ui->outputClassifyPanel);
