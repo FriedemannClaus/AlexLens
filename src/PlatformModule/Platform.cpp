@@ -3,6 +3,17 @@
 //
 
 #include "Platform.h"
-std::vector<std::string> Platform::runClassify(std::list<std::string> list) {
+void Platform::runClassify() {
     std::cout << "base virtual mathods" << std::endl;
 }
+
+PlatformStatistic Platform::getStatistic() {
+    return PlatformStatistic();
+}
+
+PlatformType Platform::getType() {
+    return PlatformType();
+}
+void Platform::setImagePaths(std::list<std::string> imagePaths) {
+}
+vector<string> Platform::getResults() {}

@@ -1,13 +1,22 @@
-/**
- * Project Entwurf_PSE_KNN
- * @author Jakub Trzcinsi, Viet Pham, Friedemann Claus, Dima Seletkov, Alexandr Eismont
- * @version 1.2
- */
-
-
 #ifndef _PLATFORMTYPE_H
 #define _PLATFORMTYPE_H
 
-enum PlatformType { GPU, CPU, ASIC };
+#include <iostream>
+
+enum class PlatformType {
+    CPU,
+    ASIC
+};
+
+
+inline std::ostream &operator<<(std::ostream &out, const PlatformType &type) {
+    switch(type) {
+        case PlatformType::CPU:
+            out << "CPU";
+        case PlatformType::ASIC:
+            out << "ASIC";
+    }
+    return out;
+}
 
 #endif //_PLATFORMTYPE_H

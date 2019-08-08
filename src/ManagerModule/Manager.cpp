@@ -9,16 +9,13 @@
 #include <unistd.h>
 #define GetCurrentDir getcwd
 #endif
-
 #include <string>
 #include <iostream>
 #include <dirent.h>
 #include <regex>
 
-
 #include "Manager.h"
 #include "Executor.h"
-
 
 
 Manager::Manager(Subject* subject) {
@@ -40,17 +37,16 @@ void Manager::setDefaultModesTraining() {
     this->defaultModesTraining = mods;
 }
 
+
 void Manager::setDefaultNeuralNets() {
     list<string> nets;
-    //TODO
     nets.push_front("AlexNet");
     this->defaultNeuralNets = nets;
-    //this->defaultNeuralNets = Manager::findNeuralNets();
 }
 
 void Manager::runClassify() {
+
     this->results = executor->classify(imagePaths, operationMode, neuralNet);
-    for (auto a: results) cout << a << endl;
     this->subject->informObservers();
 
 }
@@ -78,7 +74,7 @@ list<string> Manager::findNeuralNets(){
     if ((dir = opendir (charPath)) != NULL) {
         while ((ent = readdir (dir)) != NULL) {
             if(ent->d_name[0] != '.')
-                    nets->push_front(ent->d_name);
+                nets->push_front(ent->d_name);
         }
         closedir (dir);
     } else {
@@ -88,10 +84,7 @@ list<string> Manager::findNeuralNets(){
     }
     return *nets;
 }
-
 void Manager::runTraining() {
-    std::cout << "Thats training" << std::endl;
+
 
 }
-
-

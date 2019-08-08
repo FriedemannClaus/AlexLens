@@ -9,12 +9,18 @@
 #include <list>
 #include <string>
 #include <vector>
+#include "PlatformType.h"
+#include "PlatformStatistic.h"
 
-
+using namespace std;
 
 class Platform {
 public:
-    virtual std::vector<std::string> runClassify(std::list<std::string> list);
+    virtual void runClassify();
+    virtual PlatformType getType();
+    virtual PlatformStatistic getStatistic();
+    virtual void setImagePaths(std::list<std::string> imagePaths);
+    virtual vector<string> getResults();
 };
 
 

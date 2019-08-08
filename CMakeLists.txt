@@ -6,15 +6,23 @@ set(CMAKE_AUTOMOC ON)
 set(CMAKE_CXX_STANDARD 11)
 
 set(CMAKE_AUTORCC ON)
+SET(CMAKE_CXX_FLAGS -pthread)
+find_package(Threads)
 
 find_package(Qt5Core REQUIRED)
 find_package(Qt5Gui REQUIRED)
 find_package(Qt5Widgets REQUIRED)
 
+#Torch stuff
+find_package(Torch REQUIRED)
+find_package(OpenCV REQUIRED)
+
 list(APPEND THIRD-PARTY-LIBS Qt::Widgets Qt::Core)
 
 include_directories(includes)
 include_directories(src)
+#Torch stuff
+include_directories( ${OpenCV_INCLUDE_DIRS} )
 # OpenVino stuff
 #INCLUDE_DIRECTORIES(/opt/intel/openvino/deployment_tools/inference_engine/include)
 #INCLUDE_DIRECTORIES(/opt/intel/openvino/deployment_tools/inference_engine/samples/common/format_reader)
@@ -37,9 +45,14 @@ add_executable(AlexLens src/ManagerModule/main.cpp
         src/ManagerModule/Manager.cpp src/ManagerModule/Manager.h
         src/ManagerModule/Executor.cpp src/ManagerModule/Executor.h
         src/PlatformModule/Platform.cpp src/PlatformModule/Platform.h
-        #src/PlatformModule/ASICPlatform.cpp src/PlatformModule/ASICPlatform.h
+        src/PlatformModule/ASICPlatform.cpp src/PlatformModule/ASICPlatform.h
         includes/GUIModule/IObserver.h
-        includes/GUIModule/Subject.h)
+        includes/GUIModule/Subject.h
+        src/PlatformModule/PlatformManager.cpp src/PlatformModule/PlatformManager.h
+        src/PlatformModule/CPUPlatform.cpp src/PlatformModule/CPUPlatform.h
+        src/PlatformModule/PlatformType.h
+        src/PlatformModule/PlatformStatistic.cpp src/PlatformModule/PlatformStatistic.h
+        )
 
 
 
@@ -50,4 +63,6 @@ target_link_libraries(${PROJECT_NAME}
         #/opt/intel/openvino/deployment_tools/inference_engine/lib/intel64/libinference_engine.so
         #/home/dmitrii/inference_engine_samples_build/intel64/Release/lib/libformat_reader.so
         #dl
+        ${TORCH_LIBRARIES}
+        ${OpenCV_LIBS}
         )

@@ -1,24 +1,29 @@
-/**
- * Project Entwurf_PSE_KNN
- * @author Jakub Trzcinsi, Viet Pham, Friedemann Claus, Dima Seletkov, Alexandr Eismont
- * @version 1.2
- */
+//
+// Created by dmitrii on 7/21/19.
+//
 
+#ifndef ALEXLENS_PLATFORMMANAGER_H
+#define ALEXLENS_PLATFORMMANAGER_H
 
-#ifndef _PLATFORMMANAGER_H
-#define _PLATFORMMANAGER_H
+#include <iostream>
+#include <list>
+#include "Platform.h"
+#include "Mode.h"
+#include "ASICPlatform.h"
+#include "CPUPlatform.h"
 
-#include "IPlatformManager.h"
-#include "../GUIModule/Subject.h"
-#include "../GUIModule/Subject.h"
-#include "../GUIModule/Subject.h"
+using namespace std;
 
-
-class PlatformManager: public IPlatformManager, public Subject, public Subject, public Subject {
-private: 
-	Vector<Platform> platforms;
-	Mode mode;
-	INeuralNet neuralNet;
+class PlatformManager {
+private:
+    const static int NUM_PLATFORMS = 2;
+    list<Platform*> platforms;
+    Mode mode;
+public:
+    PlatformManager();
+    list<Platform *> getAvailablePlatforms();
+    inline void setMode(Mode mode) {this->mode = mode;}
 };
 
-#endif //_PLATFORMMANAGER_H
+
+#endif //ALEXLENS_PLATFORMMANAGER_H

@@ -7,32 +7,30 @@
 
 #include <string>
 #include <list>
-#include "../PlatformModule/Mode.h"
-
 #include <iostream>
 #include <vector>
-//#include "../../includes/GUIModule/outputclassifypanel.h"
+
+#include "../PlatformModule/Mode.h"
+#include <GUIModule/Subject.h>
+#include <PlatformModule/PlatformManager.h>
+#include "../PlatformModule/Platform.h"
+#include "../PlatformModule/ASICPlatform.h"
 
 using namespace std;
 
 
 class Executor {
+private:
+    PlatformManager* platformManager;
 
 public:
     list<string> imagePaths;
-    //OutputClassifyPanel* panel;
 
     //inline Subject* getSubject() { return this->subject;}
 
     Executor();
 
-    //static void setOutputPanel(OutputClassifyPanel* panel) {
-   //     Executor::panel=panel;
-   // }
-
-
     vector<string> classify(list<string> imagePaths, Mode mode, string neuralNet);
-    void train(list<string> trainPaths, Mode mode, string neuralNet);
 
 };
 

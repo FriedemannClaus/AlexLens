@@ -30,12 +30,32 @@ double PlatformStatistic::getEnergyConsum() {
  * @return PlatformType
  */
 PlatformType PlatformStatistic::getName() {
-    return null;
+    return *(new PlatformType);
 }
 
 /**
  * @return int
  */
-int PlatformStatistic::getTime() {
-    return 0;
+double PlatformStatistic::getTotalInferenceTime() {
+    return this->totalInferenceTime;
+}
+
+void PlatformStatistic::setTotalInferenceTime(double time) {
+    this->totalInferenceTime = time;
+}
+
+double PlatformStatistic::getThroughput() {
+    return this->throughput;
+}
+
+void PlatformStatistic::setThroughput(double throughput) {
+    this->throughput = throughput;
+}
+
+double PlatformStatistic::getAvgIterationTime() {
+    return this->avgIterationTime;
+}
+
+void PlatformStatistic::setAvgIterationTime(double avgIterationTime) {
+    this->avgIterationTime = avgIterationTime;
 }

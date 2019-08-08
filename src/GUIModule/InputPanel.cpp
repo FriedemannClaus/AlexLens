@@ -59,7 +59,7 @@ void InputPanel::addImage()
         m_verticalLayout->addWidget(imageLabel);
 
         this->manager->addImage(fileName.toStdString()); // adding fileName to manager
-        std::cout << fileName.toStdString() << endl;
+
     }
 }
 

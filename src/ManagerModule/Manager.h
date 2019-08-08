@@ -8,7 +8,7 @@
 #include <list>
 #include <iterator>
 #include <string>
-#include "../../includes/GUIModule/Subject.h"
+#include <GUIModule/Subject.h>
 #include "../PlatformModule/Mode.h"
 #include "../PlatformModule/ModeUtil.h"
 #include "Executor.h"
@@ -49,6 +49,8 @@ public:
 
     inline vector<string> getResults() { return this->results;}
 
+    inline void clearImagePaths() {this->imagePaths.clear();}
+
     void runClassify();
 
     void runTraining();
@@ -57,6 +59,7 @@ private:
     void setDefaultModesClassify();
     void setDefaultModesTraining();
     void setDefaultNeuralNets();
+
     list<string> findNeuralNets();
 };
 

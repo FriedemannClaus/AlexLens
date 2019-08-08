@@ -2,25 +2,67 @@
 // Created by dmitrii on 7/18/19.
 //
 
-#include "../../includes/GUIModule/Subject.h"
-#include "../NeuralNetModule/NeuralNet.h"
+#include <PlatformModule/ModeUtil.h>
 #include "Executor.h"
-#include "../PlatformModule/Platform.h"
-//#include "../PlatformModule/ASICPlatform.h"
+#include <thread>
 
-vector<string> Executor::classify(list<string> imagePaths, Mode mode, string neuralNetPath) {
+void thrFunction(Platform *platform) {
+    platform->runClassify();
+}
 
-    NeuralNet *neuralNet1 = new NeuralNet(neuralNetPath);
-    //Platform* asicplatform = new ASICPlatform;
+vector<string> Executor::classify(list<string> imagePaths, Mode mode, string neuralNet) {
 
-    //vector<string> results = asicplatform->runClassify(imagePaths);
+    this->platformManager->setMode(mode);
+    list<Platform*> platforms = platformManager->getAvailablePlatforms();
 
-    vector<string> results = {"cat 0.9999 \n dog 0.01111 \n shark 0.0001 \n penguin 0.001 \n monkey 0.000 "};
+    //splitting all image paths between platforms
+    int num_platforms = platforms.size();
+    int num_imagePaths = imagePaths.size();
+    list<string> split[num_platforms];
+    for (int i = 0; i < num_platforms; i++) {
+        list<string> list;
+        split[i] = list;
+    }
+
+    int i = 0;
+    for (auto path:imagePaths) {
+        split[i].push_back(path);
+        i++;
+        if (i == num_platforms) i -= num_platforms;
+    }
+
+    i=0;
+    for(Platform* platform:platforms) {
+        platform->setImagePaths(split[i]);
+        i++;
+        if (i==num_platforms) break;
+    }
+
+    //starting threads
+    vector<thread> threads;
+    for(Platform* platform:platforms) {
+        thread thr(thrFunction, platform);;
+        threads.push_back(move(thr));
+    }
+
+    //joining all threads
+    for (auto& t:threads) {
+        t.join();
+    }
+
+    //joining all results into one vector
+    vector<string> results;
+    results.reserve(num_imagePaths);
+    results.clear();
+    for(Platform* platform:platforms) {
+        vector<string> platformResults = platform->getResults();
+        results.insert(results.end(), platformResults.begin(), platformResults.end());
+    };
 
     return results;
 
 }
-void Executor::train(list<string> trainPaths, Mode mode, string neuralNet) {
 
+Executor::Executor() {
+    this->platformManager = new PlatformManager();
 }
-Executor::Executor() {}

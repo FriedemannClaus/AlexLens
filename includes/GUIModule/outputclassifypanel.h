@@ -36,7 +36,6 @@ public:
     //inline void setSubject(Subject* subject) {this->subject = subject;subject->attachObserver(this);}
     void setResults(vector<string>& results);
     void invokeUpdate() override;
-    void hello() {std::cout << "hello!" << std::endl;}
 
 
 protected:

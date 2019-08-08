@@ -1,17 +1,37 @@
-/**
- * Project Entwurf_PSE_KNN
- * @author Jakub Trzcinsi, Viet Pham, Friedemann Claus, Dima Seletkov, Alexandr Eismont
- * @version 1.2
- */
+//
+// Created by dmitrii on 7/21/19.
+//
+
+#ifndef ALEXLENS_CPUPLATFORM_H
+#define ALEXLENS_CPUPLATFORM_H
 
 
-#ifndef _CPUPLATFORM_H
-#define _CPUPLATFORM_H
+#include "Platform.h"
+#include "PlatformStatistic.h"
+#include <string>
+#include <list>
+using namespace std;
 
-#include "PlatformTraining.h"
+class CPUPlatform : public Platform {
+private:
+    PlatformType type;
+    PlatformStatistic statistic;
+    vector<string> imageNames;
+    vector<string> results;
 
+    void runClassifyOne(string imagePath);
+    void convertListToVector(list<string> list, vector<string> *imageNames);
 
-class CPUPlatform: public PlatformTraining {
+public:
+    CPUPlatform();
+    void runClassify() override;
+
+    inline PlatformType getType() {return this->type;}
+    inline PlatformStatistic getStatistic() { return this->statistic;}
+    void setImagePaths(list<string> imagePaths);
+    vector<string> getResults();
+
 };
 
-#endif //_CPUPLATFORM_H
+
+#endif //ALEXLENS_CPUPLATFORM_H
