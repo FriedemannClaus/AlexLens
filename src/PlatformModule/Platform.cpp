@@ -21,3 +21,7 @@ vector<string> Platform::getResults() {}
 void Platform::runTraining() {
     std::cout << "base virtual mathods" << std::endl;
 }
+
+void Platform::setNeuralNet(string neuralNet) {
+    std::cout << "base virtual mathods" << std::endl;
+}

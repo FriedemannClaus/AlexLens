@@ -17,12 +17,15 @@
 void CPUPlatform::runClassify() {
     this->results.clear();
 
-
+    std::cout << model_path <<std::endl;
+    std::cout << label_path <<std::endl;
+    //model_path = "/home/dmitrii/alexnetTr.pt";
     // Deserialize the ScriptModule from a file using torch::jit::load().
-    std::string model_path = "/home/dmitrii/repos/cpp-pytorch/caltech.pt";//"/home/dmitrii/alexnetTr.pt";
-    std::string label_path = "/home/dmitrii/Downloads/Telegram Desktop/imagenet_classes.txt";
+    //std::string model_path = "/home/dmitrii/repos/cpp-pytorch/caltech.pt";//"/home/dmitrii/alexnetTr.pt";
+    //std::string label_path = "/home/dmitrii/Downloads/Telegram Desktop/imagenet_classes.txt";
     //std::string image_path = "/home/dmitrii/Downloads/Telegram Desktop/test/test/bear/009_0071.jpg";
     torch::jit::script::Module module = torch::jit::load(model_path);
+
 
     for (auto image_path:imageNames) {
         // load image with opencv and transform

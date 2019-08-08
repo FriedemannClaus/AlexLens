@@ -40,7 +40,7 @@ void Manager::setDefaultModesTraining() {
 
 void Manager::setDefaultNeuralNets() {
     list<string> nets;
-    nets.push_front("AlexNet");
+    nets.push_front("alexnet");
     this->defaultNeuralNets = nets;
 }
 

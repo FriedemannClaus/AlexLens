@@ -15,6 +15,9 @@
 using namespace std;
 
 class Platform {
+private:
+    string model_path;
+    string label_path;
 public:
     virtual void runClassify();
     virtual void runTraining();
@@ -22,6 +25,7 @@ public:
     virtual PlatformStatistic getStatistic();
     virtual void setImagePaths(std::list<std::string> imagePaths);
     virtual vector<string> getResults();
+    virtual void setNeuralNet(string neuralNet);
 };
 
 

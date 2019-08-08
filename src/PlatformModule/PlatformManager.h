@@ -19,10 +19,12 @@ private:
     const static int NUM_PLATFORMS = 2;
     list<Platform*> platforms;
     Mode mode;
+    string neuralNet;
 public:
     PlatformManager();
     list<Platform *> getAvailablePlatforms();
     inline void setMode(Mode mode) {this->mode = mode;}
+    inline void setNeuralNet(string neuralNet) {this->neuralNet = neuralNet;}
 };
 
 
