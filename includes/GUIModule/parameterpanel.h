@@ -21,7 +21,7 @@
 
 using namespace std;
 
-class ParameterPanel : public QWidget
+class ParameterPanel : public QWidget, public IObserver
 {
     Q_OBJECT
 
@@ -40,6 +40,8 @@ public:
     inline void setInputPanel(InputPanel* inputPanel) {this->inputPanel = inputPanel;}
 
     inline void setOutputPanel(OutputClassifyPanel* outputPanel) {this->outputPanel = outputPanel;}
+    void invokeUpdate() override;
+
 
     //inline void setInputTrainingPanel(InputPanel* inputTrainingPanel) {this->inputTrainingPanel = inputTrainingPanel;}
 

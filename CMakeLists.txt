@@ -8,6 +8,8 @@ set(CMAKE_CXX_STANDARD 11)
 set(CMAKE_AUTORCC ON)
 SET(CMAKE_CXX_FLAGS -pthread)
 find_package(Threads)
+find_package(PythonLibs REQUIRED)
+
 
 find_package(Qt5Core REQUIRED)
 find_package(Qt5Gui REQUIRED)
@@ -21,6 +23,7 @@ list(APPEND THIRD-PARTY-LIBS Qt::Widgets Qt::Core)
 
 include_directories(includes)
 include_directories(src)
+include_directories(${PYTHON_INCLUDE_DIRS})
 #Torch stuff
 include_directories( ${OpenCV_INCLUDE_DIRS} )
 # OpenVino stuff
@@ -65,4 +68,5 @@ target_link_libraries(${PROJECT_NAME}
         #dl
         ${TORCH_LIBRARIES}
         ${OpenCV_LIBS}
+        ${PYTHON_LIBRARIES}
         )

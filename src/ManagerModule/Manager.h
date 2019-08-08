@@ -51,6 +51,8 @@ public:
 
     inline void clearImagePaths() {this->imagePaths.clear();}
 
+    inline void addNeuralNet(string newNN) {this->defaultNeuralNets.push_back(newNN);}
+
     void runClassify();
 
     void runTraining();

@@ -52,8 +52,21 @@ void Manager::runClassify() {
 }
 
 void Manager::runTraining() {
-    std::cout << imagePaths.front() << endl;
-    this->executor->train(imagePaths.front(), operationMode, neuralNet);
+    string imageDir = imagePaths.front();
+
+    this->executor->train(imageDir, operationMode, neuralNet);
+
+    //make name from imageDir for ParameterPanel
+    if(imageDir[imageDir.size()-1] == '/') {
+        imageDir.erase(imageDir.size()-1,1);
+    }
+    int i;
+    for(i = imageDir.size()-1; imageDir[i] != '/'; i--) {}
+    imageDir.erase(0, i+1);
+
+    defaultNeuralNets.push_back(imageDir);
+    this->subject->informObservers();
+
 }
 list<string> Manager::findNeuralNets(){
     list<string> *nets = new list<string>;

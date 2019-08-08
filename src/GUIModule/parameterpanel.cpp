@@ -155,3 +155,14 @@ void ParameterPanel::fillNeuralNets() {
     }
     neuralNetsList->setCurrentRow(0);
 }
+
+void ParameterPanel::invokeUpdate() {
+    int i = 0;
+    neuralNetsList->clear();
+    for (string net:this->manager->getDeafaultNeuralNets()) {
+        QListWidgetItem *item = new QListWidgetItem(QString::fromStdString(net));
+        neuralNetsList->addItem(item);
+        i++;
+    }
+    neuralNetsList->setCurrentRow(0);
+}

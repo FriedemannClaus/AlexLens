@@ -62,6 +62,8 @@ MainWindow::MainWindow(Manager* manager, Subject* subject, QWidget *parent) :
 
     //ATTCAHING OBSERVER
     this->manager->getSubject()->attachObserver(ui->outputClassifyPanel);
+    this->manager->getSubject()->attachObserver(ui->parameterClassifyPanel);
+    this->manager->getSubject()->attachObserver(ui->parameterTrainingPanel);
     // = ui->outputClassifyPanel;
 }
 

@@ -6,6 +6,7 @@
 #include "Executor.h"
 #include <thread>
 
+
 void thrFunction(Platform *platform) {
     platform->runClassify();
 }
