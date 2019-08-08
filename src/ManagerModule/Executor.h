@@ -31,6 +31,7 @@ public:
     Executor();
 
     vector<string> classify(list<string> imagePaths, Mode mode, string neuralNet);
+    void train (string dirPath, Mode mode, string neuralNet);
 
 };
 

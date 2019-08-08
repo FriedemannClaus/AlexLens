@@ -17,3 +17,7 @@ PlatformType Platform::getType() {
 void Platform::setImagePaths(std::list<std::string> imagePaths) {
 }
 vector<string> Platform::getResults() {}
+
+void Platform::runTraining() {
+    std::cout << "base virtual mathods" << std::endl;
+}

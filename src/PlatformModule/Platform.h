@@ -17,6 +17,7 @@ using namespace std;
 class Platform {
 public:
     virtual void runClassify();
+    virtual void runTraining();
     virtual PlatformType getType();
     virtual PlatformStatistic getStatistic();
     virtual void setImagePaths(std::list<std::string> imagePaths);

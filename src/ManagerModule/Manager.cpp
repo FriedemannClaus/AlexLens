@@ -50,6 +50,11 @@ void Manager::runClassify() {
     this->subject->informObservers();
 
 }
+
+void Manager::runTraining() {
+    std::cout << imagePaths.front() << endl;
+    this->executor->train(imagePaths.front(), operationMode, neuralNet);
+}
 list<string> Manager::findNeuralNets(){
     list<string> *nets = new list<string>;
 
@@ -83,8 +88,4 @@ list<string> Manager::findNeuralNets(){
         //throw error on not opening the directory
     }
     return *nets;
-}
-void Manager::runTraining() {
-
-
 }

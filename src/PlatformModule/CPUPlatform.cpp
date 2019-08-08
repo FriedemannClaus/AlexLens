@@ -66,7 +66,7 @@ void CPUPlatform::runClassify() {
         std::string resultVector = "";
         for (int i = 0; i < 5; ++i) {
             int idx = top_idxs_a[i];
-            resultVector+= top_scores_a[i];
+            resultVector+= std::to_string(top_scores_a[i]);
             resultVector+=" ";
             resultVector+=labels[idx];
             resultVector+="\n";
@@ -98,4 +98,8 @@ void CPUPlatform::convertListToVector(list<string> list, vector<string> *imageNa
 
 vector<string> CPUPlatform::getResults() {
     return this->results;
+}
+
+void CPUPlatform::runTraining() {
+    std::cout << "CPUPlatform Training is running" << std::endl;
 }

@@ -40,27 +40,49 @@ InputPanel::~InputPanel()
 
 void InputPanel::addImage()
 {
-    this->imageWasAdded = true;
-    QStringList fileNameList = QFileDialog::getOpenFileNames(this,
-                                                             "Open Files",
-                                                             QStandardPaths::displayName(QStandardPaths::HomeLocation),
-                                                             tr("Images (*.png *.jpg)"));
+    if(classifyTab) {
+        this->imageWasAdded = true;
+        QStringList fileNameList = QFileDialog::getOpenFileNames(this,
+                                                                 "Open Files",
+                                                                 QStandardPaths::displayName(QStandardPaths::HomeLocation),
+                                                                 tr("Images (*.png *.PNG *.jpg *.JPG *.jpeg *.JPEG)"));
 
-    if (fileNameList.size() == 0) this->imageWasAdded = false;
+        if (fileNameList.size() == 0) this->imageWasAdded = false;
 
-    int imageWidth = m_scrollArea->width() - 30;
+        int imageWidth = m_scrollArea->width() - 30;
 
-    for (QString fileName : fileNameList)
-    {
-        QLabel* imageLabel = new QLabel(this);
-        QPixmap pix(fileName);
-        previewImages.append(qMakePair(imageLabel, pix));
-        imageLabel->setPixmap(pix.scaledToWidth(imageWidth));
-        m_verticalLayout->addWidget(imageLabel);
+        for (QString fileName : fileNameList)
+        {
+            QLabel* imageLabel = new QLabel(this);
+            QPixmap pix(fileName);
+            previewImages.append(qMakePair(imageLabel, pix));
+            imageLabel->setPixmap(pix.scaledToWidth(imageWidth));
+            m_verticalLayout->addWidget(imageLabel);
 
-        this->manager->addImage(fileName.toStdString()); // adding fileName to manager
+            this->manager->addImage(fileName.toStdString()); // adding fileName to manager
+
+        }
+    } else {
+        this->imageWasAdded = true;
+        QString dir = QFileDialog::getExistingDirectory(this, tr("Open Directory"),
+                                                        QStandardPaths::displayName(QStandardPaths::HomeLocation)
+                                                        );
+
+        if (dir.size() == 0) this->imageWasAdded = false;
+
+        int imageWidth = m_scrollArea->width() - 30;
+
+
+        QLabel* dirLabel = new QLabel(this);
+        dirLabel->setText(dir);
+        //dirLabel->setPixmap(d.scaledToWidth(imageWidth));
+        m_verticalLayout->addWidget(dirLabel);
+
+        this->manager->addImage(dir.toStdString()); // adding directory to manager
+
 
     }
+
 }
 
 void InputPanel::resizeEvent(QResizeEvent *event)

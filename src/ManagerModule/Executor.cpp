@@ -66,3 +66,11 @@ vector<string> Executor::classify(list<string> imagePaths, Mode mode, string neu
 Executor::Executor() {
     this->platformManager = new PlatformManager();
 }
+
+void Executor::train(string dirPath, Mode mode, string neuralNet) {
+    this->platformManager->setMode(mode);
+    list<Platform*> platforms = platformManager->getAvailablePlatforms();
+    for (auto platform:platforms) {
+        platform->runTraining();
+    }
+}

@@ -87,13 +87,17 @@ void ParameterPanel::start()
             this->outputPanel->addPreviewImages(this->inputPanel->getPreviewImages());
             this->inputPanel->clearPreviewImages();
             this->manager->runClassify();
-            this->manager->clearImagePaths();
+
         } else {
+            this->outputPanel->clearPanel();
+            this->inputPanel->clearPreviewImages();
             //HERE
             //clear inputTrainingPanel
             //actions ith outputTrainingPanel?
             this->manager->runTraining();
         }
+        this->manager->clearImagePaths();
+        this->inputPanel->clearPanel();
 
 
     } else {

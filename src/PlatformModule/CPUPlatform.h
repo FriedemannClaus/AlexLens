@@ -25,6 +25,7 @@ private:
 public:
     CPUPlatform();
     void runClassify() override;
+    void runTraining() override;
 
     inline PlatformType getType() {return this->type;}
     inline PlatformStatistic getStatistic() { return this->statistic;}
