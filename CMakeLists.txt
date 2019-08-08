@@ -19,7 +19,7 @@ add_executable(AlexLens src/ManagerModule/main.cpp src/GUIModule/InputPanel.cpp 
         #src/MathModule/Skalar.cpp src/MathModule/Skalar.h src/MathModule/MathException.h
         src/NeuralNetModule/Layer.h
         #src/NeuralNetModule/FCLayer.cpp src/NeuralNetModule/FCLayer.h
-        )
+        src/NeuralNetModule/ReLULayer.cpp src/NeuralNetModule/ReLULayer.h)
 
 include_directories(includes)
 
