@@ -20,6 +20,7 @@ private:
     vector<string> results;
     std::string model_path;
     std::string label_path;
+    std::string datasetPath;
 
     void runClassifyOne(string imagePath);
     void convertListToVector(list<string> list, vector<string> *imageNames);
@@ -36,6 +37,8 @@ public:
 
     inline PlatformType getType() {return this->type;}
     inline PlatformStatistic getStatistic() { return this->statistic;}
+    inline void setDatasetPath(std::string path) override {this->datasetPath = path;}
+
     void setImagePaths(list<string> imagePaths);
     vector<string> getResults();
 

@@ -25,3 +25,7 @@ void Platform::runTraining() {
 void Platform::setNeuralNet(string neuralNet) {
     std::cout << "base virtual mathods" << std::endl;
 }
+
+void Platform::setDatasetPath(string path) {
+    std::cout << "base virtual mathods" << std::endl;
+}

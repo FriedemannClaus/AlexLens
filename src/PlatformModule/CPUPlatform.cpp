@@ -11,8 +11,9 @@
 
 #include <iostream>
 #include <memory>
-#include <string>
 #include <vector>
+
+#include <string>
 
 void CPUPlatform::runClassify() {
     this->results.clear();
@@ -104,5 +105,8 @@ vector<string> CPUPlatform::getResults() {
 }
 
 void CPUPlatform::runTraining() {
-    std::cout << "CPUPlatform Training is running" << std::endl;
+    std::string command = "python3 /home/dmitrii/AlexLens/testtest.py ";
+    command += this->datasetPath;
+
+    //system("python3 /home/dmitrii/AlexLens/testtest.py /home/dmitrii/Downloads/Telegram Desktop/test/caltech_10");
 }

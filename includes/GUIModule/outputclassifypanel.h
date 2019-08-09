@@ -17,6 +17,8 @@
 #include "../GUIModule/IObserver.h"
 #include "../../src/ManagerModule/Manager.h"
 #include "Subject.h"
+#include <fstream>
+#include <unistd.h>
 
 using namespace std;
 
@@ -36,6 +38,12 @@ public:
     //inline void setSubject(Subject* subject) {this->subject = subject;subject->attachObserver(this);}
     void setResults(vector<string>& results);
     void invokeUpdate() override;
+    void addTrainingLog();
+    void addTrainingAccuracyCurve();
+    void addTrainingLossCurve();
+    inline void setClassifyTab(bool classifyTab) {this->classifyTab = classifyTab;}
+    inline bool isClassifyTab() {return classifyTab;}
+
 
 
 protected:
@@ -52,6 +60,7 @@ private:
     QVector<QPair<QLabel*, QPixmap> > previewImages;
     QVector<QLabel*> classifyResults;
     //Subject* subject = new Subject();
+    bool classifyTab = true;
     Manager* manager;
 
 };

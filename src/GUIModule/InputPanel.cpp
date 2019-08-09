@@ -102,7 +102,7 @@ void InputPanel::dragEnterEvent(QDragEnterEvent *e)
     foreach (const QUrl &url, e->mimeData()->urls()) {
         QFileInfo fileInfo(url.toLocalFile());
         QString fileExtension = fileInfo.suffix().toLower();
-        if (!(fileExtension.contains("jpg") || fileExtension.contains("png"))) {
+        if (!(fileExtension.contains("jpg") || fileExtension.contains("png") || fileExtension.contains("jpeg"))) {
             flag = false;
         }
     }

@@ -47,6 +47,8 @@ MainWindow::MainWindow(Manager* manager, Subject* subject, QWidget *parent) :
     ui->inputTrainingPanel->setClassifyTab(false);
     ui->parameterClassifyPanel->setClassifyTab(true);
     ui->parameterTrainingPanel->setClassifyTab(false);
+    ui->outputClassifyPanel->setClassifyTab(true);
+    ui->outputTrainingPanel->setClassifyTab(false);
 
     ui->outputClassifyPanel->setManager(manager);
 
@@ -62,6 +64,7 @@ MainWindow::MainWindow(Manager* manager, Subject* subject, QWidget *parent) :
 
     //ATTCAHING OBSERVER
     this->manager->getSubject()->attachObserver(ui->outputClassifyPanel);
+    this->manager->getSubject()->attachObserver(ui->outputTrainingPanel);
     this->manager->getSubject()->attachObserver(ui->parameterClassifyPanel);
     this->manager->getSubject()->attachObserver(ui->parameterTrainingPanel);
     // = ui->outputClassifyPanel;

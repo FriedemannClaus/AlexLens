@@ -18,6 +18,7 @@ class Platform {
 private:
     string model_path;
     string label_path;
+    string datasetPath;
 public:
     virtual void runClassify();
     virtual void runTraining();
@@ -26,6 +27,7 @@ public:
     virtual void setImagePaths(std::list<std::string> imagePaths);
     virtual vector<string> getResults();
     virtual void setNeuralNet(string neuralNet);
+    virtual void setDatasetPath(string path);
 };
 
 

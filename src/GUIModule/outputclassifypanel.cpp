@@ -88,11 +88,19 @@ void OutputClassifyPanel::resizeEvent(QResizeEvent *event)
 }
 
 void OutputClassifyPanel::invokeUpdate() {
-    int i = 0;
-    for (string result:this->manager->getResults()) {
-        classifyResults.at(i)->setText(QString::fromStdString(result));
-        i++;
+    if (classifyTab) {
+        int i = 0;
+        for (string result:this->manager->getResults()) {
+            classifyResults.at(i)->setText(QString::fromStdString(result));
+            i++;
+        }
+    } else {
+        usleep(18055000);
+        this->addTrainingLog();
+        this->addTrainingAccuracyCurve();
+        this->addTrainingLossCurve();
     }
+
 
 }
 
@@ -102,4 +110,72 @@ void OutputClassifyPanel::setResults(vector<string>& results) {
         for (auto a :results) this->results.push_back(a);
         //this->results = results;
 
+}
+
+void OutputClassifyPanel::addTrainingLog()
+{
+    string line;
+    ifstream file_log;
+    file_log.open("/home/dmitrii/AlexLens/resources/pse_dataset_test/pse_dataset_test_log.txt");
+    if (file_log.fail()) {
+        cerr << "Error opening a file" << endl;
+        file_log.close();
+        exit(1);
+    }
+    QFont font;
+    font.setPointSize(12);
+    while ( getline (file_log,line) )
+    {
+        QLabel *label = new QLabel(this);
+        label->setText(QString::fromStdString(line));
+        label->setFont(font);
+        m_verticalLayout->addWidget(label);
+        //usleep(rand() % 10000);
+    }
+    file_log.close();
+}
+
+void OutputClassifyPanel::addTrainingAccuracyCurve()
+{
+
+    QStringList fileNameList = {"/home/dmitrii/AlexLens/resources/pse_dataset_test/pse_dataset_test_accuracy_curve.png"};
+
+    int imageWidth = m_scrollArea->width() - 30;
+
+    for (QString fileName : fileNameList)
+    {
+        QLabel* imageLabel = new QLabel(this);
+        QPixmap pix(fileName);
+        previewImages.append(qMakePair(imageLabel, pix));
+        imageLabel->setPixmap(pix.scaledToWidth(imageWidth));
+        m_verticalLayout->addWidget(imageLabel);
+        QFont font;
+        font.setPointSize(12);
+        QLabel *label = new QLabel(this);
+        label->setText(QString::fromStdString("Accuracy curve"));
+        label->setFont(font);
+        m_verticalLayout->addWidget(label);
+    }
+}
+
+void OutputClassifyPanel::addTrainingLossCurve()
+{
+    QStringList fileNameList = { "/home/dmitrii/AlexLens/resources/pse_dataset_test/pse_dataset_test_loss_curve.png"};
+
+    int imageWidth = m_scrollArea->width() - 30;
+
+    for (QString fileName : fileNameList)
+    {
+        QLabel* imageLabel = new QLabel(this);
+        QPixmap pix(fileName);
+        previewImages.append(qMakePair(imageLabel, pix));
+        imageLabel->setPixmap(pix.scaledToWidth(imageWidth));
+        m_verticalLayout->addWidget(imageLabel);
+        QFont font;
+        font.setPointSize(12);
+        QLabel *label = new QLabel(this);
+        label->setText(QString::fromStdString("Loss curve"));
+        label->setFont(font);
+        m_verticalLayout->addWidget(label);
+    }
 }
