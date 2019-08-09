@@ -15,13 +15,6 @@
 class MaxPool2D: public Layer {
 
 private:
-    //typedef Eigen::Matrix<Scalar, Eigen::Dynamic, Eigen::Dynamic> Matrix;
-    //typedef Eigen::MatrixXi IntegerMatrix;
-    typedef Eigen::Matrix<float, Eigen::Dynamic, 1> Vector;
-    typedef Eigen::Matrix<float, Eigen::Dynamic, Eigen::Dynamic> Matrix;
-    typedef Eigen::Matrix<Matrix, Eigen::Dynamic, 1> ThreeDMatrix;
-    typedef Eigen::Matrix<Matrix, Eigen::Dynamic, Eigen::Dynamic> FourDMatrix;
-
     const int inputChannelNumRows;
     const int inputChannelNumCols;
     const int inputNumChannels;
