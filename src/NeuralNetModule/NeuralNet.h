@@ -12,9 +12,12 @@
 #include "NeuralNetModule/INeuralNet.h"
 
 
-class NeuralNet: public INeuralNet, public INeuralNet {
+class NeuralNet: public INeuralNet {
 private: 
-	List<Layer> layers;
+//	List<Layer> layers;
+
+public:
+    void init();
 };
 
 #endif //_NEURALNET_H

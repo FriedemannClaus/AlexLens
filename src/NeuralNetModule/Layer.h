@@ -8,15 +8,20 @@
 #include <cstdlib>
 #include <Eigen/Core>
 #include <vector>
-using namespace Eigen;
 /// Abstract class Layer. For all Layers extend this class
 class Layer {
 protected:
-    ///Definition of Types for convenient using.
+    ///Definition of Types for convenient usage.
     ///To use Layer::Matrix or Layer::Vector
+    typedef Eigen::Matrix<float, Eigen::Dynamic, 1> Vector;
+    typedef Eigen::Matrix<float, Eigen::Dynamic, Eigen::Dynamic> Matrix;
+    typedef Eigen::Matrix<Matrix, Eigen::Dynamic, 1> ThreeDMatrix;
+    typedef Eigen::Matrix<Matrix, Eigen::Dynamic, Eigen::Dynamic> FourDMatrix;
+
+    //for compilation, but will be removed soon
     typedef double Scalar;
-    typedef Matrix<Scalar, Dynamic, Dynamic> Matrix_t;
-    typedef Matrix<Scalar, Dynamic, 1> Vector_t;
+    typedef Eigen::Matrix<Scalar, Eigen::Dynamic, Eigen::Dynamic> Matrix_t;
+    typedef Eigen::Matrix<Scalar, Eigen::Dynamic, 1> Vector_t;
 
     ///Input and Outut sizes of Layer
     ///they will be set in constructor
@@ -34,11 +39,6 @@ public:
     /// \param x output of PREVIOUS Layet
     /// \return result of forward propagation r = W*x+b
     virtual const Matrix_t& forward(const Matrix_t& x);
-
-    /// setting Weights of corresponding layer
-    /// \param W Weight Matrix
-    /// \param b Bias
-    virtual void setWeights(Matrix_t& W, Vector_t& b);
 
 
 };

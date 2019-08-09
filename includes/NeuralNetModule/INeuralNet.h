@@ -14,11 +14,11 @@ public:
 /**
  * @param weights
  */
-void setWeights(List<TensorObject> weights);
+//void setWeights(List<TensorObject> weights);
 	
-List<TensorObject> getWeights();
+//List<TensorObject> getWeights();
 	
-List<Layer> getLayers();
+//List<Layer> getLayers();
 };
 
 #endif //_INEURALNET_H
