@@ -8,15 +8,13 @@
 #define _MAXPOOL2D_H
 
 #include "Layer.h"
-#include <vector>
-#include <Eigen/Core>
 
 
 class MaxPool2D: public Layer {
 
 private:
-    const int inputChannelNumRows;
-    const int inputChannelNumCols;
+    const int inputNumRows;
+    const int inputNumCols;
     const int inputNumChannels;
     const int poolNumRows;
     const int poolNumCols;
@@ -38,7 +36,8 @@ private:
 public:
     MaxPool2D(const int inputWidth, const int inputHeight, const int inputChannels, const int poolWidth, const int poolHeight, const int poolStride):
     //Initialisierungsliste
-            Layer(inputWidth * inputHeight * inputChannels, (inputWidth / poolWidth) * (inputHeight / poolHeight) * inputChannels),
+
+            Layer(inputWidth * inputHeight * inputChannels, (((inputWidth - poolWidth) / poolStride) + 1) * (((inputHeight - poolHeight) / poolStride) + 1) * inputChannels),
             inputNumRows(inputHeight),
             inputNumCols(inputWidth),
             inputNumChannels(inputChannels),
@@ -50,7 +49,8 @@ public:
     {}
 
      ThreeDMatrix forward(const ThreeDMatrix &inputMatrix) {
-        int outputSize = ((inputChannelNumCols - poolWidth) / poolStride) + 1;
+        outputMatrix.resize(outputNumRows, outputNumCols);
+        int outputSize = ((inputChannelNumCols - poolWidth) / poolStride) + 1; //size of one side!
         int numPoolElements = poolWidht * poolWidth;
         for (int c = 0; c < inputNumChannels; c++) { // Iterieren ueber Channel
             for (int i = 0; i < outputSize; i++) { // Iterieren ueber Zeilen
