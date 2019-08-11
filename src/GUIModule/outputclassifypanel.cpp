@@ -95,7 +95,7 @@ void OutputClassifyPanel::invokeUpdate() {
             i++;
         }
     } else {
-        usleep(18055000);
+        //usleep(18055000);
         this->addTrainingLog();
         this->addTrainingAccuracyCurve();
         this->addTrainingLossCurve();
@@ -116,7 +116,13 @@ void OutputClassifyPanel::addTrainingLog()
 {
     string line;
     ifstream file_log;
-    file_log.open("/home/dmitrii/AlexLens/resources/pse_dataset_test/pse_dataset_test_log.txt");
+    string file_log_name = "";
+    file_log_name += this->PROJECT_DIR;
+    file_log_name += this->manager->getNeuralNet();
+    file_log_name+= "/";
+    file_log_name += this->manager->getNeuralNet();
+    file_log_name+= "_log.txt";
+    file_log.open(file_log_name);
     if (file_log.fail()) {
         cerr << "Error opening a file" << endl;
         file_log.close();
@@ -138,7 +144,10 @@ void OutputClassifyPanel::addTrainingLog()
 void OutputClassifyPanel::addTrainingAccuracyCurve()
 {
 
-    QStringList fileNameList = {"/home/dmitrii/AlexLens/resources/pse_dataset_test/pse_dataset_test_accuracy_curve.png"};
+    string fileNameListPath = this->PROJECT_DIR + this->manager->getNeuralNet() + "/" + this->manager->getNeuralNet()+ "_accuracy_curve.png";
+
+    QString QfileNameListPath = QString::fromStdString(fileNameListPath);
+    QStringList fileNameList = {QfileNameListPath};
 
     int imageWidth = m_scrollArea->width() - 30;
 
@@ -160,7 +169,10 @@ void OutputClassifyPanel::addTrainingAccuracyCurve()
 
 void OutputClassifyPanel::addTrainingLossCurve()
 {
-    QStringList fileNameList = { "/home/dmitrii/AlexLens/resources/pse_dataset_test/pse_dataset_test_loss_curve.png"};
+    string fileNameListPath = this->PROJECT_DIR + this->manager->getNeuralNet() + "/" + this->manager->getNeuralNet()+ "_loss_curve.png";
+    QString QfileNameListPath = QString::fromStdString(fileNameListPath);
+    QStringList fileNameList = {QfileNameListPath};
+    //QStringList fileNameList = { "/home/dmitrii/AlexLens/resources/pse_dataset_test/pse_dataset_test_loss_curve.png"};
 
     int imageWidth = m_scrollArea->width() - 30;
 

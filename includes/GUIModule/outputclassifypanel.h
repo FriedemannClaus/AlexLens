@@ -50,6 +50,7 @@ protected:
     virtual void resizeEvent(QResizeEvent *event) override;
 
 private:
+    const string PROJECT_DIR = "/home/dmitrii/AlexLens/resources/";
     vector<string> results;
     QGridLayout* m_gridLayout;
     QGridLayout* m_gridLayout_2;

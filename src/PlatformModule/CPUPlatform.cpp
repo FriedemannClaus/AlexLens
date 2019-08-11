@@ -14,7 +14,7 @@
 #include <vector>
 
 #include <string>
-
+#include <bits/stdc++.h>
 void CPUPlatform::runClassify() {
     this->results.clear();
 
@@ -105,8 +105,9 @@ vector<string> CPUPlatform::getResults() {
 }
 
 void CPUPlatform::runTraining() {
-    std::string command = "python3 /home/dmitrii/AlexLens/testtest.py ";
-    command += this->datasetPath;
+    std::string command_str = "/home/dmitrii/anaconda3/bin/python /home/dmitrii/AlexLens/TransferLearning.py ";
+    command_str += this->datasetPath;
+    const char *command = command_str.c_str();
 
-    //system("python3 /home/dmitrii/AlexLens/testtest.py /home/dmitrii/Downloads/Telegram Desktop/test/caltech_10");
+    system(command);
 }

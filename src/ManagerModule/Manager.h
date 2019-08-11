@@ -37,6 +37,8 @@ public:
 
     inline void setNeuralNet(string neuralNet) {this->neuralNet = neuralNet;}
 
+    inline string getNeuralNet() {return this->neuralNet;}
+
     inline list<string> getDefaultModesClassify() {return defaultModesClassify;}
 
     inline list<string> getDefaultModesTraining() {return defaultModesTraining;}

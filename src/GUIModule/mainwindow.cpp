@@ -40,8 +40,10 @@ MainWindow::MainWindow(Manager* manager, Subject* subject, QWidget *parent) :
 
     ui->parameterClassifyPanel->setManager(manager);
     ui->parameterTrainingPanel->setManager(manager);
-
     ui->inputClassifyPanel->setManager(manager);
+    ui->outputClassifyPanel->setManager(manager);
+    ui->outputTrainingPanel->setManager(manager);
+
     ui->inputClassifyPanel->setClassifyTab(true);
     ui->inputTrainingPanel->setManager(manager);
     ui->inputTrainingPanel->setClassifyTab(false);
