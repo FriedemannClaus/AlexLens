@@ -100,8 +100,6 @@ void OutputClassifyPanel::invokeUpdate() {
         this->addTrainingAccuracyCurve();
         this->addTrainingLossCurve();
     }
-
-
 }
 
 void OutputClassifyPanel::setResults(vector<string>& results) {
@@ -128,17 +126,22 @@ void OutputClassifyPanel::addTrainingLog()
         file_log.close();
         exit(1);
     }
-    QFont font;
-    font.setPointSize(12);
     while ( getline (file_log,line) )
     {
-        QLabel *label = new QLabel(this);
-        label->setText(QString::fromStdString(line));
-        label->setFont(font);
-        m_verticalLayout->addWidget(label);
-        //usleep(rand() % 10000);
+        this->addLine(line);
     }
     file_log.close();
+}
+
+void OutputClassifyPanel::addLine(string line)
+{
+    QFont font;
+    font.setPointSize(12);
+    QLabel *label = new QLabel(this);
+    label->setText(QString::fromStdString(line));
+    label->setFont(font);
+    m_verticalLayout->addWidget(label);
+    //usleep(rand() % 100000);
 }
 
 void OutputClassifyPanel::addTrainingAccuracyCurve()

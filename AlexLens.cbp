@@ -1,0 +1,348 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CodeBlocks_project_file>
+	<FileVersion major="1" minor="6"/>
+	<Project>
+		<Option title="AlexLens"/>
+		<Option makefile_is_custom="1"/>
+		<Option compiler="gcc"/>
+		<Option virtualFolders="CMake Files\;CMake Files\..\;CMake Files\..\..\;CMake Files\..\..\..\;CMake Files\..\..\..\Qt\;CMake Files\..\..\..\Qt\5.13.0\;CMake Files\..\..\..\Qt\5.13.0\clang_64\;CMake Files\..\..\..\Qt\5.13.0\clang_64\lib\;CMake Files\..\..\..\Qt\5.13.0\clang_64\lib\cmake\;CMake Files\..\..\..\Qt\5.13.0\clang_64\lib\cmake\Qt5Core\;CMake Files\..\..\..\Qt\5.13.0\clang_64\lib\cmake\Qt5Gui\;CMake Files\..\..\..\Qt\5.13.0\clang_64\lib\cmake\Qt5Widgets\;CMake Files\..\..\..\..\;CMake Files\..\..\..\..\..\;CMake Files\..\..\..\..\..\usr\;CMake Files\..\..\..\..\..\usr\local\;CMake Files\..\..\..\..\..\usr\local\lib\;CMake Files\..\..\..\..\..\usr\local\lib\cmake\;CMake Files\..\..\..\..\..\usr\local\lib\cmake\opencv4\;CMake Files\Icon\;"/>
+		<Build>
+			<Target title="all">
+				<Option working_dir="/Users/eismont/Desktop/PSE/AlexLens"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j12 -f &quot;/Users/eismont/Desktop/PSE/AlexLens/Makefile&quot;  VERBOSE=1 all"/>
+					<CompileFile command="/usr/bin/make -j12 -f &quot;/Users/eismont/Desktop/PSE/AlexLens/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j12 -f &quot;/Users/eismont/Desktop/PSE/AlexLens/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j12 -f &quot;/Users/eismont/Desktop/PSE/AlexLens/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="rebuild_cache">
+				<Option working_dir="/Users/eismont/Desktop/PSE/AlexLens"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j12 -f &quot;/Users/eismont/Desktop/PSE/AlexLens/Makefile&quot;  VERBOSE=1 rebuild_cache"/>
+					<CompileFile command="/usr/bin/make -j12 -f &quot;/Users/eismont/Desktop/PSE/AlexLens/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j12 -f &quot;/Users/eismont/Desktop/PSE/AlexLens/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j12 -f &quot;/Users/eismont/Desktop/PSE/AlexLens/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="edit_cache">
+				<Option working_dir="/Users/eismont/Desktop/PSE/AlexLens"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j12 -f &quot;/Users/eismont/Desktop/PSE/AlexLens/Makefile&quot;  VERBOSE=1 edit_cache"/>
+					<CompileFile command="/usr/bin/make -j12 -f &quot;/Users/eismont/Desktop/PSE/AlexLens/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j12 -f &quot;/Users/eismont/Desktop/PSE/AlexLens/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j12 -f &quot;/Users/eismont/Desktop/PSE/AlexLens/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="AlexLens">
+				<Option output="/Users/eismont/Desktop/PSE/AlexLens/AlexLens" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/Users/eismont/Desktop/PSE/AlexLens"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add option="-DQT_CORE_LIB"/>
+					<Add option="-DQT_WIDGETS_LIB"/>
+					<Add option="-DQT_GUI_LIB"/>
+					<Add directory="/Users/eismont/Desktop/PSE/AlexLens/AlexLens_autogen/include"/>
+					<Add directory="/Users/eismont/Desktop/PSE/AlexLens/includes"/>
+					<Add directory="/Users/eismont/Desktop/PSE/AlexLens/src"/>
+					<Add directory="/usr/local/Frameworks/Python.framework/Versions/3.7/include/python3.7m"/>
+					<Add directory="/usr/local/include/opencv4"/>
+					<Add directory="/Users/eismont/Qt/5.13.0/clang_64/lib/QtCore.framework"/>
+					<Add directory="/Users/eismont/Qt/5.13.0/clang_64/lib/QtCore.framework/Headers"/>
+					<Add directory="/Users/eismont/Qt/5.13.0/clang_64/./mkspecs/macx-clang"/>
+					<Add directory="/Users/eismont/Qt/5.13.0/clang_64/lib/QtWidgets.framework"/>
+					<Add directory="/Users/eismont/Qt/5.13.0/clang_64/lib/QtWidgets.framework/Headers"/>
+					<Add directory="/Users/eismont/Qt/5.13.0/clang_64/lib/QtGui.framework"/>
+					<Add directory="/Users/eismont/Qt/5.13.0/clang_64/lib/QtGui.framework/Headers"/>
+					<Add directory="/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.14.sdk/System/Library/Frameworks/OpenGL.framework/Headers"/>
+					<Add directory="/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include/c++/v1"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/10.0.1/include"/>
+					<Add directory="/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include"/>
+					<Add directory="/System/Library/Frameworks"/>
+					<Add directory="/Library/Frameworks"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j12 -f &quot;/Users/eismont/Desktop/PSE/AlexLens/Makefile&quot;  VERBOSE=1 AlexLens"/>
+					<CompileFile command="/usr/bin/make -j12 -f &quot;/Users/eismont/Desktop/PSE/AlexLens/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j12 -f &quot;/Users/eismont/Desktop/PSE/AlexLens/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j12 -f &quot;/Users/eismont/Desktop/PSE/AlexLens/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="AlexLens/fast">
+				<Option output="/Users/eismont/Desktop/PSE/AlexLens/AlexLens" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/Users/eismont/Desktop/PSE/AlexLens"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add option="-DQT_CORE_LIB"/>
+					<Add option="-DQT_WIDGETS_LIB"/>
+					<Add option="-DQT_GUI_LIB"/>
+					<Add directory="/Users/eismont/Desktop/PSE/AlexLens/AlexLens_autogen/include"/>
+					<Add directory="/Users/eismont/Desktop/PSE/AlexLens/includes"/>
+					<Add directory="/Users/eismont/Desktop/PSE/AlexLens/src"/>
+					<Add directory="/usr/local/Frameworks/Python.framework/Versions/3.7/include/python3.7m"/>
+					<Add directory="/usr/local/include/opencv4"/>
+					<Add directory="/Users/eismont/Qt/5.13.0/clang_64/lib/QtCore.framework"/>
+					<Add directory="/Users/eismont/Qt/5.13.0/clang_64/lib/QtCore.framework/Headers"/>
+					<Add directory="/Users/eismont/Qt/5.13.0/clang_64/./mkspecs/macx-clang"/>
+					<Add directory="/Users/eismont/Qt/5.13.0/clang_64/lib/QtWidgets.framework"/>
+					<Add directory="/Users/eismont/Qt/5.13.0/clang_64/lib/QtWidgets.framework/Headers"/>
+					<Add directory="/Users/eismont/Qt/5.13.0/clang_64/lib/QtGui.framework"/>
+					<Add directory="/Users/eismont/Qt/5.13.0/clang_64/lib/QtGui.framework/Headers"/>
+					<Add directory="/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.14.sdk/System/Library/Frameworks/OpenGL.framework/Headers"/>
+					<Add directory="/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include/c++/v1"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/10.0.1/include"/>
+					<Add directory="/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include"/>
+					<Add directory="/System/Library/Frameworks"/>
+					<Add directory="/Library/Frameworks"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j12 -f &quot;/Users/eismont/Desktop/PSE/AlexLens/Makefile&quot;  VERBOSE=1 AlexLens/fast"/>
+					<CompileFile command="/usr/bin/make -j12 -f &quot;/Users/eismont/Desktop/PSE/AlexLens/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j12 -f &quot;/Users/eismont/Desktop/PSE/AlexLens/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j12 -f &quot;/Users/eismont/Desktop/PSE/AlexLens/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="AlexLens_autogen">
+				<Option working_dir="/Users/eismont/Desktop/PSE/AlexLens"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j12 -f &quot;/Users/eismont/Desktop/PSE/AlexLens/Makefile&quot;  VERBOSE=1 AlexLens_autogen"/>
+					<CompileFile command="/usr/bin/make -j12 -f &quot;/Users/eismont/Desktop/PSE/AlexLens/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j12 -f &quot;/Users/eismont/Desktop/PSE/AlexLens/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j12 -f &quot;/Users/eismont/Desktop/PSE/AlexLens/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+		</Build>
+		<Unit filename="/Users/eismont/Desktop/PSE/AlexLens/AlexLens_autogen/TPM7ZJYUKX/qrc_icon.cpp">
+			<Option target="AlexLens"/>
+		</Unit>
+		<Unit filename="/Users/eismont/Desktop/PSE/AlexLens/AlexLens_autogen/TPM7ZJYUKX/qrc_icon.cpp.rule">
+			<Option target="AlexLens"/>
+		</Unit>
+		<Unit filename="/Users/eismont/Desktop/PSE/AlexLens/AlexLens_autogen/mocs_compilation.cpp">
+			<Option target="AlexLens"/>
+		</Unit>
+		<Unit filename="/Users/eismont/Desktop/PSE/AlexLens/Icon/icon.qrc">
+			<Option target="AlexLens"/>
+		</Unit>
+		<Unit filename="/Users/eismont/Desktop/PSE/AlexLens/includes/GUIModule/IObserver.h">
+			<Option target="AlexLens"/>
+		</Unit>
+		<Unit filename="/Users/eismont/Desktop/PSE/AlexLens/includes/GUIModule/Subject.h">
+			<Option target="AlexLens"/>
+		</Unit>
+		<Unit filename="/Users/eismont/Desktop/PSE/AlexLens/includes/GUIModule/helpform.h">
+			<Option target="AlexLens"/>
+		</Unit>
+		<Unit filename="/Users/eismont/Desktop/PSE/AlexLens/includes/GUIModule/inputpanel.h">
+			<Option target="AlexLens"/>
+		</Unit>
+		<Unit filename="/Users/eismont/Desktop/PSE/AlexLens/includes/GUIModule/mainwindow.h">
+			<Option target="AlexLens"/>
+		</Unit>
+		<Unit filename="/Users/eismont/Desktop/PSE/AlexLens/includes/GUIModule/outputclassifypanel.h">
+			<Option target="AlexLens"/>
+		</Unit>
+		<Unit filename="/Users/eismont/Desktop/PSE/AlexLens/includes/GUIModule/parameterpanel.h">
+			<Option target="AlexLens"/>
+		</Unit>
+		<Unit filename="/Users/eismont/Desktop/PSE/AlexLens/includes/GUIModule/statisticform.h">
+			<Option target="AlexLens"/>
+		</Unit>
+		<Unit filename="/Users/eismont/Desktop/PSE/AlexLens/src/GUIModule/InputPanel.cpp">
+			<Option target="AlexLens"/>
+		</Unit>
+		<Unit filename="/Users/eismont/Desktop/PSE/AlexLens/src/GUIModule/helpform.cpp">
+			<Option target="AlexLens"/>
+		</Unit>
+		<Unit filename="/Users/eismont/Desktop/PSE/AlexLens/src/GUIModule/mainwindow.cpp">
+			<Option target="AlexLens"/>
+		</Unit>
+		<Unit filename="/Users/eismont/Desktop/PSE/AlexLens/src/GUIModule/outputclassifypanel.cpp">
+			<Option target="AlexLens"/>
+		</Unit>
+		<Unit filename="/Users/eismont/Desktop/PSE/AlexLens/src/GUIModule/parameterpanel.cpp">
+			<Option target="AlexLens"/>
+		</Unit>
+		<Unit filename="/Users/eismont/Desktop/PSE/AlexLens/src/GUIModule/statisticform.cpp">
+			<Option target="AlexLens"/>
+		</Unit>
+		<Unit filename="/Users/eismont/Desktop/PSE/AlexLens/src/ManagerModule/Executor.cpp">
+			<Option target="AlexLens"/>
+		</Unit>
+		<Unit filename="/Users/eismont/Desktop/PSE/AlexLens/src/ManagerModule/Executor.h">
+			<Option target="AlexLens"/>
+		</Unit>
+		<Unit filename="/Users/eismont/Desktop/PSE/AlexLens/src/ManagerModule/Manager.cpp">
+			<Option target="AlexLens"/>
+		</Unit>
+		<Unit filename="/Users/eismont/Desktop/PSE/AlexLens/src/ManagerModule/Manager.h">
+			<Option target="AlexLens"/>
+		</Unit>
+		<Unit filename="/Users/eismont/Desktop/PSE/AlexLens/src/ManagerModule/main.cpp">
+			<Option target="AlexLens"/>
+		</Unit>
+		<Unit filename="/Users/eismont/Desktop/PSE/AlexLens/src/NeuralNetModule/INeuralNet.h">
+			<Option target="AlexLens"/>
+		</Unit>
+		<Unit filename="/Users/eismont/Desktop/PSE/AlexLens/src/NeuralNetModule/NeuralNet.cpp">
+			<Option target="AlexLens"/>
+		</Unit>
+		<Unit filename="/Users/eismont/Desktop/PSE/AlexLens/src/NeuralNetModule/NeuralNet.h">
+			<Option target="AlexLens"/>
+		</Unit>
+		<Unit filename="/Users/eismont/Desktop/PSE/AlexLens/src/PlatformModule/ASICPlatform.cpp">
+			<Option target="AlexLens"/>
+		</Unit>
+		<Unit filename="/Users/eismont/Desktop/PSE/AlexLens/src/PlatformModule/ASICPlatform.h">
+			<Option target="AlexLens"/>
+		</Unit>
+		<Unit filename="/Users/eismont/Desktop/PSE/AlexLens/src/PlatformModule/CPUPlatform.cpp">
+			<Option target="AlexLens"/>
+		</Unit>
+		<Unit filename="/Users/eismont/Desktop/PSE/AlexLens/src/PlatformModule/CPUPlatform.h">
+			<Option target="AlexLens"/>
+		</Unit>
+		<Unit filename="/Users/eismont/Desktop/PSE/AlexLens/src/PlatformModule/Mode.h">
+			<Option target="AlexLens"/>
+		</Unit>
+		<Unit filename="/Users/eismont/Desktop/PSE/AlexLens/src/PlatformModule/ModeUtil.cpp">
+			<Option target="AlexLens"/>
+		</Unit>
+		<Unit filename="/Users/eismont/Desktop/PSE/AlexLens/src/PlatformModule/ModeUtil.h">
+			<Option target="AlexLens"/>
+		</Unit>
+		<Unit filename="/Users/eismont/Desktop/PSE/AlexLens/src/PlatformModule/Platform.cpp">
+			<Option target="AlexLens"/>
+		</Unit>
+		<Unit filename="/Users/eismont/Desktop/PSE/AlexLens/src/PlatformModule/Platform.h">
+			<Option target="AlexLens"/>
+		</Unit>
+		<Unit filename="/Users/eismont/Desktop/PSE/AlexLens/src/PlatformModule/PlatformManager.cpp">
+			<Option target="AlexLens"/>
+		</Unit>
+		<Unit filename="/Users/eismont/Desktop/PSE/AlexLens/src/PlatformModule/PlatformManager.h">
+			<Option target="AlexLens"/>
+		</Unit>
+		<Unit filename="/Users/eismont/Desktop/PSE/AlexLens/src/PlatformModule/PlatformStatistic.cpp">
+			<Option target="AlexLens"/>
+		</Unit>
+		<Unit filename="/Users/eismont/Desktop/PSE/AlexLens/src/PlatformModule/PlatformStatistic.h">
+			<Option target="AlexLens"/>
+		</Unit>
+		<Unit filename="/Users/eismont/Desktop/PSE/AlexLens/src/PlatformModule/PlatformType.h">
+			<Option target="AlexLens"/>
+		</Unit>
+		<Unit filename="/Users/eismont/Desktop/PSE/AlexLens/CMakeLists.txt">
+			<Option virtualFolder="CMake Files\"/>
+		</Unit>
+		<Unit filename="/Users/eismont/Desktop/PSE/AlexLens/../../../Qt/5.13.0/clang_64/lib/cmake/Qt5Core/Qt5CoreConfig.cmake">
+			<Option virtualFolder="CMake Files\..\..\..\Qt\5.13.0\clang_64\lib\cmake\Qt5Core\"/>
+		</Unit>
+		<Unit filename="/Users/eismont/Desktop/PSE/AlexLens/../../../Qt/5.13.0/clang_64/lib/cmake/Qt5Core/Qt5CoreConfigExtras.cmake">
+			<Option virtualFolder="CMake Files\..\..\..\Qt\5.13.0\clang_64\lib\cmake\Qt5Core\"/>
+		</Unit>
+		<Unit filename="/Users/eismont/Desktop/PSE/AlexLens/../../../Qt/5.13.0/clang_64/lib/cmake/Qt5Core/Qt5CoreConfigExtrasMkspecDir.cmake">
+			<Option virtualFolder="CMake Files\..\..\..\Qt\5.13.0\clang_64\lib\cmake\Qt5Core\"/>
+		</Unit>
+		<Unit filename="/Users/eismont/Desktop/PSE/AlexLens/../../../Qt/5.13.0/clang_64/lib/cmake/Qt5Core/Qt5CoreConfigVersion.cmake">
+			<Option virtualFolder="CMake Files\..\..\..\Qt\5.13.0\clang_64\lib\cmake\Qt5Core\"/>
+		</Unit>
+		<Unit filename="/Users/eismont/Desktop/PSE/AlexLens/../../../Qt/5.13.0/clang_64/lib/cmake/Qt5Core/Qt5CoreMacros.cmake">
+			<Option virtualFolder="CMake Files\..\..\..\Qt\5.13.0\clang_64\lib\cmake\Qt5Core\"/>
+		</Unit>
+		<Unit filename="/Users/eismont/Desktop/PSE/AlexLens/../../../Qt/5.13.0/clang_64/lib/cmake/Qt5Gui/Qt5GuiConfig.cmake">
+			<Option virtualFolder="CMake Files\..\..\..\Qt\5.13.0\clang_64\lib\cmake\Qt5Gui\"/>
+		</Unit>
+		<Unit filename="/Users/eismont/Desktop/PSE/AlexLens/../../../Qt/5.13.0/clang_64/lib/cmake/Qt5Gui/Qt5GuiConfigExtras.cmake">
+			<Option virtualFolder="CMake Files\..\..\..\Qt\5.13.0\clang_64\lib\cmake\Qt5Gui\"/>
+		</Unit>
+		<Unit filename="/Users/eismont/Desktop/PSE/AlexLens/../../../Qt/5.13.0/clang_64/lib/cmake/Qt5Gui/Qt5GuiConfigVersion.cmake">
+			<Option virtualFolder="CMake Files\..\..\..\Qt\5.13.0\clang_64\lib\cmake\Qt5Gui\"/>
+		</Unit>
+		<Unit filename="/Users/eismont/Desktop/PSE/AlexLens/../../../Qt/5.13.0/clang_64/lib/cmake/Qt5Gui/Qt5Gui_QCocoaIntegrationPlugin.cmake">
+			<Option virtualFolder="CMake Files\..\..\..\Qt\5.13.0\clang_64\lib\cmake\Qt5Gui\"/>
+		</Unit>
+		<Unit filename="/Users/eismont/Desktop/PSE/AlexLens/../../../Qt/5.13.0/clang_64/lib/cmake/Qt5Gui/Qt5Gui_QGifPlugin.cmake">
+			<Option virtualFolder="CMake Files\..\..\..\Qt\5.13.0\clang_64\lib\cmake\Qt5Gui\"/>
+		</Unit>
+		<Unit filename="/Users/eismont/Desktop/PSE/AlexLens/../../../Qt/5.13.0/clang_64/lib/cmake/Qt5Gui/Qt5Gui_QICNSPlugin.cmake">
+			<Option virtualFolder="CMake Files\..\..\..\Qt\5.13.0\clang_64\lib\cmake\Qt5Gui\"/>
+		</Unit>
+		<Unit filename="/Users/eismont/Desktop/PSE/AlexLens/../../../Qt/5.13.0/clang_64/lib/cmake/Qt5Gui/Qt5Gui_QICOPlugin.cmake">
+			<Option virtualFolder="CMake Files\..\..\..\Qt\5.13.0\clang_64\lib\cmake\Qt5Gui\"/>
+		</Unit>
+		<Unit filename="/Users/eismont/Desktop/PSE/AlexLens/../../../Qt/5.13.0/clang_64/lib/cmake/Qt5Gui/Qt5Gui_QJpegPlugin.cmake">
+			<Option virtualFolder="CMake Files\..\..\..\Qt\5.13.0\clang_64\lib\cmake\Qt5Gui\"/>
+		</Unit>
+		<Unit filename="/Users/eismont/Desktop/PSE/AlexLens/../../../Qt/5.13.0/clang_64/lib/cmake/Qt5Gui/Qt5Gui_QMacHeifPlugin.cmake">
+			<Option virtualFolder="CMake Files\..\..\..\Qt\5.13.0\clang_64\lib\cmake\Qt5Gui\"/>
+		</Unit>
+		<Unit filename="/Users/eismont/Desktop/PSE/AlexLens/../../../Qt/5.13.0/clang_64/lib/cmake/Qt5Gui/Qt5Gui_QMacJp2Plugin.cmake">
+			<Option virtualFolder="CMake Files\..\..\..\Qt\5.13.0\clang_64\lib\cmake\Qt5Gui\"/>
+		</Unit>
+		<Unit filename="/Users/eismont/Desktop/PSE/AlexLens/../../../Qt/5.13.0/clang_64/lib/cmake/Qt5Gui/Qt5Gui_QMinimalIntegrationPlugin.cmake">
+			<Option virtualFolder="CMake Files\..\..\..\Qt\5.13.0\clang_64\lib\cmake\Qt5Gui\"/>
+		</Unit>
+		<Unit filename="/Users/eismont/Desktop/PSE/AlexLens/../../../Qt/5.13.0/clang_64/lib/cmake/Qt5Gui/Qt5Gui_QOffscreenIntegrationPlugin.cmake">
+			<Option virtualFolder="CMake Files\..\..\..\Qt\5.13.0\clang_64\lib\cmake\Qt5Gui\"/>
+		</Unit>
+		<Unit filename="/Users/eismont/Desktop/PSE/AlexLens/../../../Qt/5.13.0/clang_64/lib/cmake/Qt5Gui/Qt5Gui_QTgaPlugin.cmake">
+			<Option virtualFolder="CMake Files\..\..\..\Qt\5.13.0\clang_64\lib\cmake\Qt5Gui\"/>
+		</Unit>
+		<Unit filename="/Users/eismont/Desktop/PSE/AlexLens/../../../Qt/5.13.0/clang_64/lib/cmake/Qt5Gui/Qt5Gui_QTiffPlugin.cmake">
+			<Option virtualFolder="CMake Files\..\..\..\Qt\5.13.0\clang_64\lib\cmake\Qt5Gui\"/>
+		</Unit>
+		<Unit filename="/Users/eismont/Desktop/PSE/AlexLens/../../../Qt/5.13.0/clang_64/lib/cmake/Qt5Gui/Qt5Gui_QTuioTouchPlugin.cmake">
+			<Option virtualFolder="CMake Files\..\..\..\Qt\5.13.0\clang_64\lib\cmake\Qt5Gui\"/>
+		</Unit>
+		<Unit filename="/Users/eismont/Desktop/PSE/AlexLens/../../../Qt/5.13.0/clang_64/lib/cmake/Qt5Gui/Qt5Gui_QWbmpPlugin.cmake">
+			<Option virtualFolder="CMake Files\..\..\..\Qt\5.13.0\clang_64\lib\cmake\Qt5Gui\"/>
+		</Unit>
+		<Unit filename="/Users/eismont/Desktop/PSE/AlexLens/../../../Qt/5.13.0/clang_64/lib/cmake/Qt5Gui/Qt5Gui_QWebpPlugin.cmake">
+			<Option virtualFolder="CMake Files\..\..\..\Qt\5.13.0\clang_64\lib\cmake\Qt5Gui\"/>
+		</Unit>
+		<Unit filename="/Users/eismont/Desktop/PSE/AlexLens/../../../Qt/5.13.0/clang_64/lib/cmake/Qt5Gui/Qt5Gui_QXdgDesktopPortalThemePlugin.cmake">
+			<Option virtualFolder="CMake Files\..\..\..\Qt\5.13.0\clang_64\lib\cmake\Qt5Gui\"/>
+		</Unit>
+		<Unit filename="/Users/eismont/Desktop/PSE/AlexLens/../../../Qt/5.13.0/clang_64/lib/cmake/Qt5Widgets/Qt5WidgetsConfig.cmake">
+			<Option virtualFolder="CMake Files\..\..\..\Qt\5.13.0\clang_64\lib\cmake\Qt5Widgets\"/>
+		</Unit>
+		<Unit filename="/Users/eismont/Desktop/PSE/AlexLens/../../../Qt/5.13.0/clang_64/lib/cmake/Qt5Widgets/Qt5WidgetsConfigExtras.cmake">
+			<Option virtualFolder="CMake Files\..\..\..\Qt\5.13.0\clang_64\lib\cmake\Qt5Widgets\"/>
+		</Unit>
+		<Unit filename="/Users/eismont/Desktop/PSE/AlexLens/../../../Qt/5.13.0/clang_64/lib/cmake/Qt5Widgets/Qt5WidgetsConfigVersion.cmake">
+			<Option virtualFolder="CMake Files\..\..\..\Qt\5.13.0\clang_64\lib\cmake\Qt5Widgets\"/>
+		</Unit>
+		<Unit filename="/Users/eismont/Desktop/PSE/AlexLens/../../../Qt/5.13.0/clang_64/lib/cmake/Qt5Widgets/Qt5WidgetsMacros.cmake">
+			<Option virtualFolder="CMake Files\..\..\..\Qt\5.13.0\clang_64\lib\cmake\Qt5Widgets\"/>
+		</Unit>
+		<Unit filename="/Users/eismont/Desktop/PSE/AlexLens/../../../Qt/5.13.0/clang_64/lib/cmake/Qt5Widgets/Qt5Widgets_QMacStylePlugin.cmake">
+			<Option virtualFolder="CMake Files\..\..\..\Qt\5.13.0\clang_64\lib\cmake\Qt5Widgets\"/>
+		</Unit>
+		<Unit filename="/Users/eismont/Desktop/PSE/AlexLens/../../../../../usr/local/lib/cmake/opencv4/OpenCVConfig-version.cmake">
+			<Option virtualFolder="CMake Files\..\..\..\..\..\usr\local\lib\cmake\opencv4\"/>
+		</Unit>
+		<Unit filename="/Users/eismont/Desktop/PSE/AlexLens/../../../../../usr/local/lib/cmake/opencv4/OpenCVConfig.cmake">
+			<Option virtualFolder="CMake Files\..\..\..\..\..\usr\local\lib\cmake\opencv4\"/>
+		</Unit>
+		<Unit filename="/Users/eismont/Desktop/PSE/AlexLens/../../../../../usr/local/lib/cmake/opencv4/OpenCVModules-release.cmake">
+			<Option virtualFolder="CMake Files\..\..\..\..\..\usr\local\lib\cmake\opencv4\"/>
+		</Unit>
+		<Unit filename="/Users/eismont/Desktop/PSE/AlexLens/../../../../../usr/local/lib/cmake/opencv4/OpenCVModules.cmake">
+			<Option virtualFolder="CMake Files\..\..\..\..\..\usr\local\lib\cmake\opencv4\"/>
+		</Unit>
+		<Unit filename="/Users/eismont/Desktop/PSE/AlexLens/Icon/icon.qrc">
+			<Option virtualFolder="CMake Files\Icon\"/>
+		</Unit>
+	</Project>
+</CodeBlocks_project_file>

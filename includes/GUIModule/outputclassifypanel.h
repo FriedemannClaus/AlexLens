@@ -40,6 +40,7 @@ public:
     void invokeUpdate() override;
     void addTrainingLog();
     void addTrainingAccuracyCurve();
+    void addLine(string line);
     void addTrainingLossCurve();
     inline void setClassifyTab(bool classifyTab) {this->classifyTab = classifyTab;}
     inline bool isClassifyTab() {return classifyTab;}

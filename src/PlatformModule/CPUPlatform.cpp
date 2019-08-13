@@ -9,16 +9,21 @@
 #include <opencv2/opencv.hpp>
 #include <opencv2/imgproc/imgproc.hpp>
 
+#include <Python.h>
+
 #include <iostream>
 #include <memory>
 #include <vector>
 
 #include <string>
-#include <bits/stdc++.h>
+//#include <bits/stdc++.h>
+
+using namespace std;
+
 void CPUPlatform::runClassify() {
     this->results.clear();
 
-    std::cout << model_path <<std::endl;
+    /*std::cout << model_path <<std::endl;
     std::cout << label_path <<std::endl;
     //model_path = "/home/dmitrii/alexnetTr.pt";
     // Deserialize the ScriptModule from a file using torch::jit::load().
@@ -32,7 +37,7 @@ void CPUPlatform::runClassify() {
         // load image with opencv and transform
         cv::Mat image;
         image = cv::imread(image_path, 1);
-        cv::cvtColor(image, image, CV_BGR2RGB);
+        cv::cvtColor(image, image, cv::COLOR_BGR2RGB);
         cv::Mat img_float;
         image.convertTo(img_float, CV_32F, 1.0/255);
         cv::resize(img_float, img_float, cv::Size(224, 224));
@@ -78,7 +83,7 @@ void CPUPlatform::runClassify() {
 
 
         this->results.push_back(resultVector);
-    }
+    }*/
     this->imageNames.clear();
 }
 
@@ -105,9 +110,34 @@ vector<string> CPUPlatform::getResults() {
 }
 
 void CPUPlatform::runTraining() {
-    std::string command_str = "/home/dmitrii/anaconda3/bin/python /home/dmitrii/AlexLens/TransferLearning.py ";
+    //Py_SetProgramName(reinterpret_cast<const wchar_t *>(argv[0]));
+    // Path of TransferLearning.py
+    char fileName[] = "/Users/eismont/Desktop/PSE/AlexLens/TransferLearning.py";
+    FILE* fp;
+    Py_Initialize();
+    fp = _Py_fopen(fileName, "r");
+    // Path of dataset
+    char path[] = "/Users/eismont/PycharmProjects/test/pse_dataset_test";
+    char* py_argv[] = {strdup(path)};
+    wchar_t *w_py_argv[] = {Py_DecodeLocale(py_argv[0], NULL)};
+    PySys_SetArgv(1, w_py_argv);
+    PyRun_SimpleFile(fp, fileName);
+    free(py_argv[0]);
+    Py_Finalize();
+
+
+// !!11!!!11!
+// Get current dir of project
+/*size_t size;
+char *path = NULL;
+path = getcwd(path, size);
+string path_str(path);
+path_str = path_str.erase(path_str.rfind('/')+1);
+cout << path_str;*/
+
+
+    /*std::string command_str = "/home/dmitrii/anaconda3/bin/python /home/dmitrii/AlexLens/TransferLearning.py ";
     command_str += this->datasetPath;
     const char *command = command_str.c_str();
-
-    system(command);
+    system(command);*/
 }

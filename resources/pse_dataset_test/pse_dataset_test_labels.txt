@@ -1,0 +1,11 @@
+bear
+chimp
+giraffe
+gorilla
+llama
+ostrich
+porcupine
+shrimp
+skunk
+triceratops
+zebra
