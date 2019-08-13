@@ -65,6 +65,7 @@ void Manager::runTraining() {
     imageDir.erase(0, i+1);
 
     defaultNeuralNets.push_back(imageDir);
+    this->neuralNet = imageDir;
     this->subject->informObservers();
 
 }

@@ -148,6 +148,7 @@ void OutputClassifyPanel::addTrainingAccuracyCurve()
 {
 
     string fileNameListPath = this->PROJECT_DIR + this->manager->getNeuralNet() + "/" + this->manager->getNeuralNet()+ "_accuracy_curve.png";
+    cout << fileNameListPath << endl;
 
     QString QfileNameListPath = QString::fromStdString(fileNameListPath);
     QStringList fileNameList = {QfileNameListPath};

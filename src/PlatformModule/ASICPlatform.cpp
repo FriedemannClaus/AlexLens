@@ -1,9 +1,7 @@
 //
 // Created by vietp on 7/18/19.
 //
-/*
- * ALL OPENVINO STUFF IS COMMENTED OUT
- */
+
 #include "ASICPlatform.h"
 #include <vector>
 #include <fstream>
@@ -11,10 +9,10 @@
 #include <chrono>
 #include <iomanip>
 
-//#include <inference_engine.hpp>
-//#include <format_reader_ptr.h>
+#include <inference_engine.hpp>
+#include <format_reader_ptr.h>
 
-//using namespace InferenceEngine;
+using namespace InferenceEngine;
 using namespace std;
 
 std::mutex ASICPlatform::mutex;
@@ -22,13 +20,11 @@ std::mutex ASICPlatform::mutex;
 ASICPlatform::ASICPlatform(const int id) {
     this->id = id;
     this->type = PlatformType::ASIC;
-    /*
     this->myriadPlugin = initPlugin();
     this->net = readIR();
     this->inputInfo = net.getInputsInfo();
-     */
 }
-/*
+
 InferencePlugin ASICPlatform::initPlugin() {
     InferenceEnginePluginPtr pluginPtr = PluginDispatcher({"/opt/intel/openvino/deployment_tools/inference_engine/lib/intel64"}).getSuitablePlugin(TargetDevice::eMYRIAD);
     InferencePlugin plugin(pluginPtr);
@@ -41,9 +37,11 @@ CNNNetwork ASICPlatform::readIR() {
     net = netReader.getNetwork();
     return net;
 }
-*/
+
 void ASICPlatform::runClassify() {
-   /*
+    //vector<string> imageNames;
+    //convertListToVector(list, &imageNames);
+
     vector<shared_ptr<unsigned char>> imagesData;
     size_t batchSize;
     string firstOutputName;
@@ -51,9 +49,7 @@ void ASICPlatform::runClassify() {
 
     ExecutableNetwork executableNetwork;
 
-    ASICPlatform::mutex.lock();
     loadModelToPlugin(&executableNetwork);
-    ASICPlatform::mutex.unlock();
 
     InferRequest inferRequest = executableNetwork.CreateInferRequest();
 
@@ -77,7 +73,6 @@ void ASICPlatform::runClassify() {
     this->results = resultVector;
     cout << "this was stick " << this->id << endl;
     //return resultVector;
-    */
 }
 
 void ASICPlatform::convertListToVector(list<string> list, vector<string> *imageNames) {
@@ -85,48 +80,48 @@ void ASICPlatform::convertListToVector(list<string> list, vector<string> *imageN
         imageNames->push_back(i);
     }
 }
-/*
+
 void ASICPlatform::configInputOutput(vector<string> *imageNames, vector<shared_ptr<unsigned char>> *imagesData, size_t *batchSize, string *firstOutputName) {
 
-auto inputInfoItem = *inputInfo.begin();
-inputInfoItem.second->setPrecision(Precision::U8); // Precision parameter
-inputInfoItem.second->setLayout(Layout::NCHW); // Layout of input data
+    auto inputInfoItem = *inputInfo.begin();
+    inputInfoItem.second->setPrecision(Precision::U8); // Precision parameter
+    inputInfoItem.second->setLayout(Layout::NCHW); // Layout of input data
 
-//transfer images from imagepaths to appropriate format in order to work with them
-for (auto & i: *imageNames)
-{
-FormatReader::ReaderPtr reader(i.c_str());
-//check image loading read
-if (reader.get() == nullptr) continue;
+    //transfer images from imagepaths to appropriate format in order to work with them
+    for (auto & i: *imageNames)
+    {
+        FormatReader::ReaderPtr reader(i.c_str());
+        //check image loading read
+        if (reader.get() == nullptr) continue;
 
-// Extract image data and store it
-shared_ptr<unsigned char> data(
-        reader->getData(inputInfoItem.second->getTensorDesc().getDims()[3],
-                        inputInfoItem.second->getTensorDesc().getDims()[2]));
+        // Extract image data and store it
+        shared_ptr<unsigned char> data(
+                reader->getData(inputInfoItem.second->getTensorDesc().getDims()[3],
+                                inputInfoItem.second->getTensorDesc().getDims()[2]));
 
-if (data.get() != nullptr) {
-imagesData->push_back(data);
-}
-}
-if (imagesData->empty()) throw logic_error("Keine gültigen Bilder gefunden!");
+        if (data.get() != nullptr) {
+            imagesData->push_back(data);
+        }
+    }
+    if (imagesData->empty()) throw logic_error("Keine gültigen Bilder gefunden!");
 
-net.setBatchSize(imagesData->size());
-*batchSize = net.getBatchSize();
-//Prep Output
-outputInfo = net.getOutputsInfo();
+    net.setBatchSize(imagesData->size());
+    *batchSize = net.getBatchSize();
+    //Prep Output
+    outputInfo = net.getOutputsInfo();
 
-for (auto & item : outputInfo) {
-if (firstOutputName->empty()) {
-*firstOutputName = item.first;
-}
-DataPtr outputData = item.second;
-if (!outputData) {
-throw logic_error("output data pointer is invalid");
-}
+    for (auto & item : outputInfo) {
+        if (firstOutputName->empty()) {
+            *firstOutputName = item.first;
+        }
+        DataPtr outputData = item.second;
+        if (!outputData) {
+            throw logic_error("output data pointer is invalid");
+        }
 
-item.second->setPrecision(Precision::FP32);
-}
-inputInfoItem.second = {};// Normally part of loading model
+        item.second->setPrecision(Precision::FP32);
+    }
+    inputInfoItem.second = {};// Normally part of loading model
 }
 
 void ASICPlatform::loadModelToPlugin(ExecutableNetwork *executableNetwork) {
@@ -140,29 +135,29 @@ void ASICPlatform::loadModelToPlugin(ExecutableNetwork *executableNetwork) {
 }
 
 void ASICPlatform::prepareInput(InferRequest *inferRequest, vector<shared_ptr<unsigned char>> *imagesData) {
-for (const auto & item : inputInfo) {
-// Creating input blob
-Blob::Ptr input = inferRequest->GetBlob(item.first);
+    for (const auto & item : inputInfo) {
+        // Creating input blob
+        Blob::Ptr input = inferRequest->GetBlob(item.first);
 
-// Filling input tensor with images. First b channel, then g and r channels
-size_t num_channels = input->getTensorDesc().getDims()[1];
-size_t image_size = input->getTensorDesc().getDims()[2] * input->getTensorDesc().getDims()[3];
+        // Filling input tensor with images. First b channel, then g and r channels
+        size_t num_channels = input->getTensorDesc().getDims()[1];
+        size_t image_size = input->getTensorDesc().getDims()[2] * input->getTensorDesc().getDims()[3];
 
-auto data = input->buffer().as<PrecisionTrait<Precision::U8>::value_type*>();
+        auto data = input->buffer().as<PrecisionTrait<Precision::U8>::value_type*>();
 
-//Iterate over all input images
-for (size_t image_id = 0; image_id < imagesData->size(); ++image_id) {
-//Iterate over all pixel in image (b,g,r)
-for (size_t pid = 0; pid < image_size; pid++) {
-// Iterate over all channels
-for (size_t ch = 0; ch < num_channels; ++ch) {
-// [images stride + channels stride + pixel id ] all in bytes
-data[image_id * image_size * num_channels + ch * image_size + pid ] = (*imagesData).at(image_id).get()[pid*num_channels + ch];
-}
-}
-}
-}
-inputInfo = {};
+        //Iterate over all input images
+        for (size_t image_id = 0; image_id < imagesData->size(); ++image_id) {
+            //Iterate over all pixel in image (b,g,r)
+            for (size_t pid = 0; pid < image_size; pid++) {
+                // Iterate over all channels
+                for (size_t ch = 0; ch < num_channels; ++ch) {
+                    // [images stride + channels stride + pixel id ] all in bytes
+                    data[image_id * image_size * num_channels + ch * image_size + pid ] = (*imagesData).at(image_id).get()[pid*num_channels + ch];
+                }
+            }
+        }
+    }
+    inputInfo = {};
 }
 
 void ASICPlatform::inference(double *total, InferRequest *inferRequest) {
@@ -206,7 +201,7 @@ void ASICPlatform::loadLabels(vector<string> *labels) {
     cout << endl << "Throughput: " << 1000 * static_cast<double>(NUM_ITERATIONS) * *batchSize / *total << " FPS" << endl;
     cout << endl;*/
 
-//}
+}
 
 
 void ASICPlatform::trimRight(string& str, const string& trimChars)
@@ -226,13 +221,13 @@ void ASICPlatform::trim(string &str, const string &trimChars) {
     trimRight(str, trimChars);
     trimLeft(str, trimChars);
 }
-/*
+
 void ASICPlatform::reset() {
     net = readIR();
     inputInfo = net.getInputsInfo();
     this->imageNames.clear();
 }
-/*
+
 void ASICPlatform::createResultVector(Blob::Ptr _outBlob, vector<string> *imageNames, size_t *batchSize,
                                       vector<string> *labels, double *total, vector<string> *resultVector) {
 
@@ -241,11 +236,11 @@ void ASICPlatform::createResultVector(Blob::Ptr _outBlob, vector<string> *imageN
     string _labelStr = "label";
 
 
-
+    /** This vector stores id's of top N results **/
     vector<unsigned> results;
     TopResults(NUM_TOP_RESULTS, *_outBlob, results);
 
-
+    /** Print the result iterating over each batch **/
     //cout << endl << "Top " << *nTop << " results:" << endl << endl;
     for (unsigned int image_id = 0; image_id < *batchSize; ++image_id) {
         string resultString = "";
@@ -253,7 +248,7 @@ void ASICPlatform::createResultVector(Blob::Ptr _outBlob, vector<string> *imageN
         cout << "Image " << (*imageNames)[image_id] << endl;
         //resultString = (*imageNames)[image_id];
 
-        // Header
+        /*// Header
         cout << _classidStr << " " << _probabilityStr;
         if (!labels->empty())
             cout << " " << _labelStr;
@@ -264,11 +259,10 @@ void ASICPlatform::createResultVector(Blob::Ptr _outBlob, vector<string> *imageN
         if (!labels->empty())
             cout << " " << labelColumn;
         cout << endl;*/
-/*
+
         for (size_t id = image_id * NUM_TOP_RESULTS, cnt = 0; id < (image_id + 1) * NUM_TOP_RESULTS; ++cnt, ++id) {
             cout.precision(7);
             /** Getting probability for resulting class **/
-/*
             const auto result = _outBlob->buffer().
                     as<InferenceEngine::PrecisionTrait<InferenceEngine::Precision::FP32>::value_type*>()
             [results[id] + image_id * (_outBlob->size() / *batchSize)];
@@ -290,7 +284,7 @@ void ASICPlatform::createResultVector(Blob::Ptr _outBlob, vector<string> *imageN
         //cout << endl;
     }
 }
-*/
+
 void ASICPlatform::setStatistics(double *total, size_t *batchSize) {
     cout << endl << "Total inference time: " << *total << endl;
     cout << "Average running time of one iteration: " << *total / static_cast<double>(NUM_ITERATIONS) << " ms" << endl;
