@@ -1,16 +1,12 @@
 #include "../../includes/GUIModule/statisticform.h"
 #include "../../includes/GUIModule/ui_statisticform.h"
-#include <QFileDialog>
-#include <QDir>
-#include <QStandardPaths>
+
 #include <QScrollBar>
 #include <QHBoxLayout>
 #include <QGroupBox>
-#include <QListWidget>
-#include <QListWidgetItem>
+
 #include <QString>
 #include <string>
-#include <iostream>
 using namespace std;
 
 StatisticForm::StatisticForm(QWidget *parent) :
