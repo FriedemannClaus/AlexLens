@@ -261,7 +261,8 @@ image_transforms = {
 # Set train and valid directory paths
 # PATH!!!!!!!!
 #dataset = '/Users/eismont/PycharmProjects/test/pse_dataset_test'
-dataset = sys.argv[0]
+dataset = sys.argv[0] #for initialize
+dataset = sys.argv[1] #for syscall
 dataset_name = dataset[dataset.rfind('/', 0, len(dataset)) + 1:len(dataset)]
 folderName = folderName + '/' + dataset_name
 if not(os.path.isdir(folderName)):
@@ -331,7 +332,7 @@ optimizer = optim.Adam(alexnet.parameters())
 device = torch.device("cpu")
 
 # Train the model for 13 epochs
-num_epochs = 13
+num_epochs = 2
 trained_model, history = train_and_validate(alexnet, loss_func, optimizer, num_epochs)
 
 file_log.close()

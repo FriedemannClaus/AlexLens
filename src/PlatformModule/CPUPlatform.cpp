@@ -3,8 +3,8 @@
 //
 
 #include "CPUPlatform.h"
-//#include <torch/script.h>
-//#include <torch/torch.h>
+#include <torch/script.h>
+#include <torch/torch.h>
 
 #include <opencv2/opencv.hpp>
 #include <opencv2/imgproc/imgproc.hpp>
@@ -23,7 +23,7 @@ using namespace std;
 void CPUPlatform::runClassify() {
     this->results.clear();
 
-    /*std::cout << model_path <<std::endl;
+    std::cout << model_path <<std::endl;
     std::cout << label_path <<std::endl;
     //model_path = "/home/dmitrii/alexnetTr.pt";
     // Deserialize the ScriptModule from a file using torch::jit::load().
@@ -83,7 +83,7 @@ void CPUPlatform::runClassify() {
 
 
         this->results.push_back(resultVector);
-    }*/
+    }
     this->imageNames.clear();
 }
 
@@ -112,7 +112,7 @@ vector<string> CPUPlatform::getResults() {
 void CPUPlatform::runTraining() {
     //Py_SetProgramName(reinterpret_cast<const wchar_t *>(argv[0]));
     // Path of TransferLearning.py
-    char fileName[] = "/home/dmitrii/AlexLens/TransferLearning.py";
+   /* char fileName[] = "/home/dmitrii/AlexLens/TransferLearning.py";
     FILE* fp;
     Py_Initialize();
     fp = _Py_fopen(fileName, "r");
@@ -124,7 +124,7 @@ void CPUPlatform::runTraining() {
     PyRun_SimpleFile(fp, fileName);
     free(py_argv[0]);
     Py_Finalize();
-
+*/
 
 // !!11!!!11!
 // Get current dir of project
@@ -136,8 +136,8 @@ path_str = path_str.erase(path_str.rfind('/')+1);
 cout << path_str;*/
 
 
-    /*std::string command_str = "/home/dmitrii/anaconda3/bin/python /home/dmitrii/AlexLens/TransferLearning.py ";
+    std::string command_str = "/home/dmitrii/anaconda3/bin/python /home/dmitrii/AlexLens/TransferLearning.py ";
     command_str += this->datasetPath;
     const char *command = command_str.c_str();
-    system(command);*/
+    system(command);
 }

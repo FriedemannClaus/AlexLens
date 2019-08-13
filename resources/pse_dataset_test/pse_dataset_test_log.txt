@@ -1,30 +1,60 @@
-Epoch: 1/1
-Batch number: 000, Training: Loss: 2.5437, Accuracy: 0.0000
-Batch number: 001, Training: Loss: 2.6980, Accuracy: 0.2500
-Batch number: 002, Training: Loss: 2.1291, Accuracy: 0.5000
-Batch number: 003, Training: Loss: 1.3109, Accuracy: 0.5938
-Batch number: 004, Training: Loss: 1.3990, Accuracy: 0.6250
-Batch number: 005, Training: Loss: 1.6080, Accuracy: 0.5000
-Batch number: 006, Training: Loss: 1.2497, Accuracy: 0.687 5
-Batch number: 007, Training: Loss: 0.7849, Accuracy: 0.7812
-Batch number: 008, Training: Loss: 1.5062, Accuracy: 0.7500
-Batch number: 009, Training: Loss: 0.9330, Accuracy: 0.7500
-Batch number: 010, Training: Loss: 0.7545, Accuracy: 0.7812
-Batch number: 011, Training: Loss: 1.1133, Accuracy: 0.7500
-Batch number: 012, Training: Loss: 1.0400, Accuracy: 0.7188
-Batch number: 013, Training: Loss: 0.7510, Accuracy: 0.8125
-Batch number: 014, Training: Loss: 1.2075, Accuracy: 0.7188
-Batch number: 015, Training: Loss: 0.5222, Accuracy: 0.8125
-Batch number: 016, Training: Loss: 0.9225, Accuracy: 0.8438
-Batch number: 017, Training: Loss: 1.4239, Accuracy: 0.7500
-Batch number: 018, Training: Loss: 1.2131, Accuracy: 0.7812
-Batch number: 019, Training: Loss: 1.4741, Accuracy: 0.7500
-Batch number: 020, Training: Loss: 2.4499, Accuracy: 0.5385
-Validation Batch number: 000, Validation: Loss: 0.4740, Accuracy: 0.8438
-Validation Batch number: 001, Validation: Loss: 0.6588, Accuracy: 0.7812
-Validation Batch number: 002, Validation: Loss: 0.3132, Accuracy: 0.8750
-Validation Batch number: 003, Validation: Loss: 0.2815, Accuracy: 0.8571
+Epoch: 1/2
+Batch number: 000, Training: Loss: 2.4765, Accuracy: 0.0938
+Batch number: 001, Training: Loss: 3.3576, Accuracy: 0.2188
+Batch number: 002, Training: Loss: 1.1740, Accuracy: 0.5938
+Batch number: 003, Training: Loss: 1.6650, Accuracy: 0.5312
+Batch number: 004, Training: Loss: 1.7796, Accuracy: 0.6562
+Batch number: 005, Training: Loss: 2.2747, Accuracy: 0.6250
+Batch number: 006, Training: Loss: 1.2790, Accuracy: 0.7812
+Batch number: 007, Training: Loss: 1.7821, Accuracy: 0.5938
+Batch number: 008, Training: Loss: 1.2912, Accuracy: 0.7812
+Batch number: 009, Training: Loss: 1.1062, Accuracy: 0.8125
+Batch number: 010, Training: Loss: 0.4112, Accuracy: 0.8750
+Batch number: 011, Training: Loss: 0.4699, Accuracy: 0.8125
+Batch number: 012, Training: Loss: 0.8453, Accuracy: 0.7188
+Batch number: 013, Training: Loss: 0.5282, Accuracy: 0.7812
+Batch number: 014, Training: Loss: 1.1431, Accuracy: 0.8438
+Batch number: 015, Training: Loss: 1.0869, Accuracy: 0.7500
+Batch number: 016, Training: Loss: 0.9209, Accuracy: 0.8438
+Batch number: 017, Training: Loss: 0.5124, Accuracy: 0.8438
+Batch number: 018, Training: Loss: 1.0842, Accuracy: 0.7500
+Batch number: 019, Training: Loss: 0.8798, Accuracy: 0.7500
+Batch number: 020, Training: Loss: 1.1614, Accuracy: 0.7692
+Validation Batch number: 000, Validation: Loss: 0.3364, Accuracy: 0.9062
+Validation Batch number: 001, Validation: Loss: 0.5866, Accuracy: 0.8438
+Validation Batch number: 002, Validation: Loss: 0.4322, Accuracy: 0.8750
+Validation Batch number: 003, Validation: Loss: 0.2735, Accuracy: 0.8571
 Result of Epoch 1: 
-	Training: Loss: 1.3515, Accuracy: 65.5436%, 
-	Validation : Loss : 0.4565, Accuracy: 83.6364%, Time: 20.8569s
+	Training: Loss: 1.3006, Accuracy: 68.4533%, 
+	Validation : Loss : 0.4291, Accuracy: 87.2727%, Time: 24.5535s
+
+Epoch: 2/2
+Batch number: 000, Training: Loss: 0.1419, Accuracy: 0.9375
+Batch number: 001, Training: Loss: 0.3145, Accuracy: 0.8750
+Batch number: 002, Training: Loss: 1.0057, Accuracy: 0.7188
+Batch number: 003, Training: Loss: 0.3073, Accuracy: 0.8750
+Batch number: 004, Training: Loss: 0.3855, Accuracy: 0.8438
+Batch number: 005, Training: Loss: 0.1812, Accuracy: 0.9062
+Batch number: 006, Training: Loss: 0.1954, Accuracy: 0.9062
+Batch number: 007, Training: Loss: 0.2078, Accuracy: 0.9375
+Batch number: 008, Training: Loss: 0.1467, Accuracy: 0.9062
+Batch number: 009, Training: Loss: 0.5699, Accuracy: 0.9062
+Batch number: 010, Training: Loss: 0.2705, Accuracy: 0.9375
+Batch number: 011, Training: Loss: 0.1888, Accuracy: 0.9375
+Batch number: 012, Training: Loss: 0.4018, Accuracy: 0.8125
+Batch number: 013, Training: Loss: 0.3120, Accuracy: 0.9062
+Batch number: 014, Training: Loss: 0.3154, Accuracy: 0.9688
+Batch number: 015, Training: Loss: 0.2222, Accuracy: 0.9062
+Batch number: 016, Training: Loss: 0.1655, Accuracy: 0.9375
+Batch number: 017, Training: Loss: 0.0724, Accuracy: 0.9688
+Batch number: 018, Training: Loss: 0.3959, Accuracy: 0.8750
+Batch number: 019, Training: Loss: 0.1101, Accuracy: 0.9688
+Batch number: 020, Training: Loss: 0.5164, Accuracy: 0.7692
+Validation Batch number: 000, Validation: Loss: 0.4844, Accuracy: 0.9062
+Validation Batch number: 001, Validation: Loss: 0.2015, Accuracy: 0.9062
+Validation Batch number: 002, Validation: Loss: 0.6789, Accuracy: 0.8750
+Validation Batch number: 003, Validation: Loss: 0.4437, Accuracy: 0.7857
+Result of Epoch 2: 
+	Training: Loss: 0.2999, Accuracy: 89.8928%, 
+	Validation : Loss : 0.4535, Accuracy: 88.1818%, Time: 23.7358s
 

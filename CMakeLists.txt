@@ -27,9 +27,9 @@ include_directories(${PYTHON_INCLUDE_DIRS})
 #Torch stuff
 include_directories( ${OpenCV_INCLUDE_DIRS} )
 # OpenVino stuff
-#INCLUDE_DIRECTORIES(/opt/intel/openvino/deployment_tools/inference_engine/include)
-#INCLUDE_DIRECTORIES(/opt/intel/openvino/deployment_tools/inference_engine/samples/common/format_reader)
-#INCLUDE_DIRECTORIES(/opt/intel/openvino/deployment_tools/inference_engine/samples/common)
+INCLUDE_DIRECTORIES(/opt/intel/openvino/deployment_tools/inference_engine/include)
+INCLUDE_DIRECTORIES(/opt/intel/openvino/deployment_tools/inference_engine/samples/common/format_reader)
+INCLUDE_DIRECTORIES(/opt/intel/openvino/deployment_tools/inference_engine/samples/common)
 
 add_executable(AlexLens src/ManagerModule/main.cpp
         src/ManagerModule/Manager.cpp src/ManagerModule/Manager.h
@@ -63,9 +63,9 @@ target_link_libraries(${PROJECT_NAME}
         Qt5::Core
         Qt5::Widgets
         Qt5::Gui
-        #/opt/intel/openvino/deployment_tools/inference_engine/lib/intel64/libinference_engine.so
-        #/home/dmitrii/inference_engine_samples_build/intel64/Release/lib/libformat_reader.so
-        #dl
+        /opt/intel/openvino/deployment_tools/inference_engine/lib/intel64/libinference_engine.so
+        /home/dmitrii/inference_engine_samples_build/intel64/Release/lib/libformat_reader.so
+        dl
         ${TORCH_LIBRARIES}
         ${OpenCV_LIBS}
         ${PYTHON_LIBRARIES}
