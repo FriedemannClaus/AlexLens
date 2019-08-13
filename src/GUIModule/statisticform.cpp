@@ -19,7 +19,14 @@ StatisticForm::StatisticForm(QWidget *parent) :
 {
     ui->setupUi(this);
 
-    setWindowFlags( Qt::Dialog | Qt::MSWindowsFixedSizeDialogHint);
+    main_panel = new QGridLayout();
+    m_scrollArea = new QScrollArea(this);
+    m_scrollArea->setWidgetResizable(true);
+    m_scrollAreaWidgetContents = new QWidget();
+    m_gridLayout_2 = new QGridLayout(m_scrollAreaWidgetContents);
+    m_scrollArea->setWidget(m_scrollAreaWidgetContents);
+    m_scrollArea->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
+    main_panel->addWidget(m_scrollArea, 0, 0, 1, 1);
 
 }
 
@@ -32,23 +39,23 @@ void StatisticForm::printStatistic() {
 
     list<Platform *> listPlatforms = platformManager->getAvailablePlatforms();
 
-    main_panel = new QGridLayout();
+    QFont font;
+    font.setBold(true);
+    font.setPointSize(14);
 
     for (auto platform:listPlatforms)
     {
-        QGroupBox *horizontalGroupBoxPlatform = new QGroupBox(this);
-        QHBoxLayout *labelsAndGraphs = new QHBoxLayout();
-
         QGroupBox *vertikalGroupBoxLabels = new QGroupBox(this);
         QVBoxLayout *labels = new QVBoxLayout(this);
         QLabel *name = new QLabel(this);
         name->setText(QString::fromStdString(toString(platform->getType()) + ' ' + platform->getId()));
         name->setAlignment(Qt::AlignCenter);
+        name->setFont(font);
         PlatformStatistic platformStatistic = platform->getStatistic();
         QLabel *label = new QLabel(this);
         label->setText(QString::fromStdString("FLOPS: " + to_string(platformStatistic.getFLOPS())));
         QLabel *label_2 = new QLabel(this);
-        label_2->setText(QString::fromStdString("\nThroughput (Bandweite): " + to_string(platformStatistic.getThroughput()) + " FPS"));
+        label_2->setText(QString::fromStdString("\nBandweite (Throughput): " + to_string(platformStatistic.getThroughput()) + " FPS"));
         QLabel *label_3 = new QLabel(this);
         label_3->setText(QString::fromStdString("\nLeistungsverbrauch: "+ to_string(platformStatistic.getEnergyConsum())));
         QLabel *label_4 = new QLabel(this);
@@ -62,12 +69,7 @@ void StatisticForm::printStatistic() {
         labels->addWidget(label_4);
         labels->addWidget(label_5);
         vertikalGroupBoxLabels->setLayout(labels);
-
-        labelsAndGraphs->addWidget(vertikalGroupBoxLabels);
-
-        horizontalGroupBoxPlatform->setLayout(labelsAndGraphs);
-
-        main_panel->addWidget(horizontalGroupBoxPlatform);
+        m_gridLayout_2->addWidget(vertikalGroupBoxLabels);
     }
 
     /*QGroupBox *horizontalGroupBoxGraph = new QGroupBox(this);

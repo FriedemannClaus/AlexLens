@@ -4,6 +4,7 @@
 #include <QWidget>
 #include <QVBoxLayout>
 #include <QLabel>
+#include <QScrollArea>
 #include "../../src/PlatformModule/PlatformManager.h"
 
 namespace Ui {
@@ -34,6 +35,10 @@ private:
     Ui::StatisticForm *ui;
     QGridLayout* main_panel;
     PlatformManager* platformManager;
+
+    QGridLayout* m_gridLayout_2;
+    QScrollArea* m_scrollArea;
+    QWidget*     m_scrollAreaWidgetContents;
 };
 
 #endif // STATISTICFORM_H

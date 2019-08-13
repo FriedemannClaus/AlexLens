@@ -1,3 +1,6 @@
+# Model NN information
+resources/*
+!resources/alexnet/
 
 # Created by https://www.gitignore.io/api/qt,c++,clion,cmake,linux,macos,windows,qtcreator
 # Edit at https://www.gitignore.io/?templates=qt,c++,clion,cmake,linux,macos,windows,qtcreator

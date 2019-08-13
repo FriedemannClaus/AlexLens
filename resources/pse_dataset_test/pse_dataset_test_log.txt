@@ -5,7 +5,7 @@ Batch number: 002, Training: Loss: 2.1291, Accuracy: 0.5000
 Batch number: 003, Training: Loss: 1.3109, Accuracy: 0.5938
 Batch number: 004, Training: Loss: 1.3990, Accuracy: 0.6250
 Batch number: 005, Training: Loss: 1.6080, Accuracy: 0.5000
-Batch number: 006, Training: Loss: 1.2497, Accuracy: 0.6875
+Batch number: 006, Training: Loss: 1.2497, Accuracy: 0.687 5
 Batch number: 007, Training: Loss: 0.7849, Accuracy: 0.7812
 Batch number: 008, Training: Loss: 1.5062, Accuracy: 0.7500
 Batch number: 009, Training: Loss: 0.9330, Accuracy: 0.7500
