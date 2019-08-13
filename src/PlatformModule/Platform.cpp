@@ -14,6 +14,11 @@ PlatformStatistic Platform::getStatistic() {
 PlatformType Platform::getType() {
     return PlatformType();
 }
+
+string Platform::getId() {
+    return "";
+}
+
 void Platform::setImagePaths(std::list<std::string> imagePaths) {
 }
 vector<string> Platform::getResults() {}

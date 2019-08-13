@@ -88,6 +88,8 @@ void MainWindow::on_actionStatistiken_triggered()
     //ui->statusBar->showMessage("Statistiken");
 
     StatisticForm* s = new StatisticForm();
+    s->setPlatformManager(this->manager->getExecutor()->getPlatformManager());
+    s->printStatistic();
     s->adjustSize();
     //s->setFixedSize(QSize(590, 460));
     s->show();

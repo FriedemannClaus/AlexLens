@@ -32,6 +32,7 @@ public:
 
     vector<string> classify(list<string> imagePaths, Mode mode, string neuralNet);
     void train (string dirPath, Mode mode, string neuralNet);
+    inline PlatformManager* getPlatformManager() {return this->platformManager;}
 
 };
 

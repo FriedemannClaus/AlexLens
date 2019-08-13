@@ -29,10 +29,11 @@ class ASICPlatform : public Platform {
 public:
     ASICPlatform(const int id);
     void runClassify() override;
-    void setImagePaths(list<string> imagePaths);
-    PlatformType getType ();
-    PlatformStatistic getStatistic();
-    vector<string> getResults();
+    void setImagePaths(list<string> imagePaths) override;
+    PlatformType getType () override;
+    PlatformStatistic getStatistic() override;
+    vector<string> getResults() override;
+    string getId() override {return to_string(this->id+1);};
 
     static std::mutex mutex;
 

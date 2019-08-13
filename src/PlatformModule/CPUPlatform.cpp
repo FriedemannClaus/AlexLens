@@ -3,8 +3,8 @@
 //
 
 #include "CPUPlatform.h"
-#include <torch/script.h>
-#include <torch/torch.h>
+//#include <torch/script.h>
+//#include <torch/torch.h>
 
 #include <opencv2/opencv.hpp>
 #include <opencv2/imgproc/imgproc.hpp>
@@ -112,7 +112,7 @@ vector<string> CPUPlatform::getResults() {
 void CPUPlatform::runTraining() {
     //Py_SetProgramName(reinterpret_cast<const wchar_t *>(argv[0]));
     // Path of TransferLearning.py
-    char fileName[] = "/Users/eismont/Desktop/PSE/AlexLens/TransferLearning.py";
+    char fileName[] = "/home/dmitrii/AlexLens/TransferLearning.py";
     FILE* fp;
     Py_Initialize();
     fp = _Py_fopen(fileName, "r");

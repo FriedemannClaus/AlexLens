@@ -26,6 +26,7 @@ public:
     virtual PlatformStatistic getStatistic();
     virtual void setImagePaths(std::list<std::string> imagePaths);
     virtual vector<string> getResults();
+    virtual string getId();
     virtual void setNeuralNet(string neuralNet);
     virtual void setDatasetPath(string path);
 };

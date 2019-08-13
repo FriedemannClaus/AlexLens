@@ -70,7 +70,7 @@ void InputPanel::addImage()
 
         if (dir.size() == 0) this->imageWasAdded = false;
 
-        int imageWidth = m_scrollArea->width() - 30;
+        //int imageWidth = m_scrollArea->width() - 30;
 
 
         QLabel* dirLabel = new QLabel(this);

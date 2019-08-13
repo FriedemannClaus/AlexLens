@@ -16,26 +16,16 @@
  * @return double
  */
 double PlatformStatistic::getFLOPS() {
-    return 0.0;
+    return this->flops;
 }
 
 /**
  * @return double
  */
 double PlatformStatistic::getEnergyConsum() {
-    return 0.0;
+    return this->energyConsum;
 }
 
-/**
- * @return PlatformType
- */
-PlatformType PlatformStatistic::getName() {
-    return *(new PlatformType);
-}
-
-/**
- * @return int
- */
 double PlatformStatistic::getTotalInferenceTime() {
     return this->totalInferenceTime;
 }

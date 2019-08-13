@@ -13,8 +13,11 @@
 class PlatformStatistic {
 public:
     double getFLOPS();
+    inline void setFLOPS(bool flops) {this->flops = flops;}
+
     double getEnergyConsum();
-    PlatformType getName();
+    inline void setEnergyConsum(bool energyConsum) {this->energyConsum = energyConsum;}
+
     double getTotalInferenceTime();
     void setTotalInferenceTime(double time);
 
@@ -25,9 +28,11 @@ public:
     void setAvgIterationTime(double avgIterationTime);
 
 private:
-    double totalInferenceTime;
-    double throughput;
-    double avgIterationTime;
+    double totalInferenceTime = 0.0;
+    double throughput = 0.0;
+    double avgIterationTime = 0.0;
+    double flops = 0.0;
+    double energyConsum = 0.0;
 };
 
 #endif //_PLATFORMSTATISTIC_H
