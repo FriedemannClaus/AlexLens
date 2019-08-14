@@ -1,13 +1,9 @@
 #include "../../includes/GUIModule/inputpanel.h"
 
 #include <QFileDialog>
-#include <QDir>
 #include <QStandardPaths>
 #include <QScrollBar>
 #include <QDragEnterEvent>
-
-#include <QDebug>
-#include <iostream>
 
 
 InputPanel::InputPanel(QWidget *parent)
@@ -98,12 +94,24 @@ void InputPanel::resizeEvent(QResizeEvent *event)
 
 void InputPanel::dragEnterEvent(QDragEnterEvent *e)
 {
-    bool flag = true;
-    foreach (const QUrl &url, e->mimeData()->urls()) {
-        QFileInfo fileInfo(url.toLocalFile());
-        QString fileExtension = fileInfo.suffix().toLower();
-        if (!(fileExtension.contains("jpg") || fileExtension.contains("png") || fileExtension.contains("jpeg"))) {
-            flag = false;
+    bool flag;
+    if(classifyTab) {
+        flag = true;
+        foreach (const QUrl &url, e->mimeData()->urls()) {
+            QFileInfo fileInfo(url.toLocalFile());
+            QString fileExtension = fileInfo.suffix().toLower();
+            if (!(fileExtension.contains("jpg") || fileExtension.contains("png") ||
+            fileExtension.contains("jpeg"))) {
+                flag = false;
+            }
+        }
+    } else {
+        flag = true;
+        foreach (const QUrl &url, e->mimeData()->urls()) {
+            string path = url.toString().toLocal8Bit().constData();
+            if (path[path.length()-1] != '/') {
+                flag = false;
+            }
         }
     }
     if (flag) {
@@ -113,18 +121,32 @@ void InputPanel::dragEnterEvent(QDragEnterEvent *e)
 
 void InputPanel::dropEvent(QDropEvent *e)
 {
-    this->imageWasAdded = true;
-    int imageWidth = m_scrollArea->width() - 30;
+    if(classifyTab) {
+        this->imageWasAdded = true;
+        int imageWidth = m_scrollArea->width() - 30;
 
-    foreach (const QUrl &url, e->mimeData()->urls()) {
-        QString fileName = url.toLocalFile();
-        QLabel* imageLabel = new QLabel(this);
-        QPixmap pix(fileName);
-        previewImages.append(qMakePair(imageLabel, pix));
-        imageLabel->setPixmap(pix.scaledToWidth(imageWidth));
-        m_verticalLayout->addWidget(imageLabel);
+        foreach (const QUrl &url, e->mimeData()->urls()) {
+            QString fileName = url.toLocalFile();
+            QLabel* imageLabel = new QLabel(this);
+            QPixmap pix(fileName);
+            previewImages.append(qMakePair(imageLabel, pix));
+            imageLabel->setPixmap(pix.scaledToWidth(imageWidth));
+            m_verticalLayout->addWidget(imageLabel);
 
-        this->manager->addImage(fileName.toStdString()); // adding fileName to manager
+            this->manager->addImage(fileName.toStdString()); // adding fileName to manager
+        }
+    } else {
+        this->imageWasAdded = true;
+
+        foreach (const QUrl &url, e->mimeData()->urls()) {
+            QLabel* dirLabel = new QLabel(this);
+            QString q_path = url.toString();
+            string path = url.toString().toStdString();
+            QString subPath = q_path.mid(7,path.length()-8);
+            dirLabel->setText(subPath);
+            m_verticalLayout->addWidget(dirLabel);
+            this->manager->addImage(subPath.toStdString());
+        }
     }
 }
 
