@@ -1,6 +1,8 @@
-//
-// Created by dmitrii on 7/28/19.
-//
+/**
+ * Project Entwurf_PSE_KNN
+ * @author Dima Seletkov, Friedemann Claus
+ * @version 1.2
+ */
 
 #ifndef UNTITLED_FCLAYER_H
 #define UNTITLED_FCLAYER_H
@@ -9,25 +11,24 @@
 
 class FCLayer : public Layer {
 private:
-    /*
+    /**
      * Weight Matrix
      */
-    Matrix_t W;
-    /*
+    Matrix weights;
+    /**
      * Bias vector
      */
-    Vector_t b;
-    /*
+    Vector bias;
+    /**
      * Result of forward propagation
      */
-    Matrix_t r;
+    Matrix result;
 
 public:
-    FCLayer(const size_t inputSize, const size_t outputSize) : Layer(inputSize, outputSize) {}
+    FCLayer() : Layer() {}
 
-    const Matrix_t& forward(const Matrix_t& x) override;
-    void setWeights(Matrix_t& W, Vector_t& b) override;
-
+    const Matrix& forward(const Matrix& input) override;
+    void setWeights(Matrix& weights, Vector& bias);
 };
 
 

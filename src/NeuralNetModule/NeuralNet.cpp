@@ -19,8 +19,9 @@
 #include <stdlib.h>
 #include <vector>
 #include <Eigen/Core>
-#include "NeuralNet.h"
 #include "Layer.h"
+#include "Conv2DLayer.h"
+#include "FCLayer.h"
 #include <list>
 
 using namespace std;
@@ -293,5 +294,12 @@ void NeuralNet::init() {
         if ( i == fc8BiasBorder && x == 1000) { cout << "The biases of the final layer have been loaded successfully.\n";} //Sanity-check and user-info
         if (i == fc8BiasBorder) { cout << "60.965.224 parameters successfully loaded.\n";}
         if (i == fc8BiasBorder + 1) { cout << "This line should not be reached\n";}
+
+
+        //Now create the layers
+
+        Conv2DLayer conv1Layer = new Conv2DLayer();
+        conv1Layer.setWeights(conv1, conv1Bias);
+
     }
 }

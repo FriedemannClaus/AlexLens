@@ -19,8 +19,8 @@ add_executable(AlexLens src/ManagerModule/main.cpp src/GUIModule/InputPanel.cpp 
         #src/MathModule/Skalar.cpp src/MathModule/Skalar.h src/MathModule/MathException.h
         src/NeuralNetModule/Layer.h
         #src/NeuralNetModule/TrainableLayer.h
-        #src/NeuralNetModule/FCLayer.cpp src/NeuralNetModule/FCLayer.h
-        #src/NeuralNetModule/ConvLayer.cpp src/NeuralNetModule/ConvLayer.h
+        src/NeuralNetModule/FCLayer.cpp src/NeuralNetModule/FCLayer.h
+        src/NeuralNetModule/Conv2DLayer.cpp src/NeuralNetModule/Conv2DLayer.h
         src/NeuralNetModule/NeuralNet.cpp src/NeuralNetModule/NeuralNet.h
         )
 

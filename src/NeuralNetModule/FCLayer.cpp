@@ -1,22 +1,27 @@
-//
-// Created by dmitrii on 7/28/19.
-//
+/**
+ * Project Entwurf_PSE_KNN
+ * @author Dima Seletkov, Friedemann Claus
+ * @version 1.2
+ */
 
 #include "FCLayer.h"
-#include "Layer.h"
 
-const Layer::Matrix_t& FCLayer::forward(const Layer::Matrix_t &x) {
-    int columns = x.cols();
-    // Linear term r = W^T * x + b
-    r.resize(this->outputSize, columns);
-    r.noalias() = W.transpose() * x;
-    r.colwise() += this->b;
-    return x;
+const Layer::Matrix& FCLayer::forward(const Layer::ThreeDMatrixMatrix &input) {
+//    Vector vectorizedInput = input(i) mit for-schleife input zu Vektor machen. Oder nicht vectorizen
+//    und per for-schleife weight-Matrix mit ThreeD-Input-Matrix multiplizieren.
+    int columns = input.cols();
+    // Linear term result = weights^T * input + bias
+    // Or: Vector result = weights * vectorized Input + bias
+    // Because other Layers need a ThreeDMatrix as input for the forward-pass
+    result.resize(bias.rows(), columns);
+    result.noalias() = weights.transpose() * input;
+    result.colwise() += this->bias;
+    return result;
 }
 
-void FCLayer::setWeights(Layer::Matrix_t &W, Layer::Vector_t &b) {
-    this->W.resize(inputSize, outputSize);
-    this->b.resize(outputSize);
-    this->W = W;
-    this->b = b;
+void FCLayer::setWeights(Layer::Matrix &weights, Layer::Vector &bias) {
+    this->weights.resize(inputSize, outputSize);
+    this->bias.resize(outputSize);
+    this->weights = weights;
+    this->bias = bias;
 }

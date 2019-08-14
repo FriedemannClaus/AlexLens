@@ -1,6 +1,8 @@
-//
-// Created by dmitrii on 7/28/19.
-//
+/**
+ * Project Entwurf_PSE_KNN
+ * @author Friedemann Claus, Dima Seletkov
+ * @version 1.2
+ */
 
 #ifndef UNTITLED_LAYER_H
 #define UNTITLED_LAYER_H
@@ -18,27 +20,16 @@ protected:
     typedef Eigen::Matrix<Matrix, Eigen::Dynamic, 1> ThreeDMatrix;
     typedef Eigen::Matrix<Matrix, Eigen::Dynamic, Eigen::Dynamic> FourDMatrix;
 
-    //for compilation, but will be removed soon
-    typedef double Scalar;
-    typedef Eigen::Matrix<Scalar, Eigen::Dynamic, Eigen::Dynamic> Matrix_t;
-    typedef Eigen::Matrix<Scalar, Eigen::Dynamic, 1> Vector_t;
-
-    ///Input and Outut sizes of Layer
-    ///they will be set in constructor
-    /// Weight Matrix has sizes: (inputSize, outputSize)
-    ///Bias (1,outputSizeSize)
-    const size_t inputSize;
-    const size_t outputSize;
 public:
-    inline size_t getInputSize() { return inputSize;}
-    inline size_t getOuputSize() { return outputSize;}
 
-    Layer(const size_t inputSize, const size_t outputSize) : inputSize(inputSize), outputSize(outputSize) {}
+    // separate non-virtual setweights-Function, because weights can be different (FourDMatrix or just a (2D-) Matrix)
+    // and some Layers don't even have weights.
+    Layer() :{}
 
     /// Forward Propagation of layer
-    /// \param x output of PREVIOUS Layet
-    /// \return result of forward propagation r = W*x+b
-    virtual const Matrix_t& forward(const Matrix_t& x);
+    /// \param input output of PREVIOUS Layer
+    /// \return result of forward propagation
+    virtual const Matrix& forward(const ThreeDMatrix& input);
 
 
 };
