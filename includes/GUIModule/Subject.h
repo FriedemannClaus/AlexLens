@@ -7,17 +7,32 @@
 
 #include "../GUIModule/IObserver.h"
 #include <list>
+
 using namespace std;
 
+/**
+ * Class Subject. The subject of observer design pattern.
+ */
 class Subject {
-    list<IObserver*> observerList;
+    list<IObserver*> observerList; /// List of all observers
 
 public:
+    /**
+     * Constructor for class Subject.
+     */
     Subject() {}
+
+    /**
+     * Adds an new observer to list of observers.
+     * @param observer
+     */
     inline void attachObserver(IObserver* observer) {
         observerList.push_back(observer);
     }
 
+    /**
+     * Inform the observers of the objects changes.
+     */
     inline void informObservers() {
         for (auto observer:observerList) {
             observer->invokeUpdate();

@@ -1,12 +1,5 @@
 #include "../../includes/GUIModule/outputclassifypanel.h"
 
-#include <QFileDialog>
-#include <QDir>
-#include <QStandardPaths>
-#include <QScrollBar>
-
-#include <QDebug>
-#include <iostream>
 #include <vector>
 
 

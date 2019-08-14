@@ -47,8 +47,8 @@ private slots:
     void on_actionStatistiken_triggered();
 
 private:
-    Ui::MainWindow *ui; // Skeleton of MainWindow
-    Manager* manager; // Main manager of program
+    Ui::MainWindow *ui; /// Skeleton of MainWindow
+    Manager* manager; /// The main manager of program
 };
 
 #endif // MAINWINDOW_H

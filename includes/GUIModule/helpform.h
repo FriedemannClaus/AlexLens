@@ -28,9 +28,9 @@ public:
     ~HelpForm();
 
 private:
-    Ui::HelpForm *ui; // Skeleton of Helpform
-    QLabel *label; // Information of software
-    QGridLayout* h_panel; // The main panel of Helpform
+    Ui::HelpForm *ui; /// Skeleton of Helpform
+    QLabel *label; /// Information of software
+    QGridLayout* h_panel; /// The main panel of Helpform
 };
 
 #endif // HELPFORM_H

@@ -2,7 +2,6 @@
 #define INPUTPANEL_H
 
 #include <QWidget>
-
 #include <QGridLayout>
 #include <QScrollArea>
 #include <QPushButton>
@@ -11,46 +10,105 @@
 #include <QImage>
 #include <QPixmap>
 #include <QMimeData>
+
 #include "../../src/ManagerModule/Manager.h"
 
+/**
+ * Class InputPanel. Representation of input data.
+ */
 class InputPanel : public QWidget
 {
     Q_OBJECT
 
 public:
+    /**
+     * Constructor for class InputPanel.
+     * @param parent
+     */
     InputPanel(QWidget *parent = nullptr);
+
+    /**
+     * Destructor for class InputPanel.
+     */
     ~InputPanel();
 
+    /**
+     * @param manager manager to set
+     */
     inline void setManager(Manager* manager) {this->manager = manager;}
+
+    /**
+     * @param imageWasAdded imageWasAdded to set
+     */
     inline void setImageWasAdded(bool imageWasAdded) {this->imageWasAdded = imageWasAdded;}
+
+    /**
+     * @param classifyTab classifyTab to set
+     */
     inline void setClassifyTab(bool classifyTab) {this->classifyTab = classifyTab;}
+
+    /**
+     * @return whether image/directory was added
+     */
     inline bool isImageAdded() {return imageWasAdded;}
+
+    /**
+     * @return whether this tab is classify tab
+     */
     inline bool isClassifyTab() {return classifyTab;}
+
+    /**
+     * @return all preview of added images
+     */
     inline QVector<QPair<QLabel*, QPixmap> > getPreviewImages() {return this->previewImages;}
+
+    /**
+     * Delete all objects from vector of images preview.
+     */
     inline void clearPreviewImages() {this->previewImages.clear(); this->imageWasAdded = false;}
-    //inline void setIsClassify(bool flag) {this->classifyTab = flag;}
+
+    /**
+     * Clear InputPanel of input data.
+     */
     void clearPanel();
 
+
 private slots:
-            void addImage();
-            void dragEnterEvent(QDragEnterEvent *e) override;
-            void dropEvent(QDropEvent *e) override;
+    /**
+     * Add input data to InputPanel.
+     */
+    void addImage();
+
+    /**
+     * Check drag&drop input data.
+     * @param e
+     */
+    void dragEnterEvent(QDragEnterEvent *e) override;
+
+    /**
+     * Add drag&drop input data to InputPanel.
+     * @param e
+     */
+    void dropEvent(QDropEvent *e) override;
 
 protected:
+    /**
+     * Adjust input image for scroll area.
+     * @param event
+     */
     virtual void resizeEvent(QResizeEvent *event) override;
 
 private:
-    QGridLayout* m_gridLayout;
-    QLabel *label;
-    QGridLayout* m_gridLayout_2;
-    QScrollArea* m_scrollArea;
-    QPushButton* m_pushButton;
-    QVBoxLayout* m_verticalLayout;
-    QWidget*     m_scrollAreaWidgetContents;
-    QVector<QPair<QLabel*, QPixmap> > previewImages;
-    Manager* manager;
-    bool imageWasAdded = false;
-    bool classifyTab = true;
+    QGridLayout* m_gridLayout; /// The main panel of InputPanel
+    QGridLayout* m_gridLayout_2; /// The panel with all input data
+    QScrollArea* m_scrollArea; /// Scroll area
+    QPushButton* m_pushButton; /// Button to open file dialog for choosing input data
+    QVBoxLayout* m_verticalLayout; /// Vertical Layout for input data
+    QWidget*     m_scrollAreaWidgetContents; /// Scroll widget
+    QVector<QPair<QLabel*, QPixmap> > previewImages; /// Vector of all preview of added images
+    Manager* manager; /// The main manager of program
+    bool imageWasAdded = false; /// bool flag for input data
+    bool classifyTab = true; /// bool flag for tabs
 };
 
 #endif // WIDGET_H

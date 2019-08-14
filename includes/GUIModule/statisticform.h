@@ -57,13 +57,13 @@ public:
     }
 
 private:
-    Ui::StatisticForm *ui; // Skeleton of Statisticform
-    QGridLayout* main_panel; // The main panel of Statisticform
-    PlatformManager* platformManager; // Manager of platforms
+    Ui::StatisticForm *ui; /// Skeleton of Statisticform
+    QGridLayout* main_panel; /// The main panel of Statisticform
+    PlatformManager* platformManager; /// Manager of platforms
 
-    QGridLayout* m_gridLayout_2; // The panel with all statistics
-    QScrollArea* m_scrollArea; // Scroll area
-    QWidget*     m_scrollAreaWidgetContents; // Scroll widget
+    QGridLayout* m_gridLayout_2; /// The panel with all statistics
+    QScrollArea* m_scrollArea; /// Scroll area
+    QWidget*     m_scrollAreaWidgetContents; /// Scroll widget
 };
 
 #endif // STATISTICFORM_H

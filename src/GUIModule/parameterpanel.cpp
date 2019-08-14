@@ -1,19 +1,13 @@
 #include "../../includes/GUIModule/parameterpanel.h"
 #include "../PlatformModule/ModeUtil.h"
-#include <QFileDialog>
-#include <QDir>
-#include <QStandardPaths>
-#include <QScrollBar>
+
 #include <QHBoxLayout>
 #include <QGroupBox>
-#include <QListWidget>
 #include <QListWidgetItem>
 #include <QPushButton>
 #include <QMessageBox>
-#include <QDebug>
 #include <QString>
 #include <string>
-#include <iostream>
 
 using namespace std;
 
