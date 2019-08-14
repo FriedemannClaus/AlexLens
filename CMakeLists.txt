@@ -8,28 +8,32 @@ set(CMAKE_CXX_STANDARD 11)
 set(CMAKE_AUTORCC ON)
 SET(CMAKE_CXX_FLAGS -pthread)
 find_package(Threads)
-find_package(PythonLibs REQUIRED)
-
-
-find_package(Qt5Core REQUIRED)
-find_package(Qt5Gui REQUIRED)
-find_package(Qt5Widgets REQUIRED)
-
-#Torch stuff
-find_package(Torch REQUIRED)
-find_package(OpenCV REQUIRED)
-
-list(APPEND THIRD-PARTY-LIBS Qt::Widgets Qt::Core)
 
 include_directories(includes)
 include_directories(src)
+
+# Python
+find_package(PythonLibs REQUIRED)
 include_directories(${PYTHON_INCLUDE_DIRS})
-#Torch stuff
-include_directories( ${OpenCV_INCLUDE_DIRS} )
-# OpenVino stuff
-INCLUDE_DIRECTORIES(/opt/intel/openvino/deployment_tools/inference_engine/include)
-INCLUDE_DIRECTORIES(/opt/intel/openvino/deployment_tools/inference_engine/samples/common/format_reader)
-INCLUDE_DIRECTORIES(/opt/intel/openvino/deployment_tools/inference_engine/samples/common)
+
+# Qt5
+find_package(Qt5Core REQUIRED)
+find_package(Qt5Gui REQUIRED)
+find_package(Qt5Widgets REQUIRED)
+list(APPEND THIRD-PARTY-LIBS Qt::Widgets Qt::Core)
+
+# Torch
+find_package(Torch REQUIRED)
+include_directories( ${Torch_INCLUDE_DIRS} )
+
+# OpenCV
+set(OpenCV_DIR /opt/intel/openvino/opencv/cmake)
+find_package(OpenCV)
+
+# OpenVino
+set(InferenceEngine_DIR /opt/intel/openvino/inference_engine/share)
+find_package(InferenceEngine)
+include_directories(/opt/intel/openvino/deployment_tools/inference_engine/samples/common/format_reader)
 
 add_executable(AlexLens src/ManagerModule/main.cpp
         src/ManagerModule/Manager.cpp src/ManagerModule/Manager.h
@@ -63,9 +67,8 @@ target_link_libraries(${PROJECT_NAME}
         Qt5::Core
         Qt5::Widgets
         Qt5::Gui
-        /opt/intel/openvino/deployment_tools/inference_engine/lib/intel64/libinference_engine.so
-        /home/dmitrii/inference_engine_samples_build/intel64/Release/lib/libformat_reader.so
-        dl
+        ${InferenceEngine_LIBRARIES}
+        /home/viet/inference_engine_samples_build/intel64/Release/lib/libformat_reader.so
         ${TORCH_LIBRARIES}
         ${OpenCV_LIBS}
         ${PYTHON_LIBRARIES}
