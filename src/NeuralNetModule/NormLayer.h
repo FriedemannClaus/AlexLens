@@ -24,6 +24,14 @@ private:
     const int outputNumCols;
     ThreeDMatrix outputMatrix;
 
+    int max(int a, int b) {
+        return ((a > b) ? a : b);
+    }
+
+    int min(int a, int b) {
+        return ((a < b) ? a : b);
+    }
+
 public:
     NormLayer(const int inputWidth, const int inputHeight, const int inputChannels, const int normK, const int normAlpha, const int normBeta, const in normRegionSize):
         //Initialisierungsliste
@@ -56,14 +64,6 @@ public:
         }
 
         return outputMatrix;
-    }
-
-    int max(int a, int b) {
-        return ((a > b) ? a : b);
-    }
-
-    int min(int a, int b) {
-        return ((a < b) ? a : b);
     }
 };
 
