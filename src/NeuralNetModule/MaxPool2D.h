@@ -61,7 +61,7 @@ public:
                         floats(k) = (*inputMatrix)(c)((i * stride) + (k / 3), (j * stride) + (k % 3));
                     }
                     float max = getMaxFloat(&floats);
-                    outputMatrix(i)(j, k) = max;
+                    outputMatrix(i)(j, k) = max; // i,j,k?! -> Überprüfen
                 }
             }
         }
