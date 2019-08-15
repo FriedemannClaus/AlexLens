@@ -53,15 +53,14 @@ public:
         int outputSize = ((inputChannelNumCols - poolWidth) / poolStride) + 1; //size of one side!
         int numPoolElements = poolWidht * poolWidth;
         for (int c = 0; c < inputNumChannels; c++) { // Iterieren ueber Channel
-            for (int i = 0; i < outputSize; i++) { // Iterieren ueber Zeilen
-                for (int j = 0; j < outputSize; j++) { // Iterieren ueber Spalten
-                    float floats<numPoolElements>;
+            for (int i = 0; i < outputSize; i++) { // Iterieren ueber Zeilen des Outputs
+                for (int j = 0; j < outputSize; j++) { // Iterieren ueber Spalten des Outputs
                     Vector floats;
                     for (int k = 0; k < numPoolElements; k++) {
                         floats(k) = (*inputMatrix)(c)((i * stride) + (k / 3), (j * stride) + (k % 3));
                     }
                     float max = getMaxFloat(&floats);
-                    outputMatrix(i)(j, k) = max; // i,j,k?! -> Überprüfen
+                    outputMatrix(c)(i, j) = max;
                 }
             }
         }
