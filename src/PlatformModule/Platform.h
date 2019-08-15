@@ -19,6 +19,7 @@ private:
     string model_path;
     string label_path;
     string datasetPath;
+    string project_dir;
 public:
     virtual void runClassify();
     virtual void runTraining();
@@ -29,6 +30,7 @@ public:
     virtual string getId();
     virtual void setNeuralNet(string neuralNet);
     virtual void setDatasetPath(string path);
+    virtual void setProjectDir(string dir);
 };
 
 

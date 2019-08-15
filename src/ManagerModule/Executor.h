@@ -30,8 +30,8 @@ public:
 
     Executor();
 
-    vector<string> classify(list<string> imagePaths, Mode mode, string neuralNet);
-    void train (string dirPath, Mode mode, string neuralNet);
+    vector<string> classify(list<string> imagePaths, Mode mode, string neuralNet, string project_dir);
+    void train (string dirPath, Mode mode, string neuralNet, string project_dir);
     inline PlatformManager* getPlatformManager() {return this->platformManager;}
 
 };

@@ -66,7 +66,7 @@ void InputPanel::addImage()
 
         if (dir.size() == 0) this->imageWasAdded = false;
 
-        QStringList fileNameList = {"/Users/eismont/Desktop/PSE/AlexLens/Icon/iconOrdner.png"};
+        QStringList fileNameList = {QString::fromStdString(this->manager->getProjectDir() + "Icon/iconOrdner.png")};
 
         int imageWidth = m_scrollArea->width() - 30;
 
@@ -154,7 +154,7 @@ void InputPanel::dropEvent(QDropEvent *e)
     } else {
         this->imageWasAdded = true;
 
-        QStringList fileNameList = {"/Users/eismont/Desktop/PSE/AlexLens/Icon/iconOrdner.png"};
+        QStringList fileNameList = {QString::fromStdString(this->manager->getProjectDir() + "Icon/iconOrdner.png")};
 
         int imageWidth = m_scrollArea->width() - 30;
 

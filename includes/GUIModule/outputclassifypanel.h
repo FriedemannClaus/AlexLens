@@ -102,7 +102,7 @@ protected:
     virtual void resizeEvent(QResizeEvent *event) override;
 
 private:
-    const string PROJECT_DIR = "/home/viet/CLionProjects/AlexLens/resources/"; /// Current path of project directory
+    //const string PROJECT_DIR = "/home/viet/CLionProjects/AlexLens/resources/"; /// Current path of project directory
     vector<string> results; /// Vector of results of process
     QGridLayout* m_gridLayout; /// The main panel of OutputClassifyPanel
     QGridLayout* m_gridLayout_2; /// The panel with all output data

@@ -63,7 +63,7 @@ void Manager::setDefaultNeuralNets() {
 
 void Manager::runClassify() {
 
-    this->results = executor->classify(imagePaths, operationMode, neuralNet);
+    this->results = executor->classify(imagePaths, operationMode, neuralNet, this->PROJECT_DIR);
     this->subject->setClassify(true);
     this->subject->informObservers();
 
@@ -72,7 +72,7 @@ void Manager::runClassify() {
 void Manager::runTraining() {
     string imageDir = imagePaths.front();
 
-    this->executor->train(imageDir, operationMode, neuralNet);
+    this->executor->train(imageDir, operationMode, neuralNet, this->PROJECT_DIR);
 
     //make name from imageDir for ParameterPanel
     if(imageDir[imageDir.size()-1] == '/') {

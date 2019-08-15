@@ -35,6 +35,8 @@ private:
 public:
     Manager(Subject* subject);
 
+    inline string getProjectDir() {return this->PROJECT_DIR;}
+
     inline void addImage(string imagePath) {this->imagePaths.push_front(imagePath);}
 
     inline void setMode(Mode mode) {operationMode = mode;}
