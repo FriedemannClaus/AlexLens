@@ -195,7 +195,6 @@ void ASICPlatform::loadLabels(vector<string> *labels) {
     /*
     ClassificationResult classificationResult(output_blob, *imageNames, *batchSize, NUM_TOP_RESULTS, labels);
     classificationResult.print();
-
     cout << endl << "total inference time: " << *total << endl;
     cout << "Average running time of one iteration: " << *total / static_cast<double>(NUM_ITERATIONS) << " ms" << endl;
     cout << endl << "Throughput: " << 1000 * static_cast<double>(NUM_ITERATIONS) * *batchSize / *total << " FPS" << endl;

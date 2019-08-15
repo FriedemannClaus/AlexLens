@@ -112,7 +112,7 @@ vector<string> CPUPlatform::getResults() {
 void CPUPlatform::runTraining() {
     //Py_SetProgramName(reinterpret_cast<const wchar_t *>(argv[0]));
     // Path of TransferLearning.py
-   /* char fileName[] = "/home/dmitrii/AlexLens/TransferLearning.py";
+    char fileName[] = "/home/dmitrii/AlexLens/TransferLearning.py";
     FILE* fp;
     Py_Initialize();
     fp = _Py_fopen(fileName, "r");
@@ -124,16 +124,16 @@ void CPUPlatform::runTraining() {
     PyRun_SimpleFile(fp, fileName);
     free(py_argv[0]);
     Py_Finalize();
-*/
 
-// !!11!!!11!
-// Get current dir of project
-/*size_t size;
-char *path = NULL;
-path = getcwd(path, size);
-string path_str(path);
-path_str = path_str.erase(path_str.rfind('/')+1);
-cout << path_str;*/
+
+    // !!11!!!11!
+    // Get current dir of project
+    /*size_t size;
+    char *path = NULL;
+    path = getcwd(path, size);
+    string path_str(path);
+    path_str = path_str.erase(path_str.rfind('/')+1);
+    cout << path_str;*/
 
 
     std::string command_str = "/home/dmitrii/anaconda3/bin/python /home/dmitrii/AlexLens/TransferLearning.py ";

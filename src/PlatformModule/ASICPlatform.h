@@ -12,7 +12,6 @@
 #include <inference_engine.hpp>
 #include <thread>
 #include <mutex>
-//#include <samples/classification_results.h>
 
 #include "Platform.h"
 #include "PlatformType.h"
