@@ -23,6 +23,12 @@ class ParameterPanel : public QWidget, public IObserver
 
 public:
     /**
+    * @return whether this tab is classify tab
+    */
+    inline bool isClassifyTab() override {return classifyTab;}
+
+
+    /**
      * Constructor for class ParameterPanel.
      * @param parent
      */
@@ -47,11 +53,6 @@ public:
      * @param classifyTab classifyTab to set
      */
     inline void setClassifyTab(bool classifyTab) {this->classifyTab = classifyTab;}
-
-    /**
-     * @return whether this tab is classify tab
-     */
-    inline bool isClassifyTab() {return classifyTab;}
 
     /**
      * @param manager manager to set
@@ -95,7 +96,6 @@ private:
     OutputClassifyPanel* outputPanel; /// Output panel
     bool runWasPushed = false; /// bool flag for start button
     bool classifyTab = true; /// bool flag for tabs
-    bool filesForTrainAdded = true; /// bool flag for input dir for training
 };
 
 #endif // WIDGET_H

@@ -69,7 +69,7 @@ ParameterPanel::~ParameterPanel()
 
 void ParameterPanel::start()
 {
-    if((classifyTab && inputPanel->isImageAdded()) || (!classifyTab && filesForTrainAdded)) {
+    if((classifyTab && inputPanel->isImageAdded()) || (!classifyTab && inputPanel->isImageAdded())) {
         string currentMode = this->modList->currentItem()->text().toStdString();
         string currentNeuralNet = this->neuralNetsList->currentItem()->text().toStdString();
         this->manager->setMode(ModeUtil::whichModeClassify(currentMode));

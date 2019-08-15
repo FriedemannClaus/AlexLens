@@ -66,11 +66,27 @@ void InputPanel::addImage()
 
         if (dir.size() == 0) this->imageWasAdded = false;
 
+        QStringList fileNameList = {"/Users/eismont/Desktop/PSE/AlexLens/Icon/iconOrdner.png"};
+
+        int imageWidth = m_scrollArea->width() - 30;
+
+        for (QString fileName : fileNameList)
+        {
+            QLabel* imageLabel = new QLabel(this);
+            QPixmap pix(fileName);
+            previewImages.append(qMakePair(imageLabel, pix));
+            imageLabel->setPixmap(pix.scaledToWidth(imageWidth));
+            m_verticalLayout->addWidget(imageLabel);
+        }
+
         //int imageWidth = m_scrollArea->width() - 30;
 
 
         QLabel* dirLabel = new QLabel(this);
-        dirLabel->setText(dir);
+        string path = dir.toStdString();
+        path = path.substr(path.rfind('/')+1, path.length()-path.rfind('/')+1);
+        dirLabel->setText(QString::fromStdString(path));
+        dirLabel->setAlignment(Qt::AlignCenter);
         //dirLabel->setPixmap(d.scaledToWidth(imageWidth));
         m_verticalLayout->addWidget(dirLabel);
 
@@ -138,12 +154,28 @@ void InputPanel::dropEvent(QDropEvent *e)
     } else {
         this->imageWasAdded = true;
 
+        QStringList fileNameList = {"/Users/eismont/Desktop/PSE/AlexLens/Icon/iconOrdner.png"};
+
+        int imageWidth = m_scrollArea->width() - 30;
+
+        for (QString fileName : fileNameList)
+        {
+            QLabel* imageLabel = new QLabel(this);
+            QPixmap pix(fileName);
+            previewImages.append(qMakePair(imageLabel, pix));
+            imageLabel->setPixmap(pix.scaledToWidth(imageWidth));
+            m_verticalLayout->addWidget(imageLabel);
+        }
+
         foreach (const QUrl &url, e->mimeData()->urls()) {
             QLabel* dirLabel = new QLabel(this);
             QString q_path = url.toString();
             string path = url.toString().toStdString();
             QString subPath = q_path.mid(7,path.length()-8);
-            dirLabel->setText(subPath);
+            path = path.substr(0, path.length()-1);
+            path = path.substr(path.rfind('/')+1, path.length()-path.rfind('/')+1);
+            dirLabel->setText(QString::fromStdString(path));
+            dirLabel->setAlignment(Qt::AlignCenter);
             m_verticalLayout->addWidget(dirLabel);
             this->manager->addImage(subPath.toStdString());
         }
@@ -164,3 +196,4 @@ void InputPanel::clearPanel()
             delete child;
         }
 }
+

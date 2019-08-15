@@ -64,6 +64,7 @@ void Manager::setDefaultNeuralNets() {
 void Manager::runClassify() {
 
     this->results = executor->classify(imagePaths, operationMode, neuralNet);
+    this->subject->setClassify(true);
     this->subject->informObservers();
 
 }
@@ -83,6 +84,7 @@ void Manager::runTraining() {
 
     defaultNeuralNets.push_back(imageDir);
     this->neuralNet = imageDir;
+    this->subject->setClassify(false);
     this->subject->informObservers();
 
 }

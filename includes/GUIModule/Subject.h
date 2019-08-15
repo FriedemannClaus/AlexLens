@@ -16,6 +16,9 @@ using namespace std;
 class Subject {
     list<IObserver*> observerList; /// List of all observers
 
+private:
+    bool classifyTab = true; /// bool flag for tabs
+
 public:
     /**
      * Constructor for class Subject.
@@ -30,12 +33,16 @@ public:
         observerList.push_back(observer);
     }
 
+
+    inline void setClassify(bool flag){
+        this->classifyTab = flag;
+    }
     /**
      * Inform the observers of the objects changes.
      */
     inline void informObservers() {
         for (auto observer:observerList) {
-            observer->invokeUpdate();
+            if (observer->isClassifyTab() == this->classifyTab ) observer->invokeUpdate();
         }
     }
 };
