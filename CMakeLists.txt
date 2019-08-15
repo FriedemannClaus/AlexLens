@@ -8,28 +8,40 @@ set(CMAKE_CXX_STANDARD 11)
 set(CMAKE_AUTORCC ON)
 SET(CMAKE_CXX_FLAGS -pthread)
 find_package(Threads)
-find_package(PythonLibs REQUIRED)
-
-
-find_package(Qt5Core REQUIRED)
-find_package(Qt5Gui REQUIRED)
-find_package(Qt5Widgets REQUIRED)
-
-#Torch stuff
-find_package(Torch REQUIRED)
-find_package(OpenCV REQUIRED)
-
-list(APPEND THIRD-PARTY-LIBS Qt::Widgets Qt::Core)
 
 include_directories(includes)
 include_directories(src)
+
+# Python
+find_package(PythonLibs REQUIRED)
 include_directories(${PYTHON_INCLUDE_DIRS})
-#Torch stuff
-include_directories( ${OpenCV_INCLUDE_DIRS} )
-# OpenVino stuff
-INCLUDE_DIRECTORIES(/opt/intel/openvino/deployment_tools/inference_engine/include)
-INCLUDE_DIRECTORIES(/opt/intel/openvino/deployment_tools/inference_engine/samples/common/format_reader)
-INCLUDE_DIRECTORIES(/opt/intel/openvino/deployment_tools/inference_engine/samples/common)
+
+# Qt5
+find_package(Qt5Core REQUIRED)
+find_package(Qt5Gui REQUIRED)
+find_package(Qt5Widgets REQUIRED)
+list(APPEND THIRD-PARTY-LIBS Qt::Widgets Qt::Core)
+
+# Torch
+include_directories(/home/viet/pytorch/build/lib.linux-x86_64-3.7/torch/include)
+include_directories(/home/viet/pytorch/build/lib.linux-x86_64-3.7/torch/include/torch/csrc/api/include)
+
+# OpenCV
+set(OpenCV_DIR /opt/intel/openvino/opencv/cmake)
+find_package(OpenCV)
+message(STATUS "OpenCV library status:")
+message(STATUS "    version: ${OpenCV_VERSION}")
+message(STATUS "    libraries: ${OpenCV_LIBS}")
+message(STATUS "    include path: ${OpenCV_INCLUDE_DIRS}")
+
+# OpenVino
+set(InferenceEngine_DIR /opt/intel/openvino/inference_engine/share)
+find_package(InferenceEngine QUIET)
+include_directories(/opt/intel/openvino/deployment_tools/inference_engine/samples/common/format_reader)
+message(STATUS "InferenceEngine library status:")
+message(STATUS "    version: ${InferenceEngine_VERSION}")
+message(STATUS "    libraries: ${InferenceEngine_LIBRARIES}")
+message(STATUS "    include path: ${InferenceEngine_INCLUDE_DIRS}")
 
 add_executable(AlexLens src/ManagerModule/main.cpp
         src/ManagerModule/Manager.cpp src/ManagerModule/Manager.h
@@ -57,16 +69,15 @@ add_executable(AlexLens src/ManagerModule/main.cpp
         src/PlatformModule/PlatformStatistic.cpp src/PlatformModule/PlatformStatistic.h
         )
 
-
-
 target_link_libraries(${PROJECT_NAME}
         Qt5::Core
         Qt5::Widgets
         Qt5::Gui
-        /opt/intel/openvino/deployment_tools/inference_engine/lib/intel64/libinference_engine.so
-        /home/dmitrii/inference_engine_samples_build/intel64/Release/lib/libformat_reader.so
-        dl
-        ${TORCH_LIBRARIES}
+        ${InferenceEngine_LIBRARIES}
+        /home/viet/inference_engine_samples_build/intel64/Release/lib/libformat_reader.so
+        /home/viet/pytorch/build/lib.linux-x86_64-3.7/torch/lib/libtorch.so
+        /home/viet/pytorch/build/lib.linux-x86_64-3.7/torch/lib/libshm.so
+        /home/viet/pytorch/build/lib.linux-x86_64-3.7/torch/lib/libc10.so
         ${OpenCV_LIBS}
         ${PYTHON_LIBRARIES}
         )
