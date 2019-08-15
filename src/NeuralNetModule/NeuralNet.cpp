@@ -167,7 +167,6 @@ void NeuralNet::init() {
             int z = 0;
             conv1Bias(z, 0) = stof(line); //Just a vector
             j++;
-            cout << "Hi\n";
         }
         if ( i == conv1BiasBorder && j == 96) { cout << "Conv-Layer 1 biases loaded successfully.\n";} //Sanity-check and user-info
 
@@ -293,12 +292,49 @@ void NeuralNet::init() {
         if ( i == fc8BiasBorder && x == 1000) { cout << "The biases of the final layer have been loaded successfully.\n";} //Sanity-check and user-info
         if (i == fc8BiasBorder) { cout << "60.965.224 parameters successfully loaded.\n";}
         if (i == fc8BiasBorder + 1) { cout << "This line should not be reached\n";}
-
-
-        //Now create the layers
-
-        auto conv1Layer = new Conv2DLayer();
-        conv1Layer->setWeights(conv1, conv1Bias);
-
     }
+
+
+    //Now create the layers
+    convLayers.resize(5);
+    convLayers(0) = new Conv2DLayer();
+    convLayers(0)->setWeights(conv1, conv1Bias);
+    convLayers(1) = new Conv2DLayer();
+    convLayers(1)->setWeights(conv2, conv2Bias);
+    convLayers(2) = new Conv2DLayer();
+    convLayers(2)->setWeights(conv3, conv3Bias);
+    convLayers(3) = new Conv2DLayer();
+    convLayers(3)->setWeights(conv4, conv4Bias);
+    convLayers(4) = new Conv2DLayer();
+    convLayers(4)->setWeights(conv5, conv5Bias);
+
+    fcLayers.resize(3);
+    fcLayers(0) = new FCLayer();
+    fcLayers(0)->setWeights(fc6, fc6Bias);
+    fcLayers(1) = new FCLayer();
+    fcLayers(1)->setWeights(fc7, fc7Bias);
+    fcLayers(2) = new FCLayer();
+    fcLayers(2)->setWeights(fc8, fc8Bias);
+}
+
+
+Layer::Vector& NeuralNet::classify(Layer::ThreeDMatrix &picture) {
+
+    //Forward-Propagate
+    Layer::ThreeDMatrix result = picture;
+    for (int i = 0; i < convLayers.rows(); ++i) {
+        result = convLayers(i)->forward(result);
+    }
+    for (int i = 0; i < fcLayers.rows(); ++i) {
+        result = fcLayers(i)->forward(result);
+    }
+    Layer::Vector propabilities;
+    propabilities.resize (1000);
+    //artificially resize result because layers don't work yet
+    result.resize(1);
+    result(0).resize(1000, 1);
+    for (int i = 0; i < 1000; ++i) {
+        propabilities(i) = result(0)(i, 0);
+    }
+    return propabilities;
 }

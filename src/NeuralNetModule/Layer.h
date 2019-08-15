@@ -12,15 +12,13 @@
 #include <vector>
 /// Abstract class Layer. For all Layers extend this class
 class Layer {
-protected:
+public:
     ///Definition of Types for convenient usage.
     ///To use Layer::Matrix or Layer::Vector
     typedef Eigen::Matrix<float, Eigen::Dynamic, 1> Vector;
     typedef Eigen::Matrix<float, Eigen::Dynamic, Eigen::Dynamic> Matrix;
     typedef Eigen::Matrix<Matrix, Eigen::Dynamic, 1> ThreeDMatrix;
     typedef Eigen::Matrix<Matrix, Eigen::Dynamic, Eigen::Dynamic> FourDMatrix;
-
-public:
 
     // separate non-virtual setweights-Function, because weights can be different (FourDMatrix or just a (2D-) Matrix)
     // and some Layers don't even have weights.

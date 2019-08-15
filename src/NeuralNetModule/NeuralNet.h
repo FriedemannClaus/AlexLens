@@ -10,14 +10,19 @@
 
 #include "NeuralNetModule/INeuralNet.h"
 #include "NeuralNetModule/INeuralNet.h"
+#include "Layer.h"
+#include "Conv2DLayer.h"
+#include "FCLayer.h"
 
 
 class NeuralNet: public INeuralNet {
 private: 
-//	List<Layer> layers;
+    Eigen::Matrix<Conv2DLayer* , Eigen::Dynamic, 1> convLayers;
+    Eigen::Matrix<FCLayer* , Eigen::Dynamic, 1> fcLayers;
 
 public:
-    static void init();
+    void init();
+    Layer::Vector& classify(Layer::ThreeDMatrix &picture);
 };
 
 #endif //_NEURALNET_H

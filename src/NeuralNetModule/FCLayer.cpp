@@ -16,7 +16,7 @@ const Layer::ThreeDMatrix& FCLayer::forward(const Layer::ThreeDMatrix &input) {
 //    result.resize(bias.rows(), columns);
 //    result.noalias() = weights.transpose() * input;
 //    result.colwise() += this->bias;
-    return result;
+    return input;
 }
 
 void FCLayer::setWeights(const Layer::Matrix &weights, const Layer::Vector &bias) {
