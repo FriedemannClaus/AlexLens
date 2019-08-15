@@ -17,7 +17,7 @@ private:
 //	List<Layer> layers;
 
 public:
-    void init();
+    static void init();
 };
 
 #endif //_NEURALNET_H

@@ -27,7 +27,6 @@
 using namespace std;
 
 void NeuralNet::init() {
-
     typedef Eigen::Matrix<float, Eigen::Dynamic, 1> Vector;
     typedef Eigen::Matrix<float, Eigen::Dynamic, Eigen::Dynamic> Matrix;
     typedef Eigen::Matrix<Matrix, Eigen::Dynamic, 1> ThreeDMatrix;
@@ -95,7 +94,6 @@ void NeuralNet::init() {
     fc6.resize(4096, 9216);
     fc7.resize(4096, 4096);
     fc8.resize(1000, 4096);
-
 
     //Bias Vectors:
     Vector conv1Bias;
@@ -169,6 +167,7 @@ void NeuralNet::init() {
             int z = 0;
             conv1Bias(z, 0) = stof(line); //Just a vector
             j++;
+            cout << "Hi\n";
         }
         if ( i == conv1BiasBorder && j == 96) { cout << "Conv-Layer 1 biases loaded successfully.\n";} //Sanity-check and user-info
 
@@ -298,8 +297,8 @@ void NeuralNet::init() {
 
         //Now create the layers
 
-        Conv2DLayer conv1Layer = new Conv2DLayer();
-        conv1Layer.setWeights(conv1, conv1Bias);
+        auto conv1Layer = new Conv2DLayer();
+        conv1Layer->setWeights(conv1, conv1Bias);
 
     }
 }

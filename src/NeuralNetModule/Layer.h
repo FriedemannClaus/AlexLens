@@ -24,12 +24,12 @@ public:
 
     // separate non-virtual setweights-Function, because weights can be different (FourDMatrix or just a (2D-) Matrix)
     // and some Layers don't even have weights.
-    Layer() :{}
+//    Layer() : {}
 
-    /// Forward Propagation of layer
+    /// Forward Propagation of layer. Pure virtual because layers have to implement this.
     /// \param input output of PREVIOUS Layer
     /// \return result of forward propagation
-    virtual const Matrix& forward(const ThreeDMatrix& input);
+    virtual const ThreeDMatrix& forward(const ThreeDMatrix& input) = 0;
 
 
 };

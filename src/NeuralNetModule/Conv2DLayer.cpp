@@ -10,7 +10,7 @@
 /**
 * Conv2DLayer implementation
 */
-const Layer::Matrix& Conv2DLayer::forward(const Layer::Matrix &input)  {
+const Layer::ThreeDMatrix& Conv2DLayer::forward(const Layer::ThreeDMatrix &input)  {
 //    if (ZERO_PADDING == true) { zeroPad(input); }
 //    int strides = weights.cols() / STRIDE;
 //
@@ -25,7 +25,7 @@ const Layer::Matrix& Conv2DLayer::forward(const Layer::Matrix &input)  {
     return input;
 }
 
-const Layer::Matrix& Conv2DLayer::zeroPad(const Layer::Matrix &input) {
+const Layer::ThreeDMatrix& Conv2DLayer::zeroPad(const Layer::ThreeDMatrix &input) {
 //    int zeroPadWidth = FILTER_SIZE / 2; //div
 //    int sideLength = input.cols() + 2 * zeroPadWidth;
 //    Matrix output = Layer::Matrix::Zero();
@@ -42,7 +42,7 @@ const Layer::Matrix& Conv2DLayer::zeroPad(const Layer::Matrix &input) {
       return input;
 }
 
-void FCLayer::setWeights(Layer::FourDMatrix &weights, Layer::Vector &bias) {
+void Conv2DLayer::setWeights(const Layer::FourDMatrix &weights, const Layer::Vector &bias) {
     this->weights = weights;
     this->bias = bias;
 }

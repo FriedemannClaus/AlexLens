@@ -22,13 +22,13 @@ private:
     /**
      * Result of forward propagation
      */
-    Matrix result;
+    ThreeDMatrix result;
 
 public:
-    FCLayer() : Layer() {}
+//    FCLayer() : Layer() {}
 
-    const Matrix& forward(const Matrix& input) override;
-    void setWeights(Matrix& weights, Vector& bias);
+    const ThreeDMatrix& forward(const ThreeDMatrix& input) override;
+    void setWeights(const Matrix& weights, const Vector& bias);
 };
 
 

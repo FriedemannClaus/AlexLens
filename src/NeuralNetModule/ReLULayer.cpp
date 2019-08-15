@@ -5,10 +5,10 @@
 #include "ReLULayer.h"
 #include "Layer.h"
 
-const Layer::Matrix_t& ReLULayer::forward(const Layer::Matrix_t &x){
-    int columns = x.cols();
-    x.array() = x.array()cwiseMax(Scalar(0));
-    r.resize(this->outputSize, columns);
-    r.array() = x.array();
-    return x;
+const Layer::Matrix& ReLULayer::forward(const Layer::Matrix &input){
+//    int columns = x.cols();
+//    x.array() = x.array()cwiseMax(Scalar(0));
+//    r.resize(this->outputSize, columns);
+//    r.array() = x.array();
+    return input;
 }

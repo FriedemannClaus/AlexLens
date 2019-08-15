@@ -27,15 +27,15 @@ private:
     /**
      * Result of forward propagation
      */
-    Matrix result;
+    ThreeDMatrix result;
 
 public:
-    Conv2DLayer() : Layer() {}
-    const Matrix& forward(const Matrix& input) override;
-    void setWeights(FourDMatrix& weights, Vector& bias);
+//    Conv2DLayer() : Layer() {}
+    const ThreeDMatrix& forward(const ThreeDMatrix& input) override;
+    void setWeights(const FourDMatrix& weights, const Vector& bias);
 
 private:
-    const Matrix& zeroPad(const Matrix& input);
+    const ThreeDMatrix& zeroPad(const ThreeDMatrix& input);
 };
 
 #endif //_CONV2DLAYER_H
