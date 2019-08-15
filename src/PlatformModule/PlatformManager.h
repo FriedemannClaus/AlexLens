@@ -16,7 +16,7 @@ using namespace std;
 
 class PlatformManager {
 private:
-    const static int NUM_PLATFORMS = 2;
+    const static int NUM_PLATFORMS = 1;
     list<Platform*> platforms;
     Mode mode;
     string neuralNet;

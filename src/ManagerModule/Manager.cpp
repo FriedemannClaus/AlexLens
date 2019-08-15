@@ -19,6 +19,7 @@
 
 
 Manager::Manager(Subject* subject) {
+    setProjectDir();
     setDefaultModesClassify();
     setDefaultModesTraining();
     setDefaultNeuralNets();
@@ -40,7 +41,23 @@ void Manager::setDefaultModesTraining() {
 
 void Manager::setDefaultNeuralNets() {
     list<string> nets;
-    nets.push_front("alexnet");
+    std::string PROJECT_DIR_temp = PROJECT_DIR+"resources/";
+    char * projectdir = new char [PROJECT_DIR_temp.length()+1];
+    strcpy (projectdir, PROJECT_DIR_temp.c_str());
+    DIR *dir;
+    struct dirent *ent;
+    std::cout << projectdir << std::endl;
+    if ((dir = opendir (projectdir)) != NULL) {
+        while ((ent = readdir (dir)) != NULL) {
+            if ((ent->d_name[0] != '.') && exists_file(PROJECT_DIR_temp+"/"+ent->d_name+"/"+ent->d_name+"_labels"+".txt") && exists_file(PROJECT_DIR_temp+"/"+ent->d_name+"/"+ent->d_name+"_model"+".pt")) {
+                nets.push_back(ent->d_name);
+            }
+        }
+        closedir (dir);
+    } else {
+        perror ("NO PROJECT DIRECTORY FOUND");
+    }
+    //nets.push_front("alexnet");
     this->defaultNeuralNets = nets;
 }
 
@@ -102,4 +119,20 @@ list<string> Manager::findNeuralNets(){
         //throw error on not opening the directory
     }
     return *nets;
+}
+
+void Manager::setProjectDir() {
+    // Get current dir of project
+    size_t size;
+    char *path = NULL;
+    path = getcwd(path, size);
+    string path_str(path);
+    path_str = path_str.erase(path_str.rfind('/')+1);
+    this->PROJECT_DIR = path_str;
+    cout << path_str << endl;
+}
+
+bool Manager::exists_file(const std::string &name) {
+    struct stat buffer;
+    return (stat (name.c_str(), &buffer) == 0);
 }
