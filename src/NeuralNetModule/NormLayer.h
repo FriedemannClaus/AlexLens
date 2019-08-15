@@ -24,9 +24,17 @@ private:
     const int outputNumCols;
     ThreeDMatrix outputMatrix;
 
+    int max(int a, int b) {
+        return ((a > b) ? a : b);
+    }
+
+    int min(int a, int b) {
+        return ((a < b) ? a : b);
+    }
+
 public:
     NormLayer(const int inputWidth, const int inputHeight, const int inputChannels, const int normK, const int normAlpha, const int normBeta, const in normRegionSize):
-        //Initiatlisierungsliste
+        //Initialisierungsliste
         Layer(inputWidth * inputHeight * inputChannels, inputWidth * inputHeight * inputChannels),
         inputNumRows(inputHeight),
         inputNumCols(inputWidth),
@@ -47,23 +55,15 @@ public:
                     // Summe berechnen:
                     float sum = 0;
                     for (int l = max(0, k - (n / 2)); l <= min(inputNumChannels - 1, k + (n / 2)); l++) {
-                        sum += pow(inputMatrix(l)(i, j), 2);
+                        sum += pow((*inputMatrix)(l)(i, j), 2);
                     }
 
-                    outputMatrix(k)(i, j) = inputMatrix(k)(i, j) / pow((k + alpha * sum), beta);
+                    outputMatrix(k)(i, j) = (*inputMatrix)(k)(i, j) / pow((k + alpha * sum), beta);
                 }
             }
         }
 
         return outputMatrix;
-    }
-
-    int max(int a, int b) {
-        return ((a > b) ? a : b);
-    }
-
-    int min(int a, int b) {
-        return ((a < b) ? a : b);
     }
 };
 

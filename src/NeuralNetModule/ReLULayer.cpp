@@ -1,14 +1,11 @@
-//
-// Created by viet on 08.08.19.
-//
+/**
+ * Project Entwurf_PSE_KNN
+ * @author Jakub Trzcinsi, Viet Pham, Friedemann Claus, Dima Seletkov, Alexandr Eismont
+ * @version 1.2
+ */
 
 #include "ReLULayer.h"
-#include "Layer.h"
 
-const Layer::Matrix& ReLULayer::forward(const Layer::Matrix &input){
-//    int columns = x.cols();
-//    x.array() = x.array()cwiseMax(Scalar(0));
-//    r.resize(this->outputSize, columns);
-//    r.array() = x.array();
-    return input;
-}
+/**
+ * ReLU implementation
+ */
