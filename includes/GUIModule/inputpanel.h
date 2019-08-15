@@ -53,11 +53,6 @@ public:
     inline bool isImageAdded() {return imageWasAdded;}
 
     /**
-     * @return whether this tab is classify tab
-     */
-    inline bool isClassifyTab() {return classifyTab;}
-
-    /**
      * @return all preview of added images
      */
     inline QVector<QPair<QLabel*, QPixmap> > getPreviewImages() {return this->previewImages;}

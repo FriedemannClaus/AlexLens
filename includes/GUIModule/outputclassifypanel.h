@@ -49,6 +49,11 @@ public:
     void clearPanel();
 
     /**
+    * @return whether this tab is classify tab
+    */
+    inline bool isClassifyTab() override {return classifyTab;}
+
+    /**
      * @param manager manager to set
      */
     inline void setManager(Manager* manager) {this->manager = manager;}

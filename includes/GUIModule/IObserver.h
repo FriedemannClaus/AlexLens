@@ -14,5 +14,10 @@ public:
      * Invoke the update methods on object.
      */
     virtual void invokeUpdate() {}
+
+    /**
+     * @return whether this tab is classify tab
+     */
+    virtual bool isClassifyTab() {}
 };
 #endif //ALEXLENS_IOBSERVER_H
