@@ -18,6 +18,6 @@ public:
     /**
      * @return whether this tab is classify tab
      */
-    virtual bool isClassifyTab() {}
+    virtual bool isClassifyTab() {return false;}
 };
 #endif //ALEXLENS_IOBSERVER_H
