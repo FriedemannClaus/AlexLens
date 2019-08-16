@@ -227,6 +227,7 @@ def predict(model, test_image_name):
 # Folder fot temp files
 #folderName = '/home/dmitrii/AlexLens/resources'
 dirpath = os.getcwd()
+dirpath = dirpath[0:dirpath.rfind('/', 0, len(dirpath))]
 folderName = dirpath + "/resources"
 # Delete a folder
 #shutil.rmtree(folderName, ignore_errors=True)
@@ -263,7 +264,7 @@ image_transforms = {
 # PATH!!!!!!!!
 #dataset = '/Users/eismont/PycharmProjects/test/pse_dataset_test'
 dataset = sys.argv[0] #for initialize
-#dataset = sys.argv[1] #for syscall
+dataset = sys.argv[1] #for syscall
 dataset_name = dataset[dataset.rfind('/', 0, len(dataset)) + 1:len(dataset)]
 folderName = folderName + '/' + dataset_name
 if not(os.path.isdir(folderName)):
@@ -333,7 +334,7 @@ optimizer = optim.Adam(alexnet.parameters())
 device = torch.device("cpu")
 
 # Train the model for 13 epochs
-num_epochs = 2
+num_epochs = 1
 trained_model, history = train_and_validate(alexnet, loss_func, optimizer, num_epochs)
 
 file_log.close()

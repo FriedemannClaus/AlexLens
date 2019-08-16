@@ -124,8 +124,9 @@ void InputPanel::dragEnterEvent(QDragEnterEvent *e)
     } else {
         flag = true;
         foreach (const QUrl &url, e->mimeData()->urls()) {
+            QFileInfo fileInfo(url.toLocalFile());
             string path = url.toString().toLocal8Bit().constData();
-            if (path[path.length()-1] != '/') {
+            if ((path[path.length()-1] != '/') && (!(fileInfo.isDir()))) {
                 flag = false;
             }
         }

@@ -18,7 +18,6 @@ vector<string> Executor::classify(list<string> imagePaths, Mode mode, string neu
     this->platformManager->setNeuralNet(neuralNet);
 
     list<Platform*> platforms = platformManager->getAvailablePlatforms();
-    cout << neuralNet << endl;
     for(Platform* platform:platforms) {
         platform->setProjectDir(project_dir);
         platform->setNeuralNet(neuralNet);

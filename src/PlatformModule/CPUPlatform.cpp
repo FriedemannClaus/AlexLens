@@ -22,9 +22,6 @@ using namespace std;
 
 void CPUPlatform::runClassify() {
     this->results.clear();
-
-    std::cout << model_path <<std::endl;
-    std::cout << label_path <<std::endl;
     //model_path = "/home/dmitrii/alexnetTr.pt";
     // Deserialize the ScriptModule from a file using torch::jit::load().
     //std::string model_path = "/home/dmitrii/repos/cpp-pytorch/caltech.pt";//"/home/dmitrii/alexnetTr.pt";
