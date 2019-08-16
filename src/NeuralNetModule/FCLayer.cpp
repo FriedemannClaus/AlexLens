@@ -6,7 +6,7 @@
 #include "FCLayer.h"
 
 
-FCLayer::FCLayer(Layer::FourDMatrix &weights, Layer::Vector &bias) :
+FCLayer::FCLayer(Matrix &weights, Vector &bias) :
         weights(weights),
         bias(bias)
 {}

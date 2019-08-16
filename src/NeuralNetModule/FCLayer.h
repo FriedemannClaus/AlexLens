@@ -26,7 +26,7 @@ public:
     * @param weights The weights of the FC-Layer
     * @param bias The bias of the FC-Layer
     */
-    FCLayer(Layer::FourDMatrix &weights, Layer::Vector &bias);
+    FCLayer(Matrix &weights, Vector &bias);
 
     /**
     * The forward-propagation-function

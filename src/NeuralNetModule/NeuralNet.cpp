@@ -356,15 +356,12 @@ Layer::Vector& NeuralNet::classify(Layer::ThreeDMatrix &picture) {
     //Forward-Propagate
     Layer::ThreeDMatrix input = picture;
     Layer::ThreeDMatrix output;
-    for (int i = 0; i < convLayers.rows(); ++i) {
-        convLayers(i)->forward(input, output);
-        //Relu
-        //Norm
-        //Maxpool (nicht immer)
+    for (int i = 0; i < layers.rows(); ++i) {
+        layers(i)->forward(input, output);
     }
-    for (int i = 0; i < fcLayers.rows(); ++i) {
-        fcLayers(i)->forward(input, output);
-    }
+//    for (int i = 0; i < fcLayers.rows(); ++i) {
+//        fcLayers(i)->forward(input, output);
+//    }
     Layer::Vector propabilities;
     propabilities.resize (1000);
     //artificially resize result because layers don't work yet
