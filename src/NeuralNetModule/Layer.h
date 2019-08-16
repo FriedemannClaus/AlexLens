@@ -20,14 +20,12 @@ public:
     typedef Eigen::Matrix<Matrix, Eigen::Dynamic, 1> ThreeDMatrix;
     typedef Eigen::Matrix<Matrix, Eigen::Dynamic, Eigen::Dynamic> FourDMatrix;
 
-    // separate non-virtual setweights-Function, because weights can be different (FourDMatrix or just a (2D-) Matrix)
-    // and some Layers don't even have weights.
-//    Layer() : {}
-
-    /// Forward Propagation of layer. Pure virtual because layers have to implement this.
-    /// \param input output of PREVIOUS Layer
-    /// \return result of forward propagation
-    virtual const ThreeDMatrix& forward(const ThreeDMatrix& input) = 0;
+/**
+ * The forward-propagation-function. Pure virtual because layers have to implement this.
+ * @param input The 3D-Input-Matrix
+ * @param output The 3D-Output-Matrix
+ */
+    virtual void forward(const ThreeDMatrix &input, ThreeDMatrix &output) = 0;
 
 
 };

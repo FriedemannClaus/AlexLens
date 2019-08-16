@@ -1,7 +1,6 @@
 /**
  * Project Entwurf_PSE_KNN
  * @author Friedemann Claus
- * @version 1.2
  */
 
 
@@ -13,9 +12,7 @@
 class Conv2DLayer: public Layer {
 private:
     int STRIDE;
-    int NUM_FILTERS;
     bool ZERO_PADDING;
-    int FILTER_SIZE;
     /**
      * Weight Matrix
      */
@@ -24,18 +21,15 @@ private:
      * Bias vector
      */
     Vector bias;
-    /**
-     * Result of forward propagation
-     */
-    ThreeDMatrix result;
 
 public:
-//    Conv2DLayer() : Layer() {}
-    const ThreeDMatrix& forward(const ThreeDMatrix& input) override;
+    Conv2DLayer(int stride, bool ZeroPadding, FourDMatrix& weights, Vector& bias);
+
+    void forward(const ThreeDMatrix &input, ThreeDMatrix &output) override;
     void setWeights(const FourDMatrix& weights, const Vector& bias);
 
 private:
-    const ThreeDMatrix& zeroPad(const ThreeDMatrix& input);
+    void zeroPad(const Layer::ThreeDMatrix &input, Layer::ThreeDMatrix &output);
 };
 
 #endif //_CONV2DLAYER_H
