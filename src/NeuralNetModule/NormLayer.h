@@ -17,8 +17,8 @@ private:
     const int inputNumCols;
     const int inputNumChannels;
     const int k;
-    const int alpha;
-    const int beta;
+    const float alpha;
+    const float beta;
     const int n;
     const int outputNumRows;
     const int outputNumCols;
@@ -33,13 +33,13 @@ private:
     }
 
 public:
-    NormLayer(const int inputWidth, const int inputHeight, const int inputChannels, const int normK, const int normAlpha, const int normBeta, const int normRegionSize):
+    NormLayer(const int inputWidth, const int inputHeight, const int inputChannels, const int normK, const float normAlpha, const float normBeta, const int normRegionSize):
         //Initialisierungsliste
-        Layer(inputWidth * inputHeight * inputChannels, inputWidth * inputHeight * inputChannels),
+        //Layer(inputWidth * inputHeight * inputChannels, inputWidth * inputHeight * inputChannels),
         inputNumRows(inputHeight),
         inputNumCols(inputWidth),
         inputNumChannels(inputChannels),
-        k(normK);
+        k(normK),
         alpha(normAlpha),
         beta(normBeta),
         n(normRegionSize),
@@ -47,7 +47,7 @@ public:
         outputNumCols(inputNumCols)
     {}
 
-    ThreeDMatrix forward(const ThreeDMatrix &inputMatrix) {
+    void forward(const ThreeDMatrix &inputMatrix, ThreeDMatrix &outputMatrix) {
         outputMatrix.resize(outputNumRows, outputNumCols);
         for (int i = 0; i < inputNumRows; i++) { // Iterieren über Reihen
             for (int j = 0; j < inputNumCols; j++) { // Iterieren über Spalten
@@ -55,15 +55,13 @@ public:
                     // Summe berechnen:
                     float sum = 0;
                     for (int l = max(0, k - (n / 2)); l <= min(inputNumChannels - 1, k + (n / 2)); l++) {
-                        sum += pow((*inputMatrix)(l)(i, j), 2);
+                        sum += pow((inputMatrix)(l)(i, j), 2);
                     }
 
-                    outputMatrix(k)(i, j) = (*inputMatrix)(k)(i, j) / pow((k + alpha * sum), beta);
+                    outputMatrix(k)(i, j) = (inputMatrix)(k)(i, j) / pow((k + alpha * sum), beta);
                 }
             }
         }
-
-        return outputMatrix;
     }
 };
 
