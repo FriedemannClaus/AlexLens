@@ -37,7 +37,7 @@ public:
     * @param input The 3D-Input-Matrix
      * @param output The 3D-Output-Matrix
     */
-    void forward(const ThreeDMatrix &input, ThreeDMatrix &output) override;
+    void forward(ThreeDMatrix &input, ThreeDMatrix &output) override;
 
     /**
     * A setter-method for the weights

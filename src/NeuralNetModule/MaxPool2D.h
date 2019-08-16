@@ -47,7 +47,7 @@ public:
             stride(poolStride)
     {}
 
-    void forward(const ThreeDMatrix &inputMatrix, ThreeDMatrix &outputMatrix) override {
+    void forward(ThreeDMatrix &inputMatrix, ThreeDMatrix &outputMatrix) override {
         outputMatrix.resize(outputNumRows, outputNumCols);
         int outputSize = ((inputNumCols - poolNumCols) / stride) + 1; //size of one side!
         int numPoolElements = poolNumCols * poolNumRows;

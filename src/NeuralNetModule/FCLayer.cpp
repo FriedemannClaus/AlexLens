@@ -11,7 +11,7 @@ FCLayer::FCLayer(Layer::FourDMatrix &weights, Layer::Vector &bias) :
         bias(bias)
 {}
 
-void FCLayer::forward(const Layer::ThreeDMatrix &input, Layer::ThreeDMatrix &output) {
+void FCLayer::forward(Layer::ThreeDMatrix &input, Layer::ThreeDMatrix &output) {
 //    Vector vectorizedInput = input(i) mit for-schleife input zu Vektor machen. Oder nicht vectorizen
 //    und per for-schleife weight-Matrix mit ThreeD-Input-Matrix multiplizieren.
 //    int columns = input.cols();

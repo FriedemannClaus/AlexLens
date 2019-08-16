@@ -24,7 +24,7 @@ public:
  * @param input The 3D-Input-Matrix
  * @param output The 3D-Output-Matrix
  */
-    virtual void forward(const ThreeDMatrix &input, ThreeDMatrix &output) = 0;
+    virtual void forward(ThreeDMatrix &input, ThreeDMatrix &output) = 0;
 };
 
 #endif //UNTITLED_LAYER_H

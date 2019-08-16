@@ -33,7 +33,7 @@ public:
     * @param input The 3D-Input-Matrix
     * @param output The 3D-Output-Matrix
     */
-    void forward(const Layer::ThreeDMatrix &input, Layer::ThreeDMatrix &output) override;
+    void forward(Layer::ThreeDMatrix &input, Layer::ThreeDMatrix &output) override;
 
     /**
     * A setter-method for the weights

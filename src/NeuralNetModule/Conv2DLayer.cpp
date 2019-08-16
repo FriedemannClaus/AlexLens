@@ -15,7 +15,7 @@ Conv2DLayer::Conv2DLayer(int stride, bool ZeroPadding, FourDMatrix& weights, Vec
 {}
 
 
-void Conv2DLayer::forward(const ThreeDMatrix &input, ThreeDMatrix &output) {
+void Conv2DLayer::forward(ThreeDMatrix &input, ThreeDMatrix &output) {
     ThreeDMatrix paddedInput;
     if (ZERO_PADDING == true) {zeroPad(input,paddedInput);}
 

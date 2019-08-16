@@ -14,28 +14,20 @@
 class ReLULayer: public Layer {
 
 private:
-    const int inputNumRows;
-    const int inputNumCols;
-    const int inputNumChannels;
-
     float max(float a) {
         return ((a > 0) ? a : 0);
     }
 
 public:
-    ReLULayer(const int inputWidth, const int inputHeight, const int inputChannels):
-    //Initialisierungsliste
-            Layer(inputWidth * inputHeight * inputChannels, inputWidth * inputHeight * inputChannels),
-            inputNumRows(inputHeight),
-            inputNumCols(inputWidth),
-            inputNumChannels(inputChannels),
-    {}
+    void forward(ThreeDMatrix &inputMatrix, ThreeDMatrix &outputMatrix) override {
+        int inputNumRows = inputMatrix(0).rows();
+        int inputNumCols = inputMatrix(0).cols();
+        int inputNumChannels = inputMatrix.rows();;
 
-    void forward(const ThreeDMatrix &inputMatrix) {
         for (int i = 0; i < inputNumChannels; i++) {
             for (int j = 0; j < inputNumRows; j++) {
                 for (int k = 0; k < inputNumCols; k++) {
-                    (*inputMatrix)(i)(j)(k) = max((*inputMatrix)(i)(j)(k));
+                    inputMatrix(i)(j, k) = max(inputMatrix(i)(j, k));
                 }
             }
         }

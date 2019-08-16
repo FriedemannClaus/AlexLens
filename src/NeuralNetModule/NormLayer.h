@@ -46,7 +46,7 @@ public:
         outputNumCols(inputNumCols)
     {}
 
-    void forward(const ThreeDMatrix &inputMatrix, ThreeDMatrix &outputMatrix) override {
+    void forward(ThreeDMatrix &inputMatrix, ThreeDMatrix &outputMatrix) override {
         outputMatrix.resize(outputNumRows, outputNumCols);
         for (int i = 0; i < inputNumRows; i++) { // Iterieren über Reihen
             for (int j = 0; j < inputNumCols; j++) { // Iterieren über Spalten
