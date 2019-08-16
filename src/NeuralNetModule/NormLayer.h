@@ -16,7 +16,7 @@ private:
     const int inputNumRows;
     const int inputNumCols;
     const int inputNumChannels;
-    const int k;
+    const int kNorm;
     const float alpha;
     const float beta;
     const int n;
@@ -38,7 +38,7 @@ public:
         inputNumRows(inputHeight),
         inputNumCols(inputWidth),
         inputNumChannels(inputChannels),
-        k(normK),
+        kNorm(normK),
         alpha(normAlpha),
         beta(normBeta),
         n(normRegionSize),
@@ -46,7 +46,7 @@ public:
         outputNumCols(inputNumCols)
     {}
 
-    void forward(const ThreeDMatrix &inputMatrix, ThreeDMatrix &outputMatrix) {
+    void forward(const ThreeDMatrix &inputMatrix, ThreeDMatrix &outputMatrix) override {
         outputMatrix.resize(outputNumRows, outputNumCols);
         for (int i = 0; i < inputNumRows; i++) { // Iterieren über Reihen
             for (int j = 0; j < inputNumCols; j++) { // Iterieren über Spalten
@@ -57,7 +57,7 @@ public:
                         sum += pow((inputMatrix)(l)(i, j), 2);
                     }
 
-                    outputMatrix(k)(i, j) = (inputMatrix)(k)(i, j) / pow((k + alpha * sum), beta);
+                    outputMatrix(k)(i, j) = (inputMatrix)(k)(i, j) / pow((kNorm + alpha * sum), beta);
                 }
             }
         }
