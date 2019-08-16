@@ -21,7 +21,6 @@ private:
     const int outputNumRows;
     const int outputNumCols;
     const int stride;
-    ThreeDMatrix outputMatrix;
 
     float getMaxFloat(Vector *floats) {
         float result = (*floats)(0);
@@ -48,7 +47,7 @@ public:
             stride(poolStride)
     {}
 
-     ThreeDMatrix forward(const ThreeDMatrix &inputMatrix) {
+    void forward(const ThreeDMatrix &inputMatrix, ThreeDMatrix &outputMatrix) {
         outputMatrix.resize(outputNumRows, outputNumCols);
         int outputSize = ((inputNumCols - poolNumCols) / stride) + 1; //size of one side!
         int numPoolElements = poolNumCols * poolNumRows;
@@ -64,12 +63,7 @@ public:
                 }
             }
         }
-        return outputMatrix;
     }
-
-
-
-
 };
 
 #endif //_MAXPOOL2D_H

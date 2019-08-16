@@ -22,7 +22,6 @@ private:
     const int n;
     const int outputNumRows;
     const int outputNumCols;
-    ThreeDMatrix outputMatrix;
 
     int max(int a, int b) {
         return ((a > b) ? a : b);
