@@ -16,10 +16,10 @@
 class PlatformStatistic {
 public:
     double getFLOPS();
-    inline void setFLOPS(bool flops) {this->flops = flops;}
+    inline void setFLOPS(int flops) {this->flops = flops;}
 
     double getEnergyConsum();
-    inline void setEnergyConsum(bool energyConsum) {this->energyConsum = energyConsum;}
+    inline void setEnergyConsum(int energyConsum) {this->energyConsum = energyConsum;}
 
     double getTotalInferenceTime();
     void setTotalInferenceTime(double time);

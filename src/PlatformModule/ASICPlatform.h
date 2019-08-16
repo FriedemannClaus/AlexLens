@@ -32,6 +32,7 @@ public:
     vector<string> getResults();
 
     static std::mutex mutex;
+    string getId() override {return to_string(this->id+1);};
 
 private:
 

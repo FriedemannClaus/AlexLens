@@ -89,6 +89,8 @@ void CPUPlatform::runClassify() {
 
 CPUPlatform::CPUPlatform() {
     this->type = PlatformType::CPU;
+    this->statistic.setEnergyConsum(20);
+    this->statistic.setFLOPS(19);
 }
 
 void CPUPlatform::runClassifyOne(string imagePath) {

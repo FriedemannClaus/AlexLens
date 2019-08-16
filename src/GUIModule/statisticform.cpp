@@ -49,13 +49,13 @@ void StatisticForm::printStatistic() {
         name->setFont(font);
         PlatformStatistic platformStatistic = platform->getStatistic();
         QLabel *label = new QLabel(this);
-        label->setText(QString::fromStdString("FLOPS: " + to_string(platformStatistic.getFLOPS())));
+        label->setText(QString::fromStdString("GFLOPS: " + to_string(platformStatistic.getFLOPS())));
         QLabel *label_2 = new QLabel(this);
         label_2->setText(QString::fromStdString("\nBandweite (Throughput): " + to_string(platformStatistic.getThroughput()) + " FPS"));
         QLabel *label_3 = new QLabel(this);
-        label_3->setText(QString::fromStdString("\nLeistungsverbrauch: "+ to_string(platformStatistic.getEnergyConsum())));
+        label_3->setText(QString::fromStdString("\nLeistungsverbrauch: "+ to_string(platformStatistic.getEnergyConsum())+ " W"));
         QLabel *label_4 = new QLabel(this);
-        label_4->setText(QString::fromStdString("\nGesamte Laufzeit: " + to_string(platformStatistic.getTotalInferenceTime())));
+        label_4->setText(QString::fromStdString("\nGesamte Laufzeit: " + to_string(platformStatistic.getTotalInferenceTime())+ " ms"));
         QLabel *label_5 = new QLabel(this);
         label_5->setText(QString::fromStdString("\nDurchschnittliche Laufzeit einer Iteration: " + to_string(platformStatistic.getAvgIterationTime()) + " ms"));
         labels->addWidget(name);

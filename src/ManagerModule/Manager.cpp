@@ -50,7 +50,7 @@ void Manager::setDefaultNeuralNets() {
     if ((dir = opendir (projectdir)) != NULL) {
         while ((ent = readdir (dir)) != NULL) {
             if ((ent->d_name[0] != '.') && exists_file(PROJECT_DIR_temp+"/"+ent->d_name+"/"+ent->d_name+"_labels"+".txt") && exists_file(PROJECT_DIR_temp+"/"+ent->d_name+"/"+ent->d_name+"_model"+".pt")) {
-                nets.push_back(ent->d_name);
+                nets.push_front(ent->d_name);
             }
         }
         closedir (dir);

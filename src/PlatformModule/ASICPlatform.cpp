@@ -23,6 +23,8 @@ ASICPlatform::ASICPlatform(const int id) {
     this->myriadPlugin = initPlugin();
     this->net = readIR();
     this->inputInfo = net.getInputsInfo();
+    this->statistic.setEnergyConsum(2);
+    this->statistic.setFLOPS(100);
 }
 
 InferencePlugin ASICPlatform::initPlugin() {

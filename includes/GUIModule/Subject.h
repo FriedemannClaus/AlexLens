@@ -34,6 +34,11 @@ public:
     }
 
 
+
+    /**
+     * Setter for differ observers for classification and training
+     * @param flag flag to set
+     */
     inline void setClassify(bool flag){
         this->classifyTab = flag;
     }
