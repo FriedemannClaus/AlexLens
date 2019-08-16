@@ -296,45 +296,82 @@ void NeuralNet::init() {
 
 
     //Now create the layers
-    convLayers.resize(5);
-    convLayers(0) = new Conv2DLayer();
-    convLayers(0)->setWeights(conv1, conv1Bias);
-    convLayers(1) = new Conv2DLayer();
-    convLayers(1)->setWeights(conv2, conv2Bias);
-    convLayers(2) = new Conv2DLayer();
-    convLayers(2)->setWeights(conv3, conv3Bias);
-    convLayers(3) = new Conv2DLayer();
-    convLayers(3)->setWeights(conv4, conv4Bias);
-    convLayers(4) = new Conv2DLayer();
-    convLayers(4)->setWeights(conv5, conv5Bias);
+    auto reLuLayer = new ReLULayer();
+    layers.resize(20); //TODO
 
-    fcLayers.resize(3);
-    fcLayers(0) = new FCLayer();
-    fcLayers(0)->setWeights(fc6, fc6Bias);
-    fcLayers(1) = new FCLayer();
-    fcLayers(1)->setWeights(fc7, fc7Bias);
-    fcLayers(2) = new FCLayer();
-    fcLayers(2)->setWeights(fc8, fc8Bias);
+    layers(0) = new Conv2DLayer(4, false, conv1, conv1Bias);
+    layers(1) = reLuLayer;
+    layers(2) = new MaxPool2D(55, 55, 96, 3, 3, 2);
+    layers(3) = new NormLayer(27, 27, 96, 2, 0.0001, 0.75, 5);
+
+    layers(4) = new Conv2DLayer(1, true, conv2, conv2Bias);
+    layers(5) = reLuLayer;
+    layers(6) = new MaxPool2D(27, 27, 256, 3, 3, 2);
+    layers(7) = new NormLayer(13, 13, 256, 2, 0.0001, 0.75, 5);
+
+    layers(8) = new Conv2DLayer(1, true, conv3, conv3Bias);
+    layers(9) = reLuLayer;
+
+    layers(10) = new Conv2DLayer(1, true, conv4, conv4Bias);
+    layers(11) = reLuLayer;
+
+    layers(12) = new Conv2DLayer(1, true, conv5, conv5Bias);
+    layers(13) = reLuLayer;
+    layers(14) = new MaxPool2D(13, 13, 256, 3, 3, 2);
+
+    layers(15) = new FCLayer(fc6, fc6Bias);
+    layers(16) = reLuLayer;
+
+    layers(17) = new FCLayer(fc7, fc7Bias);
+    layers(18) = reLuLayer;
+
+    layers(19) = new FCLayer(fc8, fc8Bias);
+    layers(20) = reLuLayer;
+
+
+
+
+//    fcLayers.resize(3);
+//    fcLayers(0) = new FCLayer();
+//    fcLayers(0)->setWeights(fc6, fc6Bias);
+//    fcLayers(1) = new FCLayer();
+//    fcLayers(1)->setWeights(fc7, fc7Bias);
+//    fcLayers(2) = new FCLayer();
+//    fcLayers(2)->setWeights(fc8, fc8Bias);
+
+//    maxPoolLayers.resize(3);
+//    maxPoolLayers(0) = new MaxPool2D(55, 55, 96, 3, 3, 2);
+//    maxPoolLayers(1) = new MaxPool2D(27, 27, 256, 3, 3, 2);
+//    maxPoolLayers(2) = new MaxPool2D(13, 13, 256, 3, 3, 2);
+//
+//    // NormLayer(const int inputWidth, const int inputHeight, const int inputChannels, const int normK, const int normAlpha, const int normBeta, const int normRegionSize)
+//    normLayers(0) = new NormLayer(27, 27, 96, 2, 0.0001, 0.75, 5);
+//    normLayers(1) = new NormLayer(13, 13, 256, 2, 0.0001, 0.75, 5);
+
 }
 
 
 Layer::Vector& NeuralNet::classify(Layer::ThreeDMatrix &picture) {
 
     //Forward-Propagate
-    Layer::ThreeDMatrix result = picture;
+    Layer::ThreeDMatrix input = picture;
+    Layer::ThreeDMatrix output;
     for (int i = 0; i < convLayers.rows(); ++i) {
-        result = convLayers(i)->forward(result);
+        convLayers(i)->forward(input, output);
+        //Relu
+        //Norm
+        //Maxpool (nicht immer)
     }
     for (int i = 0; i < fcLayers.rows(); ++i) {
-        result = fcLayers(i)->forward(result);
+        fcLayers(i)->forward(input, output);
     }
     Layer::Vector propabilities;
     propabilities.resize (1000);
     //artificially resize result because layers don't work yet
-    result.resize(1);
-    result(0).resize(1000, 1);
+    output.resize(1);
+    output(0).resize(1000, 1);
     for (int i = 0; i < 1000; ++i) {
-        propabilities(i) = result(0)(i, 0);
+        propabilities(i) = output(0)(i, 0);
     }
     return propabilities;
 }

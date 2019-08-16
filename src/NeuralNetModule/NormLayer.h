@@ -33,7 +33,7 @@ private:
     }
 
 public:
-    NormLayer(const int inputWidth, const int inputHeight, const int inputChannels, const int normK, const int normAlpha, const int normBeta, const in normRegionSize):
+    NormLayer(const int inputWidth, const int inputHeight, const int inputChannels, const int normK, const int normAlpha, const int normBeta, const int normRegionSize):
         //Initialisierungsliste
         Layer(inputWidth * inputHeight * inputChannels, inputWidth * inputHeight * inputChannels),
         inputNumRows(inputHeight),

@@ -13,12 +13,20 @@
 #include "Layer.h"
 #include "Conv2DLayer.h"
 #include "FCLayer.h"
+#include "MaxPool2D.h"
+#include "NormLayer.h"
+#include "ReLULayer.h"
 
 
 class NeuralNet: public INeuralNet {
 private: 
-    Eigen::Matrix<Conv2DLayer* , Eigen::Dynamic, 1> convLayers;
-    Eigen::Matrix<FCLayer* , Eigen::Dynamic, 1> fcLayers;
+//    Eigen::Matrix<Conv2DLayer* , Eigen::Dynamic, 1> convLayers;
+//    Eigen::Matrix<FCLayer* , Eigen::Dynamic, 1> fcLayers;
+//    Eigen::Matrix<MaxPool2D* , Eigen::Dynamic, 1> maxPoolLayers;
+//    Eigen::Matrix<NormLayer* , Eigen::Dynamic, 1> normLayers;
+
+    Eigen::Matrix<Layer*, Eigen::Dynamic, 1> layers;
+
 
 public:
     void init();

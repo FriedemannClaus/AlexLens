@@ -1,12 +1,21 @@
 /**
  * Project Entwurf_PSE_KNN
- * @author Dima Seletkov, Friedemann Claus
- * @version 1.2
+ * @author Friedemann Claus, Dima Seletkov
  */
 
 #include "FCLayer.h"
 
-const Layer::ThreeDMatrix& FCLayer::forward(const Layer::ThreeDMatrix &input) {
+/**
+ * Constructor
+ * @param weights The weights of the Conv-Layer
+ * @param bias The bias of the Conv-Layer
+ */
+FCLayer::FCLayer(Layer::FourDMatrix &weights, Layer::Vector &bias) :
+        weights(weights),
+        bias(bias)
+{}
+
+void FCLayer::forward(const Layer::ThreeDMatrix &input, Layer::ThreeDMatrix &output) {
 //    Vector vectorizedInput = input(i) mit for-schleife input zu Vektor machen. Oder nicht vectorizen
 //    und per for-schleife weight-Matrix mit ThreeD-Input-Matrix multiplizieren.
 //    int columns = input.cols();
@@ -16,7 +25,6 @@ const Layer::ThreeDMatrix& FCLayer::forward(const Layer::ThreeDMatrix &input) {
 //    result.resize(bias.rows(), columns);
 //    result.noalias() = weights.transpose() * input;
 //    result.colwise() += this->bias;
-    return input;
 }
 
 void FCLayer::setWeights(const Layer::Matrix &weights, const Layer::Vector &bias) {

@@ -19,15 +19,11 @@ private:
      * Bias vector
      */
     Vector bias;
-    /**
-     * Result of forward propagation
-     */
-    ThreeDMatrix result;
 
 public:
-//    FCLayer() : Layer() {}
+    FCLayer(Layer::FourDMatrix &weights, Layer::Vector &bias);
 
-    const ThreeDMatrix& forward(const ThreeDMatrix& input) override;
+    void forward(const Layer::ThreeDMatrix &input, Layer::ThreeDMatrix &output) override;
     void setWeights(const Matrix& weights, const Vector& bias);
 };
 
