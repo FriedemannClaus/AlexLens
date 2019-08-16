@@ -1,17 +1,26 @@
-/**
- * Project Entwurf_PSE_KNN
- * @author Jakub Trzcinsi, Viet Pham, Friedemann Claus, Dima Seletkov, Aleksandr Eismont
- * @version 1.2
- */
-
-
 #ifndef _MODE_H
 #define _MODE_H
 
-enum class Mode { OPTIMAL,
-HIGH_PERFOMANCE,
-LOW_POWER,
-ENERGY_EFFICIENT};
+/**
+ * Enumeration for all Modes in Program
+ */
+enum class Mode {
+    /**
+     * Optimal Mode uses only CPU
+     */
+            OPTIMAL,
+    /**
+     * High Perfomance uses all available heterogenous platforms
+     */
+            HIGH_PERFOMANCE,
+    /**
+     * Low Power uses only one Neural Compute Stick
+     */
+            LOW_POWER,
+    /**
+     * Energy Efficient uses all available Neural Compute Sticks
+     */
+            ENERGY_EFFICIENT};
 
 
 

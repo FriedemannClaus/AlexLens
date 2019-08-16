@@ -10,6 +10,9 @@
 
 #include "PlatformType.h"
 
+/**
+ * Class PlatformStatistic aggregates all Statistics for platform
+ */
 class PlatformStatistic {
 public:
     double getFLOPS();
