@@ -297,7 +297,7 @@ void NeuralNet::init() {
 
     //Now create the layers
     auto reLuLayer = new ReLULayer();
-    layers.resize(20); //TODO
+    layers.resize(21); //TODO
 
     layers(0) = new Conv2DLayer(4, false, conv1, conv1Bias);
     layers(1) = reLuLayer;
