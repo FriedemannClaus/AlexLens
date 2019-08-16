@@ -11,7 +11,7 @@ void thrFunction(Platform *platform) {
     platform->runClassify();
 }
 
-vector<string> Executor::classify(list<string> imagePaths, Mode mode, string neuralNet) {
+vector<string> Executor::classify(list<string> imagePaths, Mode mode, string neuralNet, string project_dir) {
 
 
     this->platformManager->setMode(mode);
@@ -19,7 +19,12 @@ vector<string> Executor::classify(list<string> imagePaths, Mode mode, string neu
 
     list<Platform*> platforms = platformManager->getAvailablePlatforms();
     cout << neuralNet << endl;
-    platforms.front()->setNeuralNet(neuralNet);
+    for(Platform* platform:platforms) {
+        platform->setNeuralNet(neuralNet);
+        platform->setProjectDir(project_dir);
+    }
+
+    //platforms.front()->setNeuralNet(neuralNet);
 
     //splitting all image paths between platforms
     int num_platforms = platforms.size();
@@ -73,11 +78,12 @@ Executor::Executor() {
     this->platformManager = new PlatformManager();
 }
 
-void Executor::train(string dirPath, Mode mode, string neuralNet) {
+void Executor::train(string dirPath, Mode mode, string neuralNet, string project_dir) {
     this->platformManager->setMode(mode);
     list<Platform*> platforms = platformManager->getAvailablePlatforms();
     for (auto platform:platforms) {
         platform->setDatasetPath(dirPath);
+        platform->setProjectDir(project_dir);
         platform->runTraining();
     }
 }

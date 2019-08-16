@@ -108,7 +108,7 @@ void OutputClassifyPanel::addTrainingLog()
     string line;
     ifstream file_log;
     string file_log_name = "";
-    file_log_name += this->PROJECT_DIR;
+    file_log_name += this->manager->getProjectDir() + "resources/";
     file_log_name += this->manager->getNeuralNet();
     file_log_name+= "/";
     file_log_name += this->manager->getNeuralNet();
@@ -140,7 +140,7 @@ void OutputClassifyPanel::addLine(string line)
 void OutputClassifyPanel::addTrainingAccuracyCurve()
 {
 
-    string fileNameListPath = this->PROJECT_DIR + this->manager->getNeuralNet() + "/" + this->manager->getNeuralNet()+ "_accuracy_curve.png";
+    string fileNameListPath = this->manager->getProjectDir() + "resources/" + this->manager->getNeuralNet() + "/" + this->manager->getNeuralNet()+ "_accuracy_curve.png";
     cout << fileNameListPath << endl;
 
     QString QfileNameListPath = QString::fromStdString(fileNameListPath);
@@ -166,7 +166,7 @@ void OutputClassifyPanel::addTrainingAccuracyCurve()
 
 void OutputClassifyPanel::addTrainingLossCurve()
 {
-    string fileNameListPath = this->PROJECT_DIR + this->manager->getNeuralNet() + "/" + this->manager->getNeuralNet()+ "_loss_curve.png";
+    string fileNameListPath = this->manager->getProjectDir() + "resources/" + this->manager->getNeuralNet() + "/" + this->manager->getNeuralNet()+ "_loss_curve.png";
     QString QfileNameListPath = QString::fromStdString(fileNameListPath);
     QStringList fileNameList = {QfileNameListPath};
     //QStringList fileNameList = { "/home/dmitrii/AlexLens/resources/pse_dataset_test/pse_dataset_test_loss_curve.png"};

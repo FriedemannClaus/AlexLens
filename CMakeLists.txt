@@ -43,7 +43,42 @@ message(STATUS "    version: ${InferenceEngine_VERSION}")
 message(STATUS "    libraries: ${InferenceEngine_LIBRARIES}")
 message(STATUS "    include path: ${InferenceEngine_INCLUDE_DIRS}")
 
-add_executable(AlexLens src/ManagerModule/main.cpp
+#[[
+add_library(AlexLens_static_lib STATIC
+        src/ManagerModule/main.cpp
+        src/ManagerModule/Manager.cpp src/ManagerModule/Manager.h
+        src/GUIModule/InputPanel.cpp includes/GUIModule/inputpanel.h
+        src/GUIModule/helpform.cpp includes/GUIModule/helpform.h
+        src/GUIModule/statisticform.cpp includes/GUIModule/statisticform.h
+        src/GUIModule/mainwindow.cpp includes/GUIModule/mainwindow.h
+        src/GUIModule/parameterpanel.cpp includes/GUIModule/parameterpanel.h
+        src/GUIModule/outputclassifypanel.cpp includes/GUIModule/outputclassifypanel.h
+        src/PlatformModule/Mode.h
+        Icon/icon.qrc
+        src/PlatformModule/ModeUtil.cpp src/PlatformModule/ModeUtil.h
+        src/NeuralNetModule/NeuralNet.cpp src/NeuralNetModule/NeuralNet.h
+        src/NeuralNetModule/INeuralNet.h
+        src/PlatformModule/ModeUtil.cpp src/PlatformModule/ModeUtil.h
+        src/ManagerModule/Manager.cpp src/ManagerModule/Manager.h
+        src/ManagerModule/Executor.cpp src/ManagerModule/Executor.h
+        src/PlatformModule/Platform.cpp src/PlatformModule/Platform.h
+        src/PlatformModule/ASICPlatform.cpp src/PlatformModule/ASICPlatform.h
+        includes/GUIModule/IObserver.h
+        includes/GUIModule/Subject.h
+        src/PlatformModule/PlatformManager.cpp src/PlatformModule/PlatformManager.h
+        src/PlatformModule/CPUPlatform.cpp src/PlatformModule/CPUPlatform.h
+        src/PlatformModule/PlatformType.h
+        src/PlatformModule/PlatformStatistic.cpp src/PlatformModule/PlatformStatistic.h
+        )
+
+target_include_directories(AlexLens_static_lib
+        PUBLIC
+        ${PROJECT_SOURCE_DIR}/includes
+        )
+        ]]#
+add_executable(AlexLens
+#        AlexLens_static_lib
+        src/ManagerModule/main.cpp
         src/ManagerModule/Manager.cpp src/ManagerModule/Manager.h
         src/GUIModule/InputPanel.cpp includes/GUIModule/inputpanel.h
         src/GUIModule/helpform.cpp includes/GUIModule/helpform.h
@@ -70,6 +105,8 @@ add_executable(AlexLens src/ManagerModule/main.cpp
         )
 
 target_link_libraries(${PROJECT_NAME}
+        #PRIVATE
+        #AlexLens_static_lib
         Qt5::Core
         Qt5::Widgets
         Qt5::Gui

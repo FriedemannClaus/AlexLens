@@ -34,3 +34,7 @@ void Platform::setNeuralNet(string neuralNet) {
 void Platform::setDatasetPath(string path) {
     std::cout << "base virtual mathods" << std::endl;
 }
+
+void Platform::setProjectDir(string dir) {
+
+}

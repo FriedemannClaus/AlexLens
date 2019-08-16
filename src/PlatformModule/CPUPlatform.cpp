@@ -112,32 +112,29 @@ vector<string> CPUPlatform::getResults() {
 void CPUPlatform::runTraining() {
     //Py_SetProgramName(reinterpret_cast<const wchar_t *>(argv[0]));
     // Path of TransferLearning.py
-    char fileName[] = "/home/dmitrii/AlexLens/TransferLearning.py";
+    //char fileName[] = "/home/viet/CLionProjects/AlexLens/TransferLearning.py";
+    string str = "TransferLearning.py";
+    char fileName[this->project_dir.length()+str.length()];
+    string fileNamePath = this->project_dir + str;
+    std::cout << fileNamePath << std::endl;
+    strcpy(fileName, fileNamePath.c_str());
     FILE* fp;
     Py_Initialize();
     fp = _Py_fopen(fileName, "r");
     // Path of dataset
-    char path[] = "/Users/eismont/PycharmProjects/test/pse_dataset_test";
+    char path[this->datasetPath.length()];
+    strcpy(path, this->datasetPath.c_str());
     char* py_argv[] = {strdup(path)};
     wchar_t *w_py_argv[] = {Py_DecodeLocale(py_argv[0], NULL)};
     PySys_SetArgv(1, w_py_argv);
     PyRun_SimpleFile(fp, fileName);
     free(py_argv[0]);
     Py_Finalize();
-
-
-    // !!11!!!11!
-    // Get current dir of project
-    /*size_t size;
-    char *path = NULL;
-    path = getcwd(path, size);
-    string path_str(path);
-    path_str = path_str.erase(path_str.rfind('/')+1);
-    cout << path_str;*/
-
-
-    std::string command_str = "/home/dmitrii/anaconda3/bin/python /home/dmitrii/AlexLens/TransferLearning.py ";
+    //syscall variant start
+    /*std::string command_str = "/home/dmitrii/anaconda3/bin/python /home/dmitrii/AlexLens/TransferLearning.py ";
     command_str += this->datasetPath;
     const char *command = command_str.c_str();
-    system(command);
+    system(command);*/
+    //syzscall variant end
 }
+

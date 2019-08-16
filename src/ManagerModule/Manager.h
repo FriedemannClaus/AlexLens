@@ -12,6 +12,9 @@
 #include "../PlatformModule/Mode.h"
 #include "../PlatformModule/ModeUtil.h"
 #include "Executor.h"
+#include <dirent.h>
+#include <sys/stat.h>
+
 
 using namespace std;
 
@@ -27,9 +30,12 @@ private:
     Executor* executor;
     Subject* subject;
     vector<string> results;
+    string PROJECT_DIR;
 
 public:
     Manager(Subject* subject);
+
+    inline string getProjectDir() {return this->PROJECT_DIR;}
 
     inline void addImage(string imagePath) {this->imagePaths.push_front(imagePath);}
 
@@ -60,6 +66,8 @@ public:
     void runTraining();
 
 private:
+    bool exists_file (const std::string& name);
+    void setProjectDir();
     void setDefaultModesClassify();
     void setDefaultModesTraining();
     void setDefaultNeuralNets();
