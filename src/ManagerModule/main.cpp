@@ -20,23 +20,22 @@ int main(int argc, char *argv[])
     MainWindow* w = new MainWindow(manager);
     w->show();
     auto neuralNet = new NeuralNet();
-    neuralNet->init();
 
     //load a cat image for testing
     Layer::ThreeDMatrix catMatrix;
-    catMatrix.resize(3, 1);
-    catMatrix(0, 0).resize(227, 227);
-    catMatrix(1, 0).resize(227, 227);
-    catMatrix(2, 0).resize(227, 227);
+    catMatrix.resize(3);
+    catMatrix(0).resize(227, 227);
+    catMatrix(1).resize(227, 227);
+    catMatrix(2).resize(227, 227);
 
-    //load the cat.jpg file
-    ifstream inFile;
-    inFile.open("../cat.jpg");
-
-    if (!inFile) {
-        cerr << "Unable to load cat-file.";
-        exit(1);
-    }
+//    //load the cat.jpg file
+//    ifstream inFile;
+//    inFile.open("../cat.jpg");
+//
+//    if (!inFile) {
+//        cerr << "Unable to load cat-file.";
+//        exit(1);
+//    }
 
     // load image with opencv and transform
     string image_path = "../cat.jpg";
@@ -54,8 +53,14 @@ int main(int argc, char *argv[])
         }
     }
 
+    cout << catMatrix(1)(226,226);
+    cout << "Test-Image loaded correctly\n";
 
+
+
+    neuralNet->init();
     neuralNet->classify(catMatrix);
+
 
     return a.exec();
 }

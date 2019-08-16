@@ -22,7 +22,7 @@ public:
     void forward(ThreeDMatrix &inputMatrix, ThreeDMatrix &outputMatrix) override {
         int inputNumRows = inputMatrix(0).rows();
         int inputNumCols = inputMatrix(0).cols();
-        int inputNumChannels = inputMatrix.rows();;
+        int inputNumChannels = inputMatrix.rows();
 
         for (int i = 0; i < inputNumChannels; i++) {
             for (int j = 0; j < inputNumRows; j++) {

@@ -8,6 +8,7 @@
 #define _MAXPOOL2D_H
 
 #include "Layer.h"
+#include <assert.h>
 
 
 class MaxPool2D: public Layer {
@@ -48,6 +49,9 @@ public:
     {}
 
     void forward(ThreeDMatrix &inputMatrix, ThreeDMatrix &outputMatrix) override {
+        assert(inputMatrix.rows() == inputNumChannels);
+        assert(inputMatrix(0).cols() == inputNumCols);
+        assert(inputMatrix(0).rows() == inputNumRows);
         outputMatrix.resize(outputNumRows, outputNumCols);
         int outputSize = ((inputNumCols - poolNumCols) / stride) + 1; //size of one side!
         int numPoolElements = poolNumCols * poolNumRows;

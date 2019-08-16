@@ -50,7 +50,7 @@ add_executable(AlexLens
         src/NeuralNetModule/FCLayer.cpp src/NeuralNetModule/FCLayer.h
         src/NeuralNetModule/Conv2DLayer.cpp src/NeuralNetModule/Conv2DLayer.h
         src/NeuralNetModule/NeuralNet.cpp src/NeuralNetModule/NeuralNet.h
-        )
+        src/NeuralNetModule/NeuralNetException.h)
 
 include_directories(includes)
 

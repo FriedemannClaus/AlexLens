@@ -4,33 +4,63 @@
 */
 
 
+
 #include "Conv2DLayer.h"
 
-
-Conv2DLayer::Conv2DLayer(int stride, bool ZeroPadding, FourDMatrix& weights, Vector& bias) :
+Conv2DLayer::Conv2DLayer(int forcedInputSize, int stride, int zeroPadWidth, FourDMatrix& weights, Vector& bias) :
+        FORCED_INPUT_SIZE(forcedInputSize),
         STRIDE(stride),
-        ZERO_PADDING(ZeroPadding),
+        ZERO_PAD_WIDTH(zeroPadWidth),
         weights(weights),
         bias(bias)
 {}
 
 
 void Conv2DLayer::forward(ThreeDMatrix &input, ThreeDMatrix &output) {
-    ThreeDMatrix paddedInput;
-    if (ZERO_PADDING == true) {zeroPad(input,paddedInput);}
 
     // Calculate some Parameters
     int kernels = weights.rows();
     int kernelSize = weights(0, 0).cols(); //rows() would work too, kernels are a square.
-    int paddedInputSize = paddedInput(0).cols();
-    int inputDepth = input.rows(); //doesn't change with padding
+    int inputDepth = weights.cols(); //inputDepth shall be the depth of the kernels. Get's asserted later
+    int paddedInputSize = FORCED_INPUT_SIZE + 2 * ZERO_PAD_WIDTH;
 
-    int lastTopLeftPosition = paddedInputSize - kernelSize; //last Position of Top Left Pixel of kernel.
+    int outputSize = (FORCED_INPUT_SIZE - kernelSize + 2 * ZERO_PAD_WIDTH)/STRIDE + 1; //(227 - 11 - 2*0)/4 + 1 = 55 at Conv-1
+
+    int lastTopLeftPosition = paddedInputSize - kernelSize; //last position of top left pixel of kernel.
+
+    // Assert the input-size
+    assert(input.rows() == inputDepth);
+    assert(input(0).rows() == FORCED_INPUT_SIZE);
+    assert(input(0).cols() == FORCED_INPUT_SIZE);
+    //debug
+    assert(weights.cols() == 3);
+    assert(weights.rows() == 96);
+    assert(weights(0, 0).cols() == 11);
+    assert(weights(0, 0).rows() == 11);
+
+
+    //Zero-Pad the input
+    ThreeDMatrix paddedInput;
+    if (ZERO_PAD_WIDTH != 0) {
+        zeroPad(input,paddedInput, ZERO_PAD_WIDTH);
+    } else {
+        paddedInput = input; //We calculate with the paddedInput
+    }
+
+
+    //debug
+    assert(inputDepth == 3);
+    cout << "paddedInput.rows() = \n";
+    cout << paddedInput.rows() << std::endl;
+    cout << "input.rows() = \n";
+    cout << input.rows() << std::endl;
+    assert(paddedInput.rows() == inputDepth);
+    assert(paddedInput(0).cols() == paddedInputSize );
 
     //resize output 3DMatrix
     output.resize(kernels);
     for (int i = 0; i < kernels; ++i) {
-        output.resize(kernelSize, kernelSize);
+        output(i).resize(outputSize, outputSize);
     }
 
     //Needed for iteration:
@@ -46,6 +76,7 @@ void Conv2DLayer::forward(ThreeDMatrix &input, ThreeDMatrix &output) {
                     //In Eigen, iterating firstly over the columns and secondly over the rows is more efficient.
                     for (int j = 0; j < kernelSize; ++j) {
                         for (int i = 0; i < kernelSize; ++i) {
+                            int x = paddedInput(depth)(row + i, col + j);
                             kernelResult += weights(kernel, depth)(i, j) * paddedInput(depth)(row + i, col + j);
                         }
                     }
@@ -58,11 +89,17 @@ void Conv2DLayer::forward(ThreeDMatrix &input, ThreeDMatrix &output) {
 
 
 
-void Conv2DLayer::zeroPad(const Layer::ThreeDMatrix &input, Layer::ThreeDMatrix &output) {
-    int zeroPadWidth = weights(0,0).cols() / 2; //div
-    int sideLength = input(0).cols() + 2 * zeroPadWidth;
-    output.resize(input.rows());
+void Conv2DLayer::zeroPad(const Layer::ThreeDMatrix &input, Layer::ThreeDMatrix &output, int zeroPadWidth) {
 
+//    if(zeroPadWidth == 0) {
+//        throw NeuralNetException();
+//    }
+    int sideLength = input(0).cols() + 2 * zeroPadWidth;
+    output.resize(input.rows()); // Matrices get resized in the overall for-loop
+    assert(output.rows() == input.rows());
+
+    std::cout << "input.rows() in zeroPAd = \n";
+    std::cout << input.rows() << std::endl;
 
     int oldSideLength = input(0).cols();
     for (int depth = 0; depth < input.rows(); ++depth) {

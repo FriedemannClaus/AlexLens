@@ -12,7 +12,8 @@
 class Conv2DLayer: public Layer {
 private:
     int STRIDE;
-    bool ZERO_PADDING;
+    int ZERO_PAD_WIDTH;
+    int FORCED_INPUT_SIZE;
     /**
      * Weight Matrix
      */
@@ -25,12 +26,14 @@ private:
 public:
     /**
     * Constructor
-     * @param stride The stride of the Conv-Layer
+    * @param forcedInputSize The Size the Input shall have. The depth of the input is implicitly forced
+     *       through the 4D-weights-Matrix (the depth of the kernels).
+    * @param stride The stride of the Conv-Layer
     * @param ZeroPadding Whether Zero-Padding shall be used
     * @param weights The weights of the Conv-Layer
     * @param bias The bias of the Conv-Layer
     */
-    Conv2DLayer(int stride, bool ZeroPadding, FourDMatrix& weights, Vector& bias);
+    Conv2DLayer(int forcedInputSize, int stride, int zeroPadWidth, FourDMatrix& weights, Vector& bias);
 
     /**
     * The forward-propagation-function
@@ -46,14 +49,15 @@ public:
     */
     void setWeights(const FourDMatrix& weights, const Vector& bias);
 
-private:
 
+private:
     /**
-    * The zero-padding-function
+    * The zero-padding-function.
     * @param input The 3D-Input-Matrix to be padded
     * @param output The 3D-Output-Matrix
+    * @param zeroPadWidth The desired width of the zero-border. 0 is not valid.
     */
-    void zeroPad(const Layer::ThreeDMatrix &input, Layer::ThreeDMatrix &output);
+    void zeroPad(const Layer::ThreeDMatrix &input, Layer::ThreeDMatrix &output, int zeroPadWidth);
 };
 
 #endif //_CONV2DLAYER_H

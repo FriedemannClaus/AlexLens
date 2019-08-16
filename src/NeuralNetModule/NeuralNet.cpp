@@ -295,27 +295,27 @@ void NeuralNet::init() {
     }
 
 
-    //Now create the layers
+    //Now create the layers of AlexNet
     auto reLuLayer = new ReLULayer();
     layers.resize(21); //TODO
 
-    layers(0) = new Conv2DLayer(4, false, conv1, conv1Bias);
+    layers(0) = new Conv2DLayer(227, 4, 0, conv1, conv1Bias);
     layers(1) = reLuLayer;
     layers(2) = new MaxPool2D(55, 55, 96, 3, 3, 2);
     layers(3) = new NormLayer(27, 27, 96, 2, 0.0001, 0.75, 5);
 
-    layers(4) = new Conv2DLayer(1, true, conv2, conv2Bias);
+    layers(4) = new Conv2DLayer(27, 1, 2, conv2, conv2Bias);
     layers(5) = reLuLayer;
     layers(6) = new MaxPool2D(27, 27, 256, 3, 3, 2);
     layers(7) = new NormLayer(13, 13, 256, 2, 0.0001, 0.75, 5);
 
-    layers(8) = new Conv2DLayer(1, true, conv3, conv3Bias);
+    layers(8) = new Conv2DLayer(13, 1, 1, conv3, conv3Bias);
     layers(9) = reLuLayer;
 
-    layers(10) = new Conv2DLayer(1, true, conv4, conv4Bias);
+    layers(10) = new Conv2DLayer(13, 1, 1, conv4, conv4Bias);
     layers(11) = reLuLayer;
 
-    layers(12) = new Conv2DLayer(1, true, conv5, conv5Bias);
+    layers(12) = new Conv2DLayer(13, 1, 1, conv5, conv5Bias);
     layers(13) = reLuLayer;
     layers(14) = new MaxPool2D(13, 13, 256, 3, 3, 2);
 

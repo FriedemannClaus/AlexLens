@@ -8,6 +8,8 @@
 #define UNTITLED_FCLAYER_H
 
 #include "Layer.h"
+#include <iostream>
+#include "NeuralNetException.h"
 
 class FCLayer : public Layer {
 private:

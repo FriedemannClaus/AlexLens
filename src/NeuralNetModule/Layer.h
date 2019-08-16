@@ -9,6 +9,10 @@
 #include <cstdlib>
 #include <Eigen/Core>
 #include <vector>
+#include <iostream>
+//#include "NeuralNetException.h"
+
+using namespace std;
 /// Abstract class Layer. For all Layers extend this class
 class Layer {
 public:
