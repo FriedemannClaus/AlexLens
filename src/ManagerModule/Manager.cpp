@@ -125,13 +125,15 @@ list<string> Manager::findNeuralNets(){
 
 void Manager::setProjectDir() {
     // Get current dir of project
-    size_t size;
+    size_t size = 256;
     char *path = NULL;
     path = getcwd(path, size);
-    string path_str(path);
+    cout << "hey: " << path << endl;
+    string path_str = std::string(path);
+    path_str = path;
     path_str = path_str.erase(path_str.rfind('/')+1);
     this->PROJECT_DIR = path_str;
-    cout << path_str << endl;
+    cout << "here" << path_str << endl;
 }
 
 bool Manager::exists_file(const std::string &name) {

@@ -32,7 +32,7 @@ void CPUPlatform::runClassify() {
     //std::string image_path = "/home/dmitrii/Downloads/Telegram Desktop/test/test/bear/009_0071.jpg";
     torch::jit::script::Module module = torch::jit::load(model_path);
 
-
+    const clock_t begin_time = clock();
     for (auto image_path:imageNames) {
         // load image with opencv and transform
         cv::Mat image;
@@ -75,7 +75,7 @@ void CPUPlatform::runClassify() {
         std::string resultVector = "";
         for (int i = 0; i < 5; ++i) {
             int idx = top_idxs_a[i];
-            resultVector+= std::to_string(top_scores_a[i]);
+            resultVector+= std::to_string(top_scores_a[i]/100);
             resultVector+=" ";
             resultVector+=labels[idx];
             resultVector+="\n";
@@ -84,6 +84,10 @@ void CPUPlatform::runClassify() {
 
         this->results.push_back(resultVector);
     }
+    const float final_time = float( clock () - begin_time )/CLOCKS_PER_SEC*100;
+
+    this->statistic.setTotalInferenceTime(final_time);
+    this->statistic.setAvgIterationTime(final_time/results.size());
     this->imageNames.clear();
 }
 
@@ -116,7 +120,7 @@ void CPUPlatform::runTraining() {
     string str = "TransferLearning.py";
     char fileName[this->project_dir.length()+str.length()];
     string fileNamePath = this->project_dir + str;
-    std::cout << fileNamePath << std::endl;
+    /*
     strcpy(fileName, fileNamePath.c_str());
     FILE* fp;
     Py_Initialize();
@@ -130,11 +134,13 @@ void CPUPlatform::runTraining() {
     PyRun_SimpleFile(fp, fileName);
     free(py_argv[0]);
     Py_Finalize();
+     */
     //syscall variant start
-    /*std::string command_str = "/home/dmitrii/anaconda3/bin/python /home/dmitrii/AlexLens/TransferLearning.py ";
+    std::string command_str = "/home/dmitrii/anaconda3/bin/python ";
+    command_str += fileNamePath + " ";
     command_str += this->datasetPath;
     const char *command = command_str.c_str();
-    system(command);*/
+    system(command);
     //syzscall variant end
 }
 

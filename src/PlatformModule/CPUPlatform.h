@@ -10,6 +10,8 @@
 #include "PlatformStatistic.h"
 #include <string>
 #include <list>
+#include <ctime>
+#include <time.h>
 using namespace std;
 
 class CPUPlatform : public Platform {
@@ -27,10 +29,10 @@ private:
     void convertListToVector(list<string> list, vector<string> *imageNames);
 
     inline void setNeuralNet(string neuralNet) override {
-        this->model_path = "/home/viet/CLionProjects/AlexLens/resources/" + neuralNet + "/";
-        this->model_path +=neuralNet + "_model" + ".pt";
-        this->label_path = "/home/viet/CLionProjects/AlexLens/resources/" + neuralNet + "/";
-        this->label_path +=neuralNet + "_labels" + ".txt";
+        this->model_path = this->project_dir + "resources/" + neuralNet + "/";
+        this->model_path += neuralNet + "_model" + ".pt";
+        this->label_path = this->project_dir + "resources/" + neuralNet + "/";
+        this->label_path += neuralNet + "_labels" + ".txt";
     }
 
 public:
