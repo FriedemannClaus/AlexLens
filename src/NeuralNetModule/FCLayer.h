@@ -21,9 +21,25 @@ private:
     Vector bias;
 
 public:
+    /**
+    * Constructor
+    * @param weights The weights of the FC-Layer
+    * @param bias The bias of the FC-Layer
+    */
     FCLayer(Layer::FourDMatrix &weights, Layer::Vector &bias);
 
+    /**
+    * The forward-propagation-function
+    * @param input The 3D-Input-Matrix
+    * @param output The 3D-Output-Matrix
+    */
     void forward(const Layer::ThreeDMatrix &input, Layer::ThreeDMatrix &output) override;
+
+    /**
+    * A setter-method for the weights
+    * @param weights the new weights of the FC-Layer
+    * @param bias the new bias of the FC-Layer
+    */
     void setWeights(const Matrix& weights, const Vector& bias);
 };
 

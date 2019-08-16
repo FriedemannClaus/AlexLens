@@ -1,7 +1,6 @@
 /**
  * Project Entwurf_PSE_KNN
- * @author Friedemann Claus, Dima Seletkov
- * @version 1.2
+ * @author Friedemann Claus
  */
 
 #ifndef UNTITLED_LAYER_H
@@ -26,8 +25,6 @@ public:
  * @param output The 3D-Output-Matrix
  */
     virtual void forward(const ThreeDMatrix &input, ThreeDMatrix &output) = 0;
-
-
 };
 
 #endif //UNTITLED_LAYER_H

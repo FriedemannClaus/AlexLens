@@ -25,11 +25,23 @@ private:
 //    Eigen::Matrix<MaxPool2D* , Eigen::Dynamic, 1> maxPoolLayers;
 //    Eigen::Matrix<NormLayer* , Eigen::Dynamic, 1> normLayers;
 
+    /**
+    *  The layers of the neural net.
+    */
     Eigen::Matrix<Layer*, Eigen::Dynamic, 1> layers;
 
 
 public:
+    /**
+     * Initializes AlexNet. For that it reads the weights from the weights.txt and creates the layers.
+     */
     void init();
+
+    /**
+     * Classifies an image.
+     * @param picture The image to classify
+     * @return A vector of possibilities
+     */
     Layer::Vector& classify(Layer::ThreeDMatrix &picture);
 };
 

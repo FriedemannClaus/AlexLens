@@ -6,13 +6,7 @@
 
 #include "Conv2DLayer.h"
 
-/**
- * Constructor
- * @param stride The stride of the Conv-Layer
- * @param ZeroPadding Whether Zero-Padding shall be used
- * @param weights The weights of the Conv-Layer
- * @param bias The bias of the Conv-Layer
- */
+
 Conv2DLayer::Conv2DLayer(int stride, bool ZeroPadding, FourDMatrix& weights, Vector& bias) :
         STRIDE(stride),
         ZERO_PADDING(ZeroPadding),
@@ -20,11 +14,7 @@ Conv2DLayer::Conv2DLayer(int stride, bool ZeroPadding, FourDMatrix& weights, Vec
         bias(bias)
 {}
 
-/**
- * The forward-propagation-function
- * @param input The 3D-Input-Matrix
- * @param output The 3D-Output-Matrix
- */
+
 void Conv2DLayer::forward(const ThreeDMatrix &input, ThreeDMatrix &output) {
     ThreeDMatrix paddedInput;
     if (ZERO_PADDING == true) {zeroPad(input,paddedInput);}
@@ -60,18 +50,14 @@ void Conv2DLayer::forward(const ThreeDMatrix &input, ThreeDMatrix &output) {
                         }
                     }
                 }
-                output(kernel)(row, col) = kernelResult;
+                output(kernel)(row, col) = kernelResult + bias(kernel);
             }
         }
     }
 }
 
 
-/**
- * The zero-padding-function
- * @param input The 3D-Input-Matrix to be padded
- * @param output The 3D-Output-Matrix
- */
+
 void Conv2DLayer::zeroPad(const Layer::ThreeDMatrix &input, Layer::ThreeDMatrix &output) {
     int zeroPadWidth = weights(0,0).cols() / 2; //div
     int sideLength = input(0).cols() + 2 * zeroPadWidth;
@@ -93,11 +79,7 @@ void Conv2DLayer::zeroPad(const Layer::ThreeDMatrix &input, Layer::ThreeDMatrix 
 }
 
 
-/**
- * A setter-method for the weights
- * @param weights the new weights of the Conv-Layer
- * @param bias the new bias of the Conv-Layer
- */
+
 void Conv2DLayer::setWeights(const Layer::FourDMatrix &weights, const Layer::Vector &bias) {
     this->weights = weights;
     this->bias = bias;
