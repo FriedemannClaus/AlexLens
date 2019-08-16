@@ -7,7 +7,12 @@
 #include "../MathModule/Skalar.h"
 #include "../NeuralNetModule/NeuralNet.h"
 #include <Eigen/Core>
+//OpenCV for the Cat-Image
+#include <opencv2/opencv.hpp>
+//#include <opencv2/imgproc/imgproc.hpp>
 
+
+using namespace cv;
 int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);
@@ -32,13 +37,23 @@ int main(int argc, char *argv[])
         cerr << "Unable to load cat-file.";
         exit(1);
     }
+
+    // load image with opencv and transform
+    string image_path = "../cat.jpg";
+    Mat image = imread(image_path);
+    //cvtColor(image, image, COLOR_BGR2RGB);
+
+
+
     for (int i = 0; i < 227; ++i) {
         for (int j = 0; j < 227; ++j) {
             for (int colour = 0; colour < 2; ++colour) {
-      //          catMatrix(colour) (i, j) = inFile.imread(i, j, colour); // OpenCV could do that.
+                Vec3b intensity = image.at<Vec3b>(i, j);
+                catMatrix(colour) (i, j) = intensity.val[2 - colour]; //bgr: b = 0
             }
         }
     }
+
 
     neuralNet->classify(catMatrix);
 
