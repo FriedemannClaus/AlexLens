@@ -53,7 +53,7 @@ int main(int argc, char *argv[])
         }
     }
 
-    cout << catMatrix(1)(226,226);
+    cout << catMatrix(1)(226,226) << endl;
     cout << "Test-Image loaded correctly\n";
 
 

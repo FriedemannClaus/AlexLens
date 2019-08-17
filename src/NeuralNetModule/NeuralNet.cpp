@@ -363,6 +363,7 @@ Layer::Vector& NeuralNet::classify(Layer::ThreeDMatrix &picture) {
     io(0) = picture;
 
     for (int i = 0; i < layers.rows(); ++i) {
+        cout << "i: " << i << endl;
         layers(i)->forward(io(i), io(i+1));
         cout << "layer " << i << " applied itself successfully" << endl;
         cout << "it returned a matrix of size " << io(i+1)(0).cols() //Throws error, because of bugs in ReLuLayer
