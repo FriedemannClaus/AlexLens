@@ -354,21 +354,28 @@ void NeuralNet::init() {
 Layer::Vector& NeuralNet::classify(Layer::ThreeDMatrix &picture) {
 
     //Forward-Propagate
-    Layer::ThreeDMatrix input = picture;
-    Layer::ThreeDMatrix output;
+//    Layer::ThreeDMatrix input = picture;
+//    Layer::ThreeDMatrix output;
+//    Layer::ThreeDMatrix tmp;
+
+    Eigen::Matrix<Layer::ThreeDMatrix, Eigen::Dynamic, 1> io;
+    io.resize(22);
+    io(0) = picture;
+
     for (int i = 0; i < layers.rows(); ++i) {
-        layers(i)->forward(input, output);
+        layers(i)->forward(io(i), io(i+1));
+        cout << "layer " << i << " applied itself successfully" << endl;
+        cout << "it returned a matrix of size " << io(i+1)(0).cols() //Throws error, because of bugs in ReLuLayer
+        << " and depth " << io(i+1).rows() << endl;
     }
-//    for (int i = 0; i < fcLayers.rows(); ++i) {
-//        fcLayers(i)->forward(input, output);
-//    }
+
     Layer::Vector propabilities;
     propabilities.resize (1000);
     //artificially resize result because layers don't work yet
-    output.resize(1);
-    output(0).resize(1000, 1);
+    io(22).resize(1);
+    io(22)(0).resize(1000, 1);
     for (int i = 0; i < 1000; ++i) {
-        propabilities(i) = output(0)(i, 0);
+        propabilities(i) = io(22)(0)(i, 0);
     }
     return propabilities;
 }

@@ -24,10 +24,12 @@ public:
         int inputNumCols = inputMatrix(0).cols();
         int inputNumChannels = inputMatrix.rows();
 
+        //resize outputMatrix
+
         for (int i = 0; i < inputNumChannels; i++) {
             for (int j = 0; j < inputNumRows; j++) {
                 for (int k = 0; k < inputNumCols; k++) {
-                    inputMatrix(i)(j, k) = max(inputMatrix(i)(j, k));
+                    inputMatrix(i)(j, k) = max(inputMatrix(i)(j, k)); //du meinst outputMatrix = max...
                 }
             }
         }
