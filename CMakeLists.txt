@@ -15,7 +15,7 @@ list(APPEND THIRD-PARTY-LIBS Qt::Widgets Qt::Core)
 
 # OpenCV
 #set(OpenCV_DIR /opt/intel/openvino/opencv/cmake)
-set(OpenCV_DIR /home/viet/installation/OpenCV-3.4.7/share/OpenCV)
+#set(OpenCV_DIR /home/friedemann/installation/OpenCV-3.4.7/share/OpenCV)
 find_package(OpenCV)
 message(STATUS "OpenCV library status:")
 message(STATUS "    version: ${OpenCV_VERSION}")
@@ -50,7 +50,7 @@ add_executable(AlexLens
         src/NeuralNetModule/FCLayer.cpp src/NeuralNetModule/FCLayer.h
         src/NeuralNetModule/Conv2DLayer.cpp src/NeuralNetModule/Conv2DLayer.h
         src/NeuralNetModule/NeuralNet.cpp src/NeuralNetModule/NeuralNet.h
-        src/NeuralNetModule/NeuralNetException.h)
+        )
 
 include_directories(includes)
 

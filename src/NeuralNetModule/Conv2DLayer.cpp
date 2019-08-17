@@ -76,12 +76,12 @@ void Conv2DLayer::forward(ThreeDMatrix &input, ThreeDMatrix &output) {
                     //In Eigen, iterating firstly over the columns and secondly over the rows is more efficient.
                     for (int j = 0; j < kernelSize; ++j) {
                         for (int i = 0; i < kernelSize; ++i) {
-                            int x = paddedInput(depth)(row + i, col + j);
                             kernelResult += weights(kernel, depth)(i, j) * paddedInput(depth)(row + i, col + j);
                         }
                     }
                 }
-                output(kernel)(row, col) = kernelResult + bias(kernel);
+                output(kernel)(row / STRIDE, col / STRIDE) = kernelResult + bias(kernel); //Finished a position of a kernel.
+                // There are (lastTopLeftPosition / STRIDE)² positions a kernel gets applied to.
             }
         }
     }
