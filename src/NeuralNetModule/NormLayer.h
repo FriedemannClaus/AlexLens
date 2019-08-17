@@ -50,7 +50,12 @@ public:
         assert(inputMatrix.rows() == inputNumChannels);
         assert(inputMatrix(0).cols() == inputNumCols);
         assert(inputMatrix(0).rows() == inputNumRows);
-        outputMatrix.resize(outputNumRows, outputNumCols);
+
+        outputMatrix.resize(inputNumChannels);
+        for (int i = 0; i < inputNumChannels; i++) {
+            outputMatrix(i).resize(outputNumRows, outputNumCols);
+        }
+
         for (int i = 0; i < inputNumRows; i++) { // Iterieren über Reihen
             for (int j = 0; j < inputNumCols; j++) { // Iterieren über Spalten
                 for (int k = 0; k < inputNumChannels; k++) { // Iterieren über Channel
