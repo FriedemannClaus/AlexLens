@@ -1,8 +1,8 @@
 /**
- * Project Entwurf_PSE_KNN
- * @author Jakub Trzcinsi, Viet Pham, Friedemann Claus, Dima Seletkov, Alexandr Eismont
- * @version 1.2
- */
+* Project Entwurf_PSE_KNN
+* @author Jakub Trzcinsi, Viet Pham, Friedemann Claus, Dima Seletkov, Alexandr Eismont
+* @version 1.2
+*/
 
 
 #ifndef _NEURALNET_H
@@ -19,7 +19,7 @@
 
 
 class NeuralNet: public INeuralNet {
-private: 
+private:
 //    Eigen::Matrix<Conv2DLayer* , Eigen::Dynamic, 1> convLayers;
 //    Eigen::Matrix<FCLayer* , Eigen::Dynamic, 1> fcLayers;
 //    Eigen::Matrix<MaxPool2D* , Eigen::Dynamic, 1> maxPoolLayers;
@@ -33,16 +33,16 @@ private:
 
 public:
     /**
-     * Initializes AlexNet. For that it reads the weights from the weights.txt and creates the layers.
-     */
+    * Initializes AlexNet. For that it reads the weights from the weights.txt and creates the layers.
+    */
     void init();
 
     /**
-     * Classifies an image.
-     * @param picture The image to classify
-     * @return A vector of possibilities
-     */
-    Layer::Vector& classify(Layer::ThreeDMatrix &picture);
+    * Classifies an image.
+    * @param picture The image to classify
+    * @return A vector of possibilities
+    */
+    void classify(Layer::ThreeDMatrix &picture, Layer::Vector &result);
 };
 
 #endif //_NEURALNET_H

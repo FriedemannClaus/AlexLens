@@ -190,23 +190,23 @@ void NeuralNet::init() {
         if ( i == conv4BiasBorder && l == 384) { cout << "Conv-Layer 4 biases loaded successfully.\n";} //Sanity-check and user-info
 
 
-        // Weights of first FC-Layer (Layer 6)
-        if( (conv4BiasBorder <= i) && (i < fc6Border) ) { // 4096 neurons, 256*6*6 Pixel Input-Size from Max-Pooled Conv-Layer 5 ->
-            // 4096 * 256*6*6 = 37.748.736 parameters.
-            fc6(m / 9216, m % 9216) = stof(line);
-            // 4096 neurons (rows), each connected to input size of 256*6*6 = 9216.
-            // (I hope that's the way it is coded in the weights.txt, and not the other way around).
-            // As described at the initialization of fc6, every row represents a neuron.
-            m++;
-        }
-        if ( i == fc6Border && m == 37748736) { cout << "FC-Layer 6 weights (37.748.736) loaded successfully.\n";} //Sanity-check and user-info
-
-        // Biases of first FC-Layer (Layer 6)
-        if( (fc6Border <= i) && (i < fc6BiasBorder) ) { // 4096 neurons -> 4096 biases for first FC-Layer.
-            fc6Bias(n,0) = stof(line); //Just a vector
-            n++;
-        }
-        if ( i == fc6BiasBorder && n == 4096) { cout << "FC-Layer 6 biases loaded successfully.\n";} //Sanity-check and user-info
+//        // Weights of first FC-Layer (Layer 6)
+//        if( (conv4BiasBorder <= i) && (i < fc6Border) ) { // 4096 neurons, 256*6*6 Pixel Input-Size from Max-Pooled Conv-Layer 5 ->
+//            // 4096 * 256*6*6 = 37.748.736 parameters.
+//            fc6(m / 9216, m % 9216) = stof(line);
+//            // 4096 neurons (rows), each connected to input size of 256*6*6 = 9216.
+//            // (I hope that's the way it is coded in the weights.txt, and not the other way around).
+//            // As described at the initialization of fc6, every row represents a neuron.
+//            m++;
+//        }
+//        if ( i == fc6Border && m == 37748736) { cout << "FC-Layer 6 weights (37.748.736) loaded successfully.\n";} //Sanity-check and user-info
+//
+//        // Biases of first FC-Layer (Layer 6)
+//        if( (fc6Border <= i) && (i < fc6BiasBorder) ) { // 4096 neurons -> 4096 biases for first FC-Layer.
+//            fc6Bias(n,0) = stof(line); //Just a vector
+//            n++;
+//        }
+//        if ( i == fc6BiasBorder && n == 4096) { cout << "FC-Layer 6 biases loaded successfully.\n";} //Sanity-check and user-info
 
         // Weights of Conv-Layer 3
         if( (fc6BiasBorder <= i) && (i < conv3Border) ) { // 3*3*256*384 = 884736 Parameters for Conv-Layer 3.
@@ -241,22 +241,22 @@ void NeuralNet::init() {
         }
         if ( i == conv5BiasBorder && r == 256) { cout << "Conv-Layer 5 biases loaded successfully.\n";} //Sanity-check and user-info
 
-        // Weights of second FC-Layer (Layer 7)
-        if( (conv5BiasBorder <= i) && (i < fc7Border) ) { // 4096 neurons, 4096 Neurons has the previous Layer, so 4096²= 16.777.216
-            fc7(s / 4096, s % 4096) = stof(line);
-            // 4096 neurons (rows), each connected to input size of 4096.
-            // (I hope that's the way it is coded in the weights.txt, and not the other way around).
-            // As described at the initialization of fc7, every row represents a neuron.
-            s++;
-        }
-        if ( i == fc7Border && s == 16777216) { cout << "FC-Layer 7 weights (16.777.216) loaded successfully.\n";} //Sanity-check and user-info
-
-        // Biases of second FC-Layer (Layer 7)
-        if( (fc7Border <= i) && (i < fc7BiasBorder) ) { // 4096 neurons -> 4096 biases for second FC-Layer.
-            fc7Bias(t) = stof(line); //Just a vector
-            t++;
-        }
-        if ( i == fc7BiasBorder && t == 4096) { cout << "FC-Layer 7 biases loaded successfully.\n";} //Sanity-check and user-info
+//        // Weights of second FC-Layer (Layer 7)
+//        if( (conv5BiasBorder <= i) && (i < fc7Border) ) { // 4096 neurons, 4096 Neurons has the previous Layer, so 4096²= 16.777.216
+//            fc7(s / 4096, s % 4096) = stof(line);
+//            // 4096 neurons (rows), each connected to input size of 4096.
+//            // (I hope that's the way it is coded in the weights.txt, and not the other way around).
+//            // As described at the initialization of fc7, every row represents a neuron.
+//            s++;
+//        }
+//        if ( i == fc7Border && s == 16777216) { cout << "FC-Layer 7 weights (16.777.216) loaded successfully.\n";} //Sanity-check and user-info
+//
+//        // Biases of second FC-Layer (Layer 7)
+//        if( (fc7Border <= i) && (i < fc7BiasBorder) ) { // 4096 neurons -> 4096 biases for second FC-Layer.
+//            fc7Bias(t) = stof(line); //Just a vector
+//            t++;
+//        }
+//        if ( i == fc7BiasBorder && t == 4096) { cout << "FC-Layer 7 biases loaded successfully.\n";} //Sanity-check and user-info
 
         // Weights of Conv-Layer 2
         if( (fc7BiasBorder <= i) && (i < conv2Border) ) { // 5*5*48*256 = 307.200 Parameters for Conv-Layer 2.
@@ -319,11 +319,11 @@ void NeuralNet::init() {
     layers(13) = reLuLayer;
     layers(14) = new MaxPool2D(13, 13, 256, 3, 3, 2);
 
-    layers(15) = new FCLayer(fc6, fc6Bias);
-    layers(16) = reLuLayer;
-
-    layers(17) = new FCLayer(fc7, fc7Bias);
-    layers(18) = reLuLayer;
+//    layers(15) = new FCLayer(fc6, fc6Bias);
+//    layers(16) = reLuLayer;
+//
+//    layers(17) = new FCLayer(fc7, fc7Bias);
+//    layers(18) = reLuLayer;
 
     layers(19) = new FCLayer(fc8, fc8Bias);
     layers(20) = reLuLayer;
@@ -351,7 +351,7 @@ void NeuralNet::init() {
 }
 
 
-Layer::Vector& NeuralNet::classify(Layer::ThreeDMatrix &picture) {
+void NeuralNet::classify(Layer::ThreeDMatrix &picture, Layer::Vector &result) {
 
     //Forward-Propagate
 //    Layer::ThreeDMatrix input = picture;
@@ -359,25 +359,63 @@ Layer::Vector& NeuralNet::classify(Layer::ThreeDMatrix &picture) {
 //    Layer::ThreeDMatrix tmp;
 
     Eigen::Matrix<Layer::ThreeDMatrix, Eigen::Dynamic, 1> io;
-    io.resize(22);
+    io.resize(5);
     io(0) = picture;
 
-    for (int i = 0; i < layers.rows(); ++i) {
+    for (int i = 0; i <= 3; ++i) { // 0 to i=3, conv2 needs special treatment (two gpus in AlexNet)
         cout << "i: " << i << endl;
         layers(i)->forward(io(i), io(i+1));
         cout << "layer " << i << " applied itself successfully" << endl;
         cout << "it returned a matrix of size " << io(i+1)(0).rows()
-        << " x " << io(i+1)(0).cols()
-        << " and depth " << io(i+1).rows() << endl;
+             << " x " << io(i+1)(0).cols()
+             << " and depth " << io(i+1).rows() << endl;
     }
 
-    Layer::Vector propabilities;
-    propabilities.resize (1000);
-    //artificially resize result because layers don't work yet
-    io(22).resize(1);
-    io(22)(0).resize(1000, 1);
-    for (int i = 0; i < 1000; ++i) {
-        propabilities(i) = io(22)(0)(i, 0);
+    //Two io-Arrays for the two simulated gpus
+    Eigen::Matrix<Layer::ThreeDMatrix, Eigen::Dynamic, 1> io1;
+    io1.resize(10);
+    Eigen::Matrix<Layer::ThreeDMatrix, Eigen::Dynamic, 1> io2;
+    io2.resize(10);
+
+    //slice the input of conv2 into two pieces.
+//    auto input1 = new Layer::ThreeDMatrix;
+//    auto input2 = new Layer::ThreeDMatrix;
+    cout << "a " << endl;
+    io1(0).resize(48);
+    io2(0).resize(48);
+    cout << "b " << endl;
+    for (int j = 0; j < 48; ++j) {
+        io1(0)(j).resize(27, 27); //May still be needed
+        io2(0)(j).resize(27, 27);
+        for (int k = 0; k < 27; ++k) {
+            for (int l = 0; l < 27; ++l) {
+                io1(0)(j)(k, l) = io(4)(j)(k, l);
+                io2(0)(j)(k, l) = io(4)(j+48)(k, l);
+            }
+        }
     }
-    return propabilities;
+    cout << "c " << endl;
+
+
+    // calculate on the two simulated gpus:
+    for (int i = 4; i <= 8; ++i) { //8 is experimental for now
+        layers(i)->forward(io1(i-4), io1(i-3));
+        layers(i)->forward(io2(i-4), io2(i-3));
+        cout << "layer " << i - 4 << " applied itself successfully" << endl;
+        cout << "it returned two matrices of size " << io1(i-3)(0).rows()
+             << " x " << io1(i-3)(0).cols()
+             << " and depth " << io1(i-3).rows() << endl;
+    }
+
+
+
+
+//    result.resize (1000);
+//    //artificially resize result because layers don't work yet
+//    io(22).resize(1);
+//    io(22)(0).resize(1000, 1);
+//    for (int i = 0; i < 1000; ++i) {
+//        result(i) = io(22)(0)(i, 0);
+//    }
+//    return result;
 }

@@ -32,11 +32,6 @@ void Conv2DLayer::forward(ThreeDMatrix &input, ThreeDMatrix &output) {
     assert(input.rows() == inputDepth); // Hier Fehler: input.rows() ist nach dem ersten NormLayer 96, inputDepth jedoch 48
     assert(input(0).rows() == FORCED_INPUT_SIZE);
     assert(input(0).cols() == FORCED_INPUT_SIZE);
-    //debug
-    assert(weights.cols() == 3);
-    assert(weights.rows() == 96);
-    assert(weights(0, 0).cols() == 11);
-    assert(weights(0, 0).rows() == 11);
 
 
     //Zero-Pad the input
@@ -49,7 +44,6 @@ void Conv2DLayer::forward(ThreeDMatrix &input, ThreeDMatrix &output) {
 
 
     //debug
-    assert(inputDepth == 3);
     cout << "paddedInput.rows() = \n";
     cout << paddedInput.rows() << std::endl;
     cout << "input.rows() = \n";

@@ -59,7 +59,8 @@ int main(int argc, char *argv[])
 
 
     neuralNet->init();
-    neuralNet->classify(catMatrix);
+    Layer::Vector propabilities;
+    neuralNet->classify(catMatrix, propabilities);
 
 
     return a.exec();

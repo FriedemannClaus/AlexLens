@@ -70,7 +70,7 @@ public:
                         floats(k) = (inputMatrix)(c)((i * stride) + (k / 3), (j * stride) + (k % 3)); //Fehler
                     }
                     float max = getMaxFloat(&floats);
-                    cout << "max: " << max << endl;
+//                    cout << "max: " << max << endl;
                     outputMatrix(c)(i, j) = max;
                 }
             }
