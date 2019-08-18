@@ -42,12 +42,6 @@ void Conv2DLayer::forward(ThreeDMatrix &input, ThreeDMatrix &output) {
         paddedInput = input; //We calculate with the paddedInput
     }
 
-
-    //debug
-    cout << "paddedInput.rows() = \n";
-    cout << paddedInput.rows() << std::endl;
-    cout << "input.rows() = \n";
-    cout << input.rows() << std::endl;
     assert(paddedInput.rows() == inputDepth);
     assert(paddedInput(0).cols() == paddedInputSize );
 
@@ -91,9 +85,6 @@ void Conv2DLayer::zeroPad(const Layer::ThreeDMatrix &input, Layer::ThreeDMatrix 
     int sideLength = input(0).cols() + 2 * zeroPadWidth;
     output.resize(input.rows()); // Matrices get resized in the overall for-loop
     assert(output.rows() == input.rows());
-
-    std::cout << "input.rows() in zeroPAd = \n";
-    std::cout << input.rows() << std::endl;
 
     int oldSideLength = input(0).cols();
     for (int depth = 0; depth < input.rows(); ++depth) {

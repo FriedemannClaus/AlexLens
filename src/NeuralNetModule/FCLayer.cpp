@@ -27,8 +27,10 @@ void FCLayer::forward(Layer::ThreeDMatrix &input, Layer::ThreeDMatrix &output) {
     int inputSize = input(0).rows();
     int inputSizeSquare = inputSize * inputSize;
 
+
     //Okay for now TODO
-    assert(input.cols() * input(0).rows() * input(0).cols() == weights.cols());
+    assert(input.rows() * input(0).rows() * input(0).cols() == weights.cols());
+    assert(inputSizeSquare * inputDepth == weights.cols());
 
     int neuronResult;
     // FC-Layer returns a vector. Still has to be a ThreeDMatrix so that the other layers can process it.
