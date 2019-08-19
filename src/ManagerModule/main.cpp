@@ -23,7 +23,7 @@ int main(int argc, char *argv[])
     imageMatrix(2).resize(227, 227);
 
     // load image with opencv and transform it to a ThreeDMatrix
-    string image_path = "../blue.jpg";
+    string image_path = "../cat.jpg";
     Mat image = imread(image_path);
 
     for (int i = 0; i < 227; ++i) {
@@ -79,11 +79,14 @@ int main(int argc, char *argv[])
     cout << "(Started counting at 1 not 0)" << endl;
     cout << "Values add up to a sum of " << total << endl;
 
+    //delete what we have used
+    delete neuralNet;
+
     //Start the application
     QApplication a(argc, argv);
-    Manager* manager = new Manager();
-    MainWindow* w = new MainWindow(manager);
-    w->show();
+//    Manager* manager = new Manager();
+//    MainWindow* w = new MainWindow(manager);
+//    w->show();
 
     return a.exec();
 }

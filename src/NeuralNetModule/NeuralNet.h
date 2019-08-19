@@ -37,6 +37,12 @@ public:
     */
     void init();
 
+    ~NeuralNet() {
+        for (int i = 0; i < layers.rows(); ++i) {
+            delete layers(i);
+        }
+    }
+
     /**
     * Classifies an image.
     * @param picture The image to classify

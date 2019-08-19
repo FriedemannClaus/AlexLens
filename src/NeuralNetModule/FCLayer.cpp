@@ -12,16 +12,6 @@ FCLayer::FCLayer(Matrix &weights, Vector &bias) :
 {}
 
 void FCLayer::forward(Layer::ThreeDMatrix &input, Layer::ThreeDMatrix &output) {
-//    Vector vectorizedInput = input(i) mit for-schleife input zu Vektor machen. Oder nicht vectorizen
-//    und per for-schleife weight-Matrix mit ThreeD-Input-Matrix multiplizieren.
-//    int columns = input.cols();
-    // Linear term result = weights^T * input + bias
-    // Or: Vector result = weights * vectorized Input + bias
-    // Because other Layers need a ThreeDMatrix as input for the forward-pass
-//    result.resize(bias.rows(), columns);
-//    result.noalias() = weights.transpose() * input;
-//    result.colwise() += this->bias;
-
     int neurons = weights.rows();
     int inputDepth = input.rows();
     int inputSize = input(0).rows();
@@ -30,9 +20,8 @@ void FCLayer::forward(Layer::ThreeDMatrix &input, Layer::ThreeDMatrix &output) {
 
     //Okay for now TODO
     assert(input.rows() * input(0).rows() * input(0).cols() == weights.cols());
-    assert(inputSizeSquare * inputDepth == weights.cols());
+    assert(inputSizeSquare * inputDepth == weights.cols()); // basically the same
 
-    int neuronResult;
     // FC-Layer returns a vector. Still has to be a ThreeDMatrix so that the other layers can process it.
     // But this doesn't cause a noticeable performance-decrease because of the way the loops are built.
     output.resize(neurons);
@@ -40,10 +29,7 @@ void FCLayer::forward(Layer::ThreeDMatrix &input, Layer::ThreeDMatrix &output) {
         output(i).resize(1,1);
     }
 
-    //options are: one transformationlayer after conv5. Would need another Relulayer afterwards and threeDLayers twoDLayers attributes in NN.cpp
-    // TransformationLayer would need one RAM-Copy
-    //2. like now: Index-Calculations in the calculation-> slower (bc CPU-Calculations, RAM shouldnt be the bottleneck here)
-
+    float neuronResult;
     //calculate the output
     for (int neuron = 0; neuron < neurons; ++neuron) {
         neuronResult = 0;;

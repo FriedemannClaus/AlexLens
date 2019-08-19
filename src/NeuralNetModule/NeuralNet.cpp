@@ -381,41 +381,40 @@ void NeuralNet::init() {
 
 
     //Now create the layers of AlexNet
-    auto reLuLayer = new ReLULayer();
     layers.resize(25);
 
     layers(0) = new Conv2DLayer(227, 4, 0, conv1, conv1Bias);
-    layers(1) = reLuLayer;
+    layers(1) = new ReLULayer();
     layers(2) = new MaxPool2D(55, 55, 96, 3, 3, 2);
     layers(3) = new NormLayer(27, 27, 96, 2, 0.0001, 0.75, 5);
 
     layers(4) = new Conv2DLayer(27, 1, 2, conv21, conv21Bias);
     layers(5) = new Conv2DLayer(27, 1, 2, conv22, conv22Bias);
-    layers(6) = reLuLayer;
+    layers(6) = new ReLULayer();
     layers(7) = new MaxPool2D(27, 27, 128, 3, 3, 2); //Use it for both gpus (2 times)
     layers(8) = new NormLayer(13, 13, 128, 2, 0.0001, 0.75, 5); //Use it for both gpus (2 times)
 
     layers(9) = new Conv2DLayer(13, 1, 1, conv31, conv31Bias);
     layers(10) = new Conv2DLayer(13, 1, 1, conv32, conv32Bias);
-    layers(11) = reLuLayer;
+    layers(11) = new ReLULayer();
 
     layers(12) = new Conv2DLayer(13, 1, 1, conv41, conv41Bias);
     layers(13) = new Conv2DLayer(13, 1, 1, conv42, conv42Bias);
-    layers(14) = reLuLayer;
+    layers(14) = new ReLULayer();
 
     layers(15) = new Conv2DLayer(13, 1, 1, conv51, conv51Bias);
     layers(16) = new Conv2DLayer(13, 1, 1, conv52, conv52Bias);
-    layers(17) = reLuLayer;
+    layers(17) = new ReLULayer();
     layers(18) = new MaxPool2D(13, 13, 128, 3, 3, 2);
 
     layers(19) = new FCLayer(fc6, fc6Bias);
-    layers(20) = reLuLayer;
+    layers(20) = new ReLULayer();
 
     layers(21) = new FCLayer(fc7, fc7Bias);
-    layers(22) = reLuLayer;
+    layers(22) = new ReLULayer();
 
     layers(23) = new FCLayer(fc8, fc8Bias);
-    layers(24) = reLuLayer;
+    layers(24) = new ReLULayer();
 }
 
 
