@@ -34,12 +34,20 @@ void NeuralNet::init() {
 
     //Weight Matrices:
 
-    // Wheights for the conv-layers are stored in a Matrix of Matrices
+    // Wheights for the conv-layers are stored in a matrix of matrices
     // A row of the outer matrix represents a kernel
     // For example a 11x11x3 kernel of the first conv-layer is represented as 3 11x11 matrices in one row (RGB in that case).
-    // So conv1 is a very long matrix with width 3.
+    // So conv1 is a matrix with width 3 (input depth/ kernel depth) and length 96 (kernels of Conv1).
 
     FourDMatrix conv1;
+
+    // AlexNet (and therfore our weights) is built for two GPUs. The first Conv-Layer can be calculated as is, but the rest have to be split.
+    // They are split in the kernel-dimension (Each gpu applies half of the kernels). So conv41 and conv42 have 192 kernels each instead of 384.
+    // This results in two output-matrices with half the depth (two times 13x13x192 instead of 13x13x384).
+    // So conv51 and conv52 therefore have kernels with depth 192 instead of 384.
+    // Conv31 and Conv32 are exceptions to this, as they are calculated cross-gpu instead of parallel to the gpus.
+    // So conv31 sees the output of conv21 AND of conv22 whereas conv51 only sees the output of conv41.
+    // That's why we have to split the output-matrices of conv1, merge the outputmatrices of conv2 (and of conv5, because the fc-layers aren't parallelized too).
     FourDMatrix conv21;
     FourDMatrix conv22;
     FourDMatrix conv31;
@@ -49,8 +57,7 @@ void NeuralNet::init() {
     FourDMatrix conv51;
     FourDMatrix conv52;
 
-    // resize the 4d-Matrices
-    // for explanations see the parsings of the layers
+    // resize the 4d-Matrices accordingly
     int a;
     int b;
     conv1.resize(96, 3);
@@ -116,14 +123,14 @@ void NeuralNet::init() {
         }
     }
 
-    // Every Neuron has weights to every neuron of its previous layer. Hence weights are a 2D-matrix.
+    // Every Neuron has weights to every neuron of the previous layer. Hence weights are a 2D-matrix.
     // Every Row contains the weights of one neuron.
     Matrix fc6;
     Matrix fc7;
     Matrix fc8;
 
     // resize the matrices
-    fc6.resize(4096, 9216);
+    fc6.resize(4096, 9216); // (Number of Neurons, Number of Connections per Neuron)
     fc7.resize(4096, 4096);
     fc8.resize(1000, 4096);
 
@@ -143,6 +150,7 @@ void NeuralNet::init() {
     Vector fc8Bias;
 
     // resize the bias vectors
+    // One bias per kernel.
     conv1Bias.resize(96);
     conv21Bias.resize(128);
     conv22Bias.resize(128);
@@ -153,26 +161,28 @@ void NeuralNet::init() {
     conv51Bias.resize(128);
     conv52Bias.resize(128);
 
+    // One bias per neuron.
     fc6Bias.resize(4096);
     fc7Bias.resize(4096);
     fc8Bias.resize(1000);
 
-    //load the weight.txt file
+    // load the weight.txt file
     ifstream inFile;
     inFile.open("../weights.txt");
 
     if (!inFile) {
-        cerr << "Unable to load weight-file.";
+        cerr << "Unable to load weight-file, please place it at the top of the project-structure.";
         exit(1);
     }
 
-    //Calculate the Borders where the layers end in the weights.txt file
+    //Calculate the borders where the layers end in the weights.txt file
     int conv1Border = conv1.rows() * conv1.cols() * conv1(0, 0).rows() * conv1(0, 0).cols();
     int conv1BiasBorder = conv1Bias.rows() + conv1Border;
     // The layers in the weights.txt file are not ordered intuitively
 
-    //two gpus double the Parameters
-    //But the weights for both gpu-layers are within one sector of the weights.txt file
+    // We halfed the kernels because of the two gpus, so now double the parameters
+    // The weights for both gpu-layers are within one sector of the weights.txt file
+
     int conv4Border = 2 * (conv41.rows() * conv41.cols() * conv41(0, 0).rows() * conv41(0, 0).cols()) + conv1BiasBorder;
     int conv4BiasBorder = 2 * conv41Bias.rows() + conv4Border;
     int fc6Border = fc6.rows() * fc6.cols() + conv4BiasBorder;
@@ -372,7 +382,7 @@ void NeuralNet::init() {
 
     //Now create the layers of AlexNet
     auto reLuLayer = new ReLULayer();
-    layers.resize(25); //TODO
+    layers.resize(25);
 
     layers(0) = new Conv2DLayer(227, 4, 0, conv1, conv1Bias);
     layers(1) = reLuLayer;
@@ -406,40 +416,21 @@ void NeuralNet::init() {
 
     layers(23) = new FCLayer(fc8, fc8Bias);
     layers(24) = reLuLayer;
-
-
-
-
-//    fcLayers.resize(3);
-//    fcLayers(0) = new FCLayer();
-//    fcLayers(0)->setWeights(fc6, fc6Bias);
-//    fcLayers(1) = new FCLayer();
-//    fcLayers(1)->setWeights(fc7, fc7Bias);
-//    fcLayers(2) = new FCLayer();
-//    fcLayers(2)->setWeights(fc8, fc8Bias);
-
-//    maxPoolLayers.resize(3);
-//    maxPoolLayers(0) = new MaxPool2D(55, 55, 96, 3, 3, 2);
-//    maxPoolLayers(1) = new MaxPool2D(27, 27, 256, 3, 3, 2);
-//    maxPoolLayers(2) = new MaxPool2D(13, 13, 256, 3, 3, 2);
-//
-//    // NormLayer(const int inputWidth, const int inputHeight, const int inputChannels, const int normK, const int normAlpha, const int normBeta, const int normRegionSize)
-//    normLayers(0) = new NormLayer(27, 27, 96, 2, 0.0001, 0.75, 5);
-//    normLayers(1) = new NormLayer(13, 13, 256, 2, 0.0001, 0.75, 5);
-
 }
 
 
 void NeuralNet::classify(Layer::ThreeDMatrix &picture, Layer::Vector &result) {
 
     //Forward-Propagate
-//    Layer::ThreeDMatrix input = picture;
-//    Layer::ThreeDMatrix output;
-//    Layer::ThreeDMatrix tmp;
 
+    //The input and outputmatrices of the layers, which are calculated on only one simulated GPU.
     Eigen::Matrix<Layer::ThreeDMatrix, Eigen::Dynamic, 1> io;
-    io.resize(25);
+    io.resize(13);
     io(0) = picture;
+
+    //debug
+    cout << "input in classify (should match): ";
+    cout<< " r:" << io(0)(0)(0, 0) << " g:" << io(0) (1)(226, 0) << " b:" << io(0) (2)(226, 226);
 
     for (int i = 0; i <= 3; ++i) { // 0 to i=3, conv2 needs special treatment (two gpus in AlexNet)
         layers(i)->forward(io(i), io(i+1));
@@ -451,20 +442,20 @@ void NeuralNet::classify(Layer::ThreeDMatrix &picture, Layer::Vector &result) {
 
     //Two io-Arrays for the two simulated gpus
     Eigen::Matrix<Layer::ThreeDMatrix, Eigen::Dynamic, 1> io1;
-    io1.resize(15);
+    io1.resize(12);
     Eigen::Matrix<Layer::ThreeDMatrix, Eigen::Dynamic, 1> io2;
-    io2.resize(15);
+    io2.resize(12);
 
     //slice the input of conv2 into two pieces.
     io1(0).resize(48);
     io2(0).resize(48);
-    for (int j = 0; j < 48; ++j) {
-        io1(0)(j).resize(27, 27); //May still be needed
-        io2(0)(j).resize(27, 27);
-        for (int k = 0; k < 27; ++k) {
-            for (int l = 0; l < 27; ++l) {
-                io1(0)(j)(k, l) = io(4)(j)(k, l);
-                io2(0)(j)(k, l) = io(4)(j+48)(k, l);
+    for (int depth = 0; depth < 48; ++depth) {
+        io1(0)(depth).resize(27, 27); //May still be needed
+        io2(0)(depth).resize(27, 27);
+        for (int i = 0; i < 27; ++i) {
+            for (int j = 0; j < 27; ++j) {
+                io1(0)(depth)(i, j) = io(4)(depth)(i, j);
+                io2(0)(depth)(i, j) = io(4)(depth+48)(i, j);
             }
         }
     }
@@ -472,12 +463,12 @@ void NeuralNet::classify(Layer::ThreeDMatrix &picture, Layer::Vector &result) {
 
     //Conv-Layer 2 on each gpu:
     layers(4)->forward(io1(0), io1(1));
-    cout << "layer 4.1 applied itself successfully" << endl;
+    cout << "Conv-Layer 2.1 applied itself successfully" << endl;
     cout << "it returned two matrices of size " << io1(1)(0).rows()
          << " x " << io1(1)(0).cols()
          << " and depth " << io1(1).rows() << endl;
     layers(5)->forward(io2(0), io2(1));
-    cout << "layer 4.2 applied itself successfully" << endl;
+    cout << "Conv-Layer 2.2 applied itself successfully" << endl;
     cout << "it returned two matrices of size " << io2(1)(0).rows()
          << " x " << io2(1)(0).cols()
          << " and depth " << io2(1).rows() << endl;
@@ -494,7 +485,7 @@ void NeuralNet::classify(Layer::ThreeDMatrix &picture, Layer::Vector &result) {
 
 
     //conv-Layer 3 is cross-GPU, so merge the outputs of the previous layer:
-    //resize the new input matrix of conv-layer 3 //probably not necessary, test another time TODO
+    //resize the new input matrix of conv-layer 3
     io(5).resize(256);
     for (int depth = 0; depth < 256; ++depth) {
         io(5)(depth).resize(13, 13);
@@ -574,8 +565,8 @@ void NeuralNet::classify(Layer::ThreeDMatrix &picture, Layer::Vector &result) {
     //merged (vertically as a vector of Matrices (3rd-Dimension), Eigen does it right automatically)
     cout << "merged the output \n" << endl;
 
-
-    for (int i = 19; i <= 24; ++i) { // last 6 Layers (3 FC and 3 ReLu)
+    // last 6 Layers (3 FC and 3 ReLu)
+    for (int i = 19; i <= 24; ++i) {
         layers(i)->forward(io(i - 13), io(i - 12));
         cout << "layer " << i << " applied itself successfully" << endl;
         cout << "it returned a matrix of size " << io(i - 12)(0).rows()

@@ -29,7 +29,7 @@ void Conv2DLayer::forward(ThreeDMatrix &input, ThreeDMatrix &output) {
     int lastTopLeftPosition = paddedInputSize - kernelSize; //last position of top left pixel of kernel.
 
     // Assert the input-size
-    assert(input.rows() == inputDepth); // Hier Fehler: input.rows() ist nach dem ersten NormLayer 96, inputDepth jedoch 48
+    assert(input.rows() == inputDepth);
     assert(input(0).rows() == FORCED_INPUT_SIZE);
     assert(input(0).cols() == FORCED_INPUT_SIZE);
 

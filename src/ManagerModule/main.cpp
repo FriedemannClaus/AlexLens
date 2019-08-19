@@ -7,7 +7,7 @@
 #include "../MathModule/Skalar.h"
 #include "../NeuralNetModule/NeuralNet.h"
 #include <Eigen/Core>
-//OpenCV for the Cat-Image
+//OpenCV for loading the image
 #include <opencv2/opencv.hpp>
 //#include <opencv2/imgproc/imgproc.hpp>
 
@@ -15,53 +15,35 @@
 using namespace cv;
 int main(int argc, char *argv[])
 {
-    QApplication a(argc, argv);
-    Manager* manager = new Manager();
-    MainWindow* w = new MainWindow(manager);
-    w->show();
-    auto neuralNet = new NeuralNet();
+    //load a test image
+    Layer::ThreeDMatrix imageMatrix;
+    imageMatrix.resize(3);
+    imageMatrix(0).resize(227, 227);
+    imageMatrix(1).resize(227, 227);
+    imageMatrix(2).resize(227, 227);
 
-    //load a cat image for testing
-    Layer::ThreeDMatrix catMatrix;
-    catMatrix.resize(3);
-    catMatrix(0).resize(227, 227);
-    catMatrix(1).resize(227, 227);
-    catMatrix(2).resize(227, 227);
-
-//    //load the cat.jpg file
-//    ifstream inFile;
-//    inFile.open("../cat.jpg");
-//
-//    if (!inFile) {
-//        cerr << "Unable to load cat-file.";
-//        exit(1);
-//    }
-
-    // load image with opencv and transform
-    string image_path = "../cat.jpg";
+    // load image with opencv and transform it to a ThreeDMatrix
+    string image_path = "../snail.jpg";
     Mat image = imread(image_path);
-    //cvtColor(image, image, COLOR_BGR2RGB);
-
-
 
     for (int i = 0; i < 227; ++i) {
         for (int j = 0; j < 227; ++j) {
-            for (int colour = 0; colour < 2; ++colour) {
+            for (int colour = 0; colour < 3; ++colour) {
                 Vec3b intensity = image.at<Vec3b>(i, j);
-                catMatrix(colour) (i, j) = intensity.val[2 - colour]; //bgr: b = 0
+                imageMatrix(colour) (i, j) = intensity.val[2 - colour]; // OpenCV delivers bgr
             }
         }
     }
-
+    cout<< " r:" << imageMatrix(0)(0, 0) << " g:" << imageMatrix (1)(226, 0) << " b:" << imageMatrix (2)(226, 226);
     cout << "Test-Image loaded correctly\n";
 
-
-
+    //Classify the image
+    auto neuralNet = new NeuralNet();
     neuralNet->init();
     Layer::Vector propabilities;
-    neuralNet->classify(catMatrix, propabilities);
+    neuralNet->classify(imageMatrix, propabilities);
 
-    cout << "Result: ";
+    // Take the 5 highest values of the result (and calculate total)...
     float max1 = 0.1;
     int max1i;
     float max2 = 0.05;
@@ -72,11 +54,14 @@ int main(int argc, char *argv[])
     int max4i;
     float max5 = 0.015;
     int max5i;
+
+    float total;
     for (int i = 0; i < 1000; ++i) {
-        cout << propabilities(i) << "; ";
-        if ((i % 10) == 9) {
-            cout << endl;
-        }
+//        cout << propabilities(i) << "; ";
+//        if ((i % 10) == 9) {
+//            cout << endl;
+//        }
+        total += propabilities(i);
 
         if(propabilities(i) >= max1) {
             max1 = propabilities(i);
@@ -104,12 +89,20 @@ int main(int argc, char *argv[])
         }
     }
 
+    //...and print them
     cout <<"It is category " << max1i + 1 << " with a value of " << max1 << endl;
     cout <<"It is category " << max2i + 1 << " with a value of " << max2 << endl;
     cout <<"It is category " << max3i + 1 << " with a value of " << max3 << endl;
     cout <<"It is category " << max4i + 1 << " with a value of " << max4 << endl;
     cout <<"It is category " << max5i + 1 << " with a value of " << max5 << endl;
     cout << "(Started counting at 1 not 0)" << endl;
+    cout << "Values add up to a sum of " << total << endl;
+
+    //Start the application
+    QApplication a(argc, argv);
+    Manager* manager = new Manager();
+    MainWindow* w = new MainWindow(manager);
+    w->show();
 
     return a.exec();
 }
