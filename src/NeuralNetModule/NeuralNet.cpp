@@ -429,7 +429,7 @@ void NeuralNet::classify(Layer::ThreeDMatrix &picture, Layer::Vector &result) {
 
     //debug
     cout << "input in classify (should match): ";
-    cout<< " r:" << io(0)(0)(0, 0) << " g:" << io(0) (1)(226, 0) << " b:" << io(0) (2)(226, 226);
+    cout<< " r:" << io(0)(0)(0, 0) << " g:" << io(0) (1)(226, 0) << " b:" << io(0) (2)(226, 226) << endl;
 
     for (int i = 0; i <= 3; ++i) { // 0 to i=3, conv2 needs special treatment (two gpus in AlexNet)
         layers(i)->forward(io(i), io(i+1));
@@ -437,6 +437,15 @@ void NeuralNet::classify(Layer::ThreeDMatrix &picture, Layer::Vector &result) {
         cout << "it returned a matrix of size " << io(i+1)(0).rows()
              << " x " << io(i+1)(0).cols()
              << " and depth " << io(i+1).rows() << endl;
+
+        //debug print first 2D-Matrix of output
+        for (int row = 0; row < io(i+1)(0).rows(); ++row) {
+            for (int col = 0; col < io(i+1)(0).cols(); ++col) {
+                cout << io(i+1)(0)(row, col) << ", ";
+            }
+            cout << endl;
+        }
+        cout << endl << endl;
     }
 
     //Two io-Arrays for the two simulated gpus
@@ -449,16 +458,35 @@ void NeuralNet::classify(Layer::ThreeDMatrix &picture, Layer::Vector &result) {
     io1(0).resize(48);
     io2(0).resize(48);
     for (int depth = 0; depth < 48; ++depth) {
-        io1(0)(depth).resize(27, 27); //May still be needed
+        io1(0)(depth).resize(27, 27);
         io2(0)(depth).resize(27, 27);
         for (int i = 0; i < 27; ++i) {
             for (int j = 0; j < 27; ++j) {
                 io1(0)(depth)(i, j) = io(4)(depth)(i, j);
-                io2(0)(depth)(i, j) = io(4)(depth+48)(i, j);
+                io2(0)(depth)(i, j) = io(4)(depth + 48)(i, j);
             }
         }
     }
-    cout << "split the output \n " << endl;
+    cout << "split the output" << endl
+    << "Result from splitting for the first gpu is:" << endl;
+    //debug print first 2D-Matrix of splitting-output
+    for (int row = 0; row < io1(0)(0).rows(); ++row) {
+        for (int col = 0; col < io1(0)(0).cols(); ++col) {
+            cout << io1(0)(0)(row, col) << ", ";
+        }
+        cout << endl;
+    }
+    cout << endl << endl;
+
+    cout << "Result from splitting for the second gpu is:" << endl;
+    //debug print first 2D-Matrix of splitting-output
+    for (int row = 0; row < io2(0)(0).rows(); ++row) {
+        for (int col = 0; col < io2(0)(0).cols(); ++col) {
+            cout << io2(0)(0)(row, col) << ", ";
+        }
+        cout << endl;
+    }
+    cout << endl << endl;
 
     //Conv-Layer 2 on each gpu:
     layers(4)->forward(io1(0), io1(1));
@@ -466,11 +494,30 @@ void NeuralNet::classify(Layer::ThreeDMatrix &picture, Layer::Vector &result) {
     cout << "it returned two matrices of size " << io1(1)(0).rows()
          << " x " << io1(1)(0).cols()
          << " and depth " << io1(1).rows() << endl;
+
+    //debug print first 2D-Matrix of output
+    for (int row = 0; row < io1(1)(0).rows(); ++row) {
+        for (int col = 0; col < io1(1)(0).cols(); ++col) {
+            cout << io1(1)(0)(row, col) << ", ";
+        }
+        cout << endl;
+    }
+    cout << endl << endl;
+
     layers(5)->forward(io2(0), io2(1));
     cout << "Conv-Layer 2.2 applied itself successfully" << endl;
     cout << "it returned two matrices of size " << io2(1)(0).rows()
          << " x " << io2(1)(0).cols()
          << " and depth " << io2(1).rows() << endl;
+
+    //debug print first 2D-Matrix of output
+    for (int row = 0; row < io2(1)(0).rows(); ++row) {
+        for (int col = 0; col < io2(1)(0).cols(); ++col) {
+            cout << io2(1)(0)(row, col) << ", ";
+        }
+        cout << endl;
+    }
+    cout << endl << endl;
 
     // calculate Relu, Max Pool and Norm on the two simulated gpus:
     for (int i = 6; i <= 8; ++i) {
@@ -480,6 +527,24 @@ void NeuralNet::classify(Layer::ThreeDMatrix &picture, Layer::Vector &result) {
         cout << "it returned two matrices of size " << io1(i-4)(0).rows()
              << " x " << io1(i-4)(0).cols()
              << " and depth " << io1(i-4).rows() << endl;
+        //debug print first 2D-Matrix of output
+        cout <<"GPU1 Layer" << i << endl;
+        for (int row = 0; row < io1(i-4)(0).rows(); ++row) {
+            for (int col = 0; col < io1(i-4)(0).cols(); ++col) {
+                cout << io1(i-4)(0)(row, col) << ", ";
+            }
+            cout << endl;
+        }
+        cout << endl << endl;
+        //debug print first 2D-Matrix of output
+        cout <<"GPU2 Layer" << i << endl;
+        for (int row = 0; row < io2(i-4)(0).rows(); ++row) {
+            for (int col = 0; col < io2(i-4)(0).cols(); ++col) {
+                cout << io2(i-4)(0)(row, col) << ", ";
+            }
+            cout << endl;
+        }
+        cout << endl << endl;
     }
 
 
@@ -492,7 +557,16 @@ void NeuralNet::classify(Layer::ThreeDMatrix &picture, Layer::Vector &result) {
     io(5) <<  io1(4),
                     io2(4);
     //merged (vertically as a vector of Matrices (3rd-Dimension), Eigen does it right automatically)
-    cout << "merged the output \n" << endl;
+    cout << "merged the output \n Output after merging is: " << endl;
+    //debug print merging-output
+    for (int row = 0; row < io(5)(0).rows(); ++row) {
+        for (int col = 0; col < io(5)(0).cols(); ++col) {
+            cout << io(5)(0)(row, col) << ", ";
+        }
+        cout << endl;
+    }
+    cout << endl << endl;
+
 
     //Conv-Layer 3 on each gpu:
     layers(9)->forward(io(5), io1(5));
