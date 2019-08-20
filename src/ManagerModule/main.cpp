@@ -7,6 +7,7 @@
 int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);
+    setlocale(LC_NUMERIC,"C");
     Subject* subject = new Subject();
     Manager* manager = new Manager(subject);
     MainWindow* w = new MainWindow(manager, subject);
