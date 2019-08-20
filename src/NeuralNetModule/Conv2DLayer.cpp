@@ -28,8 +28,8 @@ void Conv2DLayer::forward(ThreeDMatrix &input, ThreeDMatrix &output) {
 
     int lastTopLeftPosition = paddedInputSize - kernelSize; //last position of top left pixel of kernel.
 
-    int slides = (lastTopLeftPosition/ STRIDE) + 1;
-    cout << "this layer performs" << slides << "slides in one direction";
+    int slides = (lastTopLeftPosition/ STRIDE);
+    cout << "this layer performs" << slides << "slides in one direction until" << lastTopLeftPosition;
     assert(slides > 0);
 
     // Assert the input-size
@@ -42,10 +42,11 @@ void Conv2DLayer::forward(ThreeDMatrix &input, ThreeDMatrix &output) {
     ThreeDMatrix paddedInput;
     if (ZERO_PAD_WIDTH != 0) {
         zeroPad(input,paddedInput, ZERO_PAD_WIDTH);
+        assert(paddedInput(0)(0,0) == 0);
     } else {
         paddedInput = input; //We calculate with the paddedInput
     }
-
+    assert(paddedInput(0)(0, 0) == paddedInput(0)(0, 0)); //Asserting that the matrix is initialized (NAN would fail this)
     assert(paddedInput.rows() == inputDepth);
     assert(paddedInput(0).cols() == paddedInputSize );
 
@@ -85,15 +86,22 @@ void Conv2DLayer::zeroPad(const Layer::ThreeDMatrix &input, Layer::ThreeDMatrix 
 //    if(zeroPadWidth == 0) {
 //        throw NeuralNetException();
 //    }
-    int sideLength = input(0).cols() + 2 * zeroPadWidth;
-    output.resize(input.rows()); // Matrices get resized in the overall for-loop
+    assert(zeroPadWidth > 0);
+    int newSideLength = input(0).cols() + (2 * zeroPadWidth);
+    int inputDepth = input.rows();
+    output.resize(inputDepth); // Matrices get resized in the overall for-loop
     assert(output.rows() == input.rows());
 
-    int oldSideLength = input(0).cols();
-    for (int depth = 0; depth < input.rows(); ++depth) {
-        output(depth).resize(sideLength, sideLength);
-        output(depth).setZero(); //TODO should work
 
+    int oldSideLength = input(0).cols();
+    for (int depth = 0; depth < inputDepth; ++depth) {
+        output(depth).resize(newSideLength, newSideLength);
+
+        //Set the new matrix to zero
+        output(depth).setZero(newSideLength, newSideLength);
+        assert(output(depth)(0,0) == 0);
+
+        //Copy input-matrix to output-matrix shifted down and to the right by zeroPadWidth
         //In Eigen, iterating firstly over the columns and secondly over the rows is more efficient.
         for (int j = 0; j < oldSideLength; j++) {
             for (int i = 0; i < oldSideLength; i++) {

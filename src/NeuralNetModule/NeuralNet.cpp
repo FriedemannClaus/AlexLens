@@ -343,6 +343,7 @@ void NeuralNet::init() {
                 conv22(u % 128, (u / 256) % 48)((u / 12288) / 5, (u / 12288) % 5) = stof(line);
             }
             // As in Conv-Layer 4 but 256 kernels of size 5*5*48
+            u++;
         }
         if ( i == conv2Border && u == 307200) { cout << "Conv-Layer 2 weights loaded successfully.\n";} //Sanity-check and user-info
 
@@ -574,11 +575,30 @@ void NeuralNet::classify(Layer::ThreeDMatrix &picture, Layer::Vector &result) {
     cout << "it returned a matrix of size " << io1(5)(0).rows()
          << " x " << io1(5)(0).cols()
          << " and depth " << io1(5).rows() << endl;
+
+    //debug print first 2D-Matrix of output
+    for (int row = 0; row < io1(5)(0).rows(); ++row) {
+        for (int col = 0; col < io1(5)(0).cols(); ++col) {
+            cout << io1(5)(0)(row, col) << ", ";
+        }
+        cout << endl;
+    }
+    cout << endl << endl;
+
     layers(10)->forward(io(5), io2(5));
     cout << "Conv-Layer 3.2 applied itself successfully" << endl;
     cout << "it returned two matrices of size " << io2(5)(0).rows()
          << " x " << io2(5)(0).cols()
          << " and depth " << io2(5).rows() << endl;
+
+    //debug print first 2D-Matrix of output
+    for (int row = 0; row < io2(5)(0).rows(); ++row) {
+        for (int col = 0; col < io2(5)(0).cols(); ++col) {
+            cout << io2(5)(row, col) << ", ";
+        }
+        cout << endl;
+    }
+    cout << endl << endl;
 
     // calculate ReLU
     layers(11)->forward(io1(5), io1(6));
@@ -608,11 +628,30 @@ void NeuralNet::classify(Layer::ThreeDMatrix &picture, Layer::Vector &result) {
     cout << "it returned a matrix of size " << io1(9)(0).rows()
          << " x " << io1(9)(0).cols()
          << " and depth " << io1(9).rows() << endl;
+
+    //debug print first 2D-Matrix of output
+    for (int row = 0; row < io1(9)(0).rows(); ++row) {
+        for (int col = 0; col < io1(9)(0).cols(); ++col) {
+            cout << io1(9)(row, col) << ", ";
+        }
+        cout << endl;
+    }
+    cout << endl << endl;
+
     layers(16)->forward(io2(8), io2(9));
     cout << "Conv-Layer 5.2 applied itself successfully" << endl;
     cout << "it returned two matrices of size " << io2(9)(0).rows()
          << " x " << io2(9)(0).cols()
          << " and depth " << io2(9).rows() << endl;
+
+    //debug print first 2D-Matrix of output
+    for (int row = 0; row < io2(9)(0).rows(); ++row) {
+        for (int col = 0; col < io2(9)(0).cols(); ++col) {
+            cout << io2(9)(row, col) << ", ";
+        }
+        cout << endl;
+    }
+    cout << endl << endl;
 
     // calculate ReLU
     layers(17)->forward(io1(9), io1(10));
@@ -636,7 +675,16 @@ void NeuralNet::classify(Layer::ThreeDMatrix &picture, Layer::Vector &result) {
     io(6) <<  io1(11),
                     io2(11);
     //merged (vertically as a vector of Matrices (3rd-Dimension), Eigen does it right automatically)
-    cout << "merged the output \n" << endl;
+
+    cout << "merged the output \n Output after merging for first FC-Layer is: " << endl;
+    //debug print merging-output
+    for (int row = 0; row < io(6)(0).rows(); ++row) {
+        for (int col = 0; col < io(6)(0).cols(); ++col) {
+            cout << io(6)(0)(row, col) << ", ";
+        }
+        cout << endl;
+    }
+    cout << endl << endl;
 
     // last 6 Layers (3 FC and 3 ReLu)
     for (int i = 19; i <= 24; ++i) {
@@ -645,6 +693,15 @@ void NeuralNet::classify(Layer::ThreeDMatrix &picture, Layer::Vector &result) {
         cout << "it returned a matrix of size " << io(i - 12)(0).rows()
              << " x " << io(i - 12)(0).cols()
              << " and depth " << io(i - 12).rows() << endl;
+
+        //debug print output-vector
+        for (int row = 0; row < io(i-12).rows(); ++row) {
+                cout << io(i-12)(row)(0, 0) << ", ";
+                if(row %50 == 49) { //50 per line
+                    cout << endl;
+            }
+        }
+        cout << endl << endl;
     }
 
     result.resize(1000);
