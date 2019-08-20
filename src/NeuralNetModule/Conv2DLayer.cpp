@@ -22,11 +22,15 @@ void Conv2DLayer::forward(ThreeDMatrix &input, ThreeDMatrix &output) {
     int kernels = weights.rows();
     int kernelSize = weights(0, 0).cols(); //rows() would work too, kernels are a square.
     int inputDepth = weights.cols(); //inputDepth shall be the depth of the kernels. Get's asserted later
-    int paddedInputSize = FORCED_INPUT_SIZE + 2 * ZERO_PAD_WIDTH;
+    int paddedInputSize = FORCED_INPUT_SIZE + (2 * ZERO_PAD_WIDTH);
 
     int outputSize = (FORCED_INPUT_SIZE - kernelSize + 2 * ZERO_PAD_WIDTH)/STRIDE + 1; //(227 - 11 - 2*0)/4 + 1 = 55 at Conv-1
 
     int lastTopLeftPosition = paddedInputSize - kernelSize; //last position of top left pixel of kernel.
+
+    int slides = (lastTopLeftPosition/ STRIDE) + 1;
+    cout << "this layer performs" << slides << "slides in one direction";
+    assert(slides > 0);
 
     // Assert the input-size
     assert(input.rows() == inputDepth);
@@ -53,11 +57,10 @@ void Conv2DLayer::forward(ThreeDMatrix &input, ThreeDMatrix &output) {
 
     //Needed for iteration:
     float kernelResult;
-
     //apply filters
     for (int kernel = 0; kernel < kernels; ++kernel) { //for every kernel
-        for (int row = 0; row < lastTopLeftPosition; row += STRIDE) {
-            for (int col = 0; col < lastTopLeftPosition; col += STRIDE) { //slide over 2DPosition of kernel
+        for (int row = 0; row <= lastTopLeftPosition; row += STRIDE) {
+            for (int col = 0; col <= lastTopLeftPosition; col += STRIDE) { //slide over 2DPosition of kernel
                 kernelResult = 0;
 
                 for (int depth = 0; depth < inputDepth; ++depth) {
