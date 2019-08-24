@@ -10,7 +10,7 @@
 #include "Platform.h"
 #include "Mode.h"
 #include "ASICPlatform.h"
-#include "CPUPlatform.h"
+#include "CPUPlatformTorch.h"
 
 using namespace std;
 

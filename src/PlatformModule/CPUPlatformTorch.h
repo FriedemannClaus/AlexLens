@@ -2,8 +2,8 @@
 // Created by dmitrii on 7/21/19.
 //
 
-#ifndef ALEXLENS_CPUPLATFORM_H
-#define ALEXLENS_CPUPLATFORM_H
+#ifndef ALEXLENS_CPUPLATFORMTORCH_H
+#define ALEXLENS_CPUPLATFORMTORCH_H
 
 
 #include "Platform.h"
@@ -14,7 +14,7 @@
 #include <time.h>
 using namespace std;
 
-class CPUPlatform : public Platform {
+class CPUPlatformTorch : public Platform {
 private:
     PlatformType type;
     PlatformStatistic statistic;
@@ -36,7 +36,7 @@ private:
     }
 
 public:
-    CPUPlatform();
+    CPUPlatformTorch();
     void runClassify() override;
     void runTraining() override;
 
@@ -52,4 +52,4 @@ public:
 };
 
 
-#endif //ALEXLENS_CPUPLATFORM_H
+#endif //ALEXLENS_CPUPLATFORMTORCH_H

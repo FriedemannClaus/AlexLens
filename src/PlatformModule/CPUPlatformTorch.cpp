@@ -2,7 +2,7 @@
 // Created by dmitrii on 7/21/19.
 //
 
-#include "CPUPlatform.h"
+#include "CPUPlatformTorch.h"
 #include <torch/script.h>
 #include <torch/torch.h>
 
@@ -20,7 +20,7 @@
 
 using namespace std;
 
-void CPUPlatform::runClassify() {
+void CPUPlatformTorch::runClassify() { //Viet: Ich vermute hier fehlt noch Softmax.
     this->results.clear();
     //model_path = "/home/dmitrii/alexnetTr.pt";
     // Deserialize the ScriptModule from a file using torch::jit::load().
@@ -88,31 +88,31 @@ void CPUPlatform::runClassify() {
     this->imageNames.clear();
 }
 
-CPUPlatform::CPUPlatform() {
+CPUPlatformTorch::CPUPlatformTorch() {
     this->type = PlatformType::CPU;
     this->statistic.setEnergyConsum(20);
     this->statistic.setFLOPS(19);
 }
 
-void CPUPlatform::runClassifyOne(string imagePath) {
+void CPUPlatformTorch::runClassifyOne(string imagePath) {
 
 }
 
-void CPUPlatform::setImagePaths(list<string> imagePaths) {
+void CPUPlatformTorch::setImagePaths(list<string> imagePaths) {
     convertListToVector(imagePaths, &imageNames);
 }
 
-void CPUPlatform::convertListToVector(list<string> list, vector<string> *imageNames) {
+void CPUPlatformTorch::convertListToVector(list<string> list, vector<string> *imageNames) {
     for(string i : list) {
         imageNames->push_back(i);
     }
 }
 
-vector<string> CPUPlatform::getResults() {
+vector<string> CPUPlatformTorch::getResults() {
     return this->results;
 }
 
-void CPUPlatform::runTraining() {
+void CPUPlatformTorch::runTraining() {
     //Py_SetProgramName(reinterpret_cast<const wchar_t *>(argv[0]));
     // Path of TransferLearning.py
     //char fileName[] = "/home/viet/CLionProjects/AlexLens/TransferLearning.py";

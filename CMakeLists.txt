@@ -66,7 +66,7 @@ add_library(AlexLens_static_lib STATIC
         includes/GUIModule/IObserver.h
         includes/GUIModule/Subject.h
         src/PlatformModule/PlatformManager.cpp src/PlatformModule/PlatformManager.h
-        src/PlatformModule/CPUPlatform.cpp src/PlatformModule/CPUPlatform.h
+        src/PlatformModule/CPUPlatformTorch.cpp src/PlatformModule/CPUPlatformTorch.h
         src/PlatformModule/PlatformType.h
         src/PlatformModule/PlatformStatistic.cpp src/PlatformModule/PlatformStatistic.h
         )
@@ -99,7 +99,7 @@ add_executable(AlexLens
         includes/GUIModule/IObserver.h
         includes/GUIModule/Subject.h
         src/PlatformModule/PlatformManager.cpp src/PlatformModule/PlatformManager.h
-        src/PlatformModule/CPUPlatform.cpp src/PlatformModule/CPUPlatform.h
+        src/PlatformModule/CPUPlatformTorch.cpp src/PlatformModule/CPUPlatformTorch.h
         src/PlatformModule/PlatformType.h
         src/PlatformModule/PlatformStatistic.cpp src/PlatformModule/PlatformStatistic.h
         )
