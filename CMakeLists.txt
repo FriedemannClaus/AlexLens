@@ -89,8 +89,6 @@ add_executable(AlexLens
         src/PlatformModule/Mode.h
         Icon/icon.qrc
         src/PlatformModule/ModeUtil.cpp src/PlatformModule/ModeUtil.h
-        src/NeuralNetModule/NeuralNet.cpp src/NeuralNetModule/NeuralNet.h
-        src/NeuralNetModule/INeuralNet.h
         src/PlatformModule/ModeUtil.cpp src/PlatformModule/ModeUtil.h
         src/ManagerModule/Manager.cpp src/ManagerModule/Manager.h
         src/ManagerModule/Executor.cpp src/ManagerModule/Executor.h
