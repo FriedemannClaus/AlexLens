@@ -89,7 +89,7 @@ void CPUPlatformTorch::runClassify() { //Viet: Ich vermute hier fehlt noch Softm
 }
 
 CPUPlatformTorch::CPUPlatformTorch() {
-    this->type = PlatformType::CPU;
+    this->type = PlatformType::CPU_TORCH;
     this->statistic.setEnergyConsum(20);
     this->statistic.setFLOPS(19);
 }

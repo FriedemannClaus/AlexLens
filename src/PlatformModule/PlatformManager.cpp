@@ -9,7 +9,8 @@ PlatformManager::PlatformManager() {
         Platform* asicplatform = new ASICPlatform(i);
         platforms.push_back(asicplatform);
     }
-    Platform* cpuplatform = new CPUPlatformTorch();
+    //Platform* cpuplatform = new CPUPlatformTorch();
+    Platform* cpuplatform = new CPUPlatform();
     platforms.push_back(cpuplatform);
 }
 

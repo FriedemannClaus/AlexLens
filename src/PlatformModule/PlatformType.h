@@ -5,6 +5,7 @@
 
 enum class PlatformType {
     CPU,
+    CPU_TORCH,
     ASIC
 };
 
@@ -13,6 +14,8 @@ inline std::ostream &operator<<(std::ostream &out, const PlatformType &type) {
     switch(type) {
         case PlatformType::CPU:
             out << "CPU";
+        case PlatformType::CPU_TORCH:
+            out << "CPU_TORCH";
         case PlatformType::ASIC:
             out << "ASIC";
     }

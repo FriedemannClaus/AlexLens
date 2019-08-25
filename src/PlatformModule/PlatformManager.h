@@ -11,6 +11,7 @@
 #include "Mode.h"
 #include "ASICPlatform.h"
 #include "CPUPlatformTorch.h"
+#include "CPUPlatform.h"
 
 using namespace std;
 
