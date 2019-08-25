@@ -11,7 +11,8 @@
 using namespace std;
 using namespace cv;
 
-AlexNet::AlexNet() {
+AlexNet::AlexNet(std::vector<std::string> &results) {
+    this->results = &results;
     initWeights();
     initLayers();
     initLabels();
@@ -95,26 +96,7 @@ void AlexNet::runClassify(std::vector<std::string> imagePaths) {
         reLU->forward(fc_3_output, reLU_8_output);
 
         softmax->apply(reLU_8_output, softmax_output);
-
-        //get top 5 results
-        float top[5];
-        int index[5];
-
-        for (int j = 0; j < 5; j++) {
-            top[j] = 0;
-            index[j] = 0;
-            for (int k = 0; k < 1000; k++) {
-                if (softmax_output(k) > top[j]) {
-                    top[j] = softmax_output(k);
-                    index[j] = k;
-                    softmax_output(k) = 0;
-                }
-            }
-        }
-        cout << endl << "Image Path: " << imagePaths[i] << endl;
-        for (int l = 0; l < 5; l++) {
-            cout << l + 1 << ". Propability: " << top[l] << ", Index: " << index[l] << " (" << classes[index[l]] << ")" << endl;
-        }
+        setResults();
     }
 }
 
@@ -251,10 +233,10 @@ void AlexNet::convertImages(std::vector<std::string> &imagePaths, std::vector<Th
         else {
             paddedImage = resizedImage;
         }
-
+        /*
         cv::namedWindow("resize", WINDOW_AUTOSIZE );
         cv::imshow("resize", paddedImage);
-        waitKey(0);
+        waitKey(0);*/
 
         assert(paddedImage.rows == IMAGE_SIZE);
         assert(paddedImage.cols == IMAGE_SIZE);
@@ -277,4 +259,27 @@ void AlexNet::convertImages(std::vector<std::string> &imagePaths, std::vector<Th
         }
         imageMatrices[i] = imageMatrix;
     }
+}
+
+void AlexNet::setResults() {
+    //get top 5 results
+    float top[5];
+    int index[5];
+    string resultString = "";
+    for (int j = 0; j < 5; j++) {
+        top[j] = 0;
+        index[j] = 0;
+        for (int k = 0; k < 1000; k++) {
+            if (softmax_output(k) > top[j]) {
+                top[j] = softmax_output(k);
+                index[j] = k;
+                softmax_output(k) = 0;
+            }
+        }
+        resultString += to_string(top[j]);
+        resultString += "   ";
+        resultString += classes[index[j]];
+        resultString += '\n';
+    }
+    results->push_back(resultString);
 }

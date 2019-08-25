@@ -17,11 +17,11 @@
 
 const int IMAGE_SIZE = 227;
 const int IMAGE_CHANNELS = 3;
-const std::string LABELS_PATH = "../../../resources/alexnet-CPU/alexnet_labels.txt";
+const std::string LABELS_PATH = "../resources/alexnet-CPU/alexnet_labels.txt";
 
 class AlexNet {
 public:
-    AlexNet();
+    AlexNet(std::vector<std::string> &results);
     void runClassify(std::vector<std::string> imagePaths);
 private:
     void initWeights();
@@ -30,6 +30,9 @@ private:
     void splitTensor(ThreeDMatrix &input, ThreeDMatrix &output_1, ThreeDMatrix &output_2);
     void mergeTensors(ThreeDMatrix &input_1, ThreeDMatrix &input_2, ThreeDMatrix &output);
     void convertImages(std::vector<std::string> &imagePaths, std::vector<ThreeDMatrix> &imageMatrices);
+    void setResults();
+
+    std::vector<std::string> *results;
 
     std::string classes[1000];
 
