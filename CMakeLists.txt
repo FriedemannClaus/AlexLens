@@ -113,7 +113,7 @@ add_executable(AlexLens
         src/PlatformModule/CPUPlatformTorch.cpp src/PlatformModule/CPUPlatformTorch.h
         src/PlatformModule/PlatformType.h
         src/PlatformModule/PlatformStatistic.cpp src/PlatformModule/PlatformStatistic.h
-        src/NeuralNetModule/Layer.cpp src/NeuralNetModule/Layer.h src/NeuralNetModule/Conv2D.cpp src/NeuralNetModule/Conv2D.h src/NeuralNetModule/ReLU.cpp src/NeuralNetModule/ReLU.h)
+        src/NeuralNetModule/Layer.cpp src/NeuralNetModule/Layer.h src/NeuralNetModule/Conv2D.cpp src/NeuralNetModule/Conv2D.h src/NeuralNetModule/ReLU.cpp src/NeuralNetModule/ReLU.h src/NeuralNetModule/MaxPool2D.cpp src/NeuralNetModule/MaxPool2D.h)
 
 target_link_libraries(${PROJECT_NAME}
         #PRIVATE
