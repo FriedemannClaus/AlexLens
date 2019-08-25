@@ -197,7 +197,7 @@ void AlexNet::mergeTensors(ThreeDMatrix &input_1, ThreeDMatrix &input_2, ThreeDM
 void AlexNet::initLabels() {
     //get classes
     ifstream file;
-    file.open("../imagenet-classes.txt");
+    file.open(LABELS_PATH);
 
     if (!file) {
         cerr << "Unable to load classes-file, please place it at the top of the project-structure.";
