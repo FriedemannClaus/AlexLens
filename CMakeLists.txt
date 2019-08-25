@@ -12,6 +12,19 @@ find_package(Threads)
 include_directories(includes)
 include_directories(src)
 
+# HDF5
+find_package(HDF5 REQUIRED COMPONENTS CXX)
+message(STATUS "HDF5 library status:")
+message(STATUS "    version: ${HDF5_VERSION}")
+message(STATUS "    libraries: ${HDF5_LIBRARIES}")
+message(STATUS "    include path: ${HDF5_INCLUDE_DIRS}")
+include_directories(${HDF5_INCLUDE_DIRS})
+
+# Eigen3
+find_package(Eigen3 3.3 REQUIRED NO_MODULE)
+message(STATUS "Eigen3 library status:")
+message(STATUS "    version: ${Eigen3_VERSION}")
+
 # Python
 find_package(PythonLibs REQUIRED)
 include_directories(${PYTHON_INCLUDE_DIRS})
@@ -100,7 +113,7 @@ add_executable(AlexLens
         src/PlatformModule/CPUPlatformTorch.cpp src/PlatformModule/CPUPlatformTorch.h
         src/PlatformModule/PlatformType.h
         src/PlatformModule/PlatformStatistic.cpp src/PlatformModule/PlatformStatistic.h
-        )
+        src/NeuralNetModule/Layer.cpp src/NeuralNetModule/Layer.h)
 
 target_link_libraries(${PROJECT_NAME}
         #PRIVATE
@@ -113,6 +126,8 @@ target_link_libraries(${PROJECT_NAME}
         /home/viet/pytorch/build/lib.linux-x86_64-3.7/torch/lib/libtorch.so
         /home/viet/pytorch/build/lib.linux-x86_64-3.7/torch/lib/libshm.so
         /home/viet/pytorch/build/lib.linux-x86_64-3.7/torch/lib/libc10.so
+        ${HDF5_CXX_LIBRARIES}
+        Eigen3::Eigen
         ${OpenCV_LIBS}
         ${PYTHON_LIBRARIES}
         )
