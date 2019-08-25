@@ -1,5 +1,5 @@
 //
-// Created by viet on 25.08.19.
+// Created by Viet Pham.
 //
 
 #ifndef ALEXLENS_FC_H
