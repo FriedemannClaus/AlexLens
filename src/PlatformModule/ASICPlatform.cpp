@@ -34,8 +34,8 @@ InferencePlugin ASICPlatform::initPlugin() {
 }
 
 CNNNetwork ASICPlatform::readIR() {
-    netReader.ReadNetwork("../resources/alexnet-FP16/alexnet.xml");
-    netReader.ReadWeights("../resources/alexnet-FP16/alexnet.bin");
+    netReader.ReadNetwork("../../resources/alexnet-FP16/alexnet.xml");
+    netReader.ReadWeights("../../resources/alexnet-FP16/alexnet.bin");
     net = netReader.getNetwork();
     return net;
 }
@@ -183,7 +183,7 @@ void ASICPlatform::inference(double *total, InferRequest *inferRequest) {
 void ASICPlatform::loadLabels(vector<string> *labels) {
 
     // Read labels for AlexNet
-    string labelFileName = "../resources/alexnet-FP16/alexnet.labels";
+    string labelFileName = "../../resources/alexnet-FP16/alexnet.labels";
     ifstream inputFile;
     inputFile.open(labelFileName, ios::in);
     if (inputFile.is_open()) {

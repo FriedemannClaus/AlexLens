@@ -17,7 +17,7 @@
 
 const int IMAGE_SIZE = 227;
 const int IMAGE_CHANNELS = 3;
-const std::string LABELS_PATH = "../resources/alexnet-CPU/alexnet_labels.txt";
+const std::string LABELS_PATH = "../../resources/alexnet-CPU/alexnet_labels.txt";
 
 class AlexNet {
 public:

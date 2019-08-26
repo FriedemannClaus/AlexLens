@@ -41,7 +41,7 @@ void Manager::setDefaultModesTraining() {
 
 void Manager::setDefaultNeuralNets() {
     list<string> nets;
-    std::string PROJECT_DIR_temp = PROJECT_DIR+"resources/";
+    std::string PROJECT_DIR_temp = PROJECT_DIR+"../resources/";
     char * projectdir = new char [PROJECT_DIR_temp.length()+1];
     strcpy (projectdir, PROJECT_DIR_temp.c_str());
     DIR *dir;

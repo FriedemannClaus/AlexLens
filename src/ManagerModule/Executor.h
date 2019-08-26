@@ -12,7 +12,7 @@
 
 #include "../PlatformModule/Mode.h"
 #include <GUIModule/Subject.h>
-#include <PlatformModule/PlatformManager.h>
+#include "../PlatformModule/PlatformManager.h"
 #include "../PlatformModule/Platform.h"
 #include "../PlatformModule/ASICPlatform.h"
 
