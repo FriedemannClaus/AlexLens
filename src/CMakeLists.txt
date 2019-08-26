@@ -2,7 +2,7 @@ project(AlexLens_prog)
 
 #Static library with all sources that need to be tested in unit tests
 add_library(AlexLens_lib STATIC NeuralNetModule/ReLU.cpp NeuralNetModule/ReLU.h)
-target_include_directories(AlexLens_lib PUBLIC ${CMAKE_CURRENT_SOURCE_DIR})
+target_include_directories(AlexLens_lib PUBLIC ${CMAKE_CURRENT_SOURCE_DIR} /usr/include/eigen3)
 
 
 # Main program
@@ -134,5 +134,5 @@ target_link_libraries(${PROJECT_NAME} PRIVATE
         Eigen3::Eigen
         ${OpenCV_LIBS}
         ${PYTHON_LIBRARIES}
-        #AlexLens_lib
+        AlexLens_lib
         )
