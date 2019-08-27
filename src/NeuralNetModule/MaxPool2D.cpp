@@ -24,8 +24,7 @@ void MaxPool2D::forward(ThreeDMatrix &inputMatrix, ThreeDMatrix &outputMatrix) {
                 Vector floats;
                 floats.resize(numPoolElements);
                 for (int k = 0; k < numPoolElements; k++) {
-                    //floats(k) = (inputMatrix)(c)((i * stride) + (k / 3), (j * stride) + (k % 3));
-                    floats(k) = (inputMatrix)(c)((j * stride) + (k % 3), (i * stride) + (k / 3));
+                    floats(k) = (inputMatrix)(c)((j * stride) + (k % poolNumRows), (i * stride) + (k / poolNumRows));
                 }
                 float max = getMaxFloat(&floats);
                 outputMatrix(c)(j, i) = max;
