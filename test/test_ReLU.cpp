@@ -3,7 +3,7 @@
 //
 #define CATCH_CONFIG_MAIN  // This tells Catch to provide a main() - only do this in one cpp file
 
-#include <NeuralNetModule/ReLU.h>
+#include <NeuralNetModule/ReLU.cpp>
 #include "catch.hpp"
 
 TEST_CASE( "ReLU: inputMatrix size equals outputMatrix size", "[fast]") {

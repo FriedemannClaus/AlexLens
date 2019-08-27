@@ -4,8 +4,6 @@
 
 #include "ReLU.h"
 
-
-
 float ReLU::max(float a) {
     return ((a > 0) ? a : 0);
 }
