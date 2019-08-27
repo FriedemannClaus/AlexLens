@@ -40,8 +40,8 @@ find_package(Qt5Widgets REQUIRED)
 list(APPEND THIRD-PARTY-LIBS Qt::Widgets Qt::Core)
 
 # Torch
-include_directories(/home/viet/pytorch/build/lib.linux-x86_64-3.7/torch/include)
-include_directories(/home/viet/pytorch/build/lib.linux-x86_64-3.7/torch/include/torch/csrc/api/include)
+set(Torch_DIR ../thirdparty/libtorch/share/cmake/Torch)
+find_package(Torch REQUIRED)
 
 # OpenCV
 set(OpenCV_DIR /opt/intel/openvino/opencv/cmake)
@@ -127,12 +127,10 @@ target_link_libraries(${PROJECT_NAME} PRIVATE
         Qt5::Gui
         ${InferenceEngine_LIBRARIES}
         /home/viet/inference_engine_samples_build/intel64/Release/lib/libformat_reader.so
-        /home/viet/pytorch/build/lib.linux-x86_64-3.7/torch/lib/libtorch.so
-        /home/viet/pytorch/build/lib.linux-x86_64-3.7/torch/lib/libshm.so
-        /home/viet/pytorch/build/lib.linux-x86_64-3.7/torch/lib/libc10.so
         ${HDF5_CXX_LIBRARIES}
         Eigen3::Eigen
         ${OpenCV_LIBS}
         ${PYTHON_LIBRARIES}
+        ${TORCH_LIBRARIES}
         AlexLens_lib
         )
