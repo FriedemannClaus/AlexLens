@@ -12,20 +12,22 @@ void Softmax::forward(ThreeDMatrix &inputMatrix, ThreeDMatrix &outputMatrix) {
 
 void Softmax::apply(ThreeDMatrix &input, Vector &output) {
     //resize output vector
-    output.resize(1000);
+    int inputSize = input(0).rows();
+
+    output.resize(inputSize);
 
     Vector exponents;
-    exponents.resize(1000);
+    exponents.resize(inputSize);
 
     float sumExponents = 0;
-    for (int i = 0; i < 1000; i++) {
+    for (int i = 0; i < inputSize; i++) {
         exponents(i) = exp(input(0)(i, 0) * 2); // * 2 because of drop out in AlexNet
         sumExponents += exponents(i);
     }
 
     //fill in output vector
     float sumPropabilities = 0;
-    for (int i = 0; i < 1000; i++) {
+    for (int i = 0; i < inputSize; i++) {
         output(i) = exponents(i) / sumExponents;
         sumPropabilities += output(i);
     }
