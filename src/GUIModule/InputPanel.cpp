@@ -37,14 +37,11 @@ InputPanel::~InputPanel()
 void InputPanel::addImage()
 {
     if(classifyTab) {
-        this->imageWasAdded = true;
+
         QStringList fileNameList = QFileDialog::getOpenFileNames(this,
                                                                  "Open Files",
                                                                  QStandardPaths::displayName(QStandardPaths::HomeLocation),
                                                                  tr("Images (*.png *.PNG *.jpg *.JPG *.jpeg *.JPEG)"));
-
-        if (fileNameList.size() == 0) this->imageWasAdded = false;
-
         int imageWidth = m_scrollArea->width() - 30;
 
         for (QString fileName : fileNameList)
@@ -59,13 +56,10 @@ void InputPanel::addImage()
 
         }
     } else {
-        this->imageWasAdded = true;
+
         QString dir = QFileDialog::getExistingDirectory(this, tr("Open Directory"),
                                                         QStandardPaths::displayName(QStandardPaths::HomeLocation)
                                                         );
-
-        if (dir.size() == 0) this->imageWasAdded = false;
-
         QStringList fileNameList = {QString::fromStdString(this->manager->getProjectDir() + "Icon/iconOrdner.png")};
 
         int imageWidth = m_scrollArea->width() - 30;
@@ -142,7 +136,7 @@ void InputPanel::dragEnterEvent(QDragEnterEvent *e)
 void InputPanel::dropEvent(QDropEvent *e)
 {
     if(classifyTab) {
-        this->imageWasAdded = true;
+
         int imageWidth = m_scrollArea->width() - 30;
 
         foreach (const QUrl &url, e->mimeData()->urls()) {
@@ -156,7 +150,6 @@ void InputPanel::dropEvent(QDropEvent *e)
             this->manager->addImage(fileName.toStdString()); // adding fileName to manager
         }
     } else {
-        this->imageWasAdded = true;
 
         QStringList fileNameList = {QString::fromStdString(this->manager->getProjectDir() + "Icon/iconOrdner.png")};
 

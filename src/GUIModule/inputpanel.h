@@ -37,10 +37,6 @@ public:
      */
     inline void setManager(Manager* manager) {this->manager = manager;}
 
-    /**
-     * @param imageWasAdded imageWasAdded to set
-     */
-    inline void setImageWasAdded(bool imageWasAdded) {this->imageWasAdded = imageWasAdded;}
 
     /**
      * @param classifyTab classifyTab to set
@@ -50,7 +46,13 @@ public:
     /**
      * @return whether image/directory was added
      */
-    inline bool isImageAdded() {return imageWasAdded;}
+    inline bool isImageAdded() {
+        if (this->previewImages.size() > 0) {
+            return true;
+        } else {
+            return false;
+        }
+    }
 
     /**
      * @return all preview of added images
@@ -60,13 +62,12 @@ public:
     /**
      * Delete all objects from vector of images preview.
      */
-    inline void clearPreviewImages() {this->previewImages.clear(); this->imageWasAdded = false;}
+    inline void clearPreviewImages() {this->previewImages.clear();}
 
     /**
      * Clear InputPanel of input data.
      */
     void clearPanel();
-
 
 private slots:
     /**
@@ -102,7 +103,6 @@ private:
     QWidget*     m_scrollAreaWidgetContents; /// Scroll widget
     QVector<QPair<QLabel*, QPixmap> > previewImages; /// Vector of all preview of added images
     Manager* manager; /// The main manager of program
-    bool imageWasAdded = false; /// bool flag for input data
     bool classifyTab = true; /// bool flag for tabs
 };
 

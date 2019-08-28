@@ -28,14 +28,6 @@ ParameterPanel::ParameterPanel(QWidget *parent)
     modList = new QListWidget; //will be filled in fillModes()
     neuralNetsList = new QListWidget; // will be filled in fillNeuralNets()
 
-   /* //Filling panels with content
-    if(classifyTab) {
-        this->fillModesClassify();
-    }else {
-        this->fillModesTraining();
-    }
-    this->fillNeuralNets();*/
-
     parameterList->addWidget(modList);
 
     QLabel *label_2 = new QLabel(this);
@@ -85,9 +77,6 @@ void ParameterPanel::start()
         } else {
             this->outputPanel->clearPanel();
             this->inputPanel->clearPreviewImages();
-            //HERE
-            //clear inputTrainingPanel
-            //actions ith outputTrainingPanel?
             this->manager->runTraining();
         }
         this->manager->clearImagePaths();
@@ -104,7 +93,6 @@ void ParameterPanel::beenden()
 {
     if (classifyTab) {
         this->inputPanel->clearPanel();
-        this->inputPanel->setImageWasAdded(false);
         this->inputPanel->clearPreviewImages();
 
     } else {
@@ -140,11 +128,7 @@ void ParameterPanel::fillNeuralNets() {
     list<string> nets = this->manager->getDeafaultNeuralNets();
     list<string>::iterator it;
     for (it = nets.begin(); it != nets.end(); ++it) {
-        //string item_str = *it;
-        //string item_name = item_str.substr(0,item_str.find(':'));
-        //string item_toolTip = item_str.substr(item_str.find(':')+2);
         QListWidgetItem *item = new QListWidgetItem(QString::fromStdString(*it));
-        //item->setToolTip(QString::fromStdString(item_toolTip));
         neuralNetsList->addItem(item);
     }
     neuralNetsList->setCurrentRow(0);
