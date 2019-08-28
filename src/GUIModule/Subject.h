@@ -47,7 +47,11 @@ public:
      */
     inline void informObservers() {
         for (auto observer:observerList) {
-            if (observer->isClassifyTab() == this->classifyTab ) observer->invokeUpdate();
+            if (!classifyTab) {
+                observer->invokeUpdate();
+            } else {
+                if (observer->isClassifyTab() == this->classifyTab ) observer->invokeUpdate();
+            }
         }
     }
 };
