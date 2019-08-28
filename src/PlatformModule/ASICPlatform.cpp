@@ -21,8 +21,8 @@ ASICPlatform::ASICPlatform(const int id) {
     this->id = id;
     this->type = PlatformType::ASIC;
     this->myriadPlugin = initPlugin();
-    this->net = readIR();
-    this->inputInfo = net.getInputsInfo();
+    //this->net = readIR();
+    //this->inputInfo = net.getInputsInfo();
     this->statistic.setEnergyConsum(2);
     this->statistic.setFLOPS(100);
 }
@@ -34,8 +34,11 @@ InferencePlugin ASICPlatform::initPlugin() {
 }
 
 CNNNetwork ASICPlatform::readIR() {
-    netReader.ReadNetwork("../../resources/alexnet-FP16/alexnet.xml");
-    netReader.ReadWeights("../../resources/alexnet-FP16/alexnet.bin");
+    //netReader.ReadNetwork("../../resources/alexnet-FP16/alexnet.xml");
+    //netReader.ReadWeights("../../resources/alexnet-FP16/alexnet.bin");
+    CNNNetReader netReader;
+    netReader.ReadNetwork(structure_path);
+    netReader.ReadWeights(model_path);
     net = netReader.getNetwork();
     return net;
 }
@@ -44,6 +47,8 @@ void ASICPlatform::runClassify() {
     //vector<string> imageNames;
     //convertListToVector(list, &imageNames);
 
+    this->net = readIR();
+    this->inputInfo = net.getInputsInfo();
     vector<shared_ptr<unsigned char>> imagesData;
     size_t batchSize;
     string firstOutputName;
@@ -133,7 +138,7 @@ void ASICPlatform::loadModelToPlugin(ExecutableNetwork *executableNetwork) {
     mutex.unlock();
     outputInfo = {};
     net = {};
-    netReader = {};
+    //netReader = {};
 }
 
 void ASICPlatform::prepareInput(InferRequest *inferRequest, vector<shared_ptr<unsigned char>> *imagesData) {

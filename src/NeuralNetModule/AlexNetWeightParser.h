@@ -15,7 +15,7 @@ typedef Eigen::Matrix<float, Eigen::Dynamic, Eigen::Dynamic> Matrix;
 typedef Eigen::Matrix<Matrix, Eigen::Dynamic, 1> ThreeDMatrix;
 typedef Eigen::Matrix<Matrix, Eigen::Dynamic, Eigen::Dynamic> FourDMatrix;
 
-const H5std_string	FILE_NAME("../../resources/alexnet-CPU/alexnet_weights.h5");
+const H5std_string	FILE_NAME("../../resources/alexnet/alexnet_model.h5");
 const H5std_string	CONV1_W("/conv_1/conv_1_W");
 const H5std_string	CONV1_b("/conv_1/conv_1_b");
 const H5std_string	CONV2_1_W("/conv_2_1/conv_2_1_W");

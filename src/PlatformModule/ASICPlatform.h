@@ -24,12 +24,29 @@ const std::string whiteSpaces( " \f\n\r\t\v" );
 
 class ASICPlatform : public Platform {
 public:
+    string model_path;
+    string label_path;
+    string project_dir;
+    string structure_path;
+    string mapping_path;
     ASICPlatform(const int id);
     void runClassify() override;
     void setImagePaths(list<string> imagePaths);
     PlatformType getType ();
     PlatformStatistic getStatistic();
     vector<string> getResults();
+    inline void setNeuralNet(string neuralNet) override {
+        this->model_path = this->project_dir + "resources/" + neuralNet + "/";
+        this->model_path += neuralNet + "_model" + ".bin";
+        this->structure_path = this->project_dir +  "resources/" + neuralNet + "/";
+        this->structure_path += neuralNet + ".xml";
+        this->mapping_path = this->project_dir +  "resources/" + neuralNet + "/";
+        this->mapping_path += neuralNet + ".mapping";
+        this->label_path = this->project_dir + "resources/" + neuralNet + "/";
+        this->label_path += neuralNet + "_labels" + ".txt";
+    }
+
+    inline void setProjectDir(std::string dir) override {this->project_dir = dir;}
 
     static std::mutex mutex;
     string getId() override {return to_string(this->id+1);};
@@ -55,7 +72,7 @@ private:
 
     // Attributes
     InferencePlugin myriadPlugin;
-    CNNNetReader netReader;
+    //CNNNetReader netReader;
     CNNNetwork net;
     InputsDataMap inputInfo;
     OutputsDataMap outputInfo;
