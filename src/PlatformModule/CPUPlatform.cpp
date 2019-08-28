@@ -24,7 +24,11 @@ vector<string> CPUPlatform::getResults() {
 
 void CPUPlatform::runClassify() {
     this->results.clear();
+    const clock_t begin_time = clock();
     alexNet->runClassify(this->imagePaths);
+    const float final_time = float( clock () - begin_time )/CLOCKS_PER_SEC*100;
+    this->statistic.setTotalInferenceTime(final_time);
+    this->statistic.setAvgIterationTime(final_time/results.size());
 }
 
 
