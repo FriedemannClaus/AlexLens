@@ -41,7 +41,7 @@ void Manager::setDefaultModesTraining() {
 
 void Manager::setDefaultNeuralNets() {
     list<string> nets;
-    std::string PROJECT_DIR_temp = PROJECT_DIR+"../resources/";
+    std::string PROJECT_DIR_temp = PROJECT_DIR+"/resources/";
     char * projectdir = new char [PROJECT_DIR_temp.length()+1];
     strcpy (projectdir, PROJECT_DIR_temp.c_str());
     DIR *dir;
@@ -129,7 +129,9 @@ void Manager::setProjectDir() {
     path = getcwd(path, size);
     string path_str = std::string(path);
     path_str = path;
+    path_str = path_str.erase(path_str.length()-4);
     path_str = path_str.erase(path_str.rfind('/')+1);
+    std::cout << path_str << std::endl;
     this->PROJECT_DIR = path_str;
 }
 
