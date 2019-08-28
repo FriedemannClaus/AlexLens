@@ -1,4 +1,4 @@
-#include "../../includes/GUIModule/outputclassifypanel.h"
+#include "outputclassifypanel.h"
 
 #include <vector>
 

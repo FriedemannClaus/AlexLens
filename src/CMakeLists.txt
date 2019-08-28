@@ -97,12 +97,12 @@ add_executable(AlexLens_prog
         #        AlexLens_static_lib
         ManagerModule/main.cpp
         ManagerModule/Manager.cpp ManagerModule/Manager.h
-        GUIModule/InputPanel.cpp ../includes/GUIModule/inputpanel.h
-        GUIModule/helpform.cpp ../includes/GUIModule/helpform.h
-        GUIModule/statisticform.cpp ../includes/GUIModule/statisticform.h
-        GUIModule/mainwindow.cpp ../includes/GUIModule/mainwindow.h
-        GUIModule/parameterpanel.cpp ../includes/GUIModule/parameterpanel.h
-        GUIModule/outputclassifypanel.cpp ../includes/GUIModule/outputclassifypanel.h
+        GUIModule/InputPanel.cpp GUIModule/inputpanel.h
+        GUIModule/helpform.cpp GUIModule/helpform.h
+        GUIModule/statisticform.cpp GUIModule/statisticform.h
+        GUIModule/mainwindow.cpp GUIModule/mainwindow.h
+        GUIModule/parameterpanel.cpp GUIModule/parameterpanel.h
+        GUIModule/outputclassifypanel.cpp GUIModule/outputclassifypanel.h
         PlatformModule/Mode.h
         ../Icon/icon.qrc
         PlatformModule/ModeUtil.cpp PlatformModule/ModeUtil.h
@@ -111,8 +111,8 @@ add_executable(AlexLens_prog
         ManagerModule/Executor.cpp ManagerModule/Executor.h
         PlatformModule/Platform.cpp PlatformModule/Platform.h
         PlatformModule/ASICPlatform.cpp PlatformModule/ASICPlatform.h
-        ../includes/GUIModule/IObserver.h
-        ../includes/GUIModule/Subject.h
+        GUIModule/IObserver.h
+        GUIModule/Subject.h
         PlatformModule/PlatformManager.cpp PlatformModule/PlatformManager.h
         PlatformModule/CPUPlatformTorch.cpp PlatformModule/CPUPlatformTorch.h
         PlatformModule/PlatformType.h

@@ -1,8 +1,8 @@
 #ifndef OUTPUTCLASSIFYPANEL_H
 #define OUTPUTCLASSIFYPANEL_H
 
-#include "../GUIModule/IObserver.h"
-#include "../../src/ManagerModule/Manager.h"
+#include "IObserver.h"
+#include "ManagerModule/Manager.h"
 #include "Subject.h"
 
 #include <QWidget>

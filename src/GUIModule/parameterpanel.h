@@ -1,7 +1,7 @@
 #ifndef PARAMETERPANEL_H
 #define PARAMETERPANEL_H
 
-#include "../../src/ManagerModule/Manager.h"
+#include "ManagerModule/Manager.h"
 #include "inputpanel.h"
 #include "outputclassifypanel.h"
 

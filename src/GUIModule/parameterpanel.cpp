@@ -1,4 +1,4 @@
-#include "../../includes/GUIModule/parameterpanel.h"
+#include "parameterpanel.h"
 #include "../PlatformModule/ModeUtil.h"
 
 #include <QHBoxLayout>

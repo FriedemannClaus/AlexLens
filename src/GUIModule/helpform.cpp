@@ -1,5 +1,5 @@
-#include "../../includes/GUIModule/helpform.h"
-#include "../../includes/GUIModule/ui_helpform.h"
+#include "helpform.h"
+#include "ui_helpform.h"
 
 HelpForm::HelpForm(QWidget *parent) :
     QWidget(parent),

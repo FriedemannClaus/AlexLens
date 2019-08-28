@@ -1,4 +1,4 @@
-#include "../../includes/GUIModule/inputpanel.h"
+#include "inputpanel.h"
 
 #include <QFileDialog>
 #include <QStandardPaths>
@@ -84,7 +84,10 @@ void InputPanel::addImage()
 
         QLabel* dirLabel = new QLabel(this);
         string path = dir.toStdString();
+        cout << "here" << endl;
+        cout << path << endl;
         path = path.substr(path.rfind('/')+1, path.length()-path.rfind('/')+1);
+        cout << path << endl;
         dirLabel->setText(QString::fromStdString(path));
         dirLabel->setAlignment(Qt::AlignCenter);
         //dirLabel->setPixmap(d.scaledToWidth(imageWidth));

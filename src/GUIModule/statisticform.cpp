@@ -1,5 +1,5 @@
-#include "../../includes/GUIModule/statisticform.h"
-#include "../../includes/GUIModule/ui_statisticform.h"
+#include "statisticform.h"
+#include "ui_statisticform.h"
 
 #include <QScrollBar>
 #include <QHBoxLayout>

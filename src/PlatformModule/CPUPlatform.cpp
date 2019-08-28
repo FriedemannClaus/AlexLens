@@ -39,6 +39,7 @@ void CPUPlatform::runTraining() {
     string str = "src/TrainingModule/TransferLearning.py";
     char fileName[this->project_dir.length()+str.length()];
     string fileNamePath = this->project_dir + str;
+    std::cout << "fileNamePAth: "<<fileNamePath << std::endl;
     /*
     strcpy(fileName, fileNamePath.c_str());
     FILE* fp;
@@ -58,6 +59,7 @@ void CPUPlatform::runTraining() {
     std::string command_str = "/home/dmitrii/anaconda3/bin/python ";
     command_str += fileNamePath + " ";
     command_str += this->datasetPath;
+    std::cout << this->datasetPath << std::endl;
     const char *command = command_str.c_str();
     system(command);
     //syzscall variant end

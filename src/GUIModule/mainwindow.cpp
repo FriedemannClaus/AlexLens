@@ -1,8 +1,8 @@
-#include "../../includes/GUIModule/mainwindow.h"
-#include "../../includes/GUIModule/ui_mainwindow.h"
-#include "../../includes/GUIModule/helpform.h"
-#include "../../includes/GUIModule/statisticform.h"
-#include "../../includes/GUIModule/Subject.h"
+#include "mainwindow.h"
+#include "ui_mainwindow.h"
+#include "helpform.h"
+#include "statisticform.h"
+#include "Subject.h"
 
 
 MainWindow::MainWindow(QWidget *parent) :

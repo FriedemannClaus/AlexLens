@@ -11,7 +11,7 @@
 #include <QPixmap>
 #include <QMimeData>
 
-#include "../../src/ManagerModule/Manager.h"
+#include "ManagerModule/Manager.h"
 
 /**
  * Class InputPanel. Representation of input data.

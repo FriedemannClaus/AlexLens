@@ -79,10 +79,12 @@ Executor::Executor() {
 
 void Executor::train(string dirPath, Mode mode, string neuralNet, string project_dir) {
     this->platformManager->setMode(mode);
+    this->platformManager->setNeuralNet(neuralNet);
     list<Platform*> platforms = platformManager->getAvailablePlatforms();
     for (auto platform:platforms) {
         platform->setDatasetPath(dirPath);
         platform->setProjectDir(project_dir);
+        platform->setNeuralNet(neuralNet);
         platform->runTraining();
     }
 }

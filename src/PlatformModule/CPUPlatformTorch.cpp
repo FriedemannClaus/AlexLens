@@ -116,7 +116,7 @@ void CPUPlatformTorch::runTraining() {
     //Py_SetProgramName(reinterpret_cast<const wchar_t *>(argv[0]));
     // Path of TransferLearning.py
     //char fileName[] = "/home/viet/CLionProjects/AlexLens/TransferLearning.py";
-    string str = "TransferLearning.py";
+    string str = "src/TrainingModule/TransferLearning.py";
     char fileName[this->project_dir.length()+str.length()];
     string fileNamePath = this->project_dir + str;
     /*

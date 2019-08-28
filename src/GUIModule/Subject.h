@@ -5,7 +5,7 @@
 #ifndef ALEXLENS_SUBJECT_H
 #define ALEXLENS_SUBJECT_H
 
-#include "../GUIModule/IObserver.h"
+#include "IObserver.h"
 #include <list>
 
 using namespace std;

@@ -1,4 +1,4 @@
-#include "../../includes/GUIModule/mainwindow.h"
+#include "GUIModule/mainwindow.h"
 #include <QApplication>
 #include <QFileDialog>
 #include <GUIModule/Subject.h>

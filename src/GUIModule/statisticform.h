@@ -5,7 +5,7 @@
 #include <QVBoxLayout>
 #include <QLabel>
 #include <QScrollArea>
-#include "../../src/PlatformModule/PlatformManager.h"
+#include "PlatformModule/PlatformManager.h"
 
 namespace Ui {
 class StatisticForm;
