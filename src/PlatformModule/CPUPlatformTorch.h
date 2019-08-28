@@ -38,7 +38,6 @@ private:
 public:
     CPUPlatformTorch();
     void runClassify() override;
-    void runTraining() override;
 
     inline PlatformType getType() override {return this->type;}
     inline PlatformStatistic getStatistic() override { return this->statistic;}

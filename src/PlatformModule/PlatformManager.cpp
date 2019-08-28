@@ -46,8 +46,6 @@ list<Platform *> PlatformManager::getAvailablePlatforms() {
             for (auto platform:this->platforms) {
                 if (((platform->getType() == PlatformType::CPU) && (this->neuralNet == "alexnet"))
                 || ((platform->getType() == PlatformType::CPU_TORCH) && (this->neuralNet != "alexnet"))) {
-                    cout << neuralNet << endl;
-                    cout << platform->getType() << endl;
                     returnPlatforms.push_back(platform);
                     return returnPlatforms;
                 }

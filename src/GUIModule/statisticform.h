@@ -53,6 +53,8 @@ public:
                 return "CPU";
             case PlatformType::ASIC:
                 return "ASIC";
+            case PlatformType ::CPU_TORCH:
+                return "CPU_TORCH";
         }
     }
 
