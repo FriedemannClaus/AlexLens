@@ -30,7 +30,9 @@ void Normalization::forward(ThreeDMatrix &inputMatrix, ThreeDMatrix &outputMatri
             for (int k = 0; k < inputNumChannels; k++) { // Iterieren über Channel
                 // Summe berechnen:
                 float sum = 0;
-                for (int l = max(0, k - (n / 2)); l <= min(inputNumChannels - 1, k + (n / 2)); l++) {
+                int l = max(0, k - (n / 2));
+                int limit = min(inputNumChannels - 1, k + (n / 2));
+                for (l; l <= limit; l++) {
                     sum += pow((inputMatrix)(l)(j, i), 2);
                 }
 
