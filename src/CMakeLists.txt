@@ -126,7 +126,7 @@ target_link_libraries(${PROJECT_NAME} PRIVATE
         Qt5::Widgets
         Qt5::Gui
         ${InferenceEngine_LIBRARIES}
-        /home/viet/inference_engine_samples_build/intel64/Release/lib/libformat_reader.so
+        /home/dmitrii/inference_engine_samples_build/intel64/Release/lib/libformat_reader.so
         ${HDF5_CXX_LIBRARIES}
         Eigen3::Eigen
         ${OpenCV_LIBS}

@@ -13,7 +13,6 @@ void thrFunction(Platform *platform) {
 
 vector<string> Executor::classify(list<string> imagePaths, Mode mode, string neuralNet, string project_dir) {
 
-
     this->platformManager->setMode(mode);
     this->platformManager->setNeuralNet(neuralNet);
 
