@@ -188,7 +188,7 @@ void ASICPlatform::inference(double *total, InferRequest *inferRequest) {
 void ASICPlatform::loadLabels(vector<string> *labels) {
 
     // Read labels for AlexNet
-    string labelFileName = "../../resources/alexnet-FP16/alexnet.labels";
+    string labelFileName = label_path;
     ifstream inputFile;
     inputFile.open(labelFileName, ios::in);
     if (inputFile.is_open()) {
