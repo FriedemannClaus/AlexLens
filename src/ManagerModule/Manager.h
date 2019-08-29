@@ -157,7 +157,6 @@ private:
      */
     void setDefaultNeuralNets();
 
-    list<string> findNeuralNets();
 };
 
 

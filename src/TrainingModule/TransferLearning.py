@@ -135,7 +135,7 @@ def train_and_validate(model, loss_criterion, optimizer, epochs):
                 epoch_end - epoch_start), file=file_log)
 
     # Save the model for Python
-    #torch.save(model, folderName + '/' + dataset_name + '_model' + '.pt')
+    torch.save(model, folderName + '/' + dataset_name + '_model_python' + '.pt')
 
     # Save the model for C++
     traced_script_module = torch.jit.trace(model, torch.rand(1, 3, 224, 224))
@@ -325,7 +325,7 @@ alexnet.classifier[6] = nn.Sequential(
     nn.ReLU(),
     nn.Dropout(0.4),
     nn.Linear(4096, num_classes),
-    nn.LogSoftmax(dim=1)  # For using NLLLoss()
+    nn.Softmax(1)  # For using NLLLoss()
 )
 
 # Define Optimizer and Loss Function

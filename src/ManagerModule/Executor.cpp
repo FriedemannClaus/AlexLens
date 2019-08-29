@@ -35,10 +35,15 @@ vector<string> Executor::classify(list<string> imagePaths, Mode mode, string neu
     }
 
     int i = 0;
+    int j = 0;
+    int avg_rate = num_imagePaths / num_platforms;
     for (auto path:imagePaths) {
         split[i].push_back(path);
-        i++;
-        if (i == num_platforms) i -= num_platforms;
+        j++;
+        if (j > avg_rate) {
+            j = 0;
+            i++;
+        }
     }
 
     i=0;
@@ -51,7 +56,7 @@ vector<string> Executor::classify(list<string> imagePaths, Mode mode, string neu
     //starting threads
     vector<thread> threads;
     for(Platform* platform:platforms) {
-        thread thr(thrFunction, platform);;
+        thread thr(thrFunction, platform);
         threads.push_back(move(thr));
     }
 
@@ -67,7 +72,7 @@ vector<string> Executor::classify(list<string> imagePaths, Mode mode, string neu
     for(Platform* platform:platforms) {
         vector<string> platformResults = platform->getResults();
         results.insert(results.end(), platformResults.begin(), platformResults.end());
-    };
+    }
 
     return results;
 

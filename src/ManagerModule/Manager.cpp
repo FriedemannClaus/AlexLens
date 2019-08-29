@@ -87,40 +87,6 @@ void Manager::runTraining() {
     this->subject->informObservers();
 
 }
-list<string> Manager::findNeuralNets(){
-    list<string> *nets = new list<string>;
-
-    char cCurrentPath[FILENAME_MAX];
-    if (!GetCurrentDir(cCurrentPath, sizeof(cCurrentPath)))
-    {
-        //TODO
-        //throw ;
-    }
-
-    cCurrentPath[sizeof(cCurrentPath) - 1] = '\0';
-
-    DIR *dir;
-    dirent *ent;
-
-    string modelPath = "/../Model";
-    string path = cCurrentPath + modelPath;
-    int n = path.length();
-    char charPath[n+1];
-    strcpy(charPath, path.c_str());
-
-    if ((dir = opendir (charPath)) != NULL) {
-        while ((ent = readdir (dir)) != NULL) {
-            if(ent->d_name[0] != '.')
-                nets->push_front(ent->d_name);
-        }
-        closedir (dir);
-    } else {
-        /* could not open directory */
-        //TODO
-        //throw error on not opening the directory
-    }
-    return *nets;
-}
 
 void Manager::setProjectDir() {
     // Get current dir of project
