@@ -105,3 +105,91 @@ bool Manager::exists_file(const std::string &name) {
     struct stat buffer;
     return (stat (name.c_str(), &buffer) == 0);
 }
+
+bool Manager::isRunnable() {
+    whichFilesInResources();
+    if (!net_labels) return false;
+
+    switch (operationMode) {
+        case Mode::OPTIMAL:
+            if (neuralNet == "alexnet") {
+                if (net_model_h5) {
+                    return true;
+                } else {
+                    return false;
+                }
+            } else {
+                if(net_model_pt) {
+                    return  true;
+                } else {
+                    return false;
+                }
+            }
+            break;
+        case Mode::HIGH_PERFOMANCE:
+            if (neuralNet == "alexnet") {
+                if (net_model_h5 && net_model_bin && net_mapping && net_xml) {
+                    return true;
+                }
+            } else {
+                if(net_model_pt && net_model_bin && net_mapping && net_xml) {
+                    return  true;
+                } else {
+                    return false;
+                }
+            }
+            break;
+        case Mode::LOW_POWER:
+            if (net_model_bin && net_mapping && net_xml) {
+                return true;
+            } else {
+                return false;
+            }
+            break;
+        case Mode::ENERGY_EFFICIENT:
+            if (net_model_bin && net_mapping && net_xml) {
+                return true;
+            } else {
+                return false;
+            }
+            break;
+    }
+    return false;
+}
+
+void Manager::whichFilesInResources() {
+    net_model_bin = false;
+    net_model_pt = false;
+    net_model_h5 = false;
+    net_labels = false;
+    net_mapping = false;
+    net_xml = false;
+
+    std::string PROJECT_DIR_temp = PROJECT_DIR+"resources/" + neuralNet +"/" +neuralNet;
+                cout << PROJECT_DIR_temp +  "_labels"+".txt" << endl;
+                if (exists_file(PROJECT_DIR_temp+"_labels"+".txt")) {
+                    cout <<"!" << endl;
+                    net_labels = true;
+                }
+                if (exists_file(PROJECT_DIR_temp+"_model"+".pt")) {
+                    cout <<"!" << endl;
+                    net_model_pt = true;
+                }
+                if(exists_file(PROJECT_DIR_temp+"_model"+".h5")) {
+                    cout <<"!h5" << endl;
+                    net_model_h5 = true;
+                }
+                if(exists_file(PROJECT_DIR_temp+"_model"+".bin")) {
+                    cout <<"!" << endl;
+                    net_model_bin = true;
+                }
+                if(exists_file(PROJECT_DIR_temp+".xml")) {
+                    cout <<"!" << endl;
+                    net_xml = true;
+                }
+                if (exists_file(PROJECT_DIR_temp+".mapping")) {
+                    cout <<"!" << endl;
+                    net_mapping = true;
+                }
+}
+

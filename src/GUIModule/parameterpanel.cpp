@@ -67,7 +67,14 @@ void ParameterPanel::start()
         string currentNeuralNet = this->neuralNetsList->currentItem()->text().toStdString();
         this->manager->setMode(ModeUtil::whichModeClassify(currentMode));
         this->manager->setNeuralNet(currentNeuralNet);
+        if (!this->manager->isRunnable()) {
+            this->manager->clearImagePaths();
+            this->inputPanel->clearPanel();
+            QMessageBox::warning(this, "Start", "This selection of parameters is not runnable" );
+            return;
+        }
         this->runWasPushed = true;
+
 
         if (classifyTab) {
             this->outputPanel->clearPanel();

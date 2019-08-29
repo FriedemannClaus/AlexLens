@@ -35,6 +35,13 @@ private:
     vector<string> results; /// results of image classification
     string PROJECT_DIR; /// Project home directory
 
+    bool net_model_bin;
+    bool net_xml;
+    bool net_mapping;
+    bool net_labels;
+    bool net_model_h5;
+    bool net_model_pt;
+
 public:
     /**
      * Constructor for class Manager
@@ -129,6 +136,13 @@ public:
      */
     void runTraining();
 
+    /**
+     * The method check wether the configuration which was set by user runnable or not
+     * @return true if the configuration (neural net, mode) can be run
+     */
+    bool isRunnable();
+
+
 private:
     /**
      * Check if file exists
@@ -156,6 +170,9 @@ private:
      * Setter for default neural nets
      */
     void setDefaultNeuralNets();
+
+
+    void whichFilesInResources();
 
 };
 
