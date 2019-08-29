@@ -70,6 +70,9 @@ void ParameterPanel::start()
         if (!this->manager->isRunnable()) {
             this->manager->clearImagePaths();
             this->inputPanel->clearPanel();
+            this->inputPanel->clearPreviewImages();
+            this->outputPanel->clearPanel();
+            this->inputPanel->clearPreviewImages();
             QMessageBox::warning(this, "Start", "This selection of parameters is not runnable" );
             return;
         }

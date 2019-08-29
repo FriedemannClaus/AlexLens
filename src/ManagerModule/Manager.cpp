@@ -40,6 +40,7 @@ void Manager::setDefaultModesTraining() {
 
 
 void Manager::setDefaultNeuralNets() {
+
     list<string> nets;
     std::string PROJECT_DIR_temp = PROJECT_DIR+"/resources/";
     char * projectdir = new char [PROJECT_DIR_temp.length()+1];
@@ -48,7 +49,11 @@ void Manager::setDefaultNeuralNets() {
     struct dirent *ent;
     if ((dir = opendir (projectdir)) != NULL) {
         while ((ent = readdir (dir)) != NULL) {
-            if ((ent->d_name[0] != '.') && exists_file(PROJECT_DIR_temp+"/"+ent->d_name+"/"+ent->d_name+"_labels"+".txt") && exists_file(PROJECT_DIR_temp+"/"+ent->d_name+"/"+ent->d_name+"_model"+".pt")) {
+            if ((ent->d_name[0] != '.') &&
+            exists_file(PROJECT_DIR_temp+"/"+ent->d_name+"/"+ent->d_name+"_labels"+".txt") &&
+                (exists_file(PROJECT_DIR_temp+"/"+ent->d_name+"/"+ent->d_name+"_model"+".pt") ||
+                    exists_file(PROJECT_DIR_temp+"/"+ent->d_name+"/"+ent->d_name+"_model"+".h5") ||
+                    exists_file(PROJECT_DIR_temp+"/"+ent->d_name+"/"+ent->d_name+"_model"+".bin")) ) {
                 nets.push_front(ent->d_name);
             }
         }
@@ -56,7 +61,6 @@ void Manager::setDefaultNeuralNets() {
     } else {
         perror ("NO PROJECT DIRECTORY FOUND");
     }
-    //nets.push_front("alexnet");
     this->defaultNeuralNets = nets;
 }
 
@@ -166,30 +170,24 @@ void Manager::whichFilesInResources() {
     net_xml = false;
 
     std::string PROJECT_DIR_temp = PROJECT_DIR+"resources/" + neuralNet +"/" +neuralNet;
-                cout << PROJECT_DIR_temp +  "_labels"+".txt" << endl;
-                if (exists_file(PROJECT_DIR_temp+"_labels"+".txt")) {
-                    cout <<"!" << endl;
-                    net_labels = true;
-                }
-                if (exists_file(PROJECT_DIR_temp+"_model"+".pt")) {
-                    cout <<"!" << endl;
-                    net_model_pt = true;
-                }
-                if(exists_file(PROJECT_DIR_temp+"_model"+".h5")) {
-                    cout <<"!h5" << endl;
-                    net_model_h5 = true;
-                }
-                if(exists_file(PROJECT_DIR_temp+"_model"+".bin")) {
-                    cout <<"!" << endl;
-                    net_model_bin = true;
-                }
-                if(exists_file(PROJECT_DIR_temp+".xml")) {
-                    cout <<"!" << endl;
-                    net_xml = true;
-                }
-                if (exists_file(PROJECT_DIR_temp+".mapping")) {
-                    cout <<"!" << endl;
-                    net_mapping = true;
-                }
+
+    if (exists_file(PROJECT_DIR_temp+"_labels"+".txt")) {
+        net_labels = true;
+    }
+    if (exists_file(PROJECT_DIR_temp+"_model"+".pt")) {
+        net_model_pt = true;
+    }
+    if(exists_file(PROJECT_DIR_temp+"_model"+".h5")) {
+        net_model_h5 = true;
+    }
+    if(exists_file(PROJECT_DIR_temp+"_model"+".bin")) {
+        net_model_bin = true;
+    }
+    if(exists_file(PROJECT_DIR_temp+".xml")) {
+        net_xml = true;
+    }
+    if (exists_file(PROJECT_DIR_temp+".mapping")) {
+        net_mapping = true;
+    }
 }
 
