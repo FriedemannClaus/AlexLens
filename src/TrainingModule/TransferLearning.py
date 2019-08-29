@@ -325,7 +325,7 @@ alexnet.classifier[6] = nn.Sequential(
     nn.ReLU(),
     nn.Dropout(0.4),
     nn.Linear(4096, num_classes),
-    nn.Softmax(1)  # For using NLLLoss()
+    nn.LogSoftmax(dim=1)  # For using NLLLoss()
 )
 
 # Define Optimizer and Loss Function

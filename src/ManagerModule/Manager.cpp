@@ -40,6 +40,7 @@ void Manager::setDefaultModesTraining() {
 
 
 void Manager::setDefaultNeuralNets() {
+
     list<string> nets;
     std::string PROJECT_DIR_temp = PROJECT_DIR+"/resources/";
     char * projectdir = new char [PROJECT_DIR_temp.length()+1];
@@ -48,7 +49,11 @@ void Manager::setDefaultNeuralNets() {
     struct dirent *ent;
     if ((dir = opendir (projectdir)) != NULL) {
         while ((ent = readdir (dir)) != NULL) {
-            if ((ent->d_name[0] != '.') && exists_file(PROJECT_DIR_temp+"/"+ent->d_name+"/"+ent->d_name+"_labels"+".txt") && exists_file(PROJECT_DIR_temp+"/"+ent->d_name+"/"+ent->d_name+"_model"+".pt")) {
+            if ((ent->d_name[0] != '.') &&
+            exists_file(PROJECT_DIR_temp+"/"+ent->d_name+"/"+ent->d_name+"_labels"+".txt") &&
+                (exists_file(PROJECT_DIR_temp+"/"+ent->d_name+"/"+ent->d_name+"_model"+".pt") ||
+                    exists_file(PROJECT_DIR_temp+"/"+ent->d_name+"/"+ent->d_name+"_model"+".h5") ||
+                    exists_file(PROJECT_DIR_temp+"/"+ent->d_name+"/"+ent->d_name+"_model"+".bin")) ) {
                 nets.push_front(ent->d_name);
             }
         }
@@ -56,7 +61,6 @@ void Manager::setDefaultNeuralNets() {
     } else {
         perror ("NO PROJECT DIRECTORY FOUND");
     }
-    //nets.push_front("alexnet");
     this->defaultNeuralNets = nets;
 }
 
@@ -105,3 +109,85 @@ bool Manager::exists_file(const std::string &name) {
     struct stat buffer;
     return (stat (name.c_str(), &buffer) == 0);
 }
+
+bool Manager::isRunnable() {
+    whichFilesInResources();
+    if (!net_labels) return false;
+
+    switch (operationMode) {
+        case Mode::OPTIMAL:
+            if (neuralNet == "alexnet") {
+                if (net_model_h5) {
+                    return true;
+                } else {
+                    return false;
+                }
+            } else {
+                if(net_model_pt) {
+                    return  true;
+                } else {
+                    return false;
+                }
+            }
+            break;
+        case Mode::HIGH_PERFOMANCE:
+            if (neuralNet == "alexnet") {
+                if (net_model_h5 && net_model_bin && net_mapping && net_xml) {
+                    return true;
+                }
+            } else {
+                if(net_model_pt && net_model_bin && net_mapping && net_xml) {
+                    return  true;
+                } else {
+                    return false;
+                }
+            }
+            break;
+        case Mode::LOW_POWER:
+            if (net_model_bin && net_mapping && net_xml) {
+                return true;
+            } else {
+                return false;
+            }
+            break;
+        case Mode::ENERGY_EFFICIENT:
+            if (net_model_bin && net_mapping && net_xml) {
+                return true;
+            } else {
+                return false;
+            }
+            break;
+    }
+    return false;
+}
+
+void Manager::whichFilesInResources() {
+    net_model_bin = false;
+    net_model_pt = false;
+    net_model_h5 = false;
+    net_labels = false;
+    net_mapping = false;
+    net_xml = false;
+
+    std::string PROJECT_DIR_temp = PROJECT_DIR+"resources/" + neuralNet +"/" +neuralNet;
+
+    if (exists_file(PROJECT_DIR_temp+"_labels"+".txt")) {
+        net_labels = true;
+    }
+    if (exists_file(PROJECT_DIR_temp+"_model"+".pt")) {
+        net_model_pt = true;
+    }
+    if(exists_file(PROJECT_DIR_temp+"_model"+".h5")) {
+        net_model_h5 = true;
+    }
+    if(exists_file(PROJECT_DIR_temp+"_model"+".bin")) {
+        net_model_bin = true;
+    }
+    if(exists_file(PROJECT_DIR_temp+".xml")) {
+        net_xml = true;
+    }
+    if (exists_file(PROJECT_DIR_temp+".mapping")) {
+        net_mapping = true;
+    }
+}
+
