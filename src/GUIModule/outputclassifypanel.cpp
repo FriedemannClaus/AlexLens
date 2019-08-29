@@ -27,20 +27,16 @@ OutputClassifyPanel::~OutputClassifyPanel()
 
 }
 
-void OutputClassifyPanel::addPreviewImages(QVector<QPair<QLabel *, QPixmap> > previewImages)
-{
-
+void OutputClassifyPanel::addPreviewImages(QVector<QPair<QLabel *, QPixmap> > previewImages) {
     int imageWidth = m_scrollArea->width() - 30;
-
     this->classifyResults.clear();
     this->previewImages.clear();
     this->previewImages = previewImages;
 
     for (auto pairLabelMap : this->previewImages)
     {
-
         QLabel* imageLabel = pairLabelMap.first;
-        QPixmap pix(pairLabelMap.second);
+        QPixmap pix = pairLabelMap.second;
         previewImages.append(qMakePair(imageLabel, pix));
         imageLabel->setPixmap(pix.scaledToWidth(imageWidth));
         m_verticalLayout->addWidget(imageLabel);
@@ -49,13 +45,9 @@ void OutputClassifyPanel::addPreviewImages(QVector<QPair<QLabel *, QPixmap> > pr
         classifyResults.push_front(resultLabel);
         m_verticalLayout->addWidget(resultLabel);
     }
-
-//HERE IS SUBJECT ATTACHING!!!! TEMPORARY
-//    this->manager->getSubject()->attachObserver(this);
 }
 
-void OutputClassifyPanel::clearPanel()
-{
+void OutputClassifyPanel::clearPanel() {
     QLayoutItem *child;
     while ((child = this->m_verticalLayout->takeAt(0)) != nullptr)
         {
@@ -69,8 +61,7 @@ void OutputClassifyPanel::clearPanel()
         }
 }
 
-void OutputClassifyPanel::resizeEvent(QResizeEvent *event)
-{
+void OutputClassifyPanel::resizeEvent(QResizeEvent *event) {
     Q_UNUSED(event)
     int imageWidth = m_scrollArea->width() - 30;
 
@@ -88,7 +79,6 @@ void OutputClassifyPanel::invokeUpdate() {
             i++;
         }
     } else {
-        //usleep(18055000);
         this->addTrainingLog();
         this->addTrainingAccuracyCurve();
         this->addTrainingLossCurve();
@@ -103,8 +93,7 @@ void OutputClassifyPanel::setResults(vector<string>& results) {
 
 }
 
-void OutputClassifyPanel::addTrainingLog()
-{
+void OutputClassifyPanel::addTrainingLog() {
     string line;
     ifstream file_log;
     string file_log_name = "";
@@ -126,30 +115,23 @@ void OutputClassifyPanel::addTrainingLog()
     file_log.close();
 }
 
-void OutputClassifyPanel::addLine(string line)
-{
+void OutputClassifyPanel::addLine(string line) {
     QFont font;
     font.setPointSize(12);
     QLabel *label = new QLabel(this);
     label->setText(QString::fromStdString(line));
     label->setFont(font);
     m_verticalLayout->addWidget(label);
-    //usleep(rand() % 100000);
 }
 
-void OutputClassifyPanel::addTrainingAccuracyCurve()
-{
-
+void OutputClassifyPanel::addTrainingAccuracyCurve() {
     string fileNameListPath = this->manager->getProjectDir() + "resources/" + this->manager->getNeuralNet() + "/" + this->manager->getNeuralNet()+ "_accuracy_curve.png";
-    cout << fileNameListPath << endl;
-
     QString QfileNameListPath = QString::fromStdString(fileNameListPath);
     QStringList fileNameList = {QfileNameListPath};
 
     int imageWidth = m_scrollArea->width() - 30;
 
-    for (QString fileName : fileNameList)
-    {
+    for (QString fileName : fileNameList) {
         QLabel* imageLabel = new QLabel(this);
         QPixmap pix(fileName);
         previewImages.append(qMakePair(imageLabel, pix));
@@ -164,17 +146,14 @@ void OutputClassifyPanel::addTrainingAccuracyCurve()
     }
 }
 
-void OutputClassifyPanel::addTrainingLossCurve()
-{
+void OutputClassifyPanel::addTrainingLossCurve() {
     string fileNameListPath = this->manager->getProjectDir() + "resources/" + this->manager->getNeuralNet() + "/" + this->manager->getNeuralNet()+ "_loss_curve.png";
     QString QfileNameListPath = QString::fromStdString(fileNameListPath);
     QStringList fileNameList = {QfileNameListPath};
-    //QStringList fileNameList = { "/home/dmitrii/AlexLens/resources/pse_dataset_test/pse_dataset_test_loss_curve.png"};
 
     int imageWidth = m_scrollArea->width() - 30;
 
-    for (QString fileName : fileNameList)
-    {
+    for (QString fileName : fileNameList) {
         QLabel* imageLabel = new QLabel(this);
         QPixmap pix(fileName);
         previewImages.append(qMakePair(imageLabel, pix));

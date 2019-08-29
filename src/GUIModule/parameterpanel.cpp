@@ -8,6 +8,7 @@
 #include <QMessageBox>
 #include <QString>
 #include <string>
+#include <QApplication>
 
 using namespace std;
 
@@ -72,6 +73,7 @@ void ParameterPanel::start()
             this->outputPanel->clearPanel();
             this->outputPanel->addPreviewImages(this->inputPanel->getPreviewImages());
             this->inputPanel->clearPreviewImages();
+            qApp->processEvents();
             this->manager->runClassify();
 
         } else {

@@ -43,17 +43,13 @@ void InputPanel::addImage()
                                                                  QStandardPaths::displayName(QStandardPaths::HomeLocation),
                                                                  tr("Images (*.png *.PNG *.jpg *.JPG *.jpeg *.JPEG)"));
         int imageWidth = m_scrollArea->width() - 30;
-
-        for (QString fileName : fileNameList)
-        {
+        for (QString fileName : fileNameList) {
             QLabel* imageLabel = new QLabel(this);
             QPixmap pix(fileName);
             previewImages.append(qMakePair(imageLabel, pix));
             imageLabel->setPixmap(pix.scaledToWidth(imageWidth));
             m_verticalLayout->addWidget(imageLabel);
-
             this->manager->addImage(fileName.toStdString()); // adding fileName to manager
-
         }
     } else {
 
