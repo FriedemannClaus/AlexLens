@@ -11,5 +11,5 @@ elseif ("${CMAKE_CXX_COMPILER_ID}" STREQUAL "GNU")
     link_libraries(gcov)
 endif ()
 
-add_executable(AlexLens_tests test_ReLU.cpp test_MaxPool2D.cpp test_Softmax.cpp test_Normalisation.cpp)
+add_executable(AlexLens_tests test_ReLU.cpp test_MaxPool2D.cpp test_Softmax.cpp test_Normalisation.cpp test_Conv2D.cpp)
 target_link_libraries(AlexLens_tests PRIVATE AlexLens_lib catch)
