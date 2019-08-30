@@ -172,8 +172,17 @@ private:
      */
     void setDefaultNeuralNets();
 
-
+    /**
+     * The methods determines which types of file are available in resources
+     * and sets the corresponding bool variables such as net_model_bin
+     */
     void whichFilesInResources();
+
+    /**
+     * The method constructs the readable name for the parameter panel from directory
+     * @param imageDir the directory
+     */
+    void makeNameFromDir(std::string& imageDir);
 
 };
 

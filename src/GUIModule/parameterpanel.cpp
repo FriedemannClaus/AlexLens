@@ -72,7 +72,7 @@ void ParameterPanel::start()
             this->inputPanel->clearPanel();
             this->inputPanel->clearPreviewImages();
             this->outputPanel->clearPanel();
-            QMessageBox::warning(this, "Start", "Diese Auswahl von Parametern ist nicht ausfuerbar!" );
+            QMessageBox::warning(this, "Start", "Diese Auswahl von Parametern ist nicht ausführbar!" );
             return;
         }
         this->runWasPushed = true;
@@ -82,10 +82,10 @@ void ParameterPanel::start()
             this->outputPanel->clearPanel();
             this->outputPanel->addPreviewImages(this->inputPanel->getPreviewImages());
             this->inputPanel->clearPreviewImages();
+            //reloading the gui
             this->outputPanel->setVisible(false);
             this->outputPanel->repaint();
             this->outputPanel->setVisible(true);
-            //qApp->processEvents();
             QCoreApplication::processEvents();
             this->manager->runClassify();
 
@@ -93,10 +93,10 @@ void ParameterPanel::start()
             this->outputPanel->clearPanel();
             this->outputPanel->addLoadingIcon();
             this->inputPanel->clearPreviewImages();
+            //reloading the gui
             this->outputPanel->setVisible(false);
             this->outputPanel->repaint();
             this->outputPanel->setVisible(true);
-            //qApp->processEvents();
             QCoreApplication::processEvents();
             this->manager->runTraining();
         }

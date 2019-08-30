@@ -42,7 +42,7 @@ void OutputClassifyPanel::addPreviewImages(QVector<QPair<QLabel *, QPixmap> > pr
         imageLabel->setPixmap(pix.scaledToWidth(imageWidth));
         m_verticalLayout->addWidget(imageLabel);
         QLabel* resultLabel = new QLabel(this);
-        resultLabel->setText("hier erscheint das Ergebnis \n");
+        resultLabel->setText("Das Ergebnis wird gerade berechnet \n");
         classifyResults.push_front(resultLabel);
         m_verticalLayout->addWidget(resultLabel);
     }

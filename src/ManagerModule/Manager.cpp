@@ -77,13 +77,9 @@ void Manager::runTraining() {
 
     this->executor->train(imageDir, operationMode, neuralNet, this->PROJECT_DIR);
 
-    //make name from imageDir for ParameterPanel
-    if(imageDir[imageDir.size()-1] == '/') {
-        imageDir.erase(imageDir.size()-1,1);
-    }
-    int i;
-    for(i = imageDir.size()-1; imageDir[i] != '/'; i--) {}
-    imageDir.erase(0, i+1);
+    makeNameFromDir(imageDir);
+
+    cout << imageDir << endl;
 
     bool found_imageDir = (std::find(defaultNeuralNets.begin(), defaultNeuralNets.end(), imageDir) != defaultNeuralNets.end());
     if (!found_imageDir) {
@@ -193,5 +189,15 @@ void Manager::whichFilesInResources() {
     if (exists_file(PROJECT_DIR_temp+".mapping")) {
         net_mapping = true;
     }
+}
+
+void Manager::makeNameFromDir(std::string &imageDir) {
+    //make name from imageDir for ParameterPanel
+    if(imageDir[imageDir.size()-1] == '/') {
+        imageDir.erase(imageDir.size()-1,1);
+    }
+    int i;
+    for(i = imageDir.size()-1; imageDir[i] != '/'; i--) {}
+    imageDir.erase(0, i+1);
 }
 
