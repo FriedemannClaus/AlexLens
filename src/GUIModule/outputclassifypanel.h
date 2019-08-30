@@ -15,6 +15,7 @@
 #include <string>
 #include <vector>
 #include <fstream>
+#include <QMovie>
 
 using namespace std;
 
@@ -94,6 +95,7 @@ public:
      */
     inline void setClassifyTab(bool classifyTab) {this->classifyTab = classifyTab;}
 
+    void addLoadingIcon();
 protected:
     /**
      * Adjust input image for scroll area.

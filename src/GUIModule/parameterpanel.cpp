@@ -72,7 +72,7 @@ void ParameterPanel::start()
             this->inputPanel->clearPanel();
             this->inputPanel->clearPreviewImages();
             this->outputPanel->clearPanel();
-            QMessageBox::warning(this, "Start", "This selection of parameters is not runnable" );
+            QMessageBox::warning(this, "Start", "Diese Auswahl von Parametern ist nicht ausfuerbar!" );
             return;
         }
         this->runWasPushed = true;
@@ -87,6 +87,8 @@ void ParameterPanel::start()
 
         } else {
             this->outputPanel->clearPanel();
+            this->outputPanel->addLoadingIcon();
+            qApp->processEvents();
             this->inputPanel->clearPreviewImages();
             this->manager->runTraining();
         }

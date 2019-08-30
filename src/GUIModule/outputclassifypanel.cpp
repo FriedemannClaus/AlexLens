@@ -21,7 +21,6 @@ OutputClassifyPanel::OutputClassifyPanel(QWidget *parent)
     m_scrollArea->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
     m_gridLayout->addWidget(m_scrollArea, 0, 0, 1, 1);
 
-
 }
 
 OutputClassifyPanel::~OutputClassifyPanel()
@@ -81,6 +80,7 @@ void OutputClassifyPanel::invokeUpdate() {
             i++;
         }
     } else {
+        this->clearPanel();
         this->addTrainingLog();
         this->addTrainingAccuracyCurve();
         this->addTrainingLossCurve();
@@ -127,7 +127,15 @@ void OutputClassifyPanel::addLine(string line) {
     qApp->processEvents();
     usleep(rand()%300000);
 }
-
+void OutputClassifyPanel::addLoadingIcon(){
+    QMovie *movie = new QMovie(QString::fromStdString(this->manager->getProjectDir() + "Icon/iconLoading.gif"));
+    QLabel *processLabel = new QLabel(this);
+    processLabel->setMovie(movie);
+    movie->start();
+    processLabel->setAlignment(Qt::AlignCenter);
+    m_verticalLayout->addWidget(processLabel);
+    qApp->processEvents();
+}
 void OutputClassifyPanel::addTrainingAccuracyCurve() {
     string fileNameListPath = this->manager->getProjectDir() + "resources/" + this->manager->getNeuralNet() + "/" + this->manager->getNeuralNet()+ "_accuracy_curve.png";
     QString QfileNameListPath = QString::fromStdString(fileNameListPath);

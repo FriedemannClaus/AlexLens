@@ -10,6 +10,7 @@ int main(int argc, char *argv[])
     setlocale(LC_NUMERIC,"C");
     Subject* subject = new Subject();
     Manager* manager = new Manager(subject);
+    a.setWindowIcon(QIcon(QString::fromStdString(manager->getProjectDir() + "Icon/iconLogo.png")));
     MainWindow* w = new MainWindow(manager, subject);
     w->show();
 
