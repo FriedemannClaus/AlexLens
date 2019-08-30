@@ -85,7 +85,11 @@ void Manager::runTraining() {
     for(i = imageDir.size()-1; imageDir[i] != '/'; i--) {}
     imageDir.erase(0, i+1);
 
-    defaultNeuralNets.push_back(imageDir);
+    bool found_imageDir = (std::find(defaultNeuralNets.begin(), defaultNeuralNets.end(), imageDir) != defaultNeuralNets.end());
+    if (!found_imageDir) {
+        defaultNeuralNets. push_back(imageDir);
+    }
+    //defaultNeuralNets. push_back(imageDir);
     this->neuralNet = imageDir;
     this->subject->setClassify(false);
     this->subject->informObservers();

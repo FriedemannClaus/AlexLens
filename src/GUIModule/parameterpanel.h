@@ -81,9 +81,9 @@ private slots:
     void start();
 
     /**
-     * Stop process (classify or transfer learning).
+     * Reset all input in panels (classify or transfer learning).
      */
-    void beenden();
+    void reset();
 
 private:
     QGridLayout* m_gridLayout; /// The main panel of OutputClassifyPanel

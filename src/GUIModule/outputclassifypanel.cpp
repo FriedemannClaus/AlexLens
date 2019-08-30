@@ -1,6 +1,8 @@
 #include "outputclassifypanel.h"
 
 #include <vector>
+#include <QApplication>
+#include <unistd.h>
 
 
 OutputClassifyPanel::OutputClassifyPanel(QWidget *parent)
@@ -122,6 +124,8 @@ void OutputClassifyPanel::addLine(string line) {
     label->setText(QString::fromStdString(line));
     label->setFont(font);
     m_verticalLayout->addWidget(label);
+    qApp->processEvents();
+    usleep(rand()%300000);
 }
 
 void OutputClassifyPanel::addTrainingAccuracyCurve() {

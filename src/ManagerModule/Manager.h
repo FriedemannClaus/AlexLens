@@ -14,6 +14,7 @@
 #include "Executor.h"
 #include <dirent.h>
 #include <sys/stat.h>
+#include <algorithm>
 
 
 using namespace std;

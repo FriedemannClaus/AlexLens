@@ -41,10 +41,10 @@ ParameterPanel::ParameterPanel(QWidget *parent)
 
     m_gridLayout->addWidget(vertikalGroupBox);
 
-    m_pushButton = new QPushButton("Beenden", this);
+    m_pushButton = new QPushButton("Reset", this);
     m_pushButton2 = new QPushButton("Start", this);
 
-    connect(m_pushButton, &QPushButton::clicked, this, &ParameterPanel::beenden);
+    connect(m_pushButton, &QPushButton::clicked, this, &ParameterPanel::reset);
     connect(m_pushButton2, &QPushButton::clicked, this, &ParameterPanel::start);
 
     QGroupBox *horizonatlGroupBox = new QGroupBox(this);
@@ -72,7 +72,6 @@ void ParameterPanel::start()
             this->inputPanel->clearPanel();
             this->inputPanel->clearPreviewImages();
             this->outputPanel->clearPanel();
-            this->inputPanel->clearPreviewImages();
             QMessageBox::warning(this, "Start", "This selection of parameters is not runnable" );
             return;
         }
@@ -101,20 +100,28 @@ void ParameterPanel::start()
 
 }
 
-void ParameterPanel::beenden()
+void ParameterPanel::reset()
 {
     if (classifyTab) {
+        //classify tab resetting
         this->inputPanel->clearPanel();
         this->inputPanel->clearPreviewImages();
+        this->outputPanel->clearPanel();
+        this->manager->clearImagePaths();
 
     } else {
-        //training beenden
+        //training tab resetting
+        this->inputPanel->clearPanel();
+        this->inputPanel->clearPreviewImages();
+        this->outputPanel->clearPanel();
+        this->manager->clearImagePaths();
     }
+    /*
     if (runWasPushed) {
         QMessageBox::warning(this, "Beenden", "Prozess wird beendet!");
     } else {
         QMessageBox::warning(this, "Beenden", "Nichts zu beenden!");
-    }
+    }*/
 }
 
 void ParameterPanel::fillModes() {
@@ -137,6 +144,12 @@ void ParameterPanel::fillModes() {
 }
 
 void ParameterPanel::fillNeuralNets() {
+    if(!classifyTab) {
+        QListWidgetItem *item = new QListWidgetItem(QString::fromStdString("alexnet"));
+        neuralNetsList->addItem(item);
+        neuralNetsList->setCurrentRow(0);
+        return;
+    }
     list<string> nets = this->manager->getDeafaultNeuralNets();
     list<string>::iterator it;
     for (it = nets.begin(); it != nets.end(); ++it) {
@@ -147,6 +160,7 @@ void ParameterPanel::fillNeuralNets() {
 }
 
 void ParameterPanel::invokeUpdate() {
+    if(classifyTab) {
         int i = 0;
         neuralNetsList->clear();
         for (string net:this->manager->getDeafaultNeuralNets()) {
@@ -155,5 +169,5 @@ void ParameterPanel::invokeUpdate() {
             i++;
         }
         neuralNetsList->setCurrentRow(0);
-
+    }
 }

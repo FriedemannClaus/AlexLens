@@ -164,8 +164,8 @@ void InputPanel::dropEvent(QDropEvent *e)
             QLabel* dirLabel = new QLabel(this);
             QString q_path = url.toString();
             string path = url.toString().toStdString();
-            QString subPath = q_path.mid(7,path.length()-8);
-            path = path.substr(0, path.length()-1);
+            QString subPath = q_path.mid(7,path.length()-6);
+            path = path.substr(0, path.length());
             path = path.substr(path.rfind('/')+1, path.length()-path.rfind('/')+1);
             dirLabel->setText(QString::fromStdString(path));
             dirLabel->setAlignment(Qt::AlignCenter);
