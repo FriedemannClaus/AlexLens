@@ -44,9 +44,6 @@ CNNNetwork ASICPlatform::readIR() {
 }
 
 void ASICPlatform::runClassify() {
-    //vector<string> imageNames;
-    //convertListToVector(list, &imageNames);
-
     this->net = readIR();
     this->inputInfo = net.getInputsInfo();
     vector<shared_ptr<unsigned char>> imagesData;
@@ -78,15 +75,8 @@ void ASICPlatform::runClassify() {
 
     reset();
     this->results = resultVector;
-    cout << "this was stick " << this->id << endl;
-    //return resultVector;
 }
 
-void ASICPlatform::convertListToVector(list<string> list, vector<string> *imageNames) {
-    for(string i : list) {
-        imageNames->push_back(i);
-    }
-}
 
 void ASICPlatform::configInputOutput(vector<string> *imageNames, vector<shared_ptr<unsigned char>> *imagesData, size_t *batchSize, string *firstOutputName) {
 
@@ -198,15 +188,6 @@ void ASICPlatform::loadLabels(vector<string> *labels) {
             labels->push_back(strLine);
         }
     }
-
-    /*
-    ClassificationResult classificationResult(output_blob, *imageNames, *batchSize, NUM_TOP_RESULTS, labels);
-    classificationResult.print();
-    cout << endl << "total inference time: " << *total << endl;
-    cout << "Average running time of one iteration: " << *total / static_cast<double>(NUM_ITERATIONS) << " ms" << endl;
-    cout << endl << "Throughput: " << 1000 * static_cast<double>(NUM_ITERATIONS) * *batchSize / *total << " FPS" << endl;
-    cout << endl;*/
-
 }
 
 
@@ -292,30 +273,19 @@ void ASICPlatform::createResultVector(Blob::Ptr _outBlob, vector<string> *imageN
 }
 
 void ASICPlatform::setStatistics(double *total, size_t *batchSize) {
-    cout << endl << "Total inference time: " << *total << endl;
-    cout << "Average running time of one iteration: " << *total / static_cast<double>(NUM_ITERATIONS) << " ms" << endl;
-    cout << "Throughput: " << 1000 * static_cast<double>(NUM_ITERATIONS) * *batchSize / *total << " FPS" << endl;
-    cout << endl;
-
     statistic.setTotalInferenceTime(*total);
     statistic.setAvgIterationTime(*total / static_cast<double>(NUM_ITERATIONS)); // ms
     statistic.setThroughput(1000 * static_cast<double>(NUM_ITERATIONS) * *batchSize / *total); // FPS
 }
 
-PlatformType ASICPlatform::getType() {
-    return this->type;
+void ASICPlatform::setNeuralNet(string neuralNet) {
+    this->model_path = this->project_dir + "resources/" + neuralNet + "/";
+    this->model_path += neuralNet + "_model" + ".bin";
+    this->structure_path = this->project_dir +  "resources/" + neuralNet + "/";
+    this->structure_path += neuralNet + ".xml";
+    this->mapping_path = this->project_dir +  "resources/" + neuralNet + "/";
+    this->mapping_path += neuralNet + ".mapping";
+    this->label_path = this->project_dir + "resources/" + neuralNet + "/";
+    this->label_path += neuralNet + "_labels" + ".txt";
 }
 
-PlatformStatistic ASICPlatform::getStatistic() {
-    return this->statistic;
-}
-
-
-void ASICPlatform::setImagePaths(list<string> imagePaths) {
-    convertListToVector(imagePaths, &imageNames);
-}
-
-
-vector<string> ASICPlatform::getResults() {
-    return this->results;
-}

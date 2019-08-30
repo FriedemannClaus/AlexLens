@@ -11,22 +11,13 @@ CPUPlatform::CPUPlatform() {
     this->statistic.setFLOPS(19);
 }
 
-void CPUPlatform::setImagePaths(list<string> images) {
-    this->imagePaths.clear();
-    for (string i : images) {
-        this->imagePaths.push_back(i);
-    }
-}
-
-vector<string> CPUPlatform::getResults() {
-    return this->results;
-}
 
 void CPUPlatform::runClassify() {
     this->results.clear();
     const clock_t begin_time = clock();
-    alexNet->runClassify(this->imagePaths);
+    alexNet->runClassify(this->imageNames);
     const float final_time = float( clock () - begin_time )/CLOCKS_PER_SEC*100;
+    this->imageNames.clear();
     this->statistic.setTotalInferenceTime(final_time);
     this->statistic.setAvgIterationTime(final_time/results.size());
 }

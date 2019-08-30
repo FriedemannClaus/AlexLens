@@ -5,28 +5,18 @@
 #include "CPUPlatformTorch.h"
 #include <torch/script.h>
 #include <torch/torch.h>
-
 #include <opencv2/opencv.hpp>
 #include <opencv2/imgproc/imgproc.hpp>
-
 #include <Python.h>
-
 #include <iostream>
 #include <memory>
 #include <vector>
-//#include <cmath>
 #include <string>
-//#include <bits/stdc++.h>
 
 using namespace std;
 
 void CPUPlatformTorch::runClassify() {
     this->results.clear();
-    //model_path = "/home/dmitrii/alexnetTr.pt";
-    // Deserialize the ScriptModule from a file using torch::jit::load().
-    //std::string model_path = "/home/dmitrii/repos/cpp-pytorch/caltech.pt";//"/home/dmitrii/alexnetTr.pt";
-    //std::string label_path = "/home/dmitrii/Downloads/Telegram Desktop/imagenet_classes.txt";
-    //std::string image_path = "/home/dmitrii/Downloads/Telegram Desktop/test/test/bear/009_0071.jpg";
     torch::jit::script::Module module = torch::jit::load(model_path);
 
     const clock_t begin_time = clock();
@@ -66,18 +56,12 @@ void CPUPlatformTorch::runClassify() {
         torch::Tensor top_scores = std::get<0>(result)[0].softmax(0);
         torch::Tensor top_idxs = std::get<1>(result)[0];
 
-        //auto top_scores_a = top_scores.accessor<float,1>();
-        //auto top_idxs_a = top_idxs.accessor<int,1>();
-
         std::string resultVector = "";
         for (int i = 0; i < 5; ++i) {
             int idx = top_idxs[i].item<int>();
-            float var = round(top_scores[i].item<float>()*100.0f);
             std::stringstream stream;
             stream << std::fixed << std::setprecision(2) << top_scores[i].item<float>()*100.0f;
             resultVector += stream.str();
-            //resultVector+= std::to_string(var);
-            //resultVector+= std::to_string(remainder((top_scores[i].item<float>()*100.0f), 2));
             resultVector+="% ";
             resultVector+=labels[idx];
             resultVector+="\n";
@@ -99,36 +83,9 @@ CPUPlatformTorch::CPUPlatformTorch() {
     this->statistic.setFLOPS(19);
 }
 
-void CPUPlatformTorch::runClassifyOne(string imagePath) {
-
-}
-
-void CPUPlatformTorch::setImagePaths(list<string> imagePaths) {
-    convertListToVector(imagePaths, &imageNames);
-}
-
-void CPUPlatformTorch::convertListToVector(list<string> list, vector<string> *imageNames) {
-    for(string i : list) {
-        imageNames->push_back(i);
-    }
-}
-
-vector<string> CPUPlatformTorch::getResults() {
-    return this->results;
-}
-
-float CPUPlatformTorch::round(float var)
-{
-    // we use array of chars to store number
-    // as a string.
-    char str[40];
-
-    // Print in string the value of var
-    // with two decimal point
-    sprintf(str, "%.2f", var);
-
-    // scan string value in var
-    sscanf(str, "%f", &var);
-
-    return var;
+void CPUPlatformTorch::setNeuralNet(string neuralNet) {
+    this->model_path = this->project_dir + "resources/" + neuralNet + "/";
+    this->model_path += neuralNet + "_model" + ".pt";
+    this->label_path = this->project_dir + "resources/" + neuralNet + "/";
+    this->label_path += neuralNet + "_labels" + ".txt";
 }
