@@ -14,13 +14,13 @@
 #include <iostream>
 #include <memory>
 #include <vector>
-
+//#include <cmath>
 #include <string>
 //#include <bits/stdc++.h>
 
 using namespace std;
 
-void CPUPlatformTorch::runClassify() { //Viet: Ich vermute hier fehlt noch Softmax.
+void CPUPlatformTorch::runClassify() {
     this->results.clear();
     //model_path = "/home/dmitrii/alexnetTr.pt";
     // Deserialize the ScriptModule from a file using torch::jit::load().
@@ -63,17 +63,22 @@ void CPUPlatformTorch::runClassify() { //Viet: Ich vermute hier fehlt noch Softm
         // print predicted top-5 labels
         std::tuple<torch::Tensor,torch::Tensor> result = out_tensor.sort(-1, true);
 
-        torch::Tensor top_scores = std::get<0>(result)[0];
-        torch::Tensor top_idxs = std::get<1>(result)[0].toType(torch::kInt32);
+        torch::Tensor top_scores = std::get<0>(result)[0].softmax(0);
+        torch::Tensor top_idxs = std::get<1>(result)[0];
 
-        auto top_scores_a = top_scores.accessor<float,1>();
-        auto top_idxs_a = top_idxs.accessor<int,1>();
+        //auto top_scores_a = top_scores.accessor<float,1>();
+        //auto top_idxs_a = top_idxs.accessor<int,1>();
 
         std::string resultVector = "";
         for (int i = 0; i < 5; ++i) {
-            int idx = top_idxs_a[i];
-            resultVector+= std::to_string(top_scores_a[i]/100);
-            resultVector+=" ";
+            int idx = top_idxs[i].item<int>();
+            float var = round(top_scores[i].item<float>()*100.0f);
+            std::stringstream stream;
+            stream << std::fixed << std::setprecision(2) << top_scores[i].item<float>()*100.0f;
+            resultVector += stream.str();
+            //resultVector+= std::to_string(var);
+            //resultVector+= std::to_string(remainder((top_scores[i].item<float>()*100.0f), 2));
+            resultVector+="% ";
             resultVector+=labels[idx];
             resultVector+="\n";
         }
@@ -110,4 +115,20 @@ void CPUPlatformTorch::convertListToVector(list<string> list, vector<string> *im
 
 vector<string> CPUPlatformTorch::getResults() {
     return this->results;
+}
+
+float CPUPlatformTorch::round(float var)
+{
+    // we use array of chars to store number
+    // as a string.
+    char str[40];
+
+    // Print in string the value of var
+    // with two decimal point
+    sprintf(str, "%.2f", var);
+
+    // scan string value in var
+    sscanf(str, "%f", &var);
+
+    return var;
 }

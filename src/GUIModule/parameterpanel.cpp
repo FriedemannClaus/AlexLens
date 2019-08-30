@@ -82,14 +82,22 @@ void ParameterPanel::start()
             this->outputPanel->clearPanel();
             this->outputPanel->addPreviewImages(this->inputPanel->getPreviewImages());
             this->inputPanel->clearPreviewImages();
-            qApp->processEvents();
+            this->outputPanel->setVisible(false);
+            this->outputPanel->repaint();
+            this->outputPanel->setVisible(true);
+            //qApp->processEvents();
+            QCoreApplication::processEvents();
             this->manager->runClassify();
 
         } else {
             this->outputPanel->clearPanel();
             this->outputPanel->addLoadingIcon();
-            qApp->processEvents();
             this->inputPanel->clearPreviewImages();
+            this->outputPanel->setVisible(false);
+            this->outputPanel->repaint();
+            this->outputPanel->setVisible(true);
+            //qApp->processEvents();
+            QCoreApplication::processEvents();
             this->manager->runTraining();
         }
         this->manager->clearImagePaths();

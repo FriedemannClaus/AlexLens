@@ -35,6 +35,8 @@ private:
         this->label_path += neuralNet + "_labels" + ".txt";
     }
 
+    float round(float var);
+
 public:
     CPUPlatformTorch();
     void runClassify() override;

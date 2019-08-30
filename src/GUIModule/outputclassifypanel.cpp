@@ -133,8 +133,7 @@ void OutputClassifyPanel::addLoadingIcon(){
     processLabel->setMovie(movie);
     movie->start();
     processLabel->setAlignment(Qt::AlignCenter);
-    m_verticalLayout->addWidget(processLabel);
-    qApp->processEvents();
+    m_verticalLayout->addWidget(processLabel);;
 }
 void OutputClassifyPanel::addTrainingAccuracyCurve() {
     string fileNameListPath = this->manager->getProjectDir() + "resources/" + this->manager->getNeuralNet() + "/" + this->manager->getNeuralNet()+ "_accuracy_curve.png";
