@@ -112,20 +112,39 @@ void ParameterPanel::start()
 
 void ParameterPanel::reset()
 {
-    if (classifyTab) {
-        //classify tab resetting
-        this->inputPanel->clearPanel();
-        this->inputPanel->clearPreviewImages();
-        this->outputPanel->clearPanel();
-        this->manager->clearImagePaths();
+    QMessageBox msgBox;
+    msgBox.setWindowTitle("Reset");
+    msgBox.setText("Sollten die Panels resettet werden?");
+    //msgBox.setInformativeText("Die Panels links und rechts werden leer");
+    msgBox.setStandardButtons(QMessageBox::Cancel | QMessageBox::Reset);
+    msgBox.setDefaultButton(QMessageBox::Cancel);
+    int ret = msgBox.exec();
 
-    } else {
-        //training tab resetting
-        this->inputPanel->clearPanel();
-        this->inputPanel->clearPreviewImages();
-        this->outputPanel->clearPanel();
-        this->manager->clearImagePaths();
+    switch(ret) {
+        case QMessageBox::Reset:
+            if (classifyTab) {
+                //classify tab resetting
+                this->inputPanel->clearPanel();
+                this->inputPanel->clearPreviewImages();
+                this->outputPanel->clearPanel();
+                this->manager->clearImagePaths();
+
+            } else {
+                //training tab resetting
+                this->inputPanel->clearPanel();
+                this->inputPanel->clearPreviewImages();
+                this->outputPanel->clearPanel();
+                this->manager->setDatasetPath("");
+            }
+            break;
+        case QMessageBox::Cancel:
+            //do not nothing
+            break;
+        default:
+            //should never be reached
+            break;
     }
+
     /*
     if (runWasPushed) {
         QMessageBox::warning(this, "Beenden", "Prozess wird beendet!");

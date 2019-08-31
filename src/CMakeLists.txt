@@ -1,8 +1,15 @@
 project(AlexLens_prog)
 
 #Static library with all sources that need to be tested in unit tests
-add_library(AlexLens_lib STATIC NeuralNetModule/ReLU.cpp NeuralNetModule/ReLU.h)
-target_include_directories(AlexLens_lib PUBLIC ${CMAKE_CURRENT_SOURCE_DIR} /usr/include/eigen3)
+add_library(AlexLens_lib STATIC
+        NeuralNetModule/ReLU.cpp NeuralNetModule/ReLU.h
+        ManagerModule/Manager.h ManagerModule/Manager.cpp
+        )
+target_include_directories(AlexLens_lib PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}
+        /usr/include/eigen3
+        /opt/intel/openvino/inference_engine/include
+        /usr/include/hdf5/serial
+        /opt/intel/openvino/opencv/include)
 
 
 # Main program

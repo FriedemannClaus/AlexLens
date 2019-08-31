@@ -69,6 +69,8 @@ public:
      */
     void clearPanel();
 
+    inline void setButtonText(string text){m_pushButton->setText(QString::fromStdString(text));}
+
 private slots:
     /**
      * Add input data to InputPanel.

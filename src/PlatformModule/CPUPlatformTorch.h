@@ -25,6 +25,7 @@ public:
     CPUPlatformTorch();
     void runClassify() override;
     inline void setNeuralNet(string neuralNet) override;
+    inline std::string getId() override {return "";}
 };
 
 

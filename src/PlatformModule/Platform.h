@@ -79,7 +79,7 @@ public:
      * Getter for ID of platform
      * @return the id of platform
      */
-    inline  string getId() {return to_string(this->id+1);};
+    inline virtual string getId() {return to_string(this->id+1);};
 
 private:
     /**

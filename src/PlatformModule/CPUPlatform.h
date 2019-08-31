@@ -16,6 +16,7 @@ public:
     CPUPlatform();
     void runClassify() override;
     void runTraining() override;
+    inline std::string getId() override{ return "";}
 };
 
 

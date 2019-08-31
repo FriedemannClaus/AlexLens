@@ -4,6 +4,7 @@
 #include <QStandardPaths>
 #include <QScrollBar>
 #include <QDragEnterEvent>
+#include <QMessageBox>
 
 
 InputPanel::InputPanel(QWidget *parent)
@@ -52,10 +53,16 @@ void InputPanel::addImage()
             this->manager->addImage(fileName.toStdString()); // adding fileName to manager
         }
     } else {
-
-        QString dir = QFileDialog::getExistingDirectory(this, tr("Open Directory"),
+        if(previewImages.size() >= 1) {
+            QMessageBox::warning(this, "Datensatz einfügen", "Nur ein Datensatz kann eingefügt werden!" );
+            return;
+        }
+        QString dir = "";
+        dir = QFileDialog::getExistingDirectory(this, tr("Open Directory"),
                                                         QStandardPaths::displayName(QStandardPaths::HomeLocation)
                                                         );
+        if (dir == "") return;
+
         QStringList fileNameList = {QString::fromStdString(this->manager->getProjectDir() + "Icon/iconOrdner.png")};
 
         int imageWidth = m_scrollArea->width() - 30;
@@ -83,7 +90,7 @@ void InputPanel::addImage()
         //dirLabel->setPixmap(d.scaledToWidth(imageWidth));
         m_verticalLayout->addWidget(dirLabel);
 
-        this->manager->addImage(dir.toStdString()); // adding directory to manager
+        this->manager->setDatasetPath(dir.toStdString()); // adding directory to manager
 
 
     }
