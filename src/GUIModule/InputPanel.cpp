@@ -177,7 +177,7 @@ void InputPanel::dropEvent(QDropEvent *e)
             dirLabel->setText(QString::fromStdString(path));
             dirLabel->setAlignment(Qt::AlignCenter);
             m_verticalLayout->addWidget(dirLabel);
-            this->manager->addImage(subPath.toStdString());
+            this->manager->setDatasetPath(subPath.toStdString());
         }
     }
 }
