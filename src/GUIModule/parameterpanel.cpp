@@ -81,13 +81,15 @@ void ParameterPanel::start()
         if (classifyTab) {
             this->outputPanel->clearPanel();
             this->outputPanel->addPreviewImages(this->inputPanel->getPreviewImages());
-            this->inputPanel->clearPreviewImages();
             //reloading the gui
             this->outputPanel->setVisible(false);
             this->outputPanel->repaint();
             this->outputPanel->setVisible(true);
             QCoreApplication::processEvents();
+
             this->manager->runClassify();
+
+            this->inputPanel->clearPreviewImages();
 
         } else {
             this->outputPanel->clearPanel();
@@ -98,6 +100,7 @@ void ParameterPanel::start()
             this->outputPanel->repaint();
             this->outputPanel->setVisible(true);
             QCoreApplication::processEvents();
+
             this->manager->runTraining();
         }
         this->manager->clearImagePaths();

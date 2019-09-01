@@ -39,10 +39,24 @@ void OutputClassifyPanel::addPreviewImages(QVector<QPair<QLabel *, QPixmap> > pr
         QLabel* imageLabel = pairLabelMap.first;
         QPixmap pix = pairLabelMap.second;
         previewImages.append(qMakePair(imageLabel, pix));
+
+        //to black-white
+        QRgb color;
+        QImage tmp = pix.toImage();
+        QSize sizeImage = tmp.size();
+        for (int x = 0; x < sizeImage.width(); x++) {
+            for (int y = 0; y < sizeImage.height(); y++) {
+                color = tmp.pixel(x, y);
+                int gray = qGray(color);
+                tmp.setPixel(x, y, qRgb(gray, gray, gray));
+            }
+        }
+        pix = QPixmap::fromImage(tmp);
+
         imageLabel->setPixmap(pix.scaledToWidth(imageWidth));
         m_verticalLayout->addWidget(imageLabel);
         QLabel* resultLabel = new QLabel(this);
-        resultLabel->setText("Das Ergebnis wird gerade berechnet \n");
+        resultLabel->setText(" \n \nLoading...\n \n ");
         classifyResults.push_front(resultLabel);
         m_verticalLayout->addWidget(resultLabel);
     }
@@ -74,6 +88,15 @@ void OutputClassifyPanel::resizeEvent(QResizeEvent *event) {
 
 void OutputClassifyPanel::invokeUpdate() {
     if (classifyTab) {
+        int imageWidth = m_scrollArea->width() - 30;
+        for (auto pairLabelMap : this->previewImages)
+        {
+            QLabel* imageLabel = pairLabelMap.first;
+            QPixmap pix = pairLabelMap.second;
+            previewImages.append(qMakePair(imageLabel, pix));
+            imageLabel->setPixmap(pix.scaledToWidth(imageWidth));
+        }
+
         int i = 0;
         for (string result:this->manager->getResults()) {
             classifyResults.at(i)->setText(QString::fromStdString(result));
