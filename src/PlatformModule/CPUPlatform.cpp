@@ -30,6 +30,7 @@ void CPUPlatform::runTraining() {
     string fileNamePath = this->project_dir + str;
 
     strcpy(fileName, fileNamePath.c_str());
+    /*
     FILE* fp;
     Py_Initialize();
     fp = _Py_fopen(fileName, "r");
@@ -42,14 +43,14 @@ void CPUPlatform::runTraining() {
     PyRun_SimpleFile(fp, fileName);
     free(py_argv[0]);
     Py_Finalize();
-
+*/
 
     //syscall variant start
-    /*std::string command_str = "/home/dmitrii/anaconda3/bin/python ";
+    std::string command_str = "/home/dmitrii/anaconda3/bin/python ";
     command_str += fileNamePath + " ";
     command_str += this->datasetPath;
     const char *command = command_str.c_str();
-    system(command);*/
+    system(command);
     //syscall variant end
 }
 

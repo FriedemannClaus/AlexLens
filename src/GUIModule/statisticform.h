@@ -8,7 +8,7 @@
 #include <iostream>
 #include <memory>
 #include <iomanip>
-#include <c++/v1/sstream>
+//#include <c++/v1/sstream> //macOS
 #include "PlatformModule/PlatformManager.h"
 
 namespace Ui {

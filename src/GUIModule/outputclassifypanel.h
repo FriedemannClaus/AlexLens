@@ -95,6 +95,11 @@ public:
      */
     inline void setClassifyTab(bool classifyTab) {this->classifyTab = classifyTab;}
 
+    /**
+     * Delete all objects from vector of images preview.
+     */
+    inline void clearPreviewImages() {this->previewImages.clear();}
+
     void addLoadingIcon();
 protected:
     /**

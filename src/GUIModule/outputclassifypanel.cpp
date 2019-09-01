@@ -104,6 +104,7 @@ void OutputClassifyPanel::invokeUpdate() {
         }
     } else {
         this->clearPanel();
+        this->clearPreviewImages();
         this->addTrainingLog();
         this->addTrainingAccuracyCurve();
         this->addTrainingLossCurve();

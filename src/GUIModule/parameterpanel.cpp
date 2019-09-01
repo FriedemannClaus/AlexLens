@@ -91,8 +91,11 @@ void ParameterPanel::start()
 
             this->inputPanel->clearPreviewImages();
 
+            this->manager->clearImagePaths();
+
         } else {
             this->outputPanel->clearPanel();
+            this->outputPanel->clearPreviewImages();
             this->outputPanel->addLoadingIcon();
             this->inputPanel->clearPreviewImages();
             //reloading the gui
@@ -103,7 +106,6 @@ void ParameterPanel::start()
 
             this->manager->runTraining();
         }
-        this->manager->clearImagePaths();
         this->inputPanel->clearPanel();
 
 
@@ -198,12 +200,14 @@ void ParameterPanel::fillNeuralNets() {
 void ParameterPanel::invokeUpdate() {
     if(classifyTab) {
         int i = 0;
+        int pos = 0;
         neuralNetsList->clear();
         for (string net:this->manager->getDeafaultNeuralNets()) {
+            if (net == this->manager->getNeuralNet()) pos = i;
             QListWidgetItem *item = new QListWidgetItem(QString::fromStdString(net));
             neuralNetsList->addItem(item);
             i++;
         }
-        neuralNetsList->setCurrentRow(0);
+        neuralNetsList->setCurrentRow(pos);
     }
 }

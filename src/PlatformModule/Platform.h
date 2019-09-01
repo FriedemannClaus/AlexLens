@@ -43,7 +43,7 @@ public:
      * Setter for the neural net and corresponding paths of model
      * @param neuralNet the neural net to set
      */
-    virtual void setNeuralNet(string neuralNet);
+    inline virtual void setNeuralNet(string neuralNet){};
 
     /**
      * Getter for platform type
