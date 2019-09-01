@@ -15,7 +15,7 @@
 /**
  * @return double
  */
-double PlatformStatistic::getFLOPS() {
+int PlatformStatistic::getFLOPS() {
     return this->flops;
 }
 
@@ -49,3 +49,4 @@ double PlatformStatistic::getAvgIterationTime() {
 void PlatformStatistic::setAvgIterationTime(double avgIterationTime) {
     this->avgIterationTime = avgIterationTime;
 }
+

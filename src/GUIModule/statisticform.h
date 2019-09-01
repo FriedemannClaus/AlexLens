@@ -5,6 +5,10 @@
 #include <QVBoxLayout>
 #include <QLabel>
 #include <QScrollArea>
+#include <iostream>
+#include <memory>
+#include <iomanip>
+#include <c++/v1/sstream>
 #include "PlatformModule/PlatformManager.h"
 
 namespace Ui {
@@ -56,6 +60,16 @@ public:
             case PlatformType ::CPU_TORCH:
                 return "CPU_TORCH";
         }
+    }
+    /**
+     * Convert double object to string.
+     * @param n double object
+     * @return string representation of object in form *.??
+     */
+    inline string convertDoubleToStr(double n) {
+        std::stringstream stream;
+        stream << std::fixed << std::setprecision(2) << n;
+        return stream.str();
     }
 
 private:
