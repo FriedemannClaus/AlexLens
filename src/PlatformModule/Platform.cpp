@@ -4,37 +4,20 @@
 
 #include "Platform.h"
 void Platform::runClassify() {
-    std::cout << "base virtual mathods" << std::endl;
+    std::cout << "base virtual mathod runClassify" << std::endl;
 }
-
-PlatformStatistic Platform::getStatistic() {
-    return PlatformStatistic();
-}
-
-PlatformType Platform::getType() {
-    return PlatformType();
-}
-
-string Platform::getId() {
-    return "";
-}
-
-void Platform::setImagePaths(std::list<std::string> imagePaths) {
-}
-vector<string> Platform::getResults() {}
 
 void Platform::runTraining() {
-    std::cout << "base virtual mathods" << std::endl;
+    std::cout << "base virtual mathod runTraining" << std::endl;
 }
 
 void Platform::setNeuralNet(string neuralNet) {
-    std::cout << "base virtual mathods" << std::endl;
+    std::cout << "base virtual mathod setNeuralNet" << std::endl;
 }
 
-void Platform::setDatasetPath(string path) {
-    std::cout << "base virtual mathods" << std::endl;
-}
 
-void Platform::setProjectDir(string dir) {
-
+void Platform::convertListToVector(list<string> list, vector<string> *imageNames) {
+    for(string i : list) {
+        imageNames->push_back(i);
+    }
 }

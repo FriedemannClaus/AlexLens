@@ -4,6 +4,7 @@
 #include <QStandardPaths>
 #include <QScrollBar>
 #include <QDragEnterEvent>
+#include <QMessageBox>
 
 
 InputPanel::InputPanel(QWidget *parent)
@@ -52,10 +53,21 @@ void InputPanel::addImage()
             this->manager->addImage(fileName.toStdString()); // adding fileName to manager
         }
     } else {
-
-        QString dir = QFileDialog::getExistingDirectory(this, tr("Open Directory"),
+        if(previewImages.size() >= 1) {
+            QMessageBox::warning(this, "Datensatz einfügen", "Nur ein Datensatz kann eingefügt werden!" );
+            return;
+        }
+        QString dir = "";
+        dir = QFileDialog::getExistingDirectory(this, tr("Open Directory"),
                                                         QStandardPaths::displayName(QStandardPaths::HomeLocation)
                                                         );
+        if (dir == "") return;
+        string dir_path = dir.toStdString();
+        if (!checkDataset(dir_path)) {
+            QMessageBox::warning(this, "Datensatz einfügen", "Die Struktur des Datensatzes ist inkorrekt" );
+            return;
+        }
+
         QStringList fileNameList = {QString::fromStdString(this->manager->getProjectDir() + "Icon/iconOrdner.png")};
 
         int imageWidth = m_scrollArea->width() - 30;
@@ -83,7 +95,7 @@ void InputPanel::addImage()
         //dirLabel->setPixmap(d.scaledToWidth(imageWidth));
         m_verticalLayout->addWidget(dirLabel);
 
-        this->manager->addImage(dir.toStdString()); // adding directory to manager
+        this->manager->setDatasetPath(dir.toStdString()); // adding directory to manager
 
 
     }
@@ -170,7 +182,7 @@ void InputPanel::dropEvent(QDropEvent *e)
             dirLabel->setText(QString::fromStdString(path));
             dirLabel->setAlignment(Qt::AlignCenter);
             m_verticalLayout->addWidget(dirLabel);
-            this->manager->addImage(subPath.toStdString());
+            this->manager->setDatasetPath(subPath.toStdString());
         }
     }
 }
@@ -189,4 +201,33 @@ void InputPanel::clearPanel()
             delete child;
         }
 }
+
+bool InputPanel::checkDataset(string &path) {
+    std::string path_valid = path+"/valid/";
+    std::string path_train = path+"/train/";
+    std::string path_test = path+"/test/";
+    list<string> files_valid = getAllFilesInDir(path_valid);
+    list<string> files_train = getAllFilesInDir(path_train);
+    list<string> files_test = getAllFilesInDir(path_test);
+
+    if ((files_test.size() != 0) && (files_test == files_train) && (files_test == files_valid))
+        return true;
+    return false;
+}
+
+list<string> InputPanel::getAllFilesInDir(string &path) {
+    list<string> files_valid;
+    char * dir_path = new char [path.length()+1];
+    strcpy (dir_path, path.c_str());
+    DIR *dir;
+    struct dirent *ent;
+    if ((dir = opendir (dir_path)) != NULL) {
+        while ((ent = readdir(dir)) != NULL) {
+            files_valid.push_back(ent->d_name);
+        }
+        closedir(dir);
+    }
+    return files_valid;
+}
+
 

@@ -1,20 +1,21 @@
 project(AlexLens_prog)
-
-#Static library with all sources that need to be tested in unit tests
-add_library(AlexLens_lib STATIC NeuralNetModule/ReLU.cpp NeuralNetModule/ReLU.h)
-target_include_directories(AlexLens_lib PUBLIC ${CMAKE_CURRENT_SOURCE_DIR} /usr/include/eigen3)
-
-
 # Main program
 set(CMAKE_INCLUDE_CURRENT_DIR )
 set(CMAKE_AUTOMOC ON)
 set(CMAKE_CXX_STANDARD 11)
-
+set(CMAKE_POSITION_INDEPENDENT_CODE ON)
 set(CMAKE_AUTORCC ON)
 SET(CMAKE_CXX_FLAGS -pthread)
 find_package(Threads)
 
 include_directories(../includes)
+
+# Qt5
+find_package(Qt5Core REQUIRED)
+find_package(Qt5Gui REQUIRED)
+find_package(Qt5Widgets REQUIRED)
+list(APPEND THIRD-PARTY-LIBS Qt::Widgets Qt::Core)
+
 
 # HDF5
 find_package(HDF5 REQUIRED COMPONENTS CXX)
@@ -32,12 +33,6 @@ message(STATUS "    version: ${Eigen3_VERSION}")
 # Python
 find_package(PythonLibs REQUIRED)
 include_directories(${PYTHON_INCLUDE_DIRS})
-
-# Qt5
-find_package(Qt5Core REQUIRED)
-find_package(Qt5Gui REQUIRED)
-find_package(Qt5Widgets REQUIRED)
-list(APPEND THIRD-PARTY-LIBS Qt::Widgets Qt::Core)
 
 # Torch
 set(Torch_DIR ../thirdparty/libtorch/share/cmake/Torch)
@@ -60,41 +55,51 @@ message(STATUS "    version: ${InferenceEngine_VERSION}")
 message(STATUS "    libraries: ${InferenceEngine_LIBRARIES}")
 message(STATUS "    include path: ${InferenceEngine_INCLUDE_DIRS}")
 
-#[[
-add_library(AlexLens_static_lib STATIC
-        src/ManagerModule/main.cpp
-        src/ManagerModule/Manager.cpp src/ManagerModule/Manager.h
-        src/GUIModule/InputPanel.cpp includes/GUIModule/inputpanel.h
-        src/GUIModule/helpform.cpp includes/GUIModule/helpform.h
-        src/GUIModule/statisticform.cpp includes/GUIModule/statisticform.h
-        src/GUIModule/mainwindow.cpp includes/GUIModule/mainwindow.h
-        src/GUIModule/parameterpanel.cpp includes/GUIModule/parameterpanel.h
-        src/GUIModule/outputclassifypanel.cpp includes/GUIModule/outputclassifypanel.h
-        src/PlatformModule/Mode.h
-        Icon/icon.qrc
-        src/PlatformModule/ModeUtil.cpp src/PlatformModule/ModeUtil.h
-        src/NeuralNetModule/NeuralNet.cpp src/NeuralNetModule/NeuralNet.h
-        src/NeuralNetModule/INeuralNet.h
-        src/PlatformModule/ModeUtil.cpp src/PlatformModule/ModeUtil.h
-        src/ManagerModule/Manager.cpp src/ManagerModule/Manager.h
-        src/ManagerModule/Executor.cpp src/ManagerModule/Executor.h
-        src/PlatformModule/Platform.cpp src/PlatformModule/Platform.h
-        src/PlatformModule/ASICPlatform.cpp src/PlatformModule/ASICPlatform.h
-        includes/GUIModule/IObserver.h
-        includes/GUIModule/Subject.h
-        src/PlatformModule/PlatformManager.cpp src/PlatformModule/PlatformManager.h
-        src/PlatformModule/CPUPlatformTorch.cpp src/PlatformModule/CPUPlatformTorch.h
-        src/PlatformModule/PlatformType.h
-        src/PlatformModule/PlatformStatistic.cpp src/PlatformModule/PlatformStatistic.h
+#Static library with all sources that need to be tested in unit tests
+add_library(AlexLens_lib STATIC
+        ManagerModule/main.cpp
+        ManagerModule/Manager.cpp ManagerModule/Manager.h
+        GUIModule/InputPanel.cpp GUIModule/inputpanel.h
+        GUIModule/helpform.cpp GUIModule/helpform.h
+        GUIModule/statisticform.cpp GUIModule/statisticform.h
+        GUIModule/mainwindow.cpp GUIModule/mainwindow.h
+        GUIModule/parameterpanel.cpp GUIModule/parameterpanel.h
+        GUIModule/outputclassifypanel.cpp GUIModule/outputclassifypanel.h
+        PlatformModule/Mode.h
+        ../Icon/icon.qrc
+        PlatformModule/ModeUtil.cpp PlatformModule/ModeUtil.h
+        PlatformModule/ModeUtil.cpp PlatformModule/ModeUtil.h
+        ManagerModule/Manager.cpp ManagerModule/Manager.h
+        ManagerModule/Executor.cpp ManagerModule/Executor.h
+        PlatformModule/Platform.cpp PlatformModule/Platform.h
+        PlatformModule/ASICPlatform.cpp PlatformModule/ASICPlatform.h
+        GUIModule/IObserver.h
+        GUIModule/Subject.h
+        PlatformModule/PlatformManager.cpp PlatformModule/PlatformManager.h
+        PlatformModule/CPUPlatformTorch.cpp PlatformModule/CPUPlatformTorch.h
+        PlatformModule/PlatformType.h
+        PlatformModule/PlatformStatistic.cpp PlatformModule/PlatformStatistic.h
+        NeuralNetModule/Layer.cpp NeuralNetModule/Layer.h NeuralNetModule/Conv2D.cpp NeuralNetModule/Conv2D.h NeuralNetModule/ReLU.cpp NeuralNetModule/ReLU.h NeuralNetModule/MaxPool2D.cpp NeuralNetModule/MaxPool2D.h NeuralNetModule/Normalization.cpp NeuralNetModule/Normalization.h NeuralNetModule/FC.cpp NeuralNetModule/FC.h NeuralNetModule/Softmax.cpp NeuralNetModule/Softmax.h NeuralNetModule/AlexNetWeightParser.cpp NeuralNetModule/AlexNetWeightParser.h NeuralNetModule/AlexNet.cpp NeuralNetModule/AlexNet.h PlatformModule/CPUPlatform.cpp PlatformModule/CPUPlatform.h)
+
+target_include_directories(AlexLens_lib PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}
+        /usr/include/eigen3
+        ${InferenceEngine_INCLUDE_DIRS}
+        ${HDF5_INCLUDE_DIRS}
+        ${OpenCV_INCLUDE_DIRS}
+        ${Torch_INCLUDE_DIRS}
+        /home/dmitrii/AlexLens/thirdparty/libtorch/include
+        /home/dmitrii/AlexLens/thirdparty/libtorch/include/torch/csrc/api/include/
+        ${Thread_INCLUDE_DIRS}
+        ${PYTHON_INCLUDE_DIRS}
+        #APPEND THIRD-PARTY-LIBS Qt::Widgets Qt::Core
+        ${Qt5Core_INCLUDE_DIRS}
+        ${Qt5Gui_INCLUDE_DIRS}
+        ${Qt5Widgets_INCLUDE_DIRS}
         )
 
-target_include_directories(AlexLens_static_lib
-        PUBLIC
-        ${PROJECT_SOURCE_DIR}/includes
-        )
-        ]]#
+
+
 add_executable(AlexLens_prog
-        #        AlexLens_static_lib
         ManagerModule/main.cpp
         ManagerModule/Manager.cpp ManagerModule/Manager.h
         GUIModule/InputPanel.cpp GUIModule/inputpanel.h
@@ -120,8 +125,6 @@ add_executable(AlexLens_prog
         NeuralNetModule/Layer.cpp NeuralNetModule/Layer.h NeuralNetModule/Conv2D.cpp NeuralNetModule/Conv2D.h NeuralNetModule/ReLU.cpp NeuralNetModule/ReLU.h NeuralNetModule/MaxPool2D.cpp NeuralNetModule/MaxPool2D.h NeuralNetModule/Normalization.cpp NeuralNetModule/Normalization.h NeuralNetModule/FC.cpp NeuralNetModule/FC.h NeuralNetModule/Softmax.cpp NeuralNetModule/Softmax.h NeuralNetModule/AlexNetWeightParser.cpp NeuralNetModule/AlexNetWeightParser.h NeuralNetModule/AlexNet.cpp NeuralNetModule/AlexNet.h PlatformModule/CPUPlatform.cpp PlatformModule/CPUPlatform.h)
 
 target_link_libraries(${PROJECT_NAME} PRIVATE
-        #PRIVATE
-        #AlexLens_static_lib
         Qt5::Core
         Qt5::Widgets
         Qt5::Gui

@@ -73,24 +73,19 @@ void Manager::runClassify() {
 }
 
 void Manager::runTraining() {
-    string imageDir = imagePaths.front();
+    //string imageDir = imagePaths.front();
 
-    this->executor->train(imageDir, operationMode, neuralNet, this->PROJECT_DIR);
+    string datasetPath = this->dataSetPath;
+    this->executor->train(datasetPath, operationMode, neuralNet, this->PROJECT_DIR);
 
-    //make name from imageDir for ParameterPanel
-    if(imageDir[imageDir.size()-1] == '/') {
-        imageDir.erase(imageDir.size()-1,1);
-    }
-    int i;
-    for(i = imageDir.size()-1; imageDir[i] != '/'; i--) {}
-    imageDir.erase(0, i+1);
+    makeNameFromDir(datasetPath);
 
-    bool found_imageDir = (std::find(defaultNeuralNets.begin(), defaultNeuralNets.end(), imageDir) != defaultNeuralNets.end());
+    bool found_imageDir = (std::find(defaultNeuralNets.begin(), defaultNeuralNets.end(), datasetPath) != defaultNeuralNets.end());
     if (!found_imageDir) {
-        defaultNeuralNets. push_back(imageDir);
+        defaultNeuralNets. push_back(datasetPath);
     }
-    //defaultNeuralNets. push_back(imageDir);
-    this->neuralNet = imageDir;
+
+    this->neuralNet = datasetPath;
     this->subject->setClassify(false);
     this->subject->informObservers();
 
@@ -105,7 +100,6 @@ void Manager::setProjectDir() {
     path_str = path;
     path_str = path_str.erase(path_str.length()-4);
     path_str = path_str.erase(path_str.rfind('/')+1);
-    std::cout << path_str << std::endl;
     this->PROJECT_DIR = path_str;
 }
 
@@ -193,5 +187,14 @@ void Manager::whichFilesInResources() {
     if (exists_file(PROJECT_DIR_temp+".mapping")) {
         net_mapping = true;
     }
+}
+
+void Manager::makeNameFromDir(std::string &imageDir) {
+    if(imageDir[imageDir.size()-1] == '/') {
+        imageDir.erase(imageDir.size()-1,1);
+    }
+    int i;
+    for(i = imageDir.size()-1; imageDir[i] != '/'; i--) {}
+    imageDir.erase(0, i+1);
 }
 

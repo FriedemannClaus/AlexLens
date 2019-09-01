@@ -9,8 +9,8 @@
 #define _PLATFORMSTATISTIC_H
 
 #include "PlatformType.h"
-
 /**
+
  * Class PlatformStatistic aggregates all Statistics for platform
  */
 class PlatformStatistic {

@@ -72,7 +72,7 @@ void ParameterPanel::start()
             this->inputPanel->clearPanel();
             this->inputPanel->clearPreviewImages();
             this->outputPanel->clearPanel();
-            QMessageBox::warning(this, "Start", "Diese Auswahl von Parametern ist nicht ausfuerbar!" );
+            QMessageBox::warning(this, "Start", "Diese Auswahl von Parametern ist nicht ausführbar!" );
             return;
         }
         this->runWasPushed = true;
@@ -82,14 +82,22 @@ void ParameterPanel::start()
             this->outputPanel->clearPanel();
             this->outputPanel->addPreviewImages(this->inputPanel->getPreviewImages());
             this->inputPanel->clearPreviewImages();
-            qApp->processEvents();
+            //reloading the gui
+            this->outputPanel->setVisible(false);
+            this->outputPanel->repaint();
+            this->outputPanel->setVisible(true);
+            QCoreApplication::processEvents();
             this->manager->runClassify();
 
         } else {
             this->outputPanel->clearPanel();
             this->outputPanel->addLoadingIcon();
-            qApp->processEvents();
             this->inputPanel->clearPreviewImages();
+            //reloading the gui
+            this->outputPanel->setVisible(false);
+            this->outputPanel->repaint();
+            this->outputPanel->setVisible(true);
+            QCoreApplication::processEvents();
             this->manager->runTraining();
         }
         this->manager->clearImagePaths();
@@ -97,27 +105,50 @@ void ParameterPanel::start()
 
 
     } else {
-        QMessageBox::warning(this, "Start", "Fügen Sie zumindest ein Bild ein" );
+        if(classifyTab) {
+            QMessageBox::warning(this, "Start", "Fügen Sie zumindest ein Bild ein" );
+        } else {
+            QMessageBox::warning(this, "Start", "Fügen Sie zumindest ein Datensatz ein");
+        }
     }
 
 }
 
 void ParameterPanel::reset()
 {
-    if (classifyTab) {
-        //classify tab resetting
-        this->inputPanel->clearPanel();
-        this->inputPanel->clearPreviewImages();
-        this->outputPanel->clearPanel();
-        this->manager->clearImagePaths();
+    QMessageBox msgBox;
+    msgBox.setWindowTitle("Reset");
+    msgBox.setText("Sollten die Panels resettet werden?");
+    //msgBox.setInformativeText("Die Panels links und rechts werden leer");
+    msgBox.setStandardButtons(QMessageBox::Cancel | QMessageBox::Reset);
+    msgBox.setDefaultButton(QMessageBox::Cancel);
+    int ret = msgBox.exec();
 
-    } else {
-        //training tab resetting
-        this->inputPanel->clearPanel();
-        this->inputPanel->clearPreviewImages();
-        this->outputPanel->clearPanel();
-        this->manager->clearImagePaths();
+    switch(ret) {
+        case QMessageBox::Reset:
+            if (classifyTab) {
+                //classify tab resetting
+                this->inputPanel->clearPanel();
+                this->inputPanel->clearPreviewImages();
+                this->outputPanel->clearPanel();
+                this->manager->clearImagePaths();
+
+            } else {
+                //training tab resetting
+                this->inputPanel->clearPanel();
+                this->inputPanel->clearPreviewImages();
+                this->outputPanel->clearPanel();
+                this->manager->setDatasetPath("");
+            }
+            break;
+        case QMessageBox::Cancel:
+            //do not nothing
+            break;
+        default:
+            //should never be reached
+            break;
     }
+
     /*
     if (runWasPushed) {
         QMessageBox::warning(this, "Beenden", "Prozess wird beendet!");

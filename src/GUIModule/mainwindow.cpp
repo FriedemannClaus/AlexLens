@@ -43,10 +43,12 @@ MainWindow::MainWindow(Manager* manager, Subject* subject, QWidget *parent) :
     ui->inputClassifyPanel->setClassifyTab(true);
     ui->inputTrainingPanel->setManager(manager);
     ui->inputTrainingPanel->setClassifyTab(false);
+    ui->inputTrainingPanel->setButtonText("Datensatz einfügen");
     ui->parameterClassifyPanel->setClassifyTab(true);
     ui->parameterTrainingPanel->setClassifyTab(false);
     ui->outputClassifyPanel->setClassifyTab(true);
     ui->outputTrainingPanel->setClassifyTab(false);
+
 
     ui->outputClassifyPanel->setManager(manager);
 

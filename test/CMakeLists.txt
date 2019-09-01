@@ -1,5 +1,5 @@
 project(AlexLens_tests)
-
+set(CMAKE_POSITION_INDEPENDENT_CODE ON)
 if ("${CMAKE_CXX_COMPILER_ID}" STREQUAL "Clang")
     add_compile_options(-fprofile-instr-generate -fcoverage-mapping)
     add_link_options(-fprofile-instr-generate)
@@ -11,5 +11,5 @@ elseif ("${CMAKE_CXX_COMPILER_ID}" STREQUAL "GNU")
     link_libraries(gcov)
 endif ()
 
-add_executable(AlexLens_tests test_ReLU.cpp test_MaxPool2D.cpp test_Softmax.cpp test_Normalisation.cpp test_Conv2D.cpp)
+add_executable(AlexLens_tests test_ReLU.cpp test_MaxPool2D.cpp test_Softmax.cpp test_Normalisation.cpp test_Conv2D.cpp test_Manager.cpp test_Executor.cpp)
 target_link_libraries(AlexLens_tests PRIVATE AlexLens_lib catch)

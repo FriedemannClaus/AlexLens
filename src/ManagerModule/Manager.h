@@ -31,19 +31,24 @@ private:
     Mode operationMode; ///current operation mode which was set in GUI
     string neuralNet; /// current Neural Net which was set in GUI
     list<string> imagePaths; /// Paths of images which should be classified
+    string dataSetPath; ///Path od dataset for training
     Executor* executor; /// Insatnce for communication with Executor
     Subject* subject; /// Subject to inform all observers to update GUI
     vector<string> results; /// results of image classification
     string PROJECT_DIR; /// Project home directory
 
-    bool net_model_bin;
-    bool net_xml;
-    bool net_mapping;
-    bool net_labels;
-    bool net_model_h5;
-    bool net_model_pt;
+    bool net_model_bin; ///Boolean variable, true if model of type .bin for ASICPlatform (NCS) is found
+    bool net_xml; ///Boolean variable, true if the file of type .xml for ASIC Platform (NCS) is found
+    bool net_mapping; ///Boolean variable, true if the file of type .mapping for ASIC Platform (NCS) is found
+    bool net_labels; ///Boolean variable, true if labels are found
+    bool net_model_h5; ///Boolean variable, true if model of type .h5 for CPUPlatform is found
+    bool net_model_pt;///Boolean variable, true if model of type .pz for CPUTPlatformTorch is found
 
 public:
+    /**
+     * The standard constructor
+     */
+    Manager();
     /**
      * Constructor for class Manager
      * @param subject subject for observer pattern
@@ -56,6 +61,11 @@ public:
      */
     inline string getProjectDir() {return this->PROJECT_DIR;}
 
+    /**
+     * Setter for dataset path for training
+     * @param path rhe path to set
+     */
+    inline void setDatasetPath(string path) {this->dataSetPath = path;}
     /**
      * This method adds Image into imagePaths for later classification
      * @param imagePath Path of image which is added
@@ -172,8 +182,17 @@ private:
      */
     void setDefaultNeuralNets();
 
-
+    /**
+     * The methods determines which types of file are available in resources
+     * and sets the corresponding bool variables such as net_model_bin
+     */
     void whichFilesInResources();
+
+    /**
+     * The method constructs the readable name for the parameter panel from directory
+     * @param imageDir the directory
+     */
+    void makeNameFromDir(std::string& imageDir);
 
 };
 

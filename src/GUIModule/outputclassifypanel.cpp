@@ -42,7 +42,7 @@ void OutputClassifyPanel::addPreviewImages(QVector<QPair<QLabel *, QPixmap> > pr
         imageLabel->setPixmap(pix.scaledToWidth(imageWidth));
         m_verticalLayout->addWidget(imageLabel);
         QLabel* resultLabel = new QLabel(this);
-        resultLabel->setText("hier erscheint das Ergebnis \n");
+        resultLabel->setText("Das Ergebnis wird gerade berechnet \n");
         classifyResults.push_front(resultLabel);
         m_verticalLayout->addWidget(resultLabel);
     }
@@ -133,8 +133,7 @@ void OutputClassifyPanel::addLoadingIcon(){
     processLabel->setMovie(movie);
     movie->start();
     processLabel->setAlignment(Qt::AlignCenter);
-    m_verticalLayout->addWidget(processLabel);
-    qApp->processEvents();
+    m_verticalLayout->addWidget(processLabel);;
 }
 void OutputClassifyPanel::addTrainingAccuracyCurve() {
     string fileNameListPath = this->manager->getProjectDir() + "resources/" + this->manager->getNeuralNet() + "/" + this->manager->getNeuralNet()+ "_accuracy_curve.png";

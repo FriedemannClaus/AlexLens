@@ -23,8 +23,6 @@ vector<string> Executor::classify(list<string> imagePaths, Mode mode, string neu
 
     }
 
-    //platforms.front()->setNeuralNet(neuralNet);
-
     //splitting all image paths between platforms
     int num_platforms = platforms.size();
     int num_imagePaths = imagePaths.size();
