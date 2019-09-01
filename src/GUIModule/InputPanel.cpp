@@ -62,6 +62,11 @@ void InputPanel::addImage()
                                                         QStandardPaths::displayName(QStandardPaths::HomeLocation)
                                                         );
         if (dir == "") return;
+        string dir_path = dir.toStdString();
+        if (!checkDataset(dir_path)) {
+            QMessageBox::warning(this, "Datensatz einfügen", "Die Struktur des Datensatzes ist inkorrekt" );
+            return;
+        }
 
         QStringList fileNameList = {QString::fromStdString(this->manager->getProjectDir() + "Icon/iconOrdner.png")};
 
@@ -196,4 +201,33 @@ void InputPanel::clearPanel()
             delete child;
         }
 }
+
+bool InputPanel::checkDataset(string &path) {
+    std::string path_valid = path+"/valid/";
+    std::string path_train = path+"/train/";
+    std::string path_test = path+"/test/";
+    list<string> files_valid = getAllFilesInDir(path_valid);
+    list<string> files_train = getAllFilesInDir(path_train);
+    list<string> files_test = getAllFilesInDir(path_test);
+
+    if ((files_test.size() != 0) && (files_test == files_train) && (files_test == files_valid))
+        return true;
+    return false;
+}
+
+list<string> InputPanel::getAllFilesInDir(string &path) {
+    list<string> files_valid;
+    char * dir_path = new char [path.length()+1];
+    strcpy (dir_path, path.c_str());
+    DIR *dir;
+    struct dirent *ent;
+    if ((dir = opendir (dir_path)) != NULL) {
+        while ((ent = readdir(dir)) != NULL) {
+            files_valid.push_back(ent->d_name);
+        }
+        closedir(dir);
+    }
+    return files_valid;
+}
+
 

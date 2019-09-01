@@ -105,7 +105,11 @@ void ParameterPanel::start()
 
 
     } else {
-        QMessageBox::warning(this, "Start", "Fügen Sie zumindest ein Bild ein" );
+        if(classifyTab) {
+            QMessageBox::warning(this, "Start", "Fügen Sie zumindest ein Bild ein" );
+        } else {
+            QMessageBox::warning(this, "Start", "Fügen Sie zumindest ein Datensatz ein");
+        }
     }
 
 }

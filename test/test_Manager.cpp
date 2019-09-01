@@ -2,6 +2,8 @@
 //#include <ManagerModule/Manager.cpp>
 #include "catch.hpp"
 #include <iostream>
+//#include <ManagerModule/Manager.h>
+//#include <ManagerModule/Manager.cpp>
 using namespace std;
 
 TEST_CASE("Setter and getters of Manager") {

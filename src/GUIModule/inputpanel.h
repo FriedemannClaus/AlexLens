@@ -89,6 +89,20 @@ private slots:
      */
     void dropEvent(QDropEvent *e) override;
 
+    /**
+     * Checks wether the directory has an appropriate structure for training
+     * @param path the path of dataset that should be checked
+     * @return true, if the structure is appropriate
+     */
+    bool checkDataset(string& path);
+
+    /**
+     * Getter for all files in the directory
+     * @param dir the directory where should be searched
+     * @return the list of all files in the directory
+     */
+    list<string> getAllFilesInDir(string& dir);
+
 protected:
     /**
      * Adjust input image for scroll area.

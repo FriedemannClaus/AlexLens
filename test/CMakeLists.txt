@@ -1,5 +1,5 @@
 project(AlexLens_tests)
-
+set(CMAKE_POSITION_INDEPENDENT_CODE ON)
 if ("${CMAKE_CXX_COMPILER_ID}" STREQUAL "Clang")
     add_compile_options(-fprofile-instr-generate -fcoverage-mapping)
     add_link_options(-fprofile-instr-generate)
