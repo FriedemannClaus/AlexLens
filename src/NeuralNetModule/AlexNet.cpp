@@ -11,8 +11,9 @@
 using namespace std;
 using namespace cv;
 
-AlexNet::AlexNet(std::vector<std::string> &results) {
+AlexNet::AlexNet(std::vector<std::string> &results, bool mode) {
     this->results = &results;
+    this->GPUMode = mode;
     initWeights();
     initLayers();
     initLabels();
@@ -31,23 +32,23 @@ void AlexNet::initWeights() {
 }
 
 void AlexNet::initLayers() {
-    conv_1 = new Conv2D(96, 11, 4, 0, conv1_w, conv1_b);
+    conv_1 = new Conv2D(96, 11, 4, 0, conv1_w, conv1_b, GPUMode);
     reLU = new ReLU();
     maxPool_1 = new MaxPool2D(3, 3, 2);
     norm_1 = new Normalization(2, 0.0001, 0.75, 5);
-    conv_2_1 = new Conv2D(128, 5, 1, 2, conv2_1_w, conv2_1_b);
-    conv_2_2 = new Conv2D(128, 5, 1, 2, conv2_2_w, conv2_2_b);
+    conv_2_1 = new Conv2D(128, 5, 1, 2, conv2_1_w, conv2_1_b, GPUMode);
+    conv_2_2 = new Conv2D(128, 5, 1, 2, conv2_2_w, conv2_2_b, GPUMode);
     maxPool_2 = new MaxPool2D(3, 3, 2);
     norm_2 = new Normalization(2, 0.0001, 0.75, 5);
-    conv_3 = new Conv2D(384, 3, 1, 1, conv3_w, conv3_b);
-    conv_4_1 = new Conv2D(192, 3, 1, 1, conv4_1_w, conv4_1_b);
-    conv_4_2 = new Conv2D(192, 3, 1, 1, conv4_2_w, conv4_2_b);
-    conv_5_1 = new Conv2D(128, 3, 1, 1, conv5_1_w, conv5_1_b);
-    conv_5_2 = new Conv2D(128, 3, 1, 1, conv5_2_w, conv5_2_b);
+    conv_3 = new Conv2D(384, 3, 1, 1, conv3_w, conv3_b, GPUMode);
+    conv_4_1 = new Conv2D(192, 3, 1, 1, conv4_1_w, conv4_1_b, GPUMode);
+    conv_4_2 = new Conv2D(192, 3, 1, 1, conv4_2_w, conv4_2_b, GPUMode);
+    conv_5_1 = new Conv2D(128, 3, 1, 1, conv5_1_w, conv5_1_b, GPUMode);
+    conv_5_2 = new Conv2D(128, 3, 1, 1, conv5_2_w, conv5_2_b, GPUMode);
     maxPool_3 = new MaxPool2D(3, 3, 2);
-    fc_1 = new FC(4096, dense1_w, dense1_b);
-    fc_2 = new FC(4096, dense2_w, dense2_b);
-    fc_3 = new FC(1000, dense3_w, dense3_b);
+    fc_1 = new FC(4096, dense1_w, dense1_b, GPUMode);
+    fc_2 = new FC(4096, dense2_w, dense2_b, GPUMode);
+    fc_3 = new FC(1000, dense3_w, dense3_b, GPUMode);
     softmax = new Softmax();
 }
 

@@ -16,19 +16,21 @@ private:
     const int PAD;
     const FourDMatrix WEIGHTS;
     const Vector BIAS;
+    const bool GPU_MODE;
     void zeroPadding(ThreeDMatrix &inputMatrix, ThreeDMatrix &outputMatrix);
     void image2col(ThreeDMatrix &inputMatrix, Matrix &convertedMatrix);
     void weights2row(Matrix &convertedWeights);
     void reshape(Matrix &resultMatrix, ThreeDMatrix *outputMatrix);
     void addBias(ThreeDMatrix *outputMatrix);
 public:
-    Conv2D(int numKernels, int kernelSize, int kernelStride, int padding, FourDMatrix &weights, Vector &bias):
+    Conv2D(int numKernels, int kernelSize, int kernelStride, int padding, FourDMatrix &weights, Vector &bias, bool gpuMode):
             NUM_KERNELS(numKernels),
             KERNEL_SIZE(kernelSize),
             STRIDE(kernelStride),
             PAD(padding),
             WEIGHTS(weights),
-            BIAS(bias)
+            BIAS(bias),
+            GPU_MODE(gpuMode)
     {}
     void forward(ThreeDMatrix &inputMatrix, ThreeDMatrix &outputMatrix) override;
 };

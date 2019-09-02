@@ -3,9 +3,10 @@
 //
 
 #include "CPUPlatform.h"
+#include <Python.h>
 
 CPUPlatform::CPUPlatform() {
-    this->alexNet = new AlexNet(this->results);
+    this->alexNet = new AlexNet(this->results, false);
     this->type = PlatformType::CPU;
     this->statistic.setEnergyConsum(20);
     this->statistic.setFLOPS(19);
@@ -24,14 +25,12 @@ void CPUPlatform::runClassify() {
 
 
 void CPUPlatform::runTraining() {
-    //Py_SetProgramName(reinterpret_cast<const wchar_t *>(argv[0]));
-    // Path of TransferLearning.py
-    //char fileName[] = "/home/viet/CLionProjects/AlexLens/TransferLearning.py";
     string str = "src/TrainingModule/TransferLearning.py";
     char fileName[this->project_dir.length()+str.length()];
     string fileNamePath = this->project_dir + str;
-    /*
+
     strcpy(fileName, fileNamePath.c_str());
+    /*
     FILE* fp;
     Py_Initialize();
     fp = _Py_fopen(fileName, "r");
@@ -44,13 +43,14 @@ void CPUPlatform::runTraining() {
     PyRun_SimpleFile(fp, fileName);
     free(py_argv[0]);
     Py_Finalize();
-     */
+*/
+
     //syscall variant start
     std::string command_str = "/home/dmitrii/anaconda3/bin/python ";
     command_str += fileNamePath + " ";
     command_str += this->datasetPath;
     const char *command = command_str.c_str();
     system(command);
-    //syzscall variant end
+    //syscall variant end
 }
 

@@ -228,7 +228,7 @@ def predict(model, test_image_name):
 #folderName = '/home/dmitrii/AlexLens/resources'
 dirpath = os.getcwd()
 dirpath = dirpath[0:dirpath.rfind('/', 0, len(dirpath))]
-dirpath = dirpath[0:dirpath.rfind('/', 0, len(dirpath))]
+dirpath = dirpath[0:dirpath.rfind('/', 0, len(dirpath))] #for Linux
 folderName = dirpath + "/resources"
 # Delete a folder
 #shutil.rmtree(folderName, ignore_errors=True)

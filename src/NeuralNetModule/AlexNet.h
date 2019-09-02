@@ -21,7 +21,7 @@ const std::string LABELS_PATH = "../../resources/alexnet/alexnet_labels.txt";
 
 class AlexNet {
 public:
-    AlexNet(std::vector<std::string> &results);
+    AlexNet(std::vector<std::string> &results, bool mode);
     void runClassify(std::vector<std::string> imagePaths);
 private:
     void initWeights();
@@ -33,6 +33,7 @@ private:
     void setResults();
 
     std::vector<std::string> *results;
+    bool GPUMode;
 
     std::string classes[1000];
 

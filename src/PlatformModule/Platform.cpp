@@ -11,9 +11,6 @@ void Platform::runTraining() {
     std::cout << "base virtual mathod runTraining" << std::endl;
 }
 
-void Platform::setNeuralNet(string neuralNet) {
-    std::cout << "base virtual mathod setNeuralNet" << std::endl;
-}
 
 
 void Platform::convertListToVector(list<string> list, vector<string> *imageNames) {
