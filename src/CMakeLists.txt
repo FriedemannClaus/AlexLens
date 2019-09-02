@@ -10,6 +10,9 @@ find_package(Threads)
 
 include_directories(../includes)
 
+# OpenCL
+find_package(OpenCL REQUIRED)
+
 # Qt5
 find_package(Qt5Core REQUIRED)
 find_package(Qt5Gui REQUIRED)
@@ -86,9 +89,7 @@ target_include_directories(AlexLens_lib PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}
         ${InferenceEngine_INCLUDE_DIRS}
         ${HDF5_INCLUDE_DIRS}
         ${OpenCV_INCLUDE_DIRS}
-        ${Torch_INCLUDE_DIRS}
-        /home/dmitrii/AlexLens/thirdparty/libtorch/include
-        /home/dmitrii/AlexLens/thirdparty/libtorch/include/torch/csrc/api/include/
+        ${TORCH_INCLUDE_DIRS}
         ${Thread_INCLUDE_DIRS}
         ${PYTHON_INCLUDE_DIRS}
         #APPEND THIRD-PARTY-LIBS Qt::Widgets Qt::Core
@@ -116,12 +117,14 @@ add_executable(AlexLens_prog
         ManagerModule/Executor.cpp ManagerModule/Executor.h
         PlatformModule/Platform.cpp PlatformModule/Platform.h
         PlatformModule/ASICPlatform.cpp PlatformModule/ASICPlatform.h
+        PlatformModule/GPUPlatform.cpp PlatformModule/GPUPlatform.h
         GUIModule/IObserver.h
         GUIModule/Subject.h
         PlatformModule/PlatformManager.cpp PlatformModule/PlatformManager.h
         PlatformModule/CPUPlatformTorch.cpp PlatformModule/CPUPlatformTorch.h
         PlatformModule/PlatformType.h
         PlatformModule/PlatformStatistic.cpp PlatformModule/PlatformStatistic.h
+        NeuralNetModule/GPUSGeMM.cpp NeuralNetModule/GPUSGeMM.h
         NeuralNetModule/Layer.cpp NeuralNetModule/Layer.h NeuralNetModule/Conv2D.cpp NeuralNetModule/Conv2D.h NeuralNetModule/ReLU.cpp NeuralNetModule/ReLU.h NeuralNetModule/MaxPool2D.cpp NeuralNetModule/MaxPool2D.h NeuralNetModule/Normalization.cpp NeuralNetModule/Normalization.h NeuralNetModule/FC.cpp NeuralNetModule/FC.h NeuralNetModule/Softmax.cpp NeuralNetModule/Softmax.h NeuralNetModule/AlexNetWeightParser.cpp NeuralNetModule/AlexNetWeightParser.h NeuralNetModule/AlexNet.cpp NeuralNetModule/AlexNet.h PlatformModule/CPUPlatform.cpp PlatformModule/CPUPlatform.h)
 
 target_link_libraries(${PROJECT_NAME} PRIVATE
@@ -129,10 +132,11 @@ target_link_libraries(${PROJECT_NAME} PRIVATE
         Qt5::Widgets
         Qt5::Gui
         ${InferenceEngine_LIBRARIES}
-        /home/dmitrii/inference_engine_samples_build/intel64/Release/lib/libformat_reader.so
+        /home/viet/inference_engine_samples_build/intel64/Release/lib/libformat_reader.so
         ${HDF5_CXX_LIBRARIES}
         Eigen3::Eigen
-        ${OpenCV_LIBS}
+        ${OpenCV_LIBRARIES}
+        ${OpenCL_LIBRARIES}
         ${PYTHON_LIBRARIES}
         ${TORCH_LIBRARIES}
         AlexLens_lib
