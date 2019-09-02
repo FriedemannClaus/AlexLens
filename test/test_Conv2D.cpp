@@ -122,10 +122,4 @@ TEST_CASE("Convolution forward pass functions correctly", "[slow]") {
 
 
     }
-    /*
-    SECTION("") {
-
-    }*/
-
-
 }
