@@ -73,8 +73,6 @@ void Manager::runClassify() {
 }
 
 void Manager::runTraining() {
-    //string imageDir = imagePaths.front();
-
     string datasetPath = this->dataSetPath;
     this->executor->train(datasetPath, operationMode, neuralNet, this->PROJECT_DIR);
 
@@ -88,7 +86,6 @@ void Manager::runTraining() {
     this->neuralNet = datasetPath;
     this->subject->setClassify(false);
     this->subject->informObservers();
-
 }
 
 void Manager::setProjectDir() {

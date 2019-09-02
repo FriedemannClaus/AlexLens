@@ -81,16 +81,21 @@ void ParameterPanel::start()
         if (classifyTab) {
             this->outputPanel->clearPanel();
             this->outputPanel->addPreviewImages(this->inputPanel->getPreviewImages());
-            this->inputPanel->clearPreviewImages();
             //reloading the gui
             this->outputPanel->setVisible(false);
             this->outputPanel->repaint();
             this->outputPanel->setVisible(true);
             QCoreApplication::processEvents();
+
             this->manager->runClassify();
+
+            this->inputPanel->clearPreviewImages();
+
+            this->manager->clearImagePaths();
 
         } else {
             this->outputPanel->clearPanel();
+            this->outputPanel->clearPreviewImages();
             this->outputPanel->addLoadingIcon();
             this->inputPanel->clearPreviewImages();
             //reloading the gui
@@ -98,9 +103,9 @@ void ParameterPanel::start()
             this->outputPanel->repaint();
             this->outputPanel->setVisible(true);
             QCoreApplication::processEvents();
+
             this->manager->runTraining();
         }
-        this->manager->clearImagePaths();
         this->inputPanel->clearPanel();
 
 
@@ -195,12 +200,14 @@ void ParameterPanel::fillNeuralNets() {
 void ParameterPanel::invokeUpdate() {
     if(classifyTab) {
         int i = 0;
+        int pos = 0;
         neuralNetsList->clear();
         for (string net:this->manager->getDeafaultNeuralNets()) {
+            if (net == this->manager->getNeuralNet()) pos = i;
             QListWidgetItem *item = new QListWidgetItem(QString::fromStdString(net));
             neuralNetsList->addItem(item);
             i++;
         }
-        neuralNetsList->setCurrentRow(0);
+        neuralNetsList->setCurrentRow(pos);
     }
 }

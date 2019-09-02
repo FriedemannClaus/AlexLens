@@ -15,7 +15,7 @@
  */
 class PlatformStatistic {
 public:
-    double getFLOPS();
+    int getFLOPS();
     inline void setFLOPS(int flops) {this->flops = flops;}
 
     double getEnergyConsum();
@@ -34,7 +34,7 @@ private:
     double totalInferenceTime = 0.0;
     double throughput = 0.0;
     double avgIterationTime = 0.0;
-    double flops = 0.0;
+    int flops = 0;
     double energyConsum = 0.0;
 };
 

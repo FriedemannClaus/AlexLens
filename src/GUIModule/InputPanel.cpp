@@ -64,7 +64,7 @@ void InputPanel::addImage()
         if (dir == "") return;
         string dir_path = dir.toStdString();
         if (!checkDataset(dir_path)) {
-            QMessageBox::warning(this, "Datensatz einfügen", "Die Struktur des Datensatzes ist inkorrekt" );
+            QMessageBox::warning(this, "Datensatz einfügen", "Die Struktur des Datensatzes ist inkorrekt." );
             return;
         }
 
@@ -86,17 +86,13 @@ void InputPanel::addImage()
 
         QLabel* dirLabel = new QLabel(this);
         string path = dir.toStdString();
-        cout << "here" << endl;
-        cout << path << endl;
         path = path.substr(path.rfind('/')+1, path.length()-path.rfind('/')+1);
-        cout << path << endl;
         dirLabel->setText(QString::fromStdString(path));
         dirLabel->setAlignment(Qt::AlignCenter);
         //dirLabel->setPixmap(d.scaledToWidth(imageWidth));
         m_verticalLayout->addWidget(dirLabel);
 
         this->manager->setDatasetPath(dir.toStdString()); // adding directory to manager
-
 
     }
 
@@ -126,18 +122,33 @@ void InputPanel::dragEnterEvent(QDragEnterEvent *e)
                 flag = false;
             }
         }
+        if (flag) {
+            e->acceptProposedAction();
+        } else {
+            QMessageBox::warning(this, "Bild einfügen", "Das Bildformat ist inkorrekt." );
+        }
     } else {
         flag = true;
+        int i = 0;
         foreach (const QUrl &url, e->mimeData()->urls()) {
             QFileInfo fileInfo(url.toLocalFile());
             string path = url.toString().toLocal8Bit().constData();
             if ((path[path.length()-1] != '/') && (!(fileInfo.isDir()))) {
                 flag = false;
+            } else {
+                i++;
             }
         }
-    }
-    if (flag) {
-        e->acceptProposedAction();
+        if (i != 1) {
+            flag = false;
+        }
+        if (flag) {
+            e->acceptProposedAction();
+        } else if (i > 1) {
+            QMessageBox::warning(this, "Datensatz einfügen", "Nur ein Datensatz kann eingefügt werden!" );
+        } else {
+            QMessageBox::warning(this, "Datensatz einfügen", "Die Struktur des Datensatzes ist inkorrekt." );
+        }
     }
 }
 
@@ -158,27 +169,40 @@ void InputPanel::dropEvent(QDropEvent *e)
             this->manager->addImage(fileName.toStdString()); // adding fileName to manager
         }
     } else {
-
-        QStringList fileNameList = {QString::fromStdString(this->manager->getProjectDir() + "Icon/iconOrdner.png")};
-
-        int imageWidth = m_scrollArea->width() - 30;
-
-        for (QString fileName : fileNameList)
-        {
-            QLabel* imageLabel = new QLabel(this);
-            QPixmap pix(fileName);
-            previewImages.append(qMakePair(imageLabel, pix));
-            imageLabel->setPixmap(pix.scaledToWidth(imageWidth));
-            m_verticalLayout->addWidget(imageLabel);
+        if(previewImages.size() >= 1) {
+            QMessageBox::warning(this, "Datensatz einfügen", "Nur ein Datensatz kann eingefügt werden!" );
+            return;
         }
 
         foreach (const QUrl &url, e->mimeData()->urls()) {
             QLabel* dirLabel = new QLabel(this);
             QString q_path = url.toString();
+            if (q_path == "") return;
             string path = url.toString().toStdString();
+
+            //QString subPath = q_path.mid(7,path.length()-8); //macOs
+            //path = path.substr(0, path.length()-1);
+
             QString subPath = q_path.mid(7,path.length()-6);
             path = path.substr(0, path.length());
             path = path.substr(path.rfind('/')+1, path.length()-path.rfind('/')+1);
+            string pathStr = subPath.toStdString();
+            if (!checkDataset(pathStr)) {
+                QMessageBox::warning(this, "Datensatz einfügen", "Die Struktur des Datensatzes ist inkorrekt." );
+                return;
+            }
+
+            QStringList fileNameList = {QString::fromStdString(this->manager->getProjectDir() + "Icon/iconOrdner.png")};
+            int imageWidth = m_scrollArea->width() - 30;
+            for (QString fileName : fileNameList)
+            {
+                QLabel* imageLabel = new QLabel(this);
+                QPixmap pix(fileName);
+                previewImages.append(qMakePair(imageLabel, pix));
+                imageLabel->setPixmap(pix.scaledToWidth(imageWidth));
+                m_verticalLayout->addWidget(imageLabel);
+            }
+
             dirLabel->setText(QString::fromStdString(path));
             dirLabel->setAlignment(Qt::AlignCenter);
             m_verticalLayout->addWidget(dirLabel);
