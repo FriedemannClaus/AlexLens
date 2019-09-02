@@ -83,10 +83,10 @@ void Conv2D::forward(ThreeDMatrix &inputMatrix, ThreeDMatrix &outputMatrix) {
 
         //Now start matrix multiplication
         //GPUSGeMM *gpuMultiplication = new GPUSGeMM(W_row_cols, W_row_rows, X_col_cols);
-        GPUSGeMM *gpuMultiplication = new GPUSGeMM(363, 96,1);
+        //GPUSGeMM *gpuMultiplication = new GPUSGeMM(363, 96,1);
         //multResult_array[0] = 0;
         //multResult_array[30] = 0;
-        gpuMultiplication->convolve(W_row_array, X_col_array, multResult_array);
+       // gpuMultiplication->convolve(W_row_array, X_col_array, multResult_array);
         exit(1);
         //cout << multResult_array[0] << endl;
         //cout << multResult_array[30] << endl;

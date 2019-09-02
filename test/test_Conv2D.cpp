@@ -93,7 +93,7 @@ TEST_CASE("Convolution forward pass functions correctly", "[slow]") {
             expectedOutputSize = ceilf(calculateExpectedOutputSize(inputSize, hyperKernelSize, hyperStride, hyperPad));
             int expectedOutputSize_Floor = floorf(calculateExpectedOutputSize(inputSize, hyperKernelSize, hyperStride,
                                                                               hyperPad));
-            Conv2D *conv2D = new Conv2D(hyperNumKernels, hyperKernelSize, hyperStride, hyperPad, weights, bias);
+          Conv2D *conv2D = new Conv2D(hyperNumKernels, hyperKernelSize, hyperStride, hyperPad, weights, bias, false);
             if (hyperStride == 0) {
                 //TODO
                 //REQUIRE_THROWS(conv2D->forward(inputMatrix, outputMatrix));
