@@ -13,12 +13,14 @@ private:
     const int NEURONS;
     const Matrix WEIGHTS;
     const Vector BIAS;
+    const bool GPU_MODE;
     void flaten(ThreeDMatrix &inputMatrix, Vector &convertedVector);
 public:
-    FC(int neurons, Matrix &weights, Vector &bias):
+    FC(int neurons, Matrix &weights, Vector &bias, bool gpuMode):
             NEURONS(neurons),
             WEIGHTS(weights),
-            BIAS(bias)
+            BIAS(bias),
+            GPU_MODE(gpuMode)
     {}
     void forward(ThreeDMatrix &inputMatrix, ThreeDMatrix &outputMatrix) override;
 };

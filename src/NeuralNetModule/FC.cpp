@@ -27,8 +27,13 @@ void FC::forward(ThreeDMatrix &inputMatrix, ThreeDMatrix &outputMatrix) {
     flaten(inputMatrix, X_row);
 
     // multiplication
-    Vector multResult = X_row.transpose() * WEIGHTS;
+    Vector multResult;
+    if (GPU_MODE) {
 
+    }
+    else if (!GPU_MODE) {
+        multResult = X_row.transpose() * WEIGHTS;
+    }
     // add bias
     multResult += BIAS;
 

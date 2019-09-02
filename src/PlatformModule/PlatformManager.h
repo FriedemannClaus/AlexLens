@@ -12,6 +12,7 @@
 #include "ASICPlatform.h"
 #include "CPUPlatformTorch.h"
 #include "CPUPlatform.h"
+#include "GPUPlatform.h"
 
 using namespace std;
 

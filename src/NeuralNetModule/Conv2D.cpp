@@ -4,6 +4,7 @@
 
 #include "Conv2D.h"
 #include <iostream>
+#include "GPUSGeMM.h"
 
 void Conv2D::forward(ThreeDMatrix &inputMatrix, ThreeDMatrix &outputMatrix) {
     ThreeDMatrix paddedMatrix;
@@ -32,20 +33,68 @@ void Conv2D::forward(ThreeDMatrix &inputMatrix, ThreeDMatrix &outputMatrix) {
     int weightsNZ = WEIGHTS.cols();
     //resize X_col
     Matrix X_col;
-    X_col.resize(KERNEL_SIZE * KERNEL_SIZE * weightsNZ, outputNumRows * outputNumCols);
+    int X_col_rows = KERNEL_SIZE * KERNEL_SIZE * weightsNZ;
+    int X_col_cols = outputNumRows * outputNumCols;
+    X_col.resize(X_col_rows, X_col_cols);
     image2col(paddedMatrix, X_col);
 
     //resize W_row
     Matrix W_row;
-    W_row.resize(NUM_KERNELS, KERNEL_SIZE * KERNEL_SIZE * weightsNZ);
+    int W_row_rows = NUM_KERNELS;
+    int W_row_cols = KERNEL_SIZE * KERNEL_SIZE * weightsNZ;
+    W_row.resize(W_row_rows, W_row_cols);
     weights2row(W_row);
 
     //resize multResult
     Matrix multResult;
-    multResult.resize(NUM_KERNELS, outputNumRows * outputNumCols); // WTF?
+    int multResult_rows = NUM_KERNELS;
+    int multResult_cols = outputNumRows * outputNumCols;
+    multResult.resize(multResult_rows, multResult_cols); // WTF?
 
     // Let the multiplication begin
-    multResult = W_row * X_col; //(dot product -> where the magic happens
+    if (GPU_MODE) {
+        // Create W_row, X_col and multResult float arrays
+        int size_X_col = X_col_rows * X_col_cols;
+        int mem_size_X_col = sizeof(float) * size_X_col;
+
+        int size_W_row = W_row_rows * W_row_cols;
+        int mem_size_W_row = sizeof(float) * size_W_row;
+
+        float* X_col_array = (float*) malloc(mem_size_X_col);
+        for (int i = 0; i < X_col_rows; i++) { // fill everything from Vector X_col into array X_col_array
+            for (int j = 0; j < X_col_cols; j++) {
+                X_col_array[i * X_col_cols + j] = X_col(i, j);
+            }
+        }
+        assert(X_col_array[2 * X_col_cols + 3] == X_col(2, 3));
+
+        float* W_row_array = (float*) malloc(mem_size_X_col);
+        for (int i = 0; i < W_row_rows; i++) {
+            for (int j = 0; j < W_row_cols; j++) {
+                W_row_array[i * W_row_cols + j] = W_row(i, j);
+            }
+        }
+        assert(W_row_array[2 * W_row_cols + 3] == W_row(2, 3));
+
+        int size_multResult = multResult_rows * multResult_cols;
+        int mem_size_multResult = sizeof(float) * size_multResult;
+
+        float* multResult_array = (float*) malloc(mem_size_multResult);
+
+        //Now start matrix multiplication
+        //GPUSGeMM *gpuMultiplication = new GPUSGeMM(W_row_cols, W_row_rows, X_col_cols);
+        GPUSGeMM *gpuMultiplication = new GPUSGeMM(363, 96,1);
+        //multResult_array[0] = 0;
+        //multResult_array[30] = 0;
+        gpuMultiplication->convolve(W_row_array, X_col_array, multResult_array);
+        exit(1);
+        //cout << multResult_array[0] << endl;
+        //cout << multResult_array[30] << endl;
+
+    }
+    else if (!GPU_MODE) {
+        multResult = W_row * X_col; //(dot product -> where the magic happens
+    }
 
     reshape(multResult, &outputMatrix);
 
