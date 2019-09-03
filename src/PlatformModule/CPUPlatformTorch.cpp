@@ -12,6 +12,7 @@
 #include <memory>
 #include <vector>
 #include <string>
+#include <Exceptions/ReadException.h>
 
 using namespace std;
 
@@ -24,6 +25,12 @@ void CPUPlatformTorch::runClassify() {
         // load image with opencv and transform
         cv::Mat image;
         image = cv::imread(image_path, 1);
+        if(image.empty()) {
+            string msg("Das eingelesene Bild ist beschädigt!");
+            this->imageNames.clear();
+            throw (ReadException(msg));
+        }
+        //image = cv::imread(image_path, 1);
         cv::cvtColor(image, image, cv::COLOR_BGR2RGB);
         cv::Mat img_float;
         image.convertTo(img_float, CV_32F, 1.0/255);

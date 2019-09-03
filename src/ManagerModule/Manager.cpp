@@ -66,7 +66,12 @@ void Manager::setDefaultNeuralNets() {
 
 void Manager::runClassify() {
 
-    this->results = executor->classify(imagePaths, operationMode, neuralNet, this->PROJECT_DIR);
+    try {
+        this->results = executor->classify(imagePaths, operationMode, neuralNet, this->PROJECT_DIR);
+    } catch(exception & e) {
+        throw;
+    }
+    //this->results = executor->classify(imagePaths, operationMode, neuralNet, this->PROJECT_DIR);
     this->subject->setClassify(true);
     this->subject->informObservers();
 

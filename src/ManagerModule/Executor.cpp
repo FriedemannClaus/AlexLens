@@ -5,14 +5,27 @@
 #include "../PlatformModule/ModeUtil.h"
 #include "Executor.h"
 #include <thread>
+#include <Exceptions/ReadException.h>
 
 
+
+std::list<std::exception_ptr> Executor::exceptionPointers; //multithreading bufffer for exceptions
+
+/**
+ * Thread function for starting all claffifications
+ * @param platform
+ */
 void thrFunction(Platform *platform) {
-    platform->runClassify();
+    //catching all exceptions of different threads in multithreading buffer
+    try {
+        platform->runClassify();
+    } catch (exception & e) {
+        cout << "Thead function" << endl;
+        Executor::exceptionPointers.push_back(std::current_exception());
+    }
 }
 
 vector<string> Executor::classify(list<string> imagePaths, Mode mode, string neuralNet, string project_dir) {
-
     this->platformManager->setMode(mode);
     this->platformManager->setNeuralNet(neuralNet);
 
@@ -53,7 +66,7 @@ vector<string> Executor::classify(list<string> imagePaths, Mode mode, string neu
 
     //starting threads
     vector<thread> threads;
-    for(Platform* platform:platforms) {
+    for (Platform *platform:platforms) {
         thread thr(thrFunction, platform);
         threads.push_back(move(thr));
     }
@@ -61,6 +74,23 @@ vector<string> Executor::classify(list<string> imagePaths, Mode mode, string neu
     //joining all threads
     for (auto& t:threads) {
         t.join();
+    }
+
+    //throwing exception of multithreading buffer
+    for (auto it = Executor::exceptionPointers.begin(); it != Executor::exceptionPointers.end(); ++it) {
+        if (*it) {
+            try {
+                std::rethrow_exception(*it);
+            } catch (const std::exception &e) {
+                cout << "Catched exception in Executor, size " << exceptionPointers.size() << endl;
+                Executor::exceptionPointers.erase(it--);
+                platformManager->clearAllImagePaths();
+                Executor::exceptionPointers.clear();
+                //delete this->platformManager;
+                //this->platformManager = new PlatformManager();
+                throw;
+            }
+        }
     }
 
     //joining all results into one vector
@@ -72,7 +102,9 @@ vector<string> Executor::classify(list<string> imagePaths, Mode mode, string neu
         results.insert(results.end(), platformResults.begin(), platformResults.end());
     }
 
+
     return results;
+
 
 }
 

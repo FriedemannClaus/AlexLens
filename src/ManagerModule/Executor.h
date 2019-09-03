@@ -15,6 +15,8 @@
 #include "../PlatformModule/PlatformManager.h"
 #include "../PlatformModule/Platform.h"
 #include "../PlatformModule/ASICPlatform.h"
+#include <exception>
+#include <stdexcept>
 
 using namespace std;
 
@@ -24,12 +26,8 @@ using namespace std;
 class Executor {
 private:
     PlatformManager* platformManager; /// Instance of Platform Manager to get all platforms for computaion
-
 public:
-    list<string> imagePaths;
-
-    //inline Subject* getSubject() { return this->subject;}
-
+    static std::list<std::exception_ptr> exceptionPointers; ///Multithreading buffer for exceptions
     /**
     * Standard Constructor
     */
@@ -59,6 +57,11 @@ public:
      * @return Platform Manager
      */
     inline PlatformManager* getPlatformManager() {return this->platformManager;}
+
+    /**
+     * Erases all elements in multithreading buffer for exceptions
+     */
+    inline void clearExceptionPointers () {Executor::exceptionPointers.clear();}
 
 };
 

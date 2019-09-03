@@ -6,7 +6,7 @@
 #define SRC_GUIMODULE_ALEXLENS_GPUSGEMM_H
 
 #include <string>
-#include <CL/cl.h>
+//#include <CL/cl.h>
 #include <iostream>
 #include <array>
 

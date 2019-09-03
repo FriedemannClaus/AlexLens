@@ -81,6 +81,11 @@ public:
      */
     inline virtual string getId() {return to_string(this->id+1);};
 
+    /**
+     * The methid clears all image paths in platform
+     */
+    inline void clearImagePaths() {imageNames.clear();}
+
 private:
     /**
      * The methid converts std::list into std::vector

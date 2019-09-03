@@ -31,6 +31,8 @@ public:
      */
     PlatformManager();
 
+    ~PlatformManager() ;
+
     /**
      * Getter for all available platforms corresponding to mode
      * @return all available platforms corresponding to mode
@@ -48,6 +50,11 @@ public:
      * @param neuralNet neural net which should be set
      */
     inline void setNeuralNet(string neuralNet) {this->neuralNet = neuralNet;}
+
+    /**
+     * The method clears all image pahts in all platforms
+     */
+    inline void clearAllImagePaths() {for (auto platform:platforms) {platform->clearImagePaths();}}
 };
 
 

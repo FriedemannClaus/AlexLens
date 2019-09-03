@@ -21,21 +21,25 @@ ASICPlatform::ASICPlatform(const int id) {
     this->id = id;
     this->type = PlatformType::ASIC;
     this->myriadPlugin = initPlugin();
-    //this->net = readIR();
-    //this->inputInfo = net.getInputsInfo();
     this->statistic.setEnergyConsum(2);
     this->statistic.setFLOPS(100);
 }
 
 InferencePlugin ASICPlatform::initPlugin() {
-    InferenceEnginePluginPtr pluginPtr = PluginDispatcher({"/opt/intel/openvino/deployment_tools/inference_engine/lib/intel64"}).getSuitablePlugin(TargetDevice::eMYRIAD);
+    InferenceEnginePluginPtr pluginPtr;
+    pluginPtr = PluginDispatcher({"/opt/intel/openvino/deployment_tools/inference_engine/lib/intel64"}).getSuitablePlugin(TargetDevice::eMYRIAD);
+    if(pluginPtr == nullptr) {
+        this->imageNames.clear();
+        string msg("Kein Stick ist angeschlossen");
+        throw (StickException(msg));
+    }
+
+    //InferenceEnginePluginPtr pluginPtr = PluginDispatcher({"/opt/intel/openvino/deployment_tools/inference_engine/lib/intel64"}).getSuitablePlugin(TargetDevice::eMYRIAD);
     InferencePlugin plugin(pluginPtr);
     return plugin;
 }
 
 CNNNetwork ASICPlatform::readIR() {
-    //netReader.ReadNetwork("../../resources/alexnet-FP16/alexnet.xml");
-    //netReader.ReadWeights("../../resources/alexnet-FP16/alexnet.bin");
     CNNNetReader netReader;
     netReader.ReadNetwork(structure_path);
     netReader.ReadWeights(model_path);
@@ -53,7 +57,14 @@ void ASICPlatform::runClassify() {
 
     ExecutableNetwork executableNetwork;
 
-    loadModelToPlugin(&executableNetwork);
+    try {
+        loadModelToPlugin(&executableNetwork);
+    } catch (exception & e) {
+        imageNames.clear(),
+        reset();
+        string msg("Kein Stick ist angeschlossen");
+        throw (StickException(msg));
+    }
 
     InferRequest inferRequest = executableNetwork.CreateInferRequest();
 
@@ -128,7 +139,6 @@ void ASICPlatform::loadModelToPlugin(ExecutableNetwork *executableNetwork) {
     mutex.unlock();
     outputInfo = {};
     net = {};
-    //netReader = {};
 }
 
 void ASICPlatform::prepareInput(InferRequest *inferRequest, vector<shared_ptr<unsigned char>> *imagesData) {
