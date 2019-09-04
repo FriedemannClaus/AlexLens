@@ -94,8 +94,8 @@ target_include_directories(AlexLens_lib PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}
         ${HDF5_INCLUDE_DIRS}
         ${OpenCV_INCLUDE_DIRS}
         ${Torch_INCLUDE_DIRS}
-        /home/dmitrii/AlexLens/thirdparty/libtorch/include
-        /home/dmitrii/AlexLens/thirdparty/libtorch/include/torch/csrc/api/include/
+        /home/pselabs19/AlexLens/thirdparty/libtorch/include
+        /home/pselabs19/AlexLens/thirdparty/libtorch/include/torch/csrc/api/include/
         ${Thread_INCLUDE_DIRS}
         ${PYTHON_INCLUDE_DIRS}
         #APPEND THIRD-PARTY-LIBS Qt::Widgets Qt::Core
@@ -111,7 +111,7 @@ target_link_libraries(AlexLens_lib PRIVATE
         Qt5::Widgets
         Qt5::Gui
         ${InferenceEngine_LIBRARIES}
-        /home/dmitrii/inference_engine_samples_build/intel64/Release/lib/libformat_reader.so
+        /home/pselabs19/inference_engine_samples_build/intel64/Release/lib/libformat_reader.so
         ${HDF5_CXX_LIBRARIES}
         Eigen3::Eigen
         ${OpenCV_LIBS}
@@ -150,7 +150,7 @@ target_link_libraries(${PROJECT_NAME} PUBLIC
         Qt5::Widgets
         Qt5::Gui
         ${InferenceEngine_LIBRARIES}
-        /home/dmitrii/inference_engine_samples_build/intel64/Release/lib/libformat_reader.so
+        /home/pselabs19/inference_engine_samples_build/intel64/Release/lib/libformat_reader.so
         ${HDF5_CXX_LIBRARIES}
         Eigen3::Eigen
         ${OpenCV_LIBS}

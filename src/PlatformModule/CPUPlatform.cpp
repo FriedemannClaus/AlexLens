@@ -9,7 +9,7 @@ CPUPlatform::CPUPlatform() {
     this->alexNet = new AlexNet(this->results, false);
     this->type = PlatformType::CPU;
     this->statistic.setEnergyConsum(20);
-    this->statistic.setFLOPS(19);
+    this->statistic.setFLOPS(90);
 }
 
 
@@ -46,7 +46,7 @@ void CPUPlatform::runTraining() {
 */
 
     //syscall variant start
-    std::string command_str = "/home/dmitrii/anaconda3/bin/python ";
+    std::string command_str = "python3 ";
     command_str += fileNamePath + " ";
     command_str += this->datasetPath;
     const char *command = command_str.c_str();
