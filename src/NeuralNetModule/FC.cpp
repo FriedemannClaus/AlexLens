@@ -35,29 +35,34 @@ void FC::forward(ThreeDMatrix &inputMatrix, ThreeDMatrix &outputMatrix) {
         int W_num_rows = WEIGHTS.rows();
         int W_num_cols = WEIGHTS.cols();
         int size_W = W_num_cols * W_num_rows;
-
+        /*
         float *X_row_array = new float[size_X_row];
         for (int i = 0; i < size_X_row; i++) {
             X_row_array[i] = X_row(i);
         }
+        */
 
-        float *W_array = new float[size_W];
+        float *X_row_array = X_row.data();
+
+        const float *W_array = WEIGHTS.data();
+        /*float *W_array = new float[size_W];
         for (int i = 0; i < W_num_rows; i++) {//switched because of the ocl kernel
             for (int j = 0; j < W_num_cols; j++) {
-                W_array[j + i * W_num_cols] = WEIGHTS(i, j);
+                W_array[i + j * W_num_rows] = WEIGHTS(i, j);
             }
-        }
+        }*/
 
         int size_multResult = outputNumRows;
         float *multResult_array = new float[size_multResult];
 
         GPUSGeMM *gpuMultiplication = new GPUSGeMM(size_X_row,1 , W_num_cols);
-        gpuMultiplication->convolve(X_row_array, W_array, multResult_array);
-        convertToEigen(multResult_array, multResult);
+        gpuMultiplication->convolve(X_row_array, const_cast<float*>(W_array), multResult_array);
+        //convertToEigen(multResult_array, multResult);
+        multResult = Eigen::Map<Matrix>(multResult_array, multResult.rows(), multResult.cols());
 
         delete gpuMultiplication;
         delete[] multResult_array;
-        delete[] X_row_array;
+        //delete[] X_row_array;
         delete[] W_array;
 
 

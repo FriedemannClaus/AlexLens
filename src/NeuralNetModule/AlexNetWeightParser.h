@@ -160,6 +160,7 @@ private:
     float conv5_2_b[CONV5_2_b_N];
 
     float dense1_w[DENSE1_W_NY][DENSE1_W_NX];
+    //float dense1_w[DENSE1_W_NY * DENSE1_W_NX];
     float dense1_b[DENSE1_b_N];
 
     float dense2_w[DENSE2_W_NY][DENSE2_W_NX];

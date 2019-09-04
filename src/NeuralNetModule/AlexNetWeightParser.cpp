@@ -47,7 +47,7 @@ AlexNetWeightParser::AlexNetWeightParser(FourDMatrix &eigen_conv1_w, Vector &eig
 
     this->eigen_dense3_w = &eigen_dense3_w;
     this->eigen_dense3_b = &eigen_dense3_b;
-    initArrays();
+    //initArrays();
     initMatrices();
 }
 
@@ -540,7 +540,7 @@ void AlexNetWeightParser::initArrays() {
     // dense1_w array
     for (i = 0; i < DENSE1_W_NY; i++) {
         for (j = 0; j < DENSE1_W_NX; j++) {
-            dense1_w[i][j] = 0;
+            //dense1_w[i][j] = 0;
         }
     }
 
@@ -701,10 +701,14 @@ void AlexNetWeightParser::setWeights() {
         }
     }
 
+
     // eigen_conv1_b
-    for (i = 0; i < CONV1_b_N; i++) {
+    /*for (i = 0; i < CONV1_b_N; i++) {
         (*eigen_conv1_b)(i) = conv1_b[i];
-    }
+    }*/
+
+    (*eigen_conv1_b) = Eigen::Map<Vector>(conv1_b, CONV1_b_N);
+
 
     // eigen conv2_1_w
     for (i = 0; i < CONV2_1_W_NK; i++) {
@@ -718,9 +722,11 @@ void AlexNetWeightParser::setWeights() {
     }
 
     // eigen_conv2_1_b
-    for (i = 0; i < CONV2_1_b_N; i++) {
+    /*for (i = 0; i < CONV2_1_b_N; i++) {
         (*eigen_conv2_1_b)(i) = conv2_1_b[i];
-    }
+    }*/
+
+    (*eigen_conv2_1_b) = Eigen::Map<Vector>(conv2_1_b, CONV2_1_b_N);
 
     // eigen conv2_2_w
     for (i = 0; i < CONV2_2_W_NK; i++) {
@@ -734,9 +740,11 @@ void AlexNetWeightParser::setWeights() {
     }
 
     // eigen_conv2_2_b
-    for (i = 0; i < CONV2_2_b_N; i++) {
+    /*for (i = 0; i < CONV2_2_b_N; i++) {
         (*eigen_conv2_2_b)(i) = conv2_2_b[i];
-    }
+    }*/
+
+    (*eigen_conv2_2_b) = Eigen::Map<Vector>(conv2_2_b, CONV2_2_b_N);
 
     // eigen_conv3_w
     for (i = 0; i < CONV3_W_NK; i++) {
@@ -750,9 +758,11 @@ void AlexNetWeightParser::setWeights() {
     }
 
     // eigen_conv3_b
-    for (i = 0; i < CONV3_b_N; i++) {
+    /*for (i = 0; i < CONV3_b_N; i++) {
         (*eigen_conv3_b)(i) = conv3_b[i];
-    }
+    }*/
+
+    (*eigen_conv3_b) = Eigen::Map<Vector>(conv3_b, CONV3_b_N);
 
     // eigen conv4_1_w
     for (i = 0; i < CONV4_1_W_NK; i++) {
@@ -766,9 +776,10 @@ void AlexNetWeightParser::setWeights() {
     }
 
     // eigen_conv4_1_b
-    for (i = 0; i < CONV4_1_b_N; i++) {
+    /*for (i = 0; i < CONV4_1_b_N; i++) {
         (*eigen_conv4_1_b)(i) = conv4_1_b[i];
-    }
+    }*/
+    (*eigen_conv4_1_b) = Eigen::Map<Vector>(conv4_1_b, CONV4_1_b_N);
 
     // eigen conv4_2_w
     for (i = 0; i < CONV4_2_W_NK; i++) {
@@ -782,9 +793,11 @@ void AlexNetWeightParser::setWeights() {
     }
 
     // eigen_conv4_2_b
-    for (i = 0; i < CONV4_2_b_N; i++) {
+    /*for (i = 0; i < CONV4_2_b_N; i++) {
         (*eigen_conv4_2_b)(i) = conv4_2_b[i];
-    }
+    }*/
+
+    (*eigen_conv4_2_b) = Eigen::Map<Vector>(conv4_2_b, CONV4_2_b_N);
 
     // eigen conv5_1_w
     for (i = 0; i < CONV5_1_W_NK; i++) {
@@ -798,9 +811,11 @@ void AlexNetWeightParser::setWeights() {
     }
 
     // eigen_conv5_1_b
-    for (i = 0; i < CONV5_1_b_N; i++) {
+    /*for (i = 0; i < CONV5_1_b_N; i++) {
         (*eigen_conv5_1_b)(i) = conv5_1_b[i];
-    }
+    }*/
+
+    (*eigen_conv5_1_b) = Eigen::Map<Vector>(conv5_1_b, CONV5_1_b_N);
 
     // eigen conv5_2_w
     for (i = 0; i < CONV5_2_W_NK; i++) {
@@ -814,9 +829,10 @@ void AlexNetWeightParser::setWeights() {
     }
 
     // eigen_conv5_2_b
-    for (i = 0; i < CONV5_2_b_N; i++) {
+    /*for (i = 0; i < CONV5_2_b_N; i++) {
         (*eigen_conv5_2_b)(i) = conv5_2_b[i];
-    }
+    }*/
+    (*eigen_conv5_2_b) = Eigen::Map<Vector>(conv5_2_b, CONV5_2_b_N);
 
     // eigen_dense1_w
     for (i = 0; i < DENSE1_W_NY; i++) {
@@ -824,11 +840,14 @@ void AlexNetWeightParser::setWeights() {
             (*eigen_dense1_w)(i, j) = dense1_w[i][j];
         }
     }
+    //(*eigen_dense1_w) = Eigen::Map<Matrix>(dense1_w, DENSE1_W_NY, DENSE1_W_NX);
 
     // eigen_dense1_b
-    for (i = 0; i < DENSE1_b_N; i++) {
+    /*for (i = 0; i < DENSE1_b_N; i++) {
         (*eigen_dense1_b)(i) = dense1_b[i];
-    }
+    }*/
+
+    (*eigen_dense1_b) = Eigen::Map<Vector>(dense1_b, DENSE1_b_N);
 
     // eigen_dense2_w
     for (i = 0; i < DENSE2_W_NY; i++) {
@@ -838,9 +857,12 @@ void AlexNetWeightParser::setWeights() {
     }
 
     // eigen_dense2_b
-    for (i = 0; i < DENSE2_b_N; i++) {
+    /*for (i = 0; i < DENSE2_b_N; i++) {
         (*eigen_dense2_b)(i) = dense2_b[i];
-    }
+    }*/
+
+    (*eigen_dense2_b) = Eigen::Map<Vector>(dense2_b, DENSE2_b_N);
+
 
     // eigen_dense3_w
     for (i = 0; i < DENSE3_W_NY; i++) {
@@ -850,9 +872,12 @@ void AlexNetWeightParser::setWeights() {
     }
 
     // eigen_dense3_b
-    for (i = 0; i < DENSE3_b_N; i++) {
+    /*for (i = 0; i < DENSE3_b_N; i++) {
         (*eigen_dense3_b)(i) = dense3_b[i];
-    }
+    }*/
+
+    (*eigen_dense3_b) = Eigen::Map<Vector>(dense3_b, DENSE3_b_N);
+
 
     cout << "Weights and biases set." << endl;
 }
