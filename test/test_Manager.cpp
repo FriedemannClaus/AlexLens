@@ -3,11 +3,11 @@
 #include "catch.hpp"
 #include <iostream>
 //#include <ManagerModule/Manager.h>
-//#include <ManagerModule/Manager.cpp>
+#include <ManagerModule/Manager.cpp>
 using namespace std;
 
 TEST_CASE("Setter and getters of Manager") {
-    /*
+
     Subject* subject = new Subject();
     Manager* manager = new Manager(subject);
 
@@ -25,6 +25,6 @@ TEST_CASE("Setter and getters of Manager") {
     SECTION("Project Directory is identified correctly") {
         REQUIRE(path_str == project_dir_test);
     }
-     */
-    REQUIRE(true == true);
+
+
 }

@@ -5,8 +5,7 @@
 #ifndef SRC_GUIMODULE_ALEXLENS_GPUSGEMM_H
 #define SRC_GUIMODULE_ALEXLENS_GPUSGEMM_H
 
-#include <stdio.h>
-#include <sys/time.h>
+#include <string>
 #include <CL/cl.h>
 #include <iostream>
 #include <fstream>
@@ -35,8 +34,7 @@ public:
             HA(hA),
             WB(wB)
     {}
-
-    void convolve(float *A, float *B, float *C);
+    void convolve(float* A, float* B, float* C);
 };
 
 

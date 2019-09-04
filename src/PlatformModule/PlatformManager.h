@@ -21,7 +21,7 @@ using namespace std;
  */
 class PlatformManager {
 private:
-    const static int NUM_PLATFORMS = 0; /// The number Of ASICPlatforms
+    int NUM_PLATFORMS = 10; /// The number Of ASICPlatforms
     list<Platform*> platforms; /// List of all initialized platforms
     Mode mode; ///The Mode which was set by user
     string neuralNet;  /// The neural net which was set by user
@@ -30,6 +30,8 @@ public:
      * Standard Constructor
      */
     PlatformManager();
+
+    ~PlatformManager() ;
 
     /**
      * Getter for all available platforms corresponding to mode
@@ -48,6 +50,11 @@ public:
      * @param neuralNet neural net which should be set
      */
     inline void setNeuralNet(string neuralNet) {this->neuralNet = neuralNet;}
+
+    /**
+     * The method clears all image pahts in all platforms
+     */
+    inline void clearAllImagePaths() {for (auto platform:platforms) {platform->clearImagePaths();}}
 };
 
 

@@ -3,13 +3,42 @@
 //
 
 #include "PlatformManager.h"
+#include <libusb-1.0/libusb.h>
 
 PlatformManager::PlatformManager() {
+    // discover devices
+    int num_sticks = 0;
+    string idProduct = to_string(8528);
+    string idVendor = to_string(999);
+    libusb_context *context = NULL;
+    libusb_device **list = NULL;
+    int rc = 0;
+    ssize_t count = 0;
+
+    rc = libusb_init(&context);
+    assert(rc == 0);
+
+    count = libusb_get_device_list(context, &list);
+    assert(count > 0);
+
+    for (size_t idx = 0; idx < count; ++idx) {
+        libusb_device *device = list[idx];
+        libusb_device_descriptor desc = {0};
+
+        rc = libusb_get_device_descriptor(device, &desc);
+        assert(rc == 0);
+        if ( to_string(desc.idVendor) == idVendor && to_string(desc.idProduct) == idProduct) num_sticks++;
+
+    }
+    NUM_PLATFORMS = num_sticks;
+    libusb_free_device_list(list, count);
+    libusb_exit(context);
+
     for (int i = 0; i < NUM_PLATFORMS; i++) {
-        Platform *asicplatform = new ASICPlatform(i);
+        Platform* asicplatform = new ASICPlatform(i);
         platforms.push_back(asicplatform);
     }
-    //Platform* cpuplatform = new CPUPlatformTorch();
+
     Platform *cpuplatform = new CPUPlatform();
     Platform *gpuplatform = new GPUPlatform();
     Platform *cpuplatformTorch = new CPUPlatformTorch();

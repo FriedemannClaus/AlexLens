@@ -9,6 +9,8 @@
 #include <QString>
 #include <string>
 #include <QApplication>
+#include <exception>
+#include <Exceptions/ReadException.h>
 
 using namespace std;
 
@@ -67,6 +69,9 @@ void ParameterPanel::start()
         string currentNeuralNet = this->neuralNetsList->currentItem()->text().toStdString();
         this->manager->setMode(ModeUtil::whichModeClassify(currentMode));
         this->manager->setNeuralNet(currentNeuralNet);
+
+        this->manager->getExecutor()->clearExceptionPointers();//clear multithreading buffer for exceptions
+
         if (!this->manager->isRunnable()) {
             this->manager->clearImagePaths();
             this->inputPanel->clearPanel();
@@ -87,7 +92,20 @@ void ParameterPanel::start()
             this->outputPanel->setVisible(true);
             QCoreApplication::processEvents();
 
-            this->manager->runClassify();
+            //catching all exceptions
+            try {
+                this->manager->runClassify();
+            } catch (std::exception & e) {
+                QMessageBox::warning(this, "Start", e.what());
+                this->manager->clearImagePaths();
+                this->outputPanel->clearPanel();
+                this->inputPanel->clearPanel();
+                this->outputPanel->clearPreviewImages();
+                this->inputPanel->clearPreviewImages();
+
+            }
+
+            //this->manager->runClassify();
 
             this->inputPanel->clearPreviewImages();
 

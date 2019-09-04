@@ -16,6 +16,8 @@
 #include "Platform.h"
 #include "PlatformType.h"
 #include "PlatformStatistic.h"
+#include <Exceptions/StickException.h>
+#include <exception>
 
 using namespace std;
 using namespace InferenceEngine;

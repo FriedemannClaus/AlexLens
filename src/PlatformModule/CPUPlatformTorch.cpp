@@ -12,6 +12,7 @@
 #include <memory>
 #include <vector>
 #include <string>
+#include <Exceptions/ReadException.h>
 
 using namespace std;
 
@@ -24,6 +25,12 @@ void CPUPlatformTorch::runClassify() {
         // load image with opencv and transform
         cv::Mat image;
         image = cv::imread(image_path, 1);
+        if(image.empty()) {
+            string msg("Das eingelesene Bild ist beschädigt!");
+            this->imageNames.clear();
+            throw (ReadException(msg));
+        }
+        //image = cv::imread(image_path, 1);
         cv::cvtColor(image, image, cv::COLOR_BGR2RGB);
         cv::Mat img_float;
         image.convertTo(img_float, CV_32F, 1.0/255);
@@ -59,10 +66,7 @@ void CPUPlatformTorch::runClassify() {
         std::string resultVector = "";
         for (int i = 0; i < 5; ++i) {
             int idx = top_idxs[i].item<int>();
-            std::stringstream stream;
-            stream << std::fixed << std::setprecision(2) << top_scores[i].item<float>()*100.0f;
-            resultVector += stream.str();
-            resultVector+="% ";
+            resultVector+= floatToPercent(top_scores[i].item<float>());
             resultVector+=labels[idx];
             resultVector+="\n";
         }
@@ -70,7 +74,7 @@ void CPUPlatformTorch::runClassify() {
 
         this->results.push_back(resultVector);
     }
-    const float final_time = float( clock () - begin_time )/CLOCKS_PER_SEC*100;
+    const float final_time = float( clock () - begin_time )/CLOCKS_PER_SEC*1000;
 
     this->statistic.setTotalInferenceTime(final_time);
     this->statistic.setAvgIterationTime(final_time/results.size());
