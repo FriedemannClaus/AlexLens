@@ -7,6 +7,8 @@
 #include <iostream>
 #include <opencv2/opencv.hpp>
 #include <fstream>
+#include <PlatformModule/Platform.h>
+#include <Exceptions/ReadException.h>
 
 using namespace std;
 using namespace cv;
@@ -181,10 +183,9 @@ void AlexNet::initLabels() {
     //get classes
     ifstream file;
     file.open(LABELS_PATH);
-
     if (!file) {
-        cerr << "Unable to load classes-file, please place it at the top of the project-structure.";
-        exit(1);
+        string msg("Es wurde keine Labels gefunden");
+        throw (ReadException(msg));
     }
     int i = 0;
     for (string line; getline(file, line);) {
@@ -197,8 +198,12 @@ void AlexNet::convertImages(std::vector<std::string> &imagePaths, std::vector<Th
     imageMatrices.resize(imagePaths.size());
 
     for (int i = 0; i < imagePaths.size(); i++) {
-
         Mat image = imread(imagePaths[i]); // automatically replicates channels if grayscale
+        if(image.empty()) {
+            string msg("Das eingelesene Bild ist beschädigt!");
+            throw (ReadException(msg));
+        }
+
         int preResizeHeight = image.rows;
         int preResizeWidth = image.cols;
 
@@ -277,8 +282,9 @@ void AlexNet::setResults() {
                 softmax_output(k) = 0;
             }
         }
-        resultString += to_string(top[j]);
-        resultString += "   ";
+        resultString += Platform::floatToPercent(top[j]);
+        //resultString += to_string(top[j]);
+        //resultString += "   ";
         resultString += classes[index[j]];
         resultString += '\n';
     }

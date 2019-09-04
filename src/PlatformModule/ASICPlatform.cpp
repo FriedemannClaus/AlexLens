@@ -27,10 +27,11 @@ ASICPlatform::ASICPlatform(const int id) {
 
 InferencePlugin ASICPlatform::initPlugin() {
     InferenceEnginePluginPtr pluginPtr;
-    pluginPtr = PluginDispatcher({"/opt/intel/openvino/deployment_tools/inference_engine/lib/intel64"}).getSuitablePlugin(TargetDevice::eMYRIAD);
-    if(pluginPtr == nullptr) {
+    try {
+        pluginPtr = PluginDispatcher({"/opt/intel/openvino/deployment_tools/inference_engine/lib/intel64"}).getSuitablePlugin(TargetDevice::eMYRIAD);
+    }catch (exception& e){
         this->imageNames.clear();
-        string msg("Kein Stick ist angeschlossen");
+        string msg("Es ist kein Stick angeschlossen!");
         throw (StickException(msg));
     }
 
@@ -41,9 +42,15 @@ InferencePlugin ASICPlatform::initPlugin() {
 
 CNNNetwork ASICPlatform::readIR() {
     CNNNetReader netReader;
-    netReader.ReadNetwork(structure_path);
-    netReader.ReadWeights(model_path);
-    net = netReader.getNetwork();
+    try {
+        netReader.ReadNetwork(structure_path);
+        netReader.ReadWeights(model_path);
+        net = netReader.getNetwork();
+    } catch (exception & e) {
+        imageNames.clear();
+        string msg("Es wurde kein Model gedunden!");
+        throw (StickException(msg));
+    }
     return net;
 }
 
@@ -60,7 +67,9 @@ void ASICPlatform::runClassify() {
     try {
         loadModelToPlugin(&executableNetwork);
     } catch (exception & e) {
-        imageNames.clear(),
+        cout << "load to plugin failes" << endl;
+        imageNames.clear();
+        //executableNetwork.reset();
         reset();
         string msg("Kein Stick ist angeschlossen");
         throw (StickException(msg));
@@ -137,6 +146,11 @@ void ASICPlatform::loadModelToPlugin(ExecutableNetwork *executableNetwork) {
     mutex.lock();
     *executableNetwork = myriadPlugin.LoadNetwork(net, {});
     mutex.unlock();
+   /*if (nullptr == &executableNetwork) {
+        cout << "loadmodelto plugun NULL " << endl;
+        this->imageNames.clear();
+
+    }*/
     outputInfo = {};
     net = {};
 }
@@ -186,7 +200,6 @@ void ASICPlatform::inference(double *total, InferRequest *inferRequest) {
 }
 
 void ASICPlatform::loadLabels(vector<string> *labels) {
-
     // Read labels for AlexNet
     string labelFileName = label_path;
     ifstream inputFile;
@@ -197,6 +210,10 @@ void ASICPlatform::loadLabels(vector<string> *labels) {
             trim(strLine);
             labels->push_back(strLine);
         }
+    } else {
+        imageNames.clear();
+        string msg("Es wurden keine Labels gefunden!");
+        throw (StickException(msg));
     }
 }
 
@@ -242,7 +259,7 @@ void ASICPlatform::createResultVector(Blob::Ptr _outBlob, vector<string> *imageN
     for (unsigned int image_id = 0; image_id < *batchSize; ++image_id) {
         string resultString = "";
 
-        cout << "Image " << (*imageNames)[image_id] << endl;
+        //cout << "Image " << (*imageNames)[image_id] << endl;
         //resultString = (*imageNames)[image_id];
 
         /*// Header
@@ -266,11 +283,12 @@ void ASICPlatform::createResultVector(Blob::Ptr _outBlob, vector<string> *imageN
 
             //cout << setw(static_cast<int>(_classidStr.length())) << left << results[id] << " ";
             //cout << left << setw(static_cast<int>(_probabilityStr.length())) << fixed << result;
-            resultString += to_string(result);
+            //resultString += to_string(result);
+            resultString += floatToPercent(result);
 
             if (!labels->empty()) {
                 //cout << " " + (*labels)[results[id]];
-                resultString += "   ";
+                //resultString += "   ";
                 resultString += (*labels)[results[id]];
 
             }
@@ -284,7 +302,8 @@ void ASICPlatform::createResultVector(Blob::Ptr _outBlob, vector<string> *imageN
 
 void ASICPlatform::setStatistics(double *total, size_t *batchSize) {
     statistic.setTotalInferenceTime(*total);
-    statistic.setAvgIterationTime(*total / static_cast<double>(NUM_ITERATIONS)); // ms
+    statistic.setAvgIterationTime(*total / imageNames.size());
+    //statistic.setAvgIterationTime(*total / static_cast<double>(NUM_ITERATIONS)); // ms
     statistic.setThroughput(1000 * static_cast<double>(NUM_ITERATIONS) * *batchSize / *total); // FPS
 }
 

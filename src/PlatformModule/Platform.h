@@ -9,8 +9,12 @@
 #include <list>
 #include <string>
 #include <vector>
+#include <memory>
+#include <iomanip>
 #include "PlatformType.h"
 #include "PlatformStatistic.h"
+#include <sstream>
+
 
 using namespace std;
 
@@ -85,6 +89,16 @@ public:
      * The methid clears all image paths in platform
      */
     inline void clearImagePaths() {imageNames.clear();}
+
+    inline static string floatToPercent(float a) {
+        std::string result = "";
+        std::stringstream stream;
+        stream << std::fixed << std::setprecision(2) << a*100.0f;
+        result += stream.str();
+        result += "% ";
+        return result;
+
+    }
 
 private:
     /**
