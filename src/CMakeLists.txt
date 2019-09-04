@@ -15,6 +15,9 @@ find_package(Threads)
 
 include_directories(../includes)
 
+# OpenCL
+find_package(OpenCL REQUIRED)
+
 # Qt5
 find_package(Qt5Core REQUIRED)
 find_package(Qt5Gui REQUIRED)
@@ -81,6 +84,7 @@ add_library(AlexLens_lib STATIC
         PlatformModule/PlatformManager.cpp
         PlatformModule/CPUPlatformTorch.cpp
         PlatformModule/PlatformStatistic.cpp
+        PlatformModule/GPUPlatform.cpp
         NeuralNetModule/Layer.cpp
         NeuralNetModule/Conv2D.cpp
         NeuralNetModule/ReLU.cpp
@@ -90,6 +94,7 @@ add_library(AlexLens_lib STATIC
         NeuralNetModule/Softmax.cpp
         NeuralNetModule/AlexNetWeightParser.cpp
         NeuralNetModule/AlexNet.cpp
+        NeuralNetModule/GPUSGeMM.cpp
         PlatformModule/CPUPlatform.cpp
         Exceptions/ReadException.h Exceptions/StickException.h)
 
@@ -116,10 +121,11 @@ target_link_libraries(AlexLens_lib PRIVATE
         Qt5::Widgets
         Qt5::Gui
         ${InferenceEngine_LIBRARIES}
-        /home/dmitrii/inference_engine_samples_build/intel64/Release/lib/libformat_reader.so
+        /home/jakubt/inference_engine_samples_build/intel64/Release/lib/libformat_reader.so
         ${HDF5_CXX_LIBRARIES}
         Eigen3::Eigen
         ${OpenCV_LIBS}
+        ${OpenCL_LIBRARIES}
         ${PYTHON_LIBRARIES}
         ${TORCH_LIBRARIES}
         )
@@ -142,6 +148,8 @@ add_executable(AlexLens_prog
         ManagerModule/Executor.cpp ManagerModule/Executor.h
         PlatformModule/Platform.cpp PlatformModule/Platform.h
         PlatformModule/ASICPlatform.cpp PlatformModule/ASICPlatform.h
+        PlatformModule/GPUPlatform.cpp PlatformModule/GPUPlatform.h
+        NeuralNetModule/GPUSGeMM.cpp NeuralNetModule/GPUSGeMM.h
         GUIModule/IObserver.h
         GUIModule/Subject.h
         PlatformModule/PlatformManager.cpp PlatformModule/PlatformManager.h
@@ -155,12 +163,13 @@ target_link_libraries(${PROJECT_NAME} PUBLIC
         Qt5::Widgets
         Qt5::Gui
         ${InferenceEngine_LIBRARIES}
-        /home/dmitrii/inference_engine_samples_build/intel64/Release/lib/libformat_reader.so
+        /home/jakubt/inference_engine_samples_build/intel64/Release/lib/libformat_reader.so
         ${HDF5_CXX_LIBRARIES}
         Eigen3::Eigen
         ${OpenCV_LIBS}
         ${PYTHON_LIBRARIES}
         ${TORCH_LIBRARIES}
+        ${OpenCL_LIBRARIES}
         /usr/lib/x86_64-linux-gnu/libusb-1.0.so
         AlexLens_lib
         )
