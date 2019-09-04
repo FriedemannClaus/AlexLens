@@ -66,10 +66,7 @@ void CPUPlatformTorch::runClassify() {
         std::string resultVector = "";
         for (int i = 0; i < 5; ++i) {
             int idx = top_idxs[i].item<int>();
-            std::stringstream stream;
-            stream << std::fixed << std::setprecision(2) << top_scores[i].item<float>()*100.0f;
-            resultVector += stream.str();
-            resultVector+="% ";
+            resultVector+= floatToPercent(top_scores[i].item<float>());
             resultVector+=labels[idx];
             resultVector+="\n";
         }
@@ -77,7 +74,7 @@ void CPUPlatformTorch::runClassify() {
 
         this->results.push_back(resultVector);
     }
-    const float final_time = float( clock () - begin_time )/CLOCKS_PER_SEC*100;
+    const float final_time = float( clock () - begin_time )/CLOCKS_PER_SEC*1000;
 
     this->statistic.setTotalInferenceTime(final_time);
     this->statistic.setAvgIterationTime(final_time/results.size());

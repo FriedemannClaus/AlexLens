@@ -6,6 +6,11 @@ set(CMAKE_CXX_STANDARD 11)
 set(CMAKE_POSITION_INDEPENDENT_CODE ON)
 set(CMAKE_AUTORCC ON)
 SET(CMAKE_CXX_FLAGS -pthread)
+#find_package(libusb-1.0 REQUIRED)
+#include_directories (${LIBUSB_1_INCLUDE_DIRS})
+find_package(PkgConfig REQUIRED)
+pkg_search_module(LIBUSB1 REQUIRED libusb-1.0)
+include_directories(SYSTEM ${LIBUSB1_INCLUDE_DIRS})
 find_package(Threads)
 
 include_directories(../includes)
@@ -156,5 +161,6 @@ target_link_libraries(${PROJECT_NAME} PUBLIC
         ${OpenCV_LIBS}
         ${PYTHON_LIBRARIES}
         ${TORCH_LIBRARIES}
+        /usr/lib/x86_64-linux-gnu/libusb-1.0.so
         AlexLens_lib
         )

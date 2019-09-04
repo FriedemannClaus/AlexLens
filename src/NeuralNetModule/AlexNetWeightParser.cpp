@@ -52,6 +52,7 @@ AlexNetWeightParser::AlexNetWeightParser(FourDMatrix &eigen_conv1_w, Vector &eig
 }
 
 void AlexNetWeightParser::parse() {
+    //TODO
     try
     {
         H5File file(FILE_NAME, H5F_ACC_RDONLY);
