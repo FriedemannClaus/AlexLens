@@ -1,32 +1,14 @@
-
-// kernel.cl
 // Multiply two matrices A * B = C
-// Device code.
-
-
 // OpenCL Kernel
-__kernel void
-matrixMul(__global float* C,
-          __global float* A,
-          __global float* B,
-          int wA, int wB)
-{
-
-    // 2D Thread ID
-    int tx = get_local_id(0);
-    int ty = get_local_id(1);
-
-    // value stores the element
-    // that is computed by the thread
-    float value = 0;
-    for (int k = 0; k < wA; ++k)
-    {
-        float elementA = A[ty * wA + k];
-        float elementB = B[k * wB + tx];
-        value += elementA * elementB;
-    }
-
-    // Write the matrix to device memory each
-    // thread writes one element
-    C[ty * wA + tx] = value;
-}
+__kernel void myGEMM1(const int M, const int N, const int K,
+                             const __global float* A,
+                             const __global float* B,
+                             __global float* C) {
+            const int globalRow = get_global_id(0);
+            const int globalCol = get_global_id(1);
+            float acc = 0.0f;
+            for (int i=0; i<K; i++) {
+                acc += A[i + K*globalRow] * B[globalCol + N*i];
+            }
+            C[globalCol + N*globalRow] = acc;
+        }

@@ -118,8 +118,13 @@ TEST_CASE("Convolution forward pass functions correctly", "[slow]") {
 
     }
 
-    SECTION("Input matrix is correctly zero-padded") {
+    SECTION("GPU computation result is correct") {
+        Conv2D *conv2D_GPU = new Conv2D(hyperNumKernels, hyperKernelSize, hyperStride, hyperPad, weights, bias, true);
+        conv2D_GPU->forward(inputMatrix,outputMatrix);
 
-
+    }
+    SECTION("CPU computation result is correct"){
+        Conv2D *conv2D_CPU = new Conv2D(hyperNumKernels, hyperKernelSize, hyperStride, hyperPad, weights, bias, false);
+        conv2D_CPU->forward(inputMatrix,outputMatrix);
     }
 }
