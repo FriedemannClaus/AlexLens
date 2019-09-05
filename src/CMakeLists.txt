@@ -6,8 +6,9 @@ set(CMAKE_CXX_STANDARD 11)
 set(CMAKE_POSITION_INDEPENDENT_CODE ON)
 set(CMAKE_AUTORCC ON)
 SET(CMAKE_CXX_FLAGS -pthread)
-#find_package(libusb-1.0 REQUIRED)
-#include_directories (${LIBUSB_1_INCLUDE_DIRS})
+
+
+# Libusb
 find_package(PkgConfig REQUIRED)
 pkg_search_module(LIBUSB1 REQUIRED libusb-1.0)
 include_directories(SYSTEM ${LIBUSB1_INCLUDE_DIRS})
@@ -47,8 +48,8 @@ set(Torch_DIR ../thirdparty/libtorch/share/cmake/Torch)
 find_package(Torch REQUIRED)
 message(STATUS "Torch library status:")
 message(STATUS "    version: ${Torch_VERSION}")
-message(STATUS "    libraries: ${Torch_LIBRARIES}")
-message(STATUS "    include path: ${Torch_INCLUDE_DIRS}")
+message(STATUS "    libraries: ${TORCH_LIBRARIES}")
+message(STATUS "    include path: ${TORCH_INCLUDE_DIRS}")
 
 # OpenCV
 set(OpenCV_DIR /opt/intel/openvino/opencv/cmake)
@@ -100,12 +101,12 @@ add_library(AlexLens_lib STATIC
 
 target_include_directories(AlexLens_lib PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}
         /usr/include/eigen3
+        ${LIBUSB1_INCLUDE_DIRS}
         ${InferenceEngine_INCLUDE_DIRS}
         ${HDF5_INCLUDE_DIRS}
         ${OpenCV_INCLUDE_DIRS}
-        ${Torch_INCLUDE_DIRS}
-        /home/dmitrii/AlexLens/thirdparty/libtorch/include
-        /home/dmitrii/AlexLens/thirdparty/libtorch/include/torch/csrc/api/include/
+        ${OpenCL_INCLUDE_DIRS}
+        ${TORCH_INCLUDE_DIRS}
         ${Thread_INCLUDE_DIRS}
         ${PYTHON_INCLUDE_DIRS}
         #APPEND THIRD-PARTY-LIBS Qt::Widgets Qt::Core
@@ -121,7 +122,7 @@ target_link_libraries(AlexLens_lib PRIVATE
         Qt5::Widgets
         Qt5::Gui
         ${InferenceEngine_LIBRARIES}
-        /home/jakubt/inference_engine_samples_build/intel64/Release/lib/libformat_reader.so
+        /home/viet/inference_engine_samples_build/intel64/Release/lib/libformat_reader.so
         ${HDF5_CXX_LIBRARIES}
         Eigen3::Eigen
         ${OpenCV_LIBS}
@@ -163,7 +164,7 @@ target_link_libraries(${PROJECT_NAME} PUBLIC
         Qt5::Widgets
         Qt5::Gui
         ${InferenceEngine_LIBRARIES}
-        /home/jakubt/inference_engine_samples_build/intel64/Release/lib/libformat_reader.so
+        /home/viet/inference_engine_samples_build/intel64/Release/lib/libformat_reader.so
         ${HDF5_CXX_LIBRARIES}
         Eigen3::Eigen
         ${OpenCV_LIBS}
