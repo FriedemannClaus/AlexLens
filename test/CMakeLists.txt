@@ -66,3 +66,16 @@ message(STATUS "InferenceEngine library status:")
 message(STATUS "    version: ${InferenceEngine_VERSION}")
 message(STATUS "    libraries: ${InferenceEngine_LIBRARIES}")
 message(STATUS "    include path: ${InferenceEngine_INCLUDE_DIRS}")
+
+target_link_libraries(AlexLens_tests
+        Qt5::Core
+        Qt5::Widgets
+        Qt5::Gui
+        ${InferenceEngine_LIBRARIES}
+        /home/dmitrii/inference_engine_samples_build/intel64/Release/lib/libformat_reader.so
+        ${HDF5_CXX_LIBRARIES}
+        Eigen3::Eigen
+        ${OpenCV_LIBS}
+        ${PYTHON_LIBRARIES}
+        ${TORCH_LIBRARIES}
+        )

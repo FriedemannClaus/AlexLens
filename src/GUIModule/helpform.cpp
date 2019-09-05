@@ -22,11 +22,17 @@ HelpForm::HelpForm(QWidget *parent) :
                    "\nChallenge teil.\n\n    Unter Transfer Learning versteht man das Übertragen der Ergebnisse eines fertig trainierten"
                    "\nneuronalen Netzes auf eine neue Aufgabe. Die fertig trainierten Layer werden dabei entweder"
                    "\nkonstant gehalten und nur am Output-Layer nachtrainiert, oder es werden einige oder alle"
-                   "\nLayer auf Basis des aktuellen Trainings-Stands weiter trainiert.\n\n\n     Optimal Modus: der optimale Modus, in "
-                   "dem ausschließlich CPU benutzt wird.\n\n     Hohe Performance: der schnellste und "
-                   "performanteste Modus, in dem alle verfügbaren\nheterogenen Plattformen benutzt werden.\n\n     "
-                   "Geringer Leistungsverbrauch: der Modus, in dem genau ein Intel Movidius Neural Compute\nStick benutzt wird."
-                   "\n\n     Hohe Energieefizient: der Modus, in dem alle verfügbaren Intel Movidius Neural Compute\nSticks benutzt werden.");
+                   "\nLayer auf Basis des aktuellen Trainings-Stands weiter trainiert."
+                   "\n\n    Die verschiedenen Betriebsmodi des Programms sind:"
+                   "\nOptimal: Der optimale Modus, in dem so viel eigener Code benutzt wird, wie möglich. Es wird also die CPU benutzt. Ist AlexNet ausgewählt, wird zusätzlich die GPU verwendet."
+                   "\nHohe Perfomance: Der schnellste und performanteste Modus, in dem alle verfügbaren heterogenen Plattformen benutzt werden."
+                   "\nGeringer Leistungsverbrauch: Der Modus mit der geringsten maximalen Last, in dem genau ein Intel Movidius Neural Compute Stick benutzt wird."
+                   "\nHohe Energieeffizienz: Der Modus, in dem alle verfügbaren Intel Movidius Neural Compute Sticks benutzt werden."
+                   "\nBeim Trainieren gibt es nur einen Modus, bei dem die CPU verwendet wird. Dieser ist somit der optimale Modus."
+                   "\n\n    Beim Trainieren muss der Datensatz folgendendermaßen formatiert sein:"
+                   "\nAusgewählt wird ein Ordner, der die Ordner test, train und valid enthält. Diese wiederum enthalten die (gleichen) Objektklassen als Ordner, welche wiederum Bilder der jeweiligen Objekte enthalten."
+                   "\nZur Veranschaulichung kann man sich unter https://cloud.viet-pham.de/s/eKRM5JyxBpAAjEn?path=%2F einen Beispieldatensatz herunterladen."
+                   "\n\n    Der Open-Source-Code dieses Programms ist unter https://github.com/FriedemannClaus/AlexLens zu finden.");
 
     h_panel->addWidget(label);
     this->setLayout(h_panel);
