@@ -68,7 +68,7 @@ void GPUSGeMM::convolve(float* A, float* B, float* C) {
 
     // Run the myGEMM kernel
     size_t TS = 16;
-    const size_t local[2] = {TS, TS};
+    const size_t local[2] = {1, 1};
     const size_t global[2] = {HC, WC};
     clEnqueueNDRangeKernel(queue, kernel, 2, NULL, global, local, 0, NULL, &event);
 
