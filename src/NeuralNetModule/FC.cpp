@@ -3,7 +3,7 @@
 //
 
 #include "FC.h"
-#include <iostream>
+#include <memory>
 
 void FC::forward(ThreeDMatrix &inputMatrix, ThreeDMatrix &outputMatrix) {
     // We don't "work" with inputMatrix and outputMatrix.
@@ -23,15 +23,34 @@ void FC::forward(ThreeDMatrix &inputMatrix, ThreeDMatrix &outputMatrix) {
 
     //resize X_row
     Vector X_row;
-    X_row.resize(inputNumChannels * inputNumRows * inputNumCols);
+    int size_X_row = inputNumChannels * inputNumRows * inputNumCols;
+    X_row.resize(size_X_row);
     flaten(inputMatrix, X_row);
 
     // multiplication
     Vector multResult;
-    if (GPU_MODE) {
+    multResult.resize(NEURONS);
 
-    }
-    else if (!GPU_MODE) {
+    if (GPU_MODE) {
+        int W_num_rows = WEIGHTS.rows();
+        int W_num_cols = WEIGHTS.cols();
+        int size_W = W_num_cols * W_num_rows;
+
+        float *X_row_array = X_row.data();
+        const float *W_array = WEIGHTS.data();
+
+        int size_multResult = outputNumRows;
+        float *multResult_array = new float[size_multResult];
+
+        GPUSGeMM *gpuMultiplication = new GPUSGeMM(size_X_row,1 , W_num_cols);
+        gpuMultiplication->convolve(X_row_array, const_cast<float*>(W_array), multResult_array);
+        multResult = Eigen::Map<Matrix>(multResult_array, multResult.rows(), multResult.cols());
+
+        //free allocated memory
+        delete gpuMultiplication;
+        delete[] multResult_array;
+
+    } else if (!GPU_MODE) {
         multResult = X_row.transpose() * WEIGHTS;
     }
     // add bias
@@ -41,11 +60,6 @@ void FC::forward(ThreeDMatrix &inputMatrix, ThreeDMatrix &outputMatrix) {
     for (int i = 0; i < multResult.rows(); i++) {
         outputMatrix(0)(i, 0) = multResult(i);
     }
-
-
-
-
-
 }
 
 void FC::flaten(ThreeDMatrix &inputMatrix, Vector &convertedVector) {
@@ -59,12 +73,9 @@ void FC::flaten(ThreeDMatrix &inputMatrix, Vector &convertedVector) {
             convertedVector(i) = inputMatrix(i / inputPatchSize)((i % inputPatchSize) / inputNumRows //
                     , (i % inputPatchSize) % inputNumCols); //
         }
-    }
-    else if (inputNumChannels == 1) { //input flat already, just put in vector
+    } else if (inputNumChannels == 1) { //input flat already, just put in vector
         for (int i = 0; i < convertedVector.rows(); i++) {
             convertedVector(i) = inputMatrix(0)(i, 0);
         }
     }
-
-
 }

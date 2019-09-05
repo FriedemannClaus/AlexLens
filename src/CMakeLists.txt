@@ -6,14 +6,18 @@ set(CMAKE_CXX_STANDARD 11)
 set(CMAKE_POSITION_INDEPENDENT_CODE ON)
 set(CMAKE_AUTORCC ON)
 SET(CMAKE_CXX_FLAGS -pthread)
-#find_package(libusb-1.0 REQUIRED)
-#include_directories (${LIBUSB_1_INCLUDE_DIRS})
+
+
+# Libusb
 find_package(PkgConfig REQUIRED)
 pkg_search_module(LIBUSB1 REQUIRED libusb-1.0)
 include_directories(SYSTEM ${LIBUSB1_INCLUDE_DIRS})
 find_package(Threads)
 
 include_directories(../includes)
+
+# OpenCL
+find_package(OpenCL REQUIRED)
 
 # Qt5
 find_package(Qt5Core REQUIRED)
@@ -44,8 +48,8 @@ set(Torch_DIR ../thirdparty/libtorch/share/cmake/Torch)
 find_package(Torch REQUIRED)
 message(STATUS "Torch library status:")
 message(STATUS "    version: ${Torch_VERSION}")
-message(STATUS "    libraries: ${Torch_LIBRARIES}")
-message(STATUS "    include path: ${Torch_INCLUDE_DIRS}")
+message(STATUS "    libraries: ${TORCH_LIBRARIES}")
+message(STATUS "    include path: ${TORCH_INCLUDE_DIRS}")
 
 # OpenCV
 set(OpenCV_DIR /opt/intel/openvino/opencv/cmake)
@@ -81,6 +85,7 @@ add_library(AlexLens_lib STATIC
         PlatformModule/PlatformManager.cpp
         PlatformModule/CPUPlatformTorch.cpp
         PlatformModule/PlatformStatistic.cpp
+        PlatformModule/GPUPlatform.cpp
         NeuralNetModule/Layer.cpp
         NeuralNetModule/Conv2D.cpp
         NeuralNetModule/ReLU.cpp
@@ -90,17 +95,18 @@ add_library(AlexLens_lib STATIC
         NeuralNetModule/Softmax.cpp
         NeuralNetModule/AlexNetWeightParser.cpp
         NeuralNetModule/AlexNet.cpp
+        NeuralNetModule/GPUSGeMM.cpp
         PlatformModule/CPUPlatform.cpp
         Exceptions/ReadException.h Exceptions/StickException.h)
 
 target_include_directories(AlexLens_lib PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}
         /usr/include/eigen3
+        ${LIBUSB1_INCLUDE_DIRS}
         ${InferenceEngine_INCLUDE_DIRS}
         ${HDF5_INCLUDE_DIRS}
         ${OpenCV_INCLUDE_DIRS}
-        ${Torch_INCLUDE_DIRS}
-        /home/pselabs19/AlexLens/thirdparty/libtorch/include
-        /home/pselabs19/AlexLens/thirdparty/libtorch/include/torch/csrc/api/include/
+        ${OpenCL_INCLUDE_DIRS}
+        ${TORCH_INCLUDE_DIRS}
         ${Thread_INCLUDE_DIRS}
         ${PYTHON_INCLUDE_DIRS}
         #APPEND THIRD-PARTY-LIBS Qt::Widgets Qt::Core
@@ -116,10 +122,11 @@ target_link_libraries(AlexLens_lib PRIVATE
         Qt5::Widgets
         Qt5::Gui
         ${InferenceEngine_LIBRARIES}
-        /home/pselabs19/inference_engine_samples_build/intel64/Release/lib/libformat_reader.so
+        /home/viet/inference_engine_samples_build/intel64/Release/lib/libformat_reader.so
         ${HDF5_CXX_LIBRARIES}
         Eigen3::Eigen
         ${OpenCV_LIBS}
+        ${OpenCL_LIBRARIES}
         ${PYTHON_LIBRARIES}
         ${TORCH_LIBRARIES}
         )
@@ -142,6 +149,8 @@ add_executable(AlexLens_prog
         ManagerModule/Executor.cpp ManagerModule/Executor.h
         PlatformModule/Platform.cpp PlatformModule/Platform.h
         PlatformModule/ASICPlatform.cpp PlatformModule/ASICPlatform.h
+        PlatformModule/GPUPlatform.cpp PlatformModule/GPUPlatform.h
+        NeuralNetModule/GPUSGeMM.cpp NeuralNetModule/GPUSGeMM.h
         GUIModule/IObserver.h
         GUIModule/Subject.h
         PlatformModule/PlatformManager.cpp PlatformModule/PlatformManager.h
@@ -155,12 +164,13 @@ target_link_libraries(${PROJECT_NAME} PUBLIC
         Qt5::Widgets
         Qt5::Gui
         ${InferenceEngine_LIBRARIES}
-        /home/pselabs19/inference_engine_samples_build/intel64/Release/lib/libformat_reader.so
+        /home/viet/inference_engine_samples_build/intel64/Release/lib/libformat_reader.so
         ${HDF5_CXX_LIBRARIES}
         Eigen3::Eigen
         ${OpenCV_LIBS}
         ${PYTHON_LIBRARIES}
         ${TORCH_LIBRARIES}
+        ${OpenCL_LIBRARIES}
         /usr/lib/x86_64-linux-gnu/libusb-1.0.so
         AlexLens_lib
         )

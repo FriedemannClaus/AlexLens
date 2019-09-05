@@ -29,8 +29,8 @@ void AlexNet::initWeights() {
             conv5_1_w, conv5_1_b, conv5_2_w, conv5_2_b, dense1_w, dense1_b,
             dense2_w, dense2_b, dense3_w, dense3_b
     );
+    GPUMode ? cout << "GPU Platform: " << endl : cout << "CPU Platform: " << endl;
     weightParser->parse();
-    weightParser->setWeights();
 }
 
 void AlexNet::initLayers() {

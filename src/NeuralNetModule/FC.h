@@ -7,6 +7,7 @@
 
 
 #include "Layer.h"
+#include "GPUSGeMM.h"
 
 class FC: public Layer {
 private:
@@ -23,6 +24,7 @@ public:
             GPU_MODE(gpuMode)
     {}
     void forward(ThreeDMatrix &inputMatrix, ThreeDMatrix &outputMatrix) override;
+
 };
 
 

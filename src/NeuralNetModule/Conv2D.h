@@ -32,6 +32,15 @@ public:
             BIAS(bias),
             GPU_MODE(gpuMode)
     {}
+    Conv2D(int numKernels, int kernelSize, int kernelStride, int padding, FourDMatrix &weights, Vector &bias,float* X_):
+            NUM_KERNELS(numKernels),
+            KERNEL_SIZE(kernelSize),
+            STRIDE(kernelStride),
+            PAD(padding),
+            WEIGHTS(weights),
+            BIAS(bias),
+            GPU_MODE(true)
+    {}
     void forward(ThreeDMatrix &inputMatrix, ThreeDMatrix &outputMatrix) override;
 };
 

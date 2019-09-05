@@ -130,9 +130,7 @@ public:
                             Matrix &eigen_dense1_w, Vector &eigen_dense1_b, Matrix &eigen_dense2_w, Vector &eigen_dense2_b, Matrix &eigen_dense3_w, Vector &eigen_dense3_b
     );
     void parse();
-    void setWeights();
 private:
-    void initArrays();
     void initMatrices();
 
     float conv1_w[CONV1_W_NK][CONV1_W_NZ][CONV1_W_NY][CONV1_W_NX];
@@ -160,6 +158,7 @@ private:
     float conv5_2_b[CONV5_2_b_N];
 
     float dense1_w[DENSE1_W_NY][DENSE1_W_NX];
+    //float dense1_w[DENSE1_W_NY * DENSE1_W_NX];
     float dense1_b[DENSE1_b_N];
 
     float dense2_w[DENSE2_W_NY][DENSE2_W_NX];
