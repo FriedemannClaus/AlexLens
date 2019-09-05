@@ -126,7 +126,6 @@ void Executor::train(string dirPath, Mode mode, string neuralNet, string project
     this->platformManager->setNeuralNet(neuralNet);
     list<Platform*> platforms = platformManager->getAvailablePlatforms();
     for (auto platform:platforms) {
-        cout
         platform->setDatasetPath(dirPath);
         platform->setProjectDir(project_dir);
         platform->setNeuralNet(neuralNet);
