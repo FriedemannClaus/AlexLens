@@ -47,8 +47,6 @@ AlexNetWeightParser::AlexNetWeightParser(FourDMatrix &eigen_conv1_w, Vector &eig
 
     this->eigen_dense3_w = &eigen_dense3_w;
     this->eigen_dense3_b = &eigen_dense3_b;
-    //initArrays();
-    initMatrices();
 }
 
 void AlexNetWeightParser::parse() {
@@ -382,6 +380,7 @@ void AlexNetWeightParser::parse() {
 
         dense3BiasDataSet.read(dense3_b, PredType::NATIVE_FLOAT, dense3BiasMemSpace, dense3BiasDataSpace);
         cout << "Weights and biases parsed." << endl;
+        initMatrices();
     }  // end of try block
 
         // catch failure caused by the H5File operations
@@ -406,175 +405,6 @@ void AlexNetWeightParser::parse() {
     }
 }
 
-void AlexNetWeightParser::initArrays() {
-    int i, j, k, l;
-
-    // conv1_w array
-    for (i = 0; i < CONV1_W_NK; i++) {
-        for (j = 0; j < CONV1_W_NZ; j++) {
-            for (k = 0; k < CONV1_W_NY; k++) {
-                for (l = 0; l < CONV1_W_NX ; l++) {
-                    conv1_w[i][j][k][l] = 0;
-                }
-            }
-        }
-    }
-
-    // conv1_b array
-    for (i = 0; i < CONV1_b_N; i++) {
-        conv1_b[i] = 0;
-    }
-
-    // conv2_1_w array
-    for (i = 0; i < CONV2_1_W_NK; i++) {
-        for (j = 0; j < CONV2_1_W_NZ; j++) {
-            for (k = 0; k < CONV2_1_W_NY; k++) {
-                for (l = 0; l < CONV2_1_W_NX ; l++) {
-                    conv2_1_w[i][j][k][l] = 0;
-                }
-            }
-        }
-    }
-
-    // conv2_1_b array
-    for (i = 0; i < CONV2_1_b_N; i++) {
-        conv2_1_b[i] = 0;
-    }
-
-    // conv2_2_w array
-    for (i = 0; i < CONV2_2_W_NK; i++) {
-        for (j = 0; j < CONV2_2_W_NZ; j++) {
-            for (k = 0; k < CONV2_2_W_NY; k++) {
-                for (l = 0; l < CONV2_2_W_NX ; l++) {
-                    conv2_2_w[i][j][k][l] = 0;
-                }
-            }
-        }
-    }
-
-    // conv2_2_b array
-    for (i = 0; i < CONV2_2_b_N; i++) {
-        conv2_2_b[i] = 0;
-    }
-
-    // conv3_w array
-    for (i = 0; i < CONV3_W_NK; i++) {
-        for (j = 0; j < CONV3_W_NZ; j++) {
-            for (k = 0; k < CONV3_W_NY; k++) {
-                for (l = 0; l < CONV3_W_NX ; l++) {
-                    conv3_w[i][j][k][l] = 0;
-                }
-            }
-        }
-    }
-
-    // conv3_b array
-    for (i = 0; i < CONV3_b_N; i++) {
-        conv3_b[i] = 0;
-    }
-
-    // conv4_1_w array
-    for (i = 0; i < CONV4_1_W_NK; i++) {
-        for (j = 0; j < CONV4_1_W_NZ; j++) {
-            for (k = 0; k < CONV4_1_W_NY; k++) {
-                for (l = 0; l < CONV4_1_W_NX ; l++) {
-                    conv4_1_w[i][j][k][l] = 0;
-                }
-            }
-        }
-    }
-
-    // conv4_1_b array
-    for (i = 0; i < CONV4_1_b_N; i++) {
-        conv4_1_b[i] = 0;
-    }
-
-    // conv4_2_w array
-    for (i = 0; i < CONV4_2_W_NK; i++) {
-        for (j = 0; j < CONV4_2_W_NZ; j++) {
-            for (k = 0; k < CONV4_2_W_NY; k++) {
-                for (l = 0; l < CONV4_2_W_NX ; l++) {
-                    conv4_2_w[i][j][k][l] = 0;
-                }
-            }
-        }
-    }
-
-    // conv4_2_b array
-    for (i = 0; i < CONV4_2_b_N; i++) {
-        conv4_2_b[i] = 0;
-    }
-
-    // conv5_1_w array
-    for (i = 0; i < CONV5_1_W_NK; i++) {
-        for (j = 0; j < CONV5_1_W_NZ; j++) {
-            for (k = 0; k < CONV5_1_W_NY; k++) {
-                for (l = 0; l < CONV5_1_W_NX ; l++) {
-                    conv5_1_w[i][j][k][l] = 0;
-                }
-            }
-        }
-    }
-
-    // conv5_1_b array
-    for (i = 0; i < CONV5_1_b_N; i++) {
-        conv5_1_b[i] = 0;
-    }
-
-    // conv5_2_w array
-    for (i = 0; i < CONV5_2_W_NK; i++) {
-        for (j = 0; j < CONV5_2_W_NZ; j++) {
-            for (k = 0; k < CONV5_2_W_NY; k++) {
-                for (l = 0; l < CONV5_2_W_NX ; l++) {
-                    conv5_2_w[i][j][k][l] = 0;
-                }
-            }
-        }
-    }
-
-    // conv5_2_b array
-    for (i = 0; i < CONV5_2_b_N; i++) {
-        conv5_2_b[i] = 0;
-    }
-
-    // dense1_w array
-    for (i = 0; i < DENSE1_W_NY; i++) {
-        for (j = 0; j < DENSE1_W_NX; j++) {
-            //dense1_w[i][j] = 0;
-        }
-    }
-
-    // dense1_b array
-    for (i = 0; i < DENSE1_b_N; i++) {
-        dense1_b[i] = 0;
-    }
-
-    // dense2_w array
-    for (i = 0; i < DENSE2_W_NY; i++) {
-        for (j = 0; j < DENSE2_W_NX; j++) {
-            dense2_w[i][j] = 0;
-        }
-    }
-
-    // dense2_b array
-    for (i = 0; i < DENSE2_b_N; i++) {
-        dense2_b[i] = 0;
-    }
-
-    // dense3_w array
-    for (i = 0; i < DENSE3_W_NY; i++) {
-        for (j = 0; j < DENSE3_W_NX; j++) {
-            dense3_w[i][j] = 0;
-        }
-    }
-
-    // dense3_b array
-    for (i = 0; i < DENSE3_b_N; i++) {
-        dense3_b[i] = 0;
-    }
-    cout << "Inited arrays." << endl;
-}
-
 void AlexNetWeightParser::initMatrices() {
     int i, j;
 
@@ -583,304 +413,133 @@ void AlexNetWeightParser::initMatrices() {
     for (i = 0; i < CONV1_W_NK; i++) {
         for (j = 0; j < CONV1_W_NZ; j++) {
             (*eigen_conv1_w)(i, j).resize(CONV1_W_NY, CONV1_W_NX);
+            (*eigen_conv1_w)(i, j) = Eigen::Map<Eigen::Matrix<float, CONV1_W_NY, CONV1_W_NX, Eigen::RowMajor> >(&conv1_w[i][j][0][0]);
+
         }
     }
 
     // eigen_conv1_b Vector
     eigen_conv1_b->resize(CONV1_b_N);
+    (*eigen_conv1_b) = Eigen::Map<Vector>(conv1_b, CONV1_b_N);
+
 
     // eigen_conv2_1_w FourDMatrix
     eigen_conv2_1_w->resize(CONV2_1_W_NK, CONV2_1_W_NZ);
     for (i = 0; i < CONV2_1_W_NK; i++) {
         for (j = 0; j < CONV2_1_W_NZ; j++) {
             (*eigen_conv2_1_w)(i, j).resize(CONV2_1_W_NY, CONV2_1_W_NX);
+            (*eigen_conv2_1_w)(i, j) = Eigen::Map<Eigen::Matrix<float, CONV2_1_W_NY, CONV2_1_W_NX, Eigen::RowMajor> >(&conv2_1_w[i][j][0][0]);
+
         }
     }
 
     // eigen_conv2_1_b Vector
     eigen_conv2_1_b->resize(CONV2_1_b_N);
+    (*eigen_conv2_1_b) = Eigen::Map<Vector>(conv2_1_b, CONV2_1_b_N);
+
 
     // eigen_conv2_2_w FourDMatrix
     eigen_conv2_2_w->resize(CONV2_2_W_NK, CONV2_2_W_NZ);
     for (i = 0; i < CONV2_2_W_NK; i++) {
         for (j = 0; j < CONV2_2_W_NZ; j++) {
             (*eigen_conv2_2_w)(i, j).resize(CONV2_2_W_NY, CONV2_2_W_NX);
+            (*eigen_conv2_2_w)(i, j) = Eigen::Map<Eigen::Matrix<float, CONV2_2_W_NY, CONV2_2_W_NX, Eigen::RowMajor> >(&conv2_2_w[i][j][0][0]);
         }
     }
 
     // eigen_conv2_2_b Vector
     eigen_conv2_2_b->resize(CONV2_2_b_N);
+    (*eigen_conv2_2_b) = Eigen::Map<Vector>(conv2_2_b, CONV2_2_b_N);
 
     // eigen_conv3_w FourDMatrix
     eigen_conv3_w->resize(CONV3_W_NK, CONV3_W_NZ);
     for (i = 0; i < CONV3_W_NK; i++) {
         for (j = 0; j < CONV3_W_NZ; j++) {
             (*eigen_conv3_w)(i, j).resize(CONV3_W_NY, CONV3_W_NX);
+            (*eigen_conv3_w)(i, j) = Eigen::Map<Eigen::Matrix<float, CONV3_W_NY, CONV3_W_NX, Eigen::RowMajor> >(&conv3_w[i][j][0][0]);
         }
     }
 
     // eigen_conv3_b Vector
     eigen_conv3_b->resize(CONV3_b_N);
+    (*eigen_conv3_b) = Eigen::Map<Vector>(conv3_b, CONV3_b_N);
 
     // eigen_conv4_1_w FourDMatrix
     eigen_conv4_1_w->resize(CONV4_1_W_NK, CONV4_1_W_NZ);
     for (i = 0; i < CONV4_1_W_NK; i++) {
         for (j = 0; j < CONV4_1_W_NZ; j++) {
             (*eigen_conv4_1_w)(i, j).resize(CONV4_1_W_NY, CONV4_1_W_NX);
+            (*eigen_conv4_1_w)(i, j) = Eigen::Map<Eigen::Matrix<float, CONV4_1_W_NY, CONV4_1_W_NX, Eigen::RowMajor> >(&conv4_1_w[i][j][0][0]);
         }
     }
 
     // eigen_conv4_1_b Vector
     eigen_conv4_1_b->resize(CONV4_1_b_N);
+    (*eigen_conv4_1_b) = Eigen::Map<Vector>(conv4_1_b, CONV4_1_b_N);
 
     // eigen_conv4_2_w FourDMatrix
     eigen_conv4_2_w->resize(CONV4_2_W_NK, CONV4_2_W_NZ);
     for (i = 0; i < CONV4_2_W_NK; i++) {
         for (j = 0; j < CONV4_2_W_NZ; j++) {
             (*eigen_conv4_2_w)(i, j).resize(CONV4_2_W_NY, CONV4_2_W_NX);
+            (*eigen_conv4_2_w)(i, j) = Eigen::Map<Eigen::Matrix<float, CONV4_2_W_NY, CONV4_2_W_NX, Eigen::RowMajor> >(&conv4_2_w[i][j][0][0]);
         }
     }
 
     // eigen_conv4_2_b Vector
     eigen_conv4_2_b->resize(CONV4_2_b_N);
+    (*eigen_conv4_2_b) = Eigen::Map<Vector>(conv4_2_b, CONV4_2_b_N);
 
     // eigen_conv5_1_w FourDMatrix
     eigen_conv5_1_w->resize(CONV5_1_W_NK, CONV5_1_W_NZ);
     for (i = 0; i < CONV5_1_W_NK; i++) {
         for (j = 0; j < CONV5_1_W_NZ; j++) {
             (*eigen_conv5_1_w)(i, j).resize(CONV5_1_W_NY, CONV5_1_W_NX);
+            (*eigen_conv5_1_w)(i, j) = Eigen::Map<Eigen::Matrix<float, CONV5_1_W_NY, CONV5_1_W_NX, Eigen::RowMajor> >(&conv5_1_w[i][j][0][0]);
         }
     }
 
     // eigen_conv5_1_b Vector
     eigen_conv5_1_b->resize(CONV5_1_b_N);
+    (*eigen_conv5_1_b) = Eigen::Map<Vector>(conv5_1_b, CONV5_1_b_N);
 
     // eigen_conv5_2_w FourDMatrix
     eigen_conv5_2_w->resize(CONV5_2_W_NK, CONV5_2_W_NZ);
     for (i = 0; i < CONV5_2_W_NK; i++) {
         for (j = 0; j < CONV5_2_W_NZ; j++) {
             (*eigen_conv5_2_w)(i, j).resize(CONV5_2_W_NY, CONV5_2_W_NX);
+            (*eigen_conv5_2_w)(i, j) = Eigen::Map<Eigen::Matrix<float, CONV5_2_W_NY, CONV5_2_W_NX, Eigen::RowMajor> >(&conv5_2_w[i][j][0][0]);
         }
     }
 
     // eigen_conv5_2_b Vector
     eigen_conv5_2_b->resize(CONV5_2_b_N);
+    (*eigen_conv5_2_b) = Eigen::Map<Vector>(conv5_2_b, CONV5_2_b_N);
 
     // eigen_dense1_w Matrix
     eigen_dense1_w->resize(DENSE1_W_NY, DENSE1_W_NX);
+    (*eigen_dense1_w) = Eigen::Map<Eigen::Matrix<float, DENSE1_W_NY, DENSE1_W_NX, Eigen::RowMajor> >(&dense1_w[0][0]);
+
 
     // eigen_dense1_b Vector
     eigen_dense1_b->resize(DENSE1_b_N);
+    (*eigen_dense1_b) = Eigen::Map<Vector>(dense1_b, DENSE1_b_N);
 
     // eigen_dense2_w Matrix
     eigen_dense2_w->resize(DENSE2_W_NY, DENSE2_W_NX);
+    (*eigen_dense2_w) = Eigen::Map<Eigen::Matrix<float, DENSE2_W_NY, DENSE2_W_NX, Eigen::RowMajor> >(&dense2_w[0][0]);
 
     // eigen_dense2_b Vector
     eigen_dense2_b->resize(DENSE2_b_N);
+    (*eigen_dense2_b) = Eigen::Map<Vector>(dense2_b, DENSE2_b_N);
 
     // eigen_dense3_w Matrix
     eigen_dense3_w->resize(DENSE3_W_NY, DENSE3_W_NX);
+    (*eigen_dense3_w) = Eigen::Map<Eigen::Matrix<float, DENSE3_W_NY, DENSE3_W_NX, Eigen::RowMajor> >(&dense3_w[0][0]);
 
     // eigen_dense3_b Vector
     eigen_dense3_b->resize(DENSE3_b_N);
-
-    cout << "Inited matrices." << endl;
-}
-
-void AlexNetWeightParser::setWeights() {
-    int i, j, k, l;
-
-    // eigen_conv1_w
-    for (i = 0; i < CONV1_W_NK; i++) {
-        for (j = 0; j < CONV1_W_NZ; j++) {
-            for (k = 0; k < CONV1_W_NY; k++) {
-                for (l = 0; l < CONV1_W_NX; l++) {
-                    (*eigen_conv1_w)(i, j)(k, l) = conv1_w[i][j][k][l];
-                }
-            }
-        }
-    }
-
-
-    // eigen_conv1_b
-    /*for (i = 0; i < CONV1_b_N; i++) {
-        (*eigen_conv1_b)(i) = conv1_b[i];
-    }*/
-
-    (*eigen_conv1_b) = Eigen::Map<Vector>(conv1_b, CONV1_b_N);
-
-
-    // eigen conv2_1_w
-    for (i = 0; i < CONV2_1_W_NK; i++) {
-        for (j = 0; j < CONV2_1_W_NZ; j++) {
-            for (k = 0; k < CONV2_1_W_NY; k++) {
-                for (l = 0; l < CONV2_1_W_NX; l++) {
-                    (*eigen_conv2_1_w)(i, j)(k, l) = conv2_1_w[i][j][k][l];
-                }
-            }
-        }
-    }
-
-    // eigen_conv2_1_b
-    /*for (i = 0; i < CONV2_1_b_N; i++) {
-        (*eigen_conv2_1_b)(i) = conv2_1_b[i];
-    }*/
-
-    (*eigen_conv2_1_b) = Eigen::Map<Vector>(conv2_1_b, CONV2_1_b_N);
-
-    // eigen conv2_2_w
-    for (i = 0; i < CONV2_2_W_NK; i++) {
-        for (j = 0; j < CONV2_2_W_NZ; j++) {
-            for (k = 0; k < CONV2_2_W_NY; k++) {
-                for (l = 0; l < CONV2_2_W_NX; l++) {
-                    (*eigen_conv2_2_w)(i, j)(k, l) = conv2_2_w[i][j][k][l];
-                }
-            }
-        }
-    }
-
-    // eigen_conv2_2_b
-    /*for (i = 0; i < CONV2_2_b_N; i++) {
-        (*eigen_conv2_2_b)(i) = conv2_2_b[i];
-    }*/
-
-    (*eigen_conv2_2_b) = Eigen::Map<Vector>(conv2_2_b, CONV2_2_b_N);
-
-    // eigen_conv3_w
-    for (i = 0; i < CONV3_W_NK; i++) {
-        for (j = 0; j < CONV3_W_NZ; j++) {
-            for (k = 0; k < CONV3_W_NY; k++) {
-                for (l = 0; l < CONV3_W_NX; l++) {
-                    (*eigen_conv3_w)(i, j)(k, l) = conv3_w[i][j][k][l];
-                }
-            }
-        }
-    }
-
-    // eigen_conv3_b
-    /*for (i = 0; i < CONV3_b_N; i++) {
-        (*eigen_conv3_b)(i) = conv3_b[i];
-    }*/
-
-    (*eigen_conv3_b) = Eigen::Map<Vector>(conv3_b, CONV3_b_N);
-
-    // eigen conv4_1_w
-    for (i = 0; i < CONV4_1_W_NK; i++) {
-        for (j = 0; j < CONV4_1_W_NZ; j++) {
-            for (k = 0; k < CONV4_1_W_NY; k++) {
-                for (l = 0; l < CONV4_1_W_NX; l++) {
-                    (*eigen_conv4_1_w)(i, j)(k, l) = conv4_1_w[i][j][k][l];
-                }
-            }
-        }
-    }
-
-    // eigen_conv4_1_b
-    /*for (i = 0; i < CONV4_1_b_N; i++) {
-        (*eigen_conv4_1_b)(i) = conv4_1_b[i];
-    }*/
-    (*eigen_conv4_1_b) = Eigen::Map<Vector>(conv4_1_b, CONV4_1_b_N);
-
-    // eigen conv4_2_w
-    for (i = 0; i < CONV4_2_W_NK; i++) {
-        for (j = 0; j < CONV4_2_W_NZ; j++) {
-            for (k = 0; k < CONV4_2_W_NY; k++) {
-                for (l = 0; l < CONV4_2_W_NX; l++) {
-                    (*eigen_conv4_2_w)(i, j)(k, l) = conv4_2_w[i][j][k][l];
-                }
-            }
-        }
-    }
-
-    // eigen_conv4_2_b
-    /*for (i = 0; i < CONV4_2_b_N; i++) {
-        (*eigen_conv4_2_b)(i) = conv4_2_b[i];
-    }*/
-
-    (*eigen_conv4_2_b) = Eigen::Map<Vector>(conv4_2_b, CONV4_2_b_N);
-
-    // eigen conv5_1_w
-    for (i = 0; i < CONV5_1_W_NK; i++) {
-        for (j = 0; j < CONV5_1_W_NZ; j++) {
-            for (k = 0; k < CONV5_1_W_NY; k++) {
-                for (l = 0; l < CONV5_1_W_NX; l++) {
-                    (*eigen_conv5_1_w)(i, j)(k, l) = conv5_1_w[i][j][k][l];
-                }
-            }
-        }
-    }
-
-    // eigen_conv5_1_b
-    /*for (i = 0; i < CONV5_1_b_N; i++) {
-        (*eigen_conv5_1_b)(i) = conv5_1_b[i];
-    }*/
-
-    (*eigen_conv5_1_b) = Eigen::Map<Vector>(conv5_1_b, CONV5_1_b_N);
-
-    // eigen conv5_2_w
-    for (i = 0; i < CONV5_2_W_NK; i++) {
-        for (j = 0; j < CONV5_2_W_NZ; j++) {
-            for (k = 0; k < CONV5_2_W_NY; k++) {
-                for (l = 0; l < CONV5_2_W_NX; l++) {
-                    (*eigen_conv5_2_w)(i, j)(k, l) = conv5_2_w[i][j][k][l];
-                }
-            }
-        }
-    }
-
-    // eigen_conv5_2_b
-    /*for (i = 0; i < CONV5_2_b_N; i++) {
-        (*eigen_conv5_2_b)(i) = conv5_2_b[i];
-    }*/
-    (*eigen_conv5_2_b) = Eigen::Map<Vector>(conv5_2_b, CONV5_2_b_N);
-
-    // eigen_dense1_w
-    /*for (i = 0; i < DENSE1_W_NY; i++) {
-        for (j = 0; j < DENSE1_W_NX; j++) {
-            (*eigen_dense1_w)(i, j) = dense1_w[i][j];
-        }
-    }*/
-    //(*eigen_deEigen::Map< Eigen::Matrix<float, DENSE1_W_NY, DENSE1_W_NX, Eigen::RowMajor> >(&dense1_w[0][0])
-    (*eigen_dense1_w) = Eigen::Map<Eigen::Matrix<float, DENSE1_W_NY, DENSE1_W_NX, Eigen::RowMajor> >(&dense1_w[0][0]);
-
-    // eigen_dense1_b
-    /*for (i = 0; i < DENSE1_b_N; i++) {
-        (*eigen_dense1_b)(i) = dense1_b[i];
-    }*/
-
-    (*eigen_dense1_b) = Eigen::Map<Vector>(dense1_b, DENSE1_b_N);
-
-    // eigen_dense2_w
-    /*for (i = 0; i < DENSE2_W_NY; i++) {
-        for (j = 0; j < DENSE2_W_NX; j++) {
-            (*eigen_dense2_w)(i, j) = dense2_w[i][j];
-        }
-    }*/
-    (*eigen_dense2_w) = Eigen::Map<Eigen::Matrix<float, DENSE2_W_NY, DENSE2_W_NX, Eigen::RowMajor> >(&dense2_w[0][0]);
-
-    // eigen_dense2_b
-    /*for (i = 0; i < DENSE2_b_N; i++) {
-        (*eigen_dense2_b)(i) = dense2_b[i];
-    }*/
-
-    (*eigen_dense2_b) = Eigen::Map<Vector>(dense2_b, DENSE2_b_N);
-
-
-    // eigen_dense3_w
-    /*for (i = 0; i < DENSE3_W_NY; i++) {
-        for (j = 0; j < DENSE3_W_NX; j++) {
-            (*eigen_dense3_w)(i, j) = dense3_w[i][j];
-        }
-    }*/
-    (*eigen_dense3_w) = Eigen::Map<Eigen::Matrix<float, DENSE3_W_NY, DENSE3_W_NX, Eigen::RowMajor> >(&dense3_w[0][0]);
-
-    // eigen_dense3_b
-    /*for (i = 0; i < DENSE3_b_N; i++) {
-        (*eigen_dense3_b)(i) = dense3_b[i];
-    }*/
-
     (*eigen_dense3_b) = Eigen::Map<Vector>(dense3_b, DENSE3_b_N);
 
-
-    cout << "Weights and biases set." << endl;
+    cout << "Inited matrices." << endl << endl;
 }
