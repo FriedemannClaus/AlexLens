@@ -15,8 +15,11 @@ void GPUPlatform::runClassify() {
     this->results.clear();
     const clock_t begin_time = clock();
     alexNet->runClassify(this->imageNames);
-    const float final_time = float( clock () - begin_time )/CLOCKS_PER_SEC*100; // not * 1000?!
+    const float final_time = float( clock () - begin_time )/CLOCKS_PER_SEC*1000;
     this->imageNames.clear();
+    cout<<"gpu"<<endl;
+    cout<<final_time<<endl;
+    cout<<final_time/results.size()<<endl;
     this->statistic.setTotalInferenceTime(final_time);
     this->statistic.setAvgIterationTime(final_time/results.size());
 }
