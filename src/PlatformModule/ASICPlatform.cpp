@@ -71,7 +71,7 @@ void ASICPlatform::runClassify() {
         imageNames.clear();
         //executableNetwork.reset();
         reset();
-        string msg("Kein Stick ist angeschlossen");
+        string msg("Es ist kein Stick angeschlossen");
         throw (StickException(msg));
     }
 
