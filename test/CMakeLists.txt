@@ -14,6 +14,14 @@ endif ()
 add_executable(AlexLens_tests test_ReLU.cpp test_MaxPool2D.cpp test_Softmax.cpp test_Normalisation.cpp test_Conv2D.cpp test_Manager.cpp test_Executor.cpp ../src/Exceptions/ReadException.h ../src/Exceptions/StickException.h)
 target_link_libraries(AlexLens_tests AlexLens_lib catch)
 
+# Libusb
+find_package(PkgConfig REQUIRED)
+pkg_search_module(LIBUSB1 REQUIRED libusb-1.0)
+include_directories(SYSTEM ${LIBUSB1_INCLUDE_DIRS})
+
+# OpenCL
+find_package(OpenCL REQUIRED)
+
 # Qt5
 find_package(Qt5Core REQUIRED)
 find_package(Qt5Gui REQUIRED)
@@ -59,16 +67,3 @@ message(STATUS "InferenceEngine library status:")
 message(STATUS "    version: ${InferenceEngine_VERSION}")
 message(STATUS "    libraries: ${InferenceEngine_LIBRARIES}")
 message(STATUS "    include path: ${InferenceEngine_INCLUDE_DIRS}")
-
-target_link_libraries(AlexLens_tests
-        Qt5::Core
-        Qt5::Widgets
-        Qt5::Gui
-        ${InferenceEngine_LIBRARIES}
-        /home/dmitrii/inference_engine_samples_build/intel64/Release/lib/libformat_reader.so
-        ${HDF5_CXX_LIBRARIES}
-        Eigen3::Eigen
-        ${OpenCV_LIBS}
-        ${PYTHON_LIBRARIES}
-        ${TORCH_LIBRARIES}
-        )
