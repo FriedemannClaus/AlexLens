@@ -14,6 +14,12 @@ typedef Eigen::Matrix<Matrix, Eigen::Dynamic, 1> ThreeDMatrix;
 typedef Eigen::Matrix<Matrix, Eigen::Dynamic, Eigen::Dynamic> FourDMatrix;
 
 class Layer {
+    /**
+     * Abstract forward function
+     *
+     * @param input layer input
+     * @param output layer output
+     */
     virtual void forward(ThreeDMatrix &input, ThreeDMatrix &output) = 0;
 };
 

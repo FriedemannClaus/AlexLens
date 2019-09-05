@@ -5,16 +5,16 @@
 #ifndef ALEXLENS_ALEXNETWEIGHTPARSER_H
 #define ALEXLENS_ALEXNETWEIGHTPARSER_H
 
-
 #include <Eigen/Core>
 #include "H5Cpp.h"
 using namespace H5;
 
-typedef Eigen::Matrix<float, Eigen::Dynamic, 1> Vector;
-typedef Eigen::Matrix<float, Eigen::Dynamic, Eigen::Dynamic> Matrix;
-typedef Eigen::Matrix<Matrix, Eigen::Dynamic, 1> ThreeDMatrix;
-typedef Eigen::Matrix<Matrix, Eigen::Dynamic, Eigen::Dynamic> FourDMatrix;
+typedef Eigen::Matrix<float, Eigen::Dynamic, 1> Vector; ///Representation of vectors
+typedef Eigen::Matrix<float, Eigen::Dynamic, Eigen::Dynamic> Matrix; ///Representation of matrices
+typedef Eigen::Matrix<Matrix, Eigen::Dynamic, 1> ThreeDMatrix; ///Representation of 3D matrices
+typedef Eigen::Matrix<Matrix, Eigen::Dynamic, Eigen::Dynamic> FourDMatrix; ///Representation of tensors
 
+//Paths of the specific layers
 const H5std_string	FILE_NAME("../../resources/alexnet/alexnet_model.h5");
 const H5std_string	CONV1_W("/conv_1/conv_1_W");
 const H5std_string	CONV1_b("/conv_1/conv_1_b");
@@ -39,10 +39,11 @@ const H5std_string	DENSE2_b("/dense_2/dense_2_b");
 const H5std_string	DENSE3_W("/dense_3/dense_3_W");
 const H5std_string	DENSE3_b("/dense_3/dense_3_b");
 
-const int CONV1_W_NK = 96;
-const int CONV1_W_NZ = 3;
-const int CONV1_W_NY = 11;
-const int CONV1_W_NX = 11;
+//Sizes of the layers
+const int CONV1_W_NK = 96; ///Number of kernels
+const int CONV1_W_NZ = 3; ///Depth of the Input
+const int CONV1_W_NY = 11; ///Spatial size in y direction
+const int CONV1_W_NX = 11; ///Spatial size in x direction
 const int CONV1_W_RANK_OUT = 4;
 const int CONV1_b_N = 96;
 const int CONV1_b_RANK_OUT = 1;
@@ -123,16 +124,48 @@ const int DENSE3_b_RANK_OUT = 1;
 
 class AlexNetWeightParser {
 public:
+    /**
+     * Class constructor
+     *
+     * @param eigen_conv1_w  convolution 1 layer weights
+     * @param eigen_conv1_b  convolution 1 layer biases
+     * @param eigen_conv2_1_w  convolution 2_1 layer weights
+     * @param eigen_conv2_1_b  convolution 2_1 layer biases
+     * @param eigen_conv2_2_w  convolution 2_2 layer weights
+     * @param eigen_conv2_2_b  convolution 2_2 layer biases
+     * @param eigen_conv3_w  convolution 3 layer weights
+     * @param eigen_conv3_b  convolution 3 layer biases
+     * @param eigen_conv4_1_w  convolution 4_1 layer weights
+     * @param eigen_conv4_1_b  convolution 4_1 layer biases
+     * @param eigen_conv4_2_w  convolution 4_2 layer weights
+     * @param eigen_conv4_2_b  convolution 4_2 layer biases
+     * @param eigen_conv5_1_w  convolution 5_1 layer weights
+     * @param eigen_conv5_1_b  convolution 5_1 layer biases
+     * @param eigen_conv5_2_w  convolution 5_2 layer weights
+     * @param eigen_conv5_2_b  convolution 5_2 layer biases
+     * @param eigen_dense1_w  fully connected 1 layer weights
+     * @param eigen_dense1_b  fully connected 1 layer biases
+     * @param eigen_dense2_w  fully connected 2 layer weights
+     * @param eigen_dense2_b  fully connected 2 layer biases
+     * @param eigen_dense3_w  fully connected 3 layer weights
+     * @param eigen_dense3_b  fully connected 3 layer biases
+     */
     AlexNetWeightParser(    FourDMatrix &eigen_conv1_w, Vector &eigen_conv1_b, FourDMatrix &eigen_conv2_1_w, Vector &eigen_conv2_1_b,
                             FourDMatrix &eigen_conv2_2_w, Vector &eigen_conv2_2_b, FourDMatrix &eigen_conv3_w, Vector &eigen_conv3_b,
                             FourDMatrix &eigen_conv4_1_w, Vector &eigen_conv4_1_b, FourDMatrix &eigen_conv4_2_w, Vector &eigen_conv4_2_b,
                             FourDMatrix &eigen_conv5_1_w, Vector &eigen_conv5_1_b, FourDMatrix &eigen_conv5_2_w, Vector &eigen_conv5_2_b,
                             Matrix &eigen_dense1_w, Vector &eigen_dense1_b, Matrix &eigen_dense2_w, Vector &eigen_dense2_b, Matrix &eigen_dense3_w, Vector &eigen_dense3_b
     );
+    /**
+     * Parsing weights
+     */
     void parse();
 private:
-    void initMatrices();
+    void initMatrices(); ///Initialise Matrices
 
+    /**
+     * Weight arrays of float for reading from the H5 file
+     */
     float conv1_w[CONV1_W_NK][CONV1_W_NZ][CONV1_W_NY][CONV1_W_NX];
     float conv1_b[CONV1_b_N];
 
@@ -158,7 +191,6 @@ private:
     float conv5_2_b[CONV5_2_b_N];
 
     float dense1_w[DENSE1_W_NY][DENSE1_W_NX];
-    //float dense1_w[DENSE1_W_NY * DENSE1_W_NX];
     float dense1_b[DENSE1_b_N];
 
     float dense2_w[DENSE2_W_NY][DENSE2_W_NX];
@@ -167,6 +199,9 @@ private:
     float dense3_w[DENSE3_W_NY][DENSE3_W_NX];
     float dense3_b[DENSE3_b_N];
 
+    /**
+     * Weight matrices in Eigen objects
+     */
     FourDMatrix *eigen_conv1_w;
     Vector *eigen_conv1_b;
 
@@ -201,6 +236,5 @@ private:
     Vector *eigen_dense3_b;
 
 };
-
 
 #endif //ALEXLENS_ALEXNETWEIGHTPARSER_H

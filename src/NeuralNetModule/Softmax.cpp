@@ -1,4 +1,4 @@
-//
+    //
 // Created by Viet Pham.
 //
 
@@ -29,6 +29,8 @@ void Softmax::apply(ThreeDMatrix &input, Vector &output) {
     float sumPropabilities = 0;
     for (int i = 0; i < inputSize; i++) {
         output(i) = exponents(i) / sumExponents;
+        if(isnanf(output(i)))
+            throw std::invalid_argument("Softmax input values are too big!");
         sumPropabilities += output(i);
     }
     //std::cout << "SUM PROPABILITIES: " << sumPropabilities << std::endl;

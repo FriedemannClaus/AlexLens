@@ -88,43 +88,45 @@ TEST_CASE("Convolution forward pass functions correctly", "[slow]") {
             7, 9, 12,
             3, 3, 5;
 
-    SECTION("Output matrix has correct size") {
-        for (hyperStride = 0; hyperStride < 5; hyperStride++) {
-            expectedOutputSize = ceilf(calculateExpectedOutputSize(inputSize, hyperKernelSize, hyperStride, hyperPad));
-            int expectedOutputSize_Floor = floorf(calculateExpectedOutputSize(inputSize, hyperKernelSize, hyperStride,
-                                                                              hyperPad));
-          Conv2D *conv2D = new Conv2D(hyperNumKernels, hyperKernelSize, hyperStride, hyperPad, weights, bias, false);
-            if (hyperStride == 0) {
-                //TODO
-                //REQUIRE_THROWS(conv2D->forward(inputMatrix, outputMatrix));
+    SECTION("Output matrix of the CPU convolution has correct size") {
 
-            } else {
-                conv2D->forward(inputMatrix, outputMatrix);
+        expectedOutputSize = ceilf(calculateExpectedOutputSize(inputSize, hyperKernelSize, hyperStride, hyperPad));
+        int expectedOutputSize_Floor = floorf(calculateExpectedOutputSize(inputSize, hyperKernelSize, hyperStride,
+                                                                          hyperPad));
+        Conv2D *conv2D_CPU = new Conv2D(hyperNumKernels, hyperKernelSize, hyperStride, hyperPad, weights, bias, false);
+        Conv2D *conv2D_GPU = new Conv2D(hyperNumKernels, hyperKernelSize, hyperStride, hyperPad, weights, bias, true);
+        conv2D_CPU->forward(inputMatrix, outputMatrix);
 
+        int outputSize = outputMatrix.size();
+        REQUIRE(outputSize == hyperNumKernels);
+        for (int i = 0; i < outputSize; i++) {
+            REQUIRE(outputMatrix(i).rows() == expectedOutputSize);
+            REQUIRE(outputMatrix(i).cols() == expectedOutputSize);
+        }
+    }
+    SECTION("Output matrix of the CPU convolution has correct size") {
+        expectedOutputSize = ceilf(calculateExpectedOutputSize(inputSize, hyperKernelSize, hyperStride, hyperPad));
+        int expectedOutputSize_Floor = floorf(calculateExpectedOutputSize(inputSize, hyperKernelSize, hyperStride,
+                                                                          hyperPad));
+        Conv2D *conv2D_GPU = new Conv2D(hyperNumKernels, hyperKernelSize, hyperStride, hyperPad, weights, bias, true);
+        conv2D_GPU->forward(inputMatrix, outputMatrix);
 
-                if (expectedOutputSize != expectedOutputSize_Floor) {
-                    REQUIRE_THROWS(conv2D->forward(inputMatrix, outputMatrix));
-                } else {
-                    int outputSize = outputMatrix.size();
-                    REQUIRE(outputSize == hyperNumKernels);
-                    for (int i = 0; i < outputSize; i++) {
-                        REQUIRE(outputMatrix(i).rows() == expectedOutputSize);
-                        REQUIRE(outputMatrix(i).cols() == expectedOutputSize);
-                    }
-                }
-            }
-
+        int outputSize = outputMatrix.size();
+        REQUIRE(outputSize == hyperNumKernels);
+        for (int i = 0; i < outputSize; i++) {
+            REQUIRE(outputMatrix(i).rows() == expectedOutputSize);
+            REQUIRE(outputMatrix(i).cols() == expectedOutputSize);
         }
 
     }
 
     SECTION("GPU computation result is correct") {
         Conv2D *conv2D_GPU = new Conv2D(hyperNumKernels, hyperKernelSize, hyperStride, hyperPad, weights, bias, true);
-        conv2D_GPU->forward(inputMatrix,outputMatrix);
+        conv2D_GPU->forward(inputMatrix, outputMatrix);
 
     }
-    SECTION("CPU computation result is correct"){
+    SECTION("CPU computation result is correct") {
         Conv2D *conv2D_CPU = new Conv2D(hyperNumKernels, hyperKernelSize, hyperStride, hyperPad, weights, bias, false);
-        conv2D_CPU->forward(inputMatrix,outputMatrix);
+        conv2D_CPU->forward(inputMatrix, outputMatrix);
     }
 }

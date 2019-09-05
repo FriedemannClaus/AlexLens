@@ -49,7 +49,7 @@ TEST_CASE("Normalization: Normalization function works correctly", "[fast]") {
         for(int i=0; i<inputDepth;i++){
             for(int j=0;j<inputRows;j++){
                 for(int k=0;k<inputCols;k++){
-                    REQUIRE(expectedOutputMatrix(i)(j,k)-outputMatrix(i)(j,k) == Approx(0).epsilon(DELTA));
+                    REQUIRE(fabsf(expectedOutputMatrix(i)(j,k)-outputMatrix(i)(j,k)) == Approx(0.0).margin(0.005));
                 }
             }
         }
