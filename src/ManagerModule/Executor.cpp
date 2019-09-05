@@ -53,7 +53,6 @@ vector<string> Executor::classify(list<string> imagePaths, Mode mode, string neu
         split[i].push_back(path);
         j++;
         if (j >= avg_rate) {
-            cout << j << " ";
             num_platforms -= 1;
             num_imagePaths -= j;
             if (num_imagePaths == 0) break;
