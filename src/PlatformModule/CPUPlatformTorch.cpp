@@ -84,7 +84,7 @@ void CPUPlatformTorch::runClassify() {
 CPUPlatformTorch::CPUPlatformTorch() {
     this->type = PlatformType::CPU_TORCH;
     this->statistic.setEnergyConsum(20);
-    this->statistic.setFLOPS(19);
+    this->statistic.setFLOPS(90);
 }
 
 void CPUPlatformTorch::setNeuralNet(string neuralNet) {

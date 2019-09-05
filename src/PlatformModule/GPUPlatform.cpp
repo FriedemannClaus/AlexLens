@@ -8,7 +8,7 @@ GPUPlatform::GPUPlatform() {
     this->alexNet = new AlexNet(this->results, true);
     this->type = PlatformType::GPU;
     this->statistic.setEnergyConsum(20);
-    this->statistic.setFLOPS(19);
+    this->statistic.setFLOPS(432);
 }
 
 void GPUPlatform::runClassify() {

@@ -51,15 +51,25 @@ public:
      */
     inline string toString(const PlatformType &type)
     {
+        /*
+        std::stringstream stream;
+        stream << type;
+
+        return stream.str();
+*/
+
         switch (type)
         {
             case PlatformType::CPU:
                 return "CPU";
             case PlatformType::ASIC:
                 return "ASIC";
-            case PlatformType ::CPU_TORCH:
+            case PlatformType::CPU_TORCH:
                 return "CPU_TORCH";
+            case PlatformType::GPU:
+                return "GPU";
         }
+
     }
     /**
      * Convert double object to string.

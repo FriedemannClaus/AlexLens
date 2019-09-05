@@ -9,7 +9,7 @@ CPUPlatform::CPUPlatform() {
     this->alexNet = new AlexNet(this->results, false);
     this->type = PlatformType::CPU;
     this->statistic.setEnergyConsum(20);
-    this->statistic.setFLOPS(19);
+    this->statistic.setFLOPS(90);
 }
 
 

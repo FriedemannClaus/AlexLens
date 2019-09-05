@@ -48,14 +48,24 @@ vector<string> Executor::classify(list<string> imagePaths, Mode mode, string neu
     int i = 0;
     int j = 0;
     int avg_rate = num_imagePaths / num_platforms;
+    if ((num_imagePaths % num_platforms) != 0) avg_rate++;
     for (auto path:imagePaths) {
         split[i].push_back(path);
         j++;
-        if (j > avg_rate) {
+        if (j >= avg_rate) {
+            cout << j << " ";
+            num_platforms -= 1;
+            num_imagePaths -= j;
+            if (num_imagePaths == 0) break;
+            avg_rate = (int) num_imagePaths / num_platforms;
+            if ((num_imagePaths % num_platforms) != 0) avg_rate++;
             j = 0;
             i++;
         }
     }
+
+    num_platforms = platforms.size();
+    num_imagePaths = imagePaths.size();
 
     i=0;
     for(Platform* platform:platforms) {

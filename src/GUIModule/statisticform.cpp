@@ -50,8 +50,8 @@ void StatisticForm::printStatistic() {
         PlatformStatistic platformStatistic = platform->getStatistic();
         QLabel *label = new QLabel(this);
         label->setText(QString::fromStdString("GFLOPS: " + to_string(platformStatistic.getFLOPS())));
-        QLabel *label_2 = new QLabel(this);
-        label_2->setText(QString::fromStdString("\nBandweite (Throughput): " + convertDoubleToStr(platformStatistic.getThroughput()) + " FPS"));
+        //QLabel *label_2 = new QLabel(this);
+        //label_2->setText(QString::fromStdString("\nBandweite (Throughput): " + convertDoubleToStr(platformStatistic.getThroughput()) + " FPS"));
         QLabel *label_3 = new QLabel(this);
         label_3->setText(QString::fromStdString("\nLeistungsverbrauch: "+ convertDoubleToStr(platformStatistic.getEnergyConsum())+ " W"));
         QLabel *label_4 = new QLabel(this);
@@ -60,7 +60,7 @@ void StatisticForm::printStatistic() {
         label_5->setText(QString::fromStdString("\nDurchschnittliche Laufzeit eines Bildes: " + convertDoubleToStr(platformStatistic.getAvgIterationTime()) + " ms"));
         labels->addWidget(name);
         labels->addWidget(label);
-        labels->addWidget(label_2);
+        //labels->addWidget(label_2);
         labels->addWidget(label_3);
         labels->addWidget(label_4);
         labels->addWidget(label_5);
