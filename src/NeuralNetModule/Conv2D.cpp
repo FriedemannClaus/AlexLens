@@ -53,49 +53,21 @@ void Conv2D::forward(ThreeDMatrix &inputMatrix, ThreeDMatrix &outputMatrix) {
 
     //multiplication begin
     if (GPU_MODE) {
+
         // Create W_row, X_col and multResult float arrays
-        int size_X_col = X_col_rows * X_col_cols;
-        int size_W_row = W_row_rows * W_row_cols;
-
-
-        /*
-        float *X_col_array = new float[size_X_col];
-        for (int i = 0; i < X_col_rows; i++) { // fill everything from Vector X_col into array X_col_array
-            for (int j = 0; j < X_col_cols; j++) {
-                X_col_array[j + X_col_cols * i] = X_col(i, j);
-            }
-        }*/
-
         float *X_col_array = X_col.data();
-        //Eigen::Map<Matrix>(X_col_array, X_col.rows(), X_col.cols()) = X_col;
-
-
-        /*
-        float *W_row_array = new float[size_W_row];
-        for (int i = 0; i < W_row_rows; i++) { // fill weights into array W_row_array
-            for (int j = 0; j < W_row_cols; j++) {
-                W_row_array[j + W_row_cols * i] = W_row(i, j);
-            }
-        }*/
-
         float *W_row_array = W_row.data();
-        //Eigen::Map<Matrix>(W_row_array, W_row.rows(), W_row.cols()) = W_row;
 
         int size_multResult = multResult_rows * multResult_cols;
         float *multResult_array = new float[size_multResult];
 
-
         //Now start matrix multiplication
         GPUSGeMM *gpuMultiplication = new GPUSGeMM(W_row_cols, W_row_rows , X_col_cols);
         gpuMultiplication->convolve(W_row_array, X_col_array, multResult_array);
-        //convertToEigen(multResult_array, multResult);
-
         multResult = Eigen::Map<Matrix>(multResult_array, multResult.rows(), multResult.cols());
 
         //free allocated memory
         delete gpuMultiplication;
-        //delete[] X_col_array;
-        //delete[] W_row_array;
         delete[] multResult_array;
 
     } else if (!GPU_MODE) {
@@ -183,17 +155,4 @@ void Conv2D::addBias(ThreeDMatrix *outputMatrix) {
             }
         }
     }
-}
-
-void Conv2D::convertToEigen(float *floatArray, Matrix &multResult) {
-    int resultCol = multResult.cols();
-    int resultRow = multResult.rows();
-
-    for (int i = 0; i < resultRow; i++) {
-        for (int j = 0; j < resultCol; j++) {
-            multResult(i, j) = floatArray[i + j * resultRow];
-        }
-    }
-
-
 }

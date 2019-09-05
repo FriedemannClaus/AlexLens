@@ -27,7 +27,6 @@ private:
     const unsigned int HB = WA;
     const unsigned int WC = WB;
     const unsigned int HC = HA;
-    void randomInit(float* data, int size);
 public:
     GPUSGeMM(int wA, int hA, int wB):
             WA(wA),

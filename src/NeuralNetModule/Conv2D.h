@@ -22,7 +22,6 @@ private:
     void weights2row(Matrix &convertedWeights);
     void reshape(Matrix &resultMatrix, ThreeDMatrix *outputMatrix);
     void addBias(ThreeDMatrix *outputMatrix);
-    void convertToEigen(float *floatArray, Matrix &multResult);
 public:
     Conv2D(int numKernels, int kernelSize, int kernelStride, int padding, FourDMatrix &weights, Vector &bias, bool gpuMode):
             NUM_KERNELS(numKernels),
@@ -43,8 +42,6 @@ public:
             GPU_MODE(true)
     {}
     void forward(ThreeDMatrix &inputMatrix, ThreeDMatrix &outputMatrix) override;
-
-
 };
 
 

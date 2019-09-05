@@ -16,7 +16,6 @@ private:
     const Vector BIAS;
     const bool GPU_MODE;
     void flaten(ThreeDMatrix &inputMatrix, Vector &convertedVector);
-    void convertToEigen(float *floatArray, Vector &memResult);
 public:
     FC(int neurons, Matrix &weights, Vector &bias, bool gpuMode):
             NEURONS(neurons),
