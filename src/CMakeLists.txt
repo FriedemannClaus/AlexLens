@@ -122,7 +122,7 @@ target_link_libraries(AlexLens_lib PRIVATE
         Qt5::Widgets
         Qt5::Gui
         ${InferenceEngine_LIBRARIES}
-        /home/jakubt/inference_engine_samples_build/intel64/Release/lib/libformat_reader.so
+        $ENV{HOME}/inference_engine_samples_build/intel64/Release/lib/libformat_reader.so
         ${HDF5_CXX_LIBRARIES}
         Eigen3::Eigen
         ${OpenCV_LIBS}
@@ -165,7 +165,7 @@ target_link_libraries(${PROJECT_NAME} PUBLIC
         Qt5::Widgets
         Qt5::Gui
         ${InferenceEngine_LIBRARIES}
-        /home/jakubt/inference_engine_samples_build/intel64/Release/lib/libformat_reader.so
+        $ENV{HOME}/inference_engine_samples_build/intel64/Release/lib/libformat_reader.so
         ${HDF5_CXX_LIBRARIES}
         Eigen3::Eigen
         ${OpenCV_LIBS}

@@ -4,11 +4,11 @@
 
 #include "ModeUtil.h"
 
- const map<string, Mode> ModeUtil::stringModeClassify = {{"Optimal: Der optimale Modus, in dem so viel eigener Code benutzt wird, wie möglich. Es wird also die CPU benutzt. Ist AlexNet ausgewählt, wird zusätzlich die GPU verwendet.", Mode::OPTIMAL},
+ const map<string, Mode> ModeUtil::stringModeClassify = {{"Optimal: Der optimale Modus, in dem CPU benutzt wird. Ist AlexNet ausgewählt, wird GPU verwendet.", Mode::OPTIMAL},
                                             {"Hohe Perfomance: Der schnellste und performanteste Modus, in dem alle verfügbaren heterogenen Plattformen benutzt werden.", Mode::HIGH_PERFOMANCE },
-                                            {"Geringer Leistungsverbrauch: Der Modus mit der geringsten maximalen Last, in dem genau ein Intel Movidius Neural Compute Stick benutzt wird.", Mode::LOW_POWER},
+                                            {"Geringer Leistungsverbrauch: Der Modus, in dem genau ein Intel Movidius Neural Compute Stick benutzt wird.", Mode::LOW_POWER},
                                             {"Hohe Energieeffizienz: Der Modus, in dem alle verfügbaren Intel Movidius Neural Compute Sticks benutzt werden.", Mode::ENERGY_EFFICIENT}};
- const map<string, Mode> ModeUtil::stringModeTraining = {{"Optimal: Der einzige und somit optimale Modus, in dem die CPU benutzt wird.", Mode::OPTIMAL}};
+ const map<string, Mode> ModeUtil::stringModeTraining = {{"Optimal: Der Modus, in dem ausschließlich CPU benutzt wird.", Mode::OPTIMAL}};
 
 Mode ModeUtil::whichModeClassify(const string& mode) {
     for(auto const& pair: stringModeClassify) {

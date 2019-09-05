@@ -121,8 +121,15 @@ void ParameterPanel::start()
             this->outputPanel->repaint();
             this->outputPanel->setVisible(true);
             QCoreApplication::processEvents();
-
-            this->manager->runTraining();
+            try {
+                this->manager->runTraining();
+            } catch(exception & e) {
+                QMessageBox::warning(this, "Start", e.what());
+                this->outputPanel->clearPanel();
+                this->inputPanel->clearPanel();
+                this->outputPanel->clearPreviewImages();
+                this->inputPanel->clearPreviewImages();
+            }
         }
         this->inputPanel->clearPanel();
 
