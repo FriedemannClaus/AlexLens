@@ -1,10 +1,11 @@
 //
 // Created by viet on 25.08.19.
 //
-#define CATCH_CONFIG_MAIN  // This tells Catch to provide a main() - only do this in one cpp file
+#define CATCH_CONFIG_MAIN
 
 #include <NeuralNetModule/ReLU.cpp>
 #include "catch.hpp"
+//#include <GUIModule/statisticform.cpp>
 
 TEST_CASE( "ReLU: inputMatrix size equals outputMatrix size", "[fast]") {
      ThreeDMatrix testInput;

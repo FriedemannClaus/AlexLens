@@ -19,18 +19,17 @@
 class InputPanel : public QWidget
 {
     Q_OBJECT
-
 public:
     /**
      * Constructor for class InputPanel.
      * @param parent
      */
-    InputPanel(QWidget *parent = nullptr);
+    explicit InputPanel(QWidget *parent = nullptr);
 
     /**
      * Destructor for class InputPanel.
      */
-    ~InputPanel();
+    virtual ~InputPanel();
 
     /**
      * @param manager manager to set

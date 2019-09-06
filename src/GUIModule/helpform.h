@@ -25,7 +25,7 @@ public:
     /**
      * Destructor for class HelpForm.
      */
-    ~HelpForm();
+    virtual ~HelpForm();
 
 private:
     Ui::HelpForm *ui; /// Skeleton of Helpform

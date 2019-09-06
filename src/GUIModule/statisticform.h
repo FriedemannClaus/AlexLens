@@ -32,7 +32,7 @@ public:
     /**
      * Destructor for class StatisticForm.
      */
-    ~StatisticForm();
+    virtual ~StatisticForm();
 
     /**
      * @param platformManager platformManager to set
