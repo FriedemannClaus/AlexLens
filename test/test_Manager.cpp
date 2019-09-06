@@ -28,7 +28,7 @@ TEST_CASE("Manager: Setters and Getters") {
         REQUIRE(path_str == project_dir_test);
     }
 
-    manager->addImage(path_str + "resources/testimages/bernese.jpg");
+    /*manager->addImage(path_str + "resources/testimages/bernese.jpg");
     manager->setMode(Mode::OPTIMAL);
     manager->setNeuralNet("alexnet");
     manager->runClassify();
@@ -39,7 +39,7 @@ TEST_CASE("Manager: Setters and Getters") {
                          "0.86% EntleBucher\n";
     SECTION("Classification Test 1 image") {
        REQUIRE(manager->getResults()[0] == rightResult);
-    }
+    }*/
     manager->addImage(path_str + "resources/testimages/cat.jpg");
 
     manager->setNeuralNet("googlenet");
