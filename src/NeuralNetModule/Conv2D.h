@@ -5,9 +5,11 @@
 #ifndef ALEXLENS_CONV2D_H
 #define ALEXLENS_CONV2D_H
 
-
 #include "Layer.h"
 
+/**
+ * Class handles convolution computation
+ */
 class Conv2D: public Layer {
 private:
     const int NUM_KERNELS; ///Number of kernels in the layer

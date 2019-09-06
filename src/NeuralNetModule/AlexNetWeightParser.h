@@ -122,6 +122,9 @@ const int DENSE3_W_RANK_OUT = 2;
 const int DENSE3_b_N = 1000;
 const int DENSE3_b_RANK_OUT = 1;
 
+/**
+ * Class handles Neural Net weights parsing
+ */
 class AlexNetWeightParser {
 public:
     /**

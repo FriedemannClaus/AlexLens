@@ -31,8 +31,6 @@ void MaxPool2D::forward(ThreeDMatrix &inputMatrix, ThreeDMatrix &outputMatrix) {
             }
         }
     }
-
-
 }
 
 float MaxPool2D::getMaxFloat(Vector *floats) {

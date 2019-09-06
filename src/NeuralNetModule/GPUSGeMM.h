@@ -15,7 +15,10 @@ using std::endl;
 using std::ofstream;
 using namespace std;
 
-
+/**
+ * Interface class for communication with the GPU device.
+ * Performs matrix multiplication on the GPU device
+ */
 class GPUSGeMM {
 private:
     const unsigned int WA; ///Width of the left input matrix

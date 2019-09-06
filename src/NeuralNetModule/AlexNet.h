@@ -18,6 +18,9 @@ const int IMAGE_SIZE = 227; ///Input image size compatible with AlexNet Neural N
 const int IMAGE_CHANNELS = 3; ///Input image color depth compatible with AlexNet Neural Net
 const std::string LABELS_PATH = "../../resources/alexnet/alexnet_labels.txt"; ///Path to the object class labels file
 
+/**
+ * Class contains all information about the AlexNet Neural Net
+ */
 class AlexNet {
 public:
     /**

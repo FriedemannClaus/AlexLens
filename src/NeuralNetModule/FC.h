@@ -8,6 +8,9 @@
 #include "Layer.h"
 #include "GPUSGeMM.h"
 
+/**
+ * Class handles fully-connected layer output computation
+ */
 class FC: public Layer {
 private:
     const int NEURONS; ///Number of neurons of the layer

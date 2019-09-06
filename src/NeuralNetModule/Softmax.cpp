@@ -7,7 +7,6 @@
 #include <iostream>
 
 void Softmax::forward(ThreeDMatrix &inputMatrix, ThreeDMatrix &outputMatrix) {
-
 }
 
 void Softmax::apply(ThreeDMatrix &input, Vector &output) {
@@ -33,5 +32,4 @@ void Softmax::apply(ThreeDMatrix &input, Vector &output) {
             throw std::invalid_argument("Softmax input values are too big!");
         sumPropabilities += output(i);
     }
-    //std::cout << "SUM PROPABILITIES: " << sumPropabilities << std::endl;
 }
