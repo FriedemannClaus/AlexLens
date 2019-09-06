@@ -76,6 +76,7 @@ vector<string> Executor::classify(list<string> imagePaths, Mode mode, string neu
     //starting threads
     vector<thread> threads;
     for (Platform *platform:platforms) {
+        if (platform->getSizeOgImagePath() == 0) continue;
         thread thr(thrFunction, platform);
         threads.push_back(move(thr));
     }
