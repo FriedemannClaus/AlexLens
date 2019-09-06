@@ -83,7 +83,7 @@ void CPUPlatformTorch::runClassify() {
 
 CPUPlatformTorch::CPUPlatformTorch() {
     this->type = PlatformType::CPU_TORCH;
-    this->statistic.setEnergyConsum(20);
+    this->statistic.setEnergyConsum(25);
     this->statistic.setFLOPS(90);
 }
 

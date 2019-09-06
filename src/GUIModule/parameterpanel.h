@@ -32,12 +32,12 @@ public:
      * Constructor for class ParameterPanel.
      * @param parent
      */
-    ParameterPanel(QWidget *parent = 0);
+    explicit ParameterPanel(QWidget *parent = 0);
 
     /**
      * Destructor for class ParameterPanel.
      */
-    ~ParameterPanel();
+    virtual ~ParameterPanel();
 
     /**
      * Fill parameter box with available modes.

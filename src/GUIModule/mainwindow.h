@@ -33,7 +33,7 @@ public:
     /**
      * Destructor for class MainWindow.
      */
-    ~MainWindow();
+    virtual ~MainWindow();
 
 private slots:
     /**
