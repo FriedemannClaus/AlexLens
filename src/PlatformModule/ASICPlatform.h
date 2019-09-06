@@ -24,13 +24,21 @@ using namespace InferenceEngine;
 
 const std::string whiteSpaces( " \f\n\r\t\v" );
 
+/**
+ * Interface class for the communication with the Intel Movidius Neural Compute Sticks
+ */
 class ASICPlatform : public Platform {
 private:
-    string structure_path;
-    string mapping_path;
-    static std::mutex mutex;
+    string structure_path; ///File path of the IR model
+    string mapping_path; ///File path of the IR model
+    static std::mutex mutex; ///For parallelisation
 public:
+    /**
+     * ASIC platform class constructor
+     * @param id ID of the stick in use
+     */
     ASICPlatform(const int id);
+
     void runClassify() override;
     void setNeuralNet(string neuralNet) override;
 private:

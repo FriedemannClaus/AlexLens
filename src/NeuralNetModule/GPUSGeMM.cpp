@@ -4,7 +4,7 @@
 
 #include "GPUSGeMM.h"
 #include <memory>
-#define MAX_SOURCE_SIZE (0x10000)//geändert
+#define MAX_SOURCE_SIZE (0x10000)
 
 void GPUSGeMM::convolve(float* A, float* B, float* C) {
 
@@ -44,8 +44,6 @@ void GPUSGeMM::convolve(float* A, float* B, float* C) {
     clGetProgramBuildInfo(program, device, CL_PROGRAM_BUILD_LOG, logSize, messages, NULL);
     messages[logSize] = '\0';
     if (logSize > 10) { printf(">>> Compiler message: %s\n", messages); }
-    //free(messages);
-    delete[]messages;
 
     // Prepare OpenCL memory objects
     cl_mem bufA = clCreateBuffer(context, CL_MEM_READ_ONLY, HA * WA * sizeof(float), NULL, NULL);
@@ -68,14 +66,16 @@ void GPUSGeMM::convolve(float* A, float* B, float* C) {
 
     // Run the myGEMM kernel
     size_t TS = 16;
-    const size_t local[2] = {1, 1};
-    const size_t global[2] = {HC, WC};
+    const size_t local[2] = {1, 1}; //size of the local work group. very hardware-sensitive parameter
+    const size_t global[2] = {HC, WC}; //size of the output
     clEnqueueNDRangeKernel(queue, kernel, 2, NULL, global, local, 0, NULL, &event);
 
     // Copy the output matrix C back to the CPU memory
     clEnqueueReadBuffer(queue, bufC, CL_TRUE, 0, HC * WC * sizeof(float), C, 0, NULL, NULL);
 
+    //free allocated memory
     delete[]clMatrixMul;
+    delete[]messages;
 
     // Free the OpenCL memory objects
     clReleaseMemObject(bufA);

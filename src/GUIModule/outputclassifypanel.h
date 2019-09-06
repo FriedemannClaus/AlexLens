@@ -31,12 +31,12 @@ public:
      * Constructor for class OutputClassifyPanel.
      * @param parent
      */
-    OutputClassifyPanel(QWidget *parent = nullptr);
+    explicit OutputClassifyPanel(QWidget *parent = nullptr);
 
     /**
      * Destructor for class OutputClassifyPanel.
      */
-    ~OutputClassifyPanel();
+    virtual ~OutputClassifyPanel();
 
     /**
      * Add images preview to output panel.

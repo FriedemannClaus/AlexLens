@@ -32,16 +32,16 @@ void FC::forward(ThreeDMatrix &inputMatrix, ThreeDMatrix &outputMatrix) {
     multResult.resize(NEURONS);
 
     if (GPU_MODE) {
-        int W_num_rows = WEIGHTS.rows();
         int W_num_cols = WEIGHTS.cols();
-        int size_W = W_num_cols * W_num_rows;
 
+        // Create W_row, X_col and multResult float arrays
         float *X_row_array = X_row.data();
         const float *W_array = WEIGHTS.data();
 
         int size_multResult = outputNumRows;
         float *multResult_array = new float[size_multResult];
 
+        //matrix multiplication on the GPU device
         GPUSGeMM *gpuMultiplication = new GPUSGeMM(size_X_row,1 , W_num_cols);
         gpuMultiplication->convolve(X_row_array, const_cast<float*>(W_array), multResult_array);
         multResult = Eigen::Map<Matrix>(multResult_array, multResult.rows(), multResult.cols());

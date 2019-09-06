@@ -335,7 +335,7 @@ optimizer = optim.Adam(alexnet.parameters())
 device = torch.device("cpu")
 
 # Train the model for 13 epochs
-num_epochs = 13
+num_epochs = 3
 trained_model, history = train_and_validate(alexnet, loss_func, optimizer, num_epochs)
 
 file_log.close()

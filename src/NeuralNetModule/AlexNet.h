@@ -5,7 +5,6 @@
 #ifndef ALEXLENS_ALEXNET_H
 #define ALEXLENS_ALEXNET_H
 
-
 #include "AlexNetWeightParser.h"
 #include "Conv2D.h"
 #include "ReLU.h"
@@ -15,27 +14,48 @@
 #include "Softmax.h"
 #include <vector>
 
-const int IMAGE_SIZE = 227;
-const int IMAGE_CHANNELS = 3;
-const std::string LABELS_PATH = "../../resources/alexnet/alexnet_labels.txt";
+const int IMAGE_SIZE = 227; ///Input image size compatible with AlexNet Neural Net
+const int IMAGE_CHANNELS = 3; ///Input image color depth compatible with AlexNet Neural Net
+const std::string LABELS_PATH = "../../resources/alexnet/alexnet_labels.txt"; ///Path to the object class labels file
 
+/**
+ * Class contains all information about the AlexNet Neural Net
+ */
 class AlexNet {
 public:
+    /**
+     * AlexNet class constructor which initialises the AlexNet Neural Net
+     * @param results results vector of String where the output of the classification is saved
+     * @param mode true if running on GPU, false if running on CPU
+     */
     AlexNet(std::vector<std::string> &results, bool mode);
+
+    /**
+     * Image classification function which runs the input through the AlexNet
+     * @param imagePaths vector of paths of inputted images
+     */
     void runClassify(std::vector<std::string> imagePaths);
+
 private:
-    void initWeights();
-    void initLayers();
-    void initLabels();
-    void splitTensor(ThreeDMatrix &input, ThreeDMatrix &output_1, ThreeDMatrix &output_2);
-    void mergeTensors(ThreeDMatrix &input_1, ThreeDMatrix &input_2, ThreeDMatrix &output);
-    void convertImages(std::vector<std::string> &imagePaths, std::vector<ThreeDMatrix> &imageMatrices);
-    void setResults();
 
-    std::vector<std::string> *results;
-    bool GPUMode;
+    void initWeights(); ///Initialising AlexNet weights
 
-    std::string classes[1000];
+    void initLayers(); ///Initialising AlexNet layers
+
+    void initLabels(); ///Initialising object class labels
+
+    void splitTensor(ThreeDMatrix &input, ThreeDMatrix &output_1, ThreeDMatrix &output_2); ///Split tensor objects before splitted convolutional layers
+
+    void mergeTensors(ThreeDMatrix &input_1, ThreeDMatrix &input_2, ThreeDMatrix &output); ///Merge tensor objects before splitted convolutional layers
+
+    void convertImages(std::vector<std::string> &imagePaths, std::vector<ThreeDMatrix> &imageMatrices); ///Convert images to tensor objects
+
+    void setResults(); ///Set the results vector with classification results
+
+    std::vector<std::string> *results; /// Results vector
+    bool GPUMode; /// Operation mode
+
+    std::string classes[1000]; ///Object classes
 
     // Weights and biases
     FourDMatrix conv1_w;

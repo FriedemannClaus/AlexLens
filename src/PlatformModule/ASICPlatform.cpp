@@ -28,14 +28,15 @@ ASICPlatform::ASICPlatform(const int id) {
 InferencePlugin ASICPlatform::initPlugin() {
     InferenceEnginePluginPtr pluginPtr;
     try {
-        pluginPtr = PluginDispatcher({"/opt/intel/openvino/deployment_tools/inference_engine/lib/intel64"}).getSuitablePlugin(TargetDevice::eMYRIAD);
-    }catch (exception& e){
+        pluginPtr = PluginDispatcher(
+                {"/opt/intel/openvino/deployment_tools/inference_engine/lib/intel64"}).getSuitablePlugin(
+                TargetDevice::eMYRIAD);
+    } catch (exception &e) {
         this->imageNames.clear();
         string msg("Es ist kein Stick angeschlossen!");
         throw (StickException(msg));
     }
 
-    //InferenceEnginePluginPtr pluginPtr = PluginDispatcher({"/opt/intel/openvino/deployment_tools/inference_engine/lib/intel64"}).getSuitablePlugin(TargetDevice::eMYRIAD);
     InferencePlugin plugin(pluginPtr);
     return plugin;
 }
@@ -46,7 +47,7 @@ CNNNetwork ASICPlatform::readIR() {
         netReader.ReadNetwork(structure_path);
         netReader.ReadWeights(model_path);
         net = netReader.getNetwork();
-    } catch (exception & e) {
+    } catch (exception &e) {
         imageNames.clear();
         string msg("Es wurde kein Model gedunden!");
         throw (StickException(msg));
@@ -66,10 +67,9 @@ void ASICPlatform::runClassify() {
 
     try {
         loadModelToPlugin(&executableNetwork);
-    } catch (exception & e) {
+    } catch (exception &e) {
         cout << "load to plugin failes" << endl;
         imageNames.clear();
-        //executableNetwork.reset();
         reset();
         string msg("Es ist kein Stick angeschlossen");
         throw (StickException(msg));
@@ -98,15 +98,15 @@ void ASICPlatform::runClassify() {
 }
 
 
-void ASICPlatform::configInputOutput(vector<string> *imageNames, vector<shared_ptr<unsigned char>> *imagesData, size_t *batchSize, string *firstOutputName) {
+void ASICPlatform::configInputOutput(vector<string> *imageNames, vector<shared_ptr<unsigned char>> *imagesData,
+                                     size_t *batchSize, string *firstOutputName) {
 
     auto inputInfoItem = *inputInfo.begin();
     inputInfoItem.second->setPrecision(Precision::U8); // Precision parameter
     inputInfoItem.second->setLayout(Layout::NCHW); // Layout of input data
 
     //transfer images from imagepaths to appropriate format in order to work with them
-    for (auto & i: *imageNames)
-    {
+    for (auto &i: *imageNames) {
         FormatReader::ReaderPtr reader(i.c_str());
         //check image loading read
         if (reader.get() == nullptr) continue;
@@ -127,7 +127,7 @@ void ASICPlatform::configInputOutput(vector<string> *imageNames, vector<shared_p
     //Prep Output
     outputInfo = net.getOutputsInfo();
 
-    for (auto & item : outputInfo) {
+    for (auto &item : outputInfo) {
         if (firstOutputName->empty()) {
             *firstOutputName = item.first;
         }
@@ -146,17 +146,12 @@ void ASICPlatform::loadModelToPlugin(ExecutableNetwork *executableNetwork) {
     mutex.lock();
     *executableNetwork = myriadPlugin.LoadNetwork(net, {});
     mutex.unlock();
-   /*if (nullptr == &executableNetwork) {
-        cout << "loadmodelto plugun NULL " << endl;
-        this->imageNames.clear();
-
-    }*/
     outputInfo = {};
     net = {};
 }
 
 void ASICPlatform::prepareInput(InferRequest *inferRequest, vector<shared_ptr<unsigned char>> *imagesData) {
-    for (const auto & item : inputInfo) {
+    for (const auto &item : inputInfo) {
         // Creating input blob
         Blob::Ptr input = inferRequest->GetBlob(item.first);
 
@@ -164,7 +159,7 @@ void ASICPlatform::prepareInput(InferRequest *inferRequest, vector<shared_ptr<un
         size_t num_channels = input->getTensorDesc().getDims()[1];
         size_t image_size = input->getTensorDesc().getDims()[2] * input->getTensorDesc().getDims()[3];
 
-        auto data = input->buffer().as<PrecisionTrait<Precision::U8>::value_type*>();
+        auto data = input->buffer().as<PrecisionTrait<Precision::U8>::value_type *>();
 
         //Iterate over all input images
         for (size_t image_id = 0; image_id < imagesData->size(); ++image_id) {
@@ -173,7 +168,8 @@ void ASICPlatform::prepareInput(InferRequest *inferRequest, vector<shared_ptr<un
                 // Iterate over all channels
                 for (size_t ch = 0; ch < num_channels; ++ch) {
                     // [images stride + channels stride + pixel id ] all in bytes
-                    data[image_id * image_size * num_channels + ch * image_size + pid ] = (*imagesData).at(image_id).get()[pid*num_channels + ch];
+                    data[image_id * image_size * num_channels + ch * image_size + pid] = (*imagesData).at(
+                            image_id).get()[pid * num_channels + ch];
                 }
             }
         }
@@ -218,15 +214,13 @@ void ASICPlatform::loadLabels(vector<string> *labels) {
 }
 
 
-void ASICPlatform::trimRight(string& str, const string& trimChars)
-{
+void ASICPlatform::trimRight(string &str, const string &trimChars) {
     string::size_type pos = str.find_last_not_of(trimChars);
     str.erase(pos + 1);
 }
 
 
-void ASICPlatform::trimLeft(string& str, const string& trimChars)
-{
+void ASICPlatform::trimLeft(string &str, const string &trimChars) {
     string::size_type pos = str.find_first_not_of(trimChars);
     str.erase(0, pos);
 }
@@ -259,60 +253,36 @@ void ASICPlatform::createResultVector(Blob::Ptr _outBlob, vector<string> *imageN
     for (unsigned int image_id = 0; image_id < *batchSize; ++image_id) {
         string resultString = "";
 
-        //cout << "Image " << (*imageNames)[image_id] << endl;
-        //resultString = (*imageNames)[image_id];
-
-        /*// Header
-        cout << _classidStr << " " << _probabilityStr;
-        if (!labels->empty())
-            cout << " " << _labelStr;
-        string classidColumn(_classidStr.length(), '-');
-        string probabilityColumn(_probabilityStr.length(), '-');
-        string labelColumn(_labelStr.length(), '-');
-        cout << endl << classidColumn << " " << probabilityColumn;
-        if (!labels->empty())
-            cout << " " << labelColumn;
-        cout << endl;*/
-
         for (size_t id = image_id * NUM_TOP_RESULTS, cnt = 0; id < (image_id + 1) * NUM_TOP_RESULTS; ++cnt, ++id) {
             cout.precision(7);
             /** Getting probability for resulting class **/
             const auto result = _outBlob->buffer().
-                    as<InferenceEngine::PrecisionTrait<InferenceEngine::Precision::FP32>::value_type*>()
+                    as<InferenceEngine::PrecisionTrait<InferenceEngine::Precision::FP32>::value_type *>()
             [results[id] + image_id * (_outBlob->size() / *batchSize)];
-
-            //cout << setw(static_cast<int>(_classidStr.length())) << left << results[id] << " ";
-            //cout << left << setw(static_cast<int>(_probabilityStr.length())) << fixed << result;
-            //resultString += to_string(result);
             resultString += floatToPercent(result);
 
             if (!labels->empty()) {
-                //cout << " " + (*labels)[results[id]];
-                //resultString += "   ";
                 resultString += (*labels)[results[id]];
 
             }
-            //cout << endl;
             resultString += '\n';
         }
         resultVector->push_back(resultString);
-        //cout << endl;
     }
 }
 
 void ASICPlatform::setStatistics(double *total, size_t *batchSize) {
     statistic.setTotalInferenceTime(*total);
     statistic.setAvgIterationTime(*total / imageNames.size());
-    //statistic.setAvgIterationTime(*total / static_cast<double>(NUM_ITERATIONS)); // ms
     statistic.setThroughput(1000 * static_cast<double>(NUM_ITERATIONS) * *batchSize / *total); // FPS
 }
 
 void ASICPlatform::setNeuralNet(string neuralNet) {
     this->model_path = this->project_dir + "resources/" + neuralNet + "/";
     this->model_path += neuralNet + "_model" + ".bin";
-    this->structure_path = this->project_dir +  "resources/" + neuralNet + "/";
+    this->structure_path = this->project_dir + "resources/" + neuralNet + "/";
     this->structure_path += neuralNet + ".xml";
-    this->mapping_path = this->project_dir +  "resources/" + neuralNet + "/";
+    this->mapping_path = this->project_dir + "resources/" + neuralNet + "/";
     this->mapping_path += neuralNet + ".mapping";
     this->label_path = this->project_dir + "resources/" + neuralNet + "/";
     this->label_path += neuralNet + "_labels" + ".txt";

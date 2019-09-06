@@ -19,9 +19,6 @@ void CPUPlatform::runClassify() {
     alexNet->runClassify(this->imageNames);
     const float final_time = float( clock () - begin_time )/CLOCKS_PER_SEC*1000;
     this->imageNames.clear();
-    cout<<"cpu"<<endl;
-    cout<<final_time<<endl;
-    cout<<final_time/results.size()<<endl;
     this->statistic.setTotalInferenceTime(final_time);
     this->statistic.setAvgIterationTime(final_time/results.size());
 }

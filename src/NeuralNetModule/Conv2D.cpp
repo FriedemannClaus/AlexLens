@@ -8,15 +8,15 @@
 
 void Conv2D::forward(ThreeDMatrix &inputMatrix, ThreeDMatrix &outputMatrix) {
 
+    //zero-padd input
     ThreeDMatrix paddedMatrix;
     if (PAD > 0) {
         zeroPadding(inputMatrix, paddedMatrix);
-    } else {
+    } else{
         paddedMatrix = inputMatrix;
     }
 
     //resize outputMatrix
-    int paddedNumChannels = paddedMatrix.rows();
     int paddedNumRows = paddedMatrix(0).rows();
     int paddedNumCols = paddedMatrix(0).cols();
 
@@ -29,21 +29,21 @@ void Conv2D::forward(ThreeDMatrix &inputMatrix, ThreeDMatrix &outputMatrix) {
         outputMatrix(i).resize(outputNumRows, outputNumCols);
     }
 
-    //Preparation for matrix multiplication (flaten our matrices)
+    //Preparation for matrix multiplication (flatten our matrices)
     int weightsNZ = WEIGHTS.cols();
     //resize X_col
     Matrix X_col;
     int X_col_rows = KERNEL_SIZE * KERNEL_SIZE * weightsNZ;
     int X_col_cols = outputNumRows * outputNumCols;
     X_col.resize(X_col_rows, X_col_cols);
-    image2col(paddedMatrix, X_col);
+    image2col(paddedMatrix, X_col); //flatten from 3D to 2D
 
     //resize W_row
     Matrix W_row;
     int W_row_rows = NUM_KERNELS;
     int W_row_cols = KERNEL_SIZE * KERNEL_SIZE * weightsNZ;
     W_row.resize(W_row_rows, W_row_cols);
-    weights2row(W_row);
+    weights2row(W_row); //flatten from 4D to 2D
 
     //resize multResult
     Matrix multResult;
@@ -61,10 +61,10 @@ void Conv2D::forward(ThreeDMatrix &inputMatrix, ThreeDMatrix &outputMatrix) {
         int size_multResult = multResult_rows * multResult_cols;
         float *multResult_array = new float[size_multResult];
 
-        //Now start matrix multiplication
+        //matrix multiplication on the GPU device
         GPUSGeMM *gpuMultiplication = new GPUSGeMM(W_row_cols, W_row_rows , X_col_cols);
         gpuMultiplication->convolve(W_row_array, X_col_array, multResult_array);
-        multResult = Eigen::Map<Matrix>(multResult_array, multResult.rows(), multResult.cols());
+        multResult = Eigen::Map<Matrix>(multResult_array, multResult.rows(), multResult.cols()); //conversion from float array back to eigen object
 
         //free allocated memory
         delete gpuMultiplication;
@@ -107,7 +107,6 @@ void Conv2D::zeroPadding(ThreeDMatrix &inputMatrix, ThreeDMatrix &paddedMatrix) 
 
 void Conv2D::image2col(ThreeDMatrix &inputMatrix, Matrix &convertedMatrix) {
     int numKernelElements = KERNEL_SIZE * KERNEL_SIZE;
-    int inputNumChannels = inputMatrix.rows();
     int numStridesPerRowCol = ((inputMatrix(0).rows() - KERNEL_SIZE) / STRIDE) + 1;
 
     for (int j = 0; j < convertedMatrix.cols(); j++) {
@@ -120,7 +119,6 @@ void Conv2D::image2col(ThreeDMatrix &inputMatrix, Matrix &convertedMatrix) {
 }
 
 void Conv2D::weights2row(Matrix &convertedWeights) {
-    int weightsNK = WEIGHTS.rows();
     int weightsNZ = WEIGHTS.cols();
     int numKernelElements = KERNEL_SIZE * KERNEL_SIZE;
 
@@ -132,7 +130,7 @@ void Conv2D::weights2row(Matrix &convertedWeights) {
     }
 }
 
-void Conv2D::reshape(Matrix &resultMatrix, ThreeDMatrix *outputMatrix) { //needs check
+void Conv2D::reshape(Matrix &resultMatrix, ThreeDMatrix *outputMatrix) {
     int outputNumRows = (*outputMatrix)(0).rows();
     int outputNumCols = (*outputMatrix)(0).cols();
     for (int i = 0; i < NUM_KERNELS; i++) {
