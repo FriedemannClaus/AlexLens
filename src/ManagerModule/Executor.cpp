@@ -28,6 +28,10 @@ void thrFunction(Platform *platform) {
 vector<string> Executor::classify(list<string> imagePaths, Mode mode, string neuralNet, string project_dir) {
     this->platformManager->setMode(mode);
     this->platformManager->setNeuralNet(neuralNet);
+    if ((platformManager->getNumberOfSticks() == 0) && (mode == Mode::LOW_POWER || mode == Mode::ENERGY_EFFICIENT)){
+        string msg("Es ist kein Stick angeschlossen");
+        throw (StickException(msg));
+    }
 
     list<Platform*> platforms = platformManager->getAvailablePlatforms();
     for(Platform* platform:platforms) {

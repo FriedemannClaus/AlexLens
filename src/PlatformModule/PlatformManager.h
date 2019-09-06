@@ -21,7 +21,7 @@ using namespace std;
  */
 class PlatformManager {
 private:
-    int NUM_PLATFORMS = 1; /// The number Of ASICPlatforms
+    int NUM_PLATFORMS = 0; /// The number Of ASICPlatforms
     list<Platform*> platforms; /// List of all initialized platforms
     Mode mode; ///The Mode which was set by user
     string neuralNet;  /// The neural net which was set by user
@@ -60,6 +60,12 @@ public:
      * The method determines the number of sticks
      */
     void setNumberOfSticks();
+
+    /**
+     * The method returns number of connected sticks
+     * @return number of connected sticks
+     */
+    inline int getNumberOfSticks() {return NUM_PLATFORMS;}
 };
 
 
