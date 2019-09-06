@@ -20,7 +20,7 @@ void thrFunction(Platform *platform) {
     try {
         platform->runClassify();
     } catch (exception & e) {
-        cout << "Thead function" << endl;
+        cout << "Caught Exception in Thread function" << endl;
         Executor::exceptionPointers.push_back(std::current_exception());
     }
 }
@@ -91,7 +91,7 @@ vector<string> Executor::classify(list<string> imagePaths, Mode mode, string neu
             try {
                 std::rethrow_exception(*it);
             } catch (const std::exception &e) {
-                cout << "Catched exception in Executor, size " << exceptionPointers.size() << endl;
+                cout << "Caught exception in Executor, size of Thread buffer" << exceptionPointers.size() << endl;
                 Executor::exceptionPointers.erase(it--);
                 platformManager->clearAllImagePaths();
                 Executor::exceptionPointers.clear();
