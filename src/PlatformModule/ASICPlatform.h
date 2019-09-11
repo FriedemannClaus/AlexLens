@@ -39,11 +39,19 @@ public:
      */
     ASICPlatform(const int id);
 
+    /**
+     * Runs image classification on the ASIC platform
+     */
     void runClassify() override;
+
+    /**
+     * Sets the Neural Net architecture and its parameters on the ASIC platform
+     * @param neuralNet
+     */
     void setNeuralNet(string neuralNet) override;
 private:
-    InferencePlugin initPlugin();
-    CNNNetwork readIR();
+    InferencePlugin initPlugin(); ///Initializes the Inference plugin
+    CNNNetwork readIR(); /// Reads the Neural Net parameters and outputs a configured NN
 
     void loadModelToPlugin(ExecutableNetwork *executableNetwork);
     void configInputOutput(vector<string> *imageNames, vector<shared_ptr<unsigned char>> *imagesData, size_t *batchSize, string *firstOutputName);

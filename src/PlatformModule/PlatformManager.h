@@ -31,6 +31,9 @@ public:
      */
     PlatformManager();
 
+    /**
+     * Standard class destructor
+     */
     ~PlatformManager() ;
 
     /**
