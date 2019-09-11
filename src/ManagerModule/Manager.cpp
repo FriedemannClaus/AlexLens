@@ -100,9 +100,10 @@ void Manager::setProjectDir() {
     path = getcwd(path, size);
     string path_str = std::string(path);
     path_str = path;
-    path_str = path_str.erase(path_str.length()-4);
-    path_str = path_str.erase(path_str.rfind('/')+1);
+    size_t pos = path_str.rfind("/AlexLens/");
+    path_str = path_str.erase(pos + 10);
     this->PROJECT_DIR = path_str;
+    cout << "PROJECT DIRECTORY: " << this->PROJECT_DIR << endl;
 }
 
 bool Manager::exists_file(const std::string &name) {

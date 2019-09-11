@@ -20,7 +20,7 @@ void thrFunction(Platform *platform) {
     try {
         platform->runClassify();
     } catch (exception & e) {
-        cout << "Thead function" << endl;
+        cout << "Caught Exception in Thread function" << endl;
         Executor::exceptionPointers.push_back(std::current_exception());
     }
 }
@@ -28,6 +28,10 @@ void thrFunction(Platform *platform) {
 vector<string> Executor::classify(list<string> imagePaths, Mode mode, string neuralNet, string project_dir) {
     this->platformManager->setMode(mode);
     this->platformManager->setNeuralNet(neuralNet);
+    if ((platformManager->getNumberOfSticks() == 0) && (mode == Mode::LOW_POWER || mode == Mode::ENERGY_EFFICIENT)){
+        string msg("Es ist kein Stick angeschlossen");
+        throw (StickException(msg));
+    }
 
     list<Platform*> platforms = platformManager->getAvailablePlatforms();
     for(Platform* platform:platforms) {
@@ -76,6 +80,7 @@ vector<string> Executor::classify(list<string> imagePaths, Mode mode, string neu
     //starting threads
     vector<thread> threads;
     for (Platform *platform:platforms) {
+        if (platform->getSizeOgImagePath() == 0) continue;
         thread thr(thrFunction, platform);
         threads.push_back(move(thr));
     }
@@ -91,7 +96,7 @@ vector<string> Executor::classify(list<string> imagePaths, Mode mode, string neu
             try {
                 std::rethrow_exception(*it);
             } catch (const std::exception &e) {
-                cout << "Catched exception in Executor, size " << exceptionPointers.size() << endl;
+                cout << "Caught exception in Executor, size of Thread buffer" << exceptionPointers.size() << endl;
                 Executor::exceptionPointers.erase(it--);
                 platformManager->clearAllImagePaths();
                 Executor::exceptionPointers.clear();

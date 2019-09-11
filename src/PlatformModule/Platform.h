@@ -90,6 +90,11 @@ public:
      */
     inline void clearImagePaths() {imageNames.clear();}
 
+    /**
+     * The method transform float number into percent
+     * @param a float number
+     * @return percent
+     */
     inline static string floatToPercent(float a) {
         std::string result = "";
         std::stringstream stream;
@@ -99,6 +104,11 @@ public:
         return result;
 
     }
+    /**
+     * The method returns the number of images to classify
+     * @return size of images to classify
+     */
+    inline int getSizeOgImagePath() {return imageNames.size();}
 
 private:
     /**
