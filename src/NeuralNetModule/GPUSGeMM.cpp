@@ -66,7 +66,7 @@ void GPUSGeMM::convolve(float* A, float* B, float* C) {
 
     // Run the myGEMM kernel
     size_t TS = 16;
-    const size_t local[2] = {1, 1}; //size of the local work group. very hardware-sensitive parameter
+    const size_t local[2] = {2*TS, TS/2}; //size of the local work group. very hardware-sensitive parameter
     const size_t global[2] = {HC, WC}; //size of the output
     clEnqueueNDRangeKernel(queue, kernel, 2, NULL, global, local, 0, NULL, &event);
 

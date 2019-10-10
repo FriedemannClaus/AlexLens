@@ -17,6 +17,7 @@ using namespace std;
 ParameterPanel::ParameterPanel(QWidget *parent)
         : QWidget(parent)
 {
+    //TODO
     //resize(640, 480);
 
     m_gridLayout = new QGridLayout(this);
@@ -105,8 +106,6 @@ void ParameterPanel::start()
 
             }
 
-            //this->manager->runClassify();
-
             this->inputPanel->clearPreviewImages();
 
             this->manager->clearImagePaths();
@@ -149,6 +148,7 @@ void ParameterPanel::reset()
     QMessageBox msgBox;
     msgBox.setWindowTitle("Reset");
     msgBox.setText("Sollten die Panels resettet werden?");
+    //TODO
     //msgBox.setInformativeText("Die Panels links und rechts werden leer");
     msgBox.setStandardButtons(QMessageBox::Cancel | QMessageBox::Reset);
     msgBox.setDefaultButton(QMessageBox::Cancel);
@@ -179,6 +179,7 @@ void ParameterPanel::reset()
             break;
     }
 
+    //TODO
     /*
     if (runWasPushed) {
         QMessageBox::warning(this, "Beenden", "Prozess wird beendet!");

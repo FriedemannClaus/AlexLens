@@ -25,6 +25,7 @@ MainWindow::MainWindow(Manager* manager, Subject* subject, QWidget *parent) :
         ui(new Ui::MainWindow)
 {
 
+    //TODO
     //Executor* executor = new Executor;
     //executor->panel = ui->outputClassifyPanel;
     //manager->executor = executor;
@@ -67,7 +68,6 @@ MainWindow::MainWindow(Manager* manager, Subject* subject, QWidget *parent) :
     this->manager->getSubject()->attachObserver(ui->outputTrainingPanel);
     this->manager->getSubject()->attachObserver(ui->parameterClassifyPanel);
     this->manager->getSubject()->attachObserver(ui->parameterTrainingPanel);
-    // = ui->outputClassifyPanel;
 }
 
 void MainWindow::on_actionHilfe_triggered()

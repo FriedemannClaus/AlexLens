@@ -5,7 +5,6 @@
 #include "../PlatformModule/ModeUtil.h"
 #include "Executor.h"
 #include <thread>
-#include <Exceptions/ReadException.h>
 
 
 
@@ -100,6 +99,7 @@ vector<string> Executor::classify(list<string> imagePaths, Mode mode, string neu
                 Executor::exceptionPointers.erase(it--);
                 platformManager->clearAllImagePaths();
                 Executor::exceptionPointers.clear();
+                //TODO
                 //delete this->platformManager;
                 //this->platformManager = new PlatformManager();
                 throw;
