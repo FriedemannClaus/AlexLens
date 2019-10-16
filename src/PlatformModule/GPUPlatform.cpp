@@ -3,6 +3,7 @@
 //
 
 #include "GPUPlatform.h"
+#include <sys/time.h>
 
 GPUPlatform::GPUPlatform() {
     this->alexNet = new AlexNet(this->results, true);
@@ -13,9 +14,13 @@ GPUPlatform::GPUPlatform() {
 
 void GPUPlatform::runClassify() {
     this->results.clear();
-    const clock_t begin_time = clock();
+
+    struct timespec begin, finish;
+    clock_gettime(CLOCK_MONOTONIC, &begin);
     alexNet->runClassify(this->imageNames);
-    const float final_time = float( clock () - begin_time )/CLOCKS_PER_SEC*10000;
+    clock_gettime(CLOCK_MONOTONIC, &finish);
+
+    const float final_time = (finish.tv_sec - begin.tv_sec) + (finish.tv_nsec - begin.tv_nsec) / 1000000.0;
     this->imageNames.clear();
     this->statistic.setTotalInferenceTime(final_time);
     this->statistic.setAvgIterationTime(final_time/results.size());
