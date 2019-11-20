@@ -1,6 +1,8 @@
 ﻿# AlexLens
 
 AlexLens is an Image Classification and Transfer Learning program for heterogeneous platforms with the Neural-Net-Classification built from scratch. It was developed during a project at KIT.
+The team consisted of Viet Pham, Dmitrii Seletkov, Aleksandr Eismont, Jakub Trzciński and Friedemann Claus.
+
 
 The program is designed to run on a specific PC, which has Ubuntu 18.04 as the operating system, 8 GB of RAM, a Core-i5 4600 CPU and its onboard graphics as the GPU.
 But with exception to the GPU classification of AlexNet it should work on most other hardware (not software) as well - unsupportedly. It also takes advantage of up to four Intel Movidius Neural Compute Sticks (Gen 1 is officially supported, but Gen 2 also works according to our tests).
@@ -14,6 +16,9 @@ For it to run you need to follow three steps:
  2. Unzip it and place it in the AlexLens folder
  3. Install the necessary libraries, if you don't have them running already:
  
+ Optionally, we also provide a training dataset as an example [here](https://cloud.viet-pham.de/s/eKRM5JyxBpAAjEn?path=%2F).
+ 
+ 
  The necessary libraries are:
  
  | Library | Usecase | Download/ Tutorial | Comments |
@@ -25,5 +30,3 @@ For it to run you need to follow three steps:
  | OpenCL | Low-level access to the GPU | `sudo apt update` `sudo apt install ocl-icd-opencl-dev` `sudo apt-get install beignet` | Confirmed to work on Intel HD Graphics of 4th, 7th and 8th generation |
  | HDF5 | To read the weights file with a good performance | `sudo apt-get install libhdf5-dev` | that's all
  | Libusb | For dynamically detecting the amount of USB-devices used | `sudo apt-get install libusb-1.0-0-dev` | that's all
- 
- Optionally, we also provide a training dataset as an example [here](https://cloud.viet-pham.de/s/eKRM5JyxBpAAjEn?path=%2F).
